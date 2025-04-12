@@ -1,0 +1,123 @@
+/* Wave Patterns */
+.wave-pattern {
+  position: absolute;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(45deg, rgba(0,0,0,0.07) 25%, transparent 25%, transparent 50%, rgba(0,0,0,0.07) 50%, rgba(0,0,0,0.07) 75%, transparent 75%, transparent);
+  background-size: 200px 200px;
+  animation: wave 30s linear infinite;
+  opacity: 0.3;
+}
+
+.wave-pattern-2 {
+  composes: wave-pattern;
+  animation-duration: 40s;
+  opacity: 0.2;
+  background-size: 160px 160px;
+  transform: rotate(-45deg);
+}
+
+.wave-pattern-3 {
+  composes: wave-pattern;
+  animation-duration: 50s;
+  opacity: 0.1;
+  background-size: 120px 120px;
+  transform: rotate(45deg);
+}
+
+@keyframes wave {
+  0% { transform: translateX(0) }
+  100% { transform: translateX(-50%) }
+}
+
+/* Floating Animations */
+.floating-gopher {
+  animation: float 8s ease-in-out infinite;
+  filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
+  transform-origin: center center;
+}
+
+.floating-star {
+  font-size: 2rem;
+  animation: twinkle 2s ease-in-out infinite;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.delay-200 {
+  animation-delay: 0.2s;
+}
+
+.delay-500 {
+  animation-delay: 0.5s;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translateY(-15px) rotate(2deg) scale(1.01);
+  }
+  50% {
+    transform: translateY(-25px) rotate(-1deg) scale(1.02);
+  }
+  75% {
+    transform: translateY(-10px) rotate(1deg) scale(1.01);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+/* African Patterns */
+.pattern-overlay {
+  background-image: url('/images/african-pattern.svg');
+  background-repeat: repeat;
+  background-size: 100px 100px;
+  mix-blend-mode: overlay;
+  mix-blend-mode: multiply;
+  opacity: 0.05;
+}
+
+.bg-pattern-1 {
+  background-image: url('/images/pattern-1.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.1;
+}
+
+.bg-pattern-2 {
+  background-image: url('/images/pattern-2.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.1;
+}
+
+/* Hover Effects */
+.group:hover .group-hover\:translate-x-1 {
+  transform: translateX(4px);
+}
+
+/* Glassmorphism */
+.backdrop-blur-sm {
+  backdrop-filter: blur(8px);
+}
+
+/* Stars Background */
+.stars {
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, #008751, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 40px 70px, #008751, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 50px 160px, #008751, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 90px 40px, #008751, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 130px 80px, #008751, rgba(0,0,0,0));
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  animation: twinkle 4s ease-in-out infinite;
+  opacity: 0.3;
+} 
