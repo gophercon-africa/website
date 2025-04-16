@@ -39,7 +39,7 @@ export default function About() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-20">
           <span className="text-[#006B3F] font-medium mb-4 block">About GopherCon Africa</span>
-          <h2 className="text-4xl font-medium text-gray-900 mb-6">Africa's Premier Go Conference</h2>
+          <h2 className="text-4xl font-medium text-gray-900 mb-6">Africa&apos;s Premier Go Conference</h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             We are pleased to announce the second annual GopherCon Africa conference. Two days of amazing talks, 
             plentiful networking opportunities, and great socials. GopherCon Africa offers the most up-to-date 
@@ -162,7 +162,7 @@ export default function About() {
             <div>
               <h3 className="text-2xl font-medium text-white mb-4">Discover More Content</h3>
               <p className="text-white/90 mb-8">
-                Watch all our previous talks and get excited for what's coming at GopherCon Africa 2025.
+                Watch all our previous talks and get excited for what&apos;s coming at GopherCon Africa 2025.
               </p>
             </div>
             <a 

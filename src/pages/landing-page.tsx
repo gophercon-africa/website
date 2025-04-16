@@ -9,6 +9,7 @@ import About from '../components/about/About';
 import InfoCards from '../components/info-cards/InfoCards';
 import Tickets from '../components/tickets/Tickets';
 import Sponsors from '../components/sponsors/Sponsors';
+import Newsletter from '../components/newsletter/Newsletter';
 import Footer from '../components/footer/Footer';
 
 const inter = Inter({ 
@@ -32,6 +33,7 @@ export default function LandingPage() {
       <InfoCards />
       <Tickets />
       <Sponsors />
+      <Newsletter />
       <Footer />
     </div>
   );

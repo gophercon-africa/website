@@ -12,7 +12,6 @@ interface TypewriterTextProps {
 const TypewriterText: React.FC<TypewriterTextProps> = ({
   text,
   className = '',
-  delay = 0,
   speed = 50,
 }) => {
   const [displayText, setDisplayText] = useState('');

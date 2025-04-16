@@ -1,8 +1,51 @@
 import React from 'react';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, X } from 'lucide-react';
 import Image from 'next/image';
-
+import { toast } from 'sonner';
+import Link from 'next/link';
 export default function Sponsors() {
+  const showContactModal = () => {
+    const id = toast(
+      <div className="bg-white rounded-xl p-8 shadow-2xl max-w-md w-full relative">
+        <button
+          onClick={() => toast.dismiss(id)}
+          className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 transition-colors"
+        >
+          <X className="w-5 h-5 text-gray-500" />
+        </button>
+        <h3 className="text-2xl font-bold text-gray-900 mb-6">Contact Information</h3>
+        <div className="space-y-4">
+          <div className="flex items-center p-4 bg-gray-50 rounded-lg">
+            <div className="w-12 h-12 rounded-full bg-[#006B3F] flex items-center justify-center">
+              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <div className="ml-4">
+              <div className="text-sm text-gray-500">Email</div>
+              <div className="font-medium text-gray-900">contact@gophersafrica.com</div>
+            </div>
+          </div>
+          <div className="flex items-center p-4 bg-gray-50 rounded-lg">
+            <div className="w-12 h-12 rounded-full bg-[#006B3F] flex items-center justify-center">
+              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+            </div>
+            <div className="ml-4">
+              <div className="text-sm text-gray-500">Phone</div>
+              <div className="font-medium text-gray-900">+254 700 000 000</div>
+            </div>
+          </div>
+        </div>
+      </div>,
+      {
+        duration: Infinity,
+        position: 'top-center',
+        className: '!bg-transparent !p-0 !shadow-none',
+      }
+    );
+  };
   return (
     <section className="py-24 bg-gradient-to-br from-white via-[#E8F5E9] to-[#F1F8E9] relative overflow-hidden" id="sponsors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -128,18 +171,30 @@ export default function Sponsors() {
             <div className="max-w-2xl mx-auto">
               <h3 className="text-3xl font-bold text-[#006B3F] mb-6">Become a Partner</h3>
               <p className="text-gray-700 text-lg mb-8 leading-relaxed">
-                Support the Go community in Africa and showcase your brand to hundreds of passionate developers. 
+                Support the Go community in Africa and showcase your brand to hundreds of passionate developers.
                 Download our sponsorship prospectus to learn more about partnership opportunities.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="bg-[#006B3F] hover:bg-[#008751] text-white px-8 py-4 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg inline-flex items-center group">
-                  Download Partnership Prospectus
-                  <ChevronRight className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" />
-                </button>
-                <button className="bg-white hover:bg-gray-50 text-[#006B3F] border-2 border-[#006B3F] px-8 py-4 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg inline-flex items-center group">
-                  Contact Us
-                  <ChevronRight className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" />
-                </button>
+                <Link
+                  href="https://drive.google.com/file/d/1q0e5oC4L-ByWN9OBwoSbBLOZdfXxIlI8/view?usp=sharing"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <button className="bg-[#006B3F] hover:bg-[#008751] text-white px-8 py-4 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg inline-flex items-center group mt-4">
+                    Download Partnership Prospectus
+                    <ChevronRight className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" />
+                  </button>
+                </Link>
+                {/* Contact Us Button */}
+                <div className="mt-4">
+                  <button
+                    onClick={showContactModal}
+                    className="bg-white hover:bg-gray-50 text-[#006B3F] border-2 border-[#006B3F] px-8 py-4 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg inline-flex items-center group"
+                  >
+                    Contact Us
+                    <ChevronRight className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" />
+                  </button>
+                </div>
               </div>
             </div>
           </div>

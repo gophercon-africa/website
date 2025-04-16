@@ -1,11 +1,12 @@
 import React from 'react';
 import { Calendar, ChevronRight, MapPin } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 import TypewriterText from '../TypewriterText';
 
 export default function Hero() {
   return (
-    <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-[#006B3F] via-[#008751] to-[#006B3F]">
+    <div className="relative min-h-[50vh] overflow-hidden bg-gradient-to-b from-[#004428] via-[#008751] to-[#004428]">
       {/* Dark overlay for better contrast */}
       <div className="absolute inset-0 bg-black/20"></div>
 
@@ -25,7 +26,7 @@ export default function Hero() {
       <div className="absolute inset-0 z-0 opacity-5 pattern-overlay"></div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-48">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Column - Text Content */}
           <div className="text-white">
@@ -37,7 +38,7 @@ export default function Hero() {
                   speed={100}
                 />
                 <TypewriterText 
-                  text="LAGOS 2025" 
+                  text="AFRICA 2025" 
                   className="text-white block mt-2 drop-shadow-[0_0_15px_rgba(0,0,0,0.5)]"
                   speed={100}
                   delay={1000}
@@ -54,19 +55,19 @@ export default function Hero() {
                 </div>
               </div>
               <p className="text-xl sm:text-2xl text-white leading-relaxed max-w-xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
-                Join Africa's largest Go conference! Experience two days of 
+                Join Africa&apos;s largest Go conference! Experience two days of 
                 knowledge sharing, networking, and innovation in the heart of Lagos.
               </p>
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="bg-white hover:bg-white/90 text-[#006B3F] px-8 py-4 rounded-full font-bold text-lg transition-all transform hover:scale-105 hover:shadow-xl inline-flex items-center justify-center group">
+              <Link href="/#tickets" className="bg-white hover:bg-white/90 text-[#006B3F] px-8 py-4 rounded-full font-bold text-lg transition-all transform hover:scale-105 hover:shadow-xl inline-flex items-center justify-center group">
                 Get your ticket
                 <ChevronRight className="w-6 h-6 ml-2 group-hover:translate-x-1 transition-transform" />
-              </button>
-              <button className="border-2 border-white hover:border-white text-white px-8 py-4 rounded-full font-bold text-lg transition-all hover:bg-white/20 backdrop-blur-sm">
-                Submit your paper
-              </button>
+              </Link>
+              <Link href="/call-for-speakers" className="border-2 border-white hover:border-white text-white px-8 py-4 rounded-full font-bold text-lg transition-all hover:bg-white/20 backdrop-blur-sm">
+                Submit your talks
+              </Link>
             </div>
           </div>
 

@@ -1,5 +1,5 @@
-import ConsumerLanding from '../pages/LandingPage';
+import LandingPage from '../pages/landing-page';
 
 export default function Home() {  
-  return <ConsumerLanding />;
+  return <LandingPage />;
 }
