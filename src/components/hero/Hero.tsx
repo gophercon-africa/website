@@ -3,7 +3,7 @@ import { Calendar, ChevronRight, MapPin } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import TypewriterText from '../TypewriterText';
-
+import paths from '@/src/path';
 export default function Hero() {
   return (
     <div className="relative min-h-[50vh] overflow-hidden bg-gradient-to-b from-[#004428] via-[#008751] to-[#004428]">
@@ -65,7 +65,7 @@ export default function Hero() {
                 Get your ticket
                 <ChevronRight className="w-6 h-6 ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
-              <Link href="/call-for-speakers" className="border-2 border-white hover:border-white text-white px-8 py-4 rounded-full font-bold text-lg transition-all hover:bg-white/20 backdrop-blur-sm">
+              <Link href={paths.callForSpeakers()} className="border-2 border-white hover:border-white text-white px-8 py-4 rounded-full font-bold text-lg transition-all hover:bg-white/20 backdrop-blur-sm">
                 Submit your talks
               </Link>
             </div>

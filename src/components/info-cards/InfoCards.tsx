@@ -2,7 +2,8 @@ import React from 'react';
 import { ChevronRight} from 'lucide-react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-
+import paths from '@/src/path';
+import Link from 'next/link';
 export default function InfoCards() {
   
 
@@ -54,10 +55,10 @@ export default function InfoCards() {
               <p className="text-gray-600 mb-8 text-lg">
                 The GopherCon Africa 2025 Call for Speakers will be open early next year. Follow us on social media to find out about updates.
               </p>
-              <a href="#cfp" className="inline-flex items-center text-gray-900 font-semibold hover:text-[#FF6B6B] transition-colors">
+                <Link href={paths.callForSpeakers()} className="inline-flex items-center text-gray-900 font-semibold hover:text-[#FF6B6B] transition-colors">
                 Submit your proposal
                 <ChevronRight className="w-5 h-5 ml-1" />
-              </a>
+              </Link>
             </div>
             <div className="absolute bottom-0 right-0 w-48 h-48">
               <Image

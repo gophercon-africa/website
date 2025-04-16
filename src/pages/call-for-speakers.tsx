@@ -6,42 +6,18 @@ import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
 import '../styles/globals.css';
 import CallForSpeakers from '../components/call-for-speakers/CallForSpeakers';
+import { SpeakerFormData } from '../types/talk';
+
 const plusJakartaSans = Plus_Jakarta_Sans({ 
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-plus-jakarta-sans',
 });
 
-interface SpeakerFormData {
-  fullName: string;
-  email: string;
-  phone: string;
-  company: string;
-  title: string;
-  bio: string;
-  talkTitle: string;
-  talkDescription: string;
-  talkDuration: string;
-  talkLevel: string;
-  previousSpeakingExperience: string;
-  additionalNotes: string;
-}
+
 
 export default function CallForSpeakersPage() {
-  const [formData, setFormData] = useState<SpeakerFormData>({
-    fullName: '',
-    email: '',
-    phone: '',
-    company: '',
-    title: '',
-    bio: '',
-    talkTitle: '',
-    talkDescription: '',
-    talkDuration: '',
-    talkLevel: '',
-    previousSpeakingExperience: '',
-    additionalNotes: '',
-  });
+    const [formData, setFormData] = useState<SpeakerFormData>( {} as SpeakerFormData);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

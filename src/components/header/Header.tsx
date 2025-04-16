@@ -2,6 +2,7 @@ import React from 'react';
 import { Code2 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import paths from '@/src/path';
 
 interface HeaderProps {
   mounted: boolean;
@@ -31,7 +32,7 @@ export default function Header({ mounted }: HeaderProps) {
           </div>
           <div className="hidden md:flex items-center space-x-8">
             <Link href="#about" className="text-gray-600 hover:text-[#006B3F] transition-colors font-medium">About</Link>
-            <Link href="/call-for-speakers" className="text-gray-600 hover:text-[#006B3F] transition-colors font-medium">Call for Speakers</Link>
+            <Link href={paths.callForSpeakers()} className="text-gray-600 hover:text-[#006B3F] transition-colors font-medium">Call for Speakers</Link>
             <Link href="#sponsors" className="text-gray-600 hover:text-[#006B3F] transition-colors font-medium">Sponsors</Link>
             <Link href="#tickets" className="bg-[#006B3F] text-white px-6 py-2 rounded-lg font-medium hover:bg-[#008751] transition-colors">
               Buy Tickets
