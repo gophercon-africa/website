@@ -2,7 +2,7 @@
 const nextConfig = {
   images: {
     domains: ['localhost', 'res.cloudinary.com'],
-    // unoptimized: process.env.NODE_ENV === 'development',
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
@@ -14,12 +14,6 @@ const nextConfig = {
     ],
   },
   output: 'standalone',
-  // Disable image optimization completely
-  experimental: {
-    images: {
-      unoptimized: true
-    }
-  }
 };
 
 export default nextConfig; 
