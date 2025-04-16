@@ -23,7 +23,7 @@ export default function Sponsors() {
             </div>
             <div className="ml-4">
               <div className="text-sm text-gray-500">Email</div>
-              <div className="font-medium text-gray-900">contact@gophersafrica.com</div>
+              <div className="font-medium text-gray-900">hello@gophers.africa</div>
             </div>
           </div>
           <div className="flex items-center p-4 bg-gray-50 rounded-lg">
@@ -34,7 +34,7 @@ export default function Sponsors() {
             </div>
             <div className="ml-4">
               <div className="text-sm text-gray-500">Phone</div>
-              <div className="font-medium text-gray-900">+254 700 000 000</div>
+              <div className="font-medium text-gray-900">+000 000 000 000</div>
             </div>
           </div>
         </div>

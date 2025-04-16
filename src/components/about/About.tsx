@@ -1,6 +1,5 @@
 import React from 'react';
 import { Lightbulb, Users, Coffee, ChevronRight } from 'lucide-react';
-import Image from 'next/image';
 import YouTubePlayer from 'react-youtube';
 
 export default function About() {
@@ -19,23 +18,7 @@ export default function About() {
 
   return (
     <section id="about" className="py-24 bg-gradient-to-br from-white via-[#E8F5E9] to-[#F1F8E9] relative overflow-hidden">
-      {/* Decorative Gophers */}
-      <div className="absolute -left-20 top-20 w-40 h-40 opacity-50 transform -rotate-12">
-        <Image
-          src="/images/mascots/mascot-kenya.png"
-          alt="Dancing Gopher"
-          fill
-          className="object-contain floating-gopher"
-        />
-      </div>
-      <div className="absolute -right-20 top-40 w-40 h-40 opacity-50 transform rotate-12">
-        <Image
-          src="/images/mascots/mascot-kenya.png"
-          alt="Loving Gopher"
-          fill
-          className="object-contain floating-gopher delay-200"
-        />
-      </div>
+      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-20">
           <span className="text-[#006B3F] font-medium mb-4 block">About GopherCon Africa</span>

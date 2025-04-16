@@ -1,26 +1,42 @@
 'use client';
-
-import React, { useState } from 'react';
-import Link from 'next/link';
 import { Mail } from 'lucide-react';
+import CallForSpeakersForm from '@/src/components/call-for-speakers/CallForSpeakersForm';
+import { useRef } from 'react';
+import { useState } from 'react';
 
-export default function CallForSpeakers() {
+export default function CallForSpeakersPage() {
   const [showForm, setShowForm] = useState(false);
+  const formRef = useRef<HTMLDivElement>(null);
 
   const toggleForm = () => {
     setShowForm(prev => !prev);
+    if (!showForm) {
+      setTimeout(() => {
+        formRef.current?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
   };
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <div className="prose prose-lg max-w-none">
         <h1 className="text-4xl font-bold text-[#006B3F] mb-8">
-          Call for Proposals for GopherCon Lagos 2025 is now open! 🎉
+          Call for Speakers for GopherCon Lagos 2025 is now open! 🎉
         </h1>
 
         <p className="text-xl mb-8">
-          Hurray! The call for proposals for GopherCon Lagos 2025 is officially open! 🚀 Join us to make the event a memorable and fantastic one.
+          Hurray! The call for speakers for GopherCon Lagos 2025 is officially open! 🚀 Join us to make the event a memorable and fantastic one.
         </p>
+
+        <div className="flex justify-center mb-12">
+          <button
+            onClick={toggleForm}
+            className="bg-[#006B3F] text-white px-8 py-3 rounded-lg font-medium hover:bg-[#008751] transition-colors flex items-center space-x-2"
+          >
+            <span>Submit Your Talk</span>
+            <Mail className="w-5 h-5" />
+          </button>
+        </div>
 
         <p className="mb-6">
           GopherCon Lagos 2025 is an opportunity to bring together people with different backgrounds and perspectives on software development. 
@@ -30,7 +46,7 @@ export default function CallForSpeakers() {
 
         <div className="bg-[#006B3F]/10 p-6 rounded-lg mb-8">
           <p className="font-medium">
-            Our Call for Proposals is now open and will run from the 1st of August to the 30th of September 2024.
+            Our Call for Speakers is now open and will run from the 1st of August to the 30th of September 2024.
           </p>
           <p className="mt-2">
             If you think you have something great to discuss, submit your idea! If unsure, speak to someone or contact one of our 
@@ -110,33 +126,11 @@ export default function CallForSpeakers() {
             If you would like to ask a question, you are always welcome to write to the Content Committee:
             <a href="mailto:content@gopherconafrica.org" className="ml-2 text-[#006B3F] hover:text-[#008751] inline-flex items-center">
               <Mail className="w-5 h-5 mr-1" />
-              content@gopherconafrica.org
+              hello@gophers.africa
             </a>
           </p>
         </div>
-
-        <div className="mt-12 flex gap-4">
-          <button 
-            onClick={toggleForm}
-            className="inline-block bg-[#006B3F] text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-[#008751] transition-colors"
-          >
-            {showForm ? 'Hide Proposal Form' : 'Submit Your Proposal'}
-          </button>
-          <Link 
-            href="/speaker-resources" 
-            className="inline-block border-2 border-[#006B3F] text-[#006B3F] px-8 py-4 rounded-full font-bold text-lg hover:bg-[#006B3F] hover:text-white transition-colors"
-          >
-            Speaker Resources
-          </Link>
-        </div>
-
-        {showForm ? (
-          <div className="mt-8 p-6 border border-[#006B3F] rounded-lg">
-            <h2 className="text-2xl font-bold text-[#006B3F] mb-6">Submit Your Proposal</h2>
-            {/* Add your CFP form components here */}
-            <p className="text-gray-600">Proposal form will be displayed here...</p>
-          </div>
-        ) : null}
+        {showForm && <div ref={formRef}><CallForSpeakersForm /></div>}
       </div>
     </div>
   );

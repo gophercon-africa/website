@@ -1,27 +1,10 @@
 import React from 'react';
-import Image from 'next/image';
 import ToastWrapper from '../common/ToastWrapper';
 
 export default function Tickets() {
   return (
     <section id="tickets" className="py-24 bg-gradient-to-b from-white via-[#E8F5E9] to-white relative overflow-hidden">
-      {/* Decorative Gophers */}
-      <div className="absolute -left-10 bottom-20 w-32 h-32 opacity-50 transform -rotate-6">
-        <Image
-          src="/images/mascots/mascot-kenya.png"
-          alt="Gopher with Laptop"
-          fill
-          className="object-contain floating-gopher delay-300"
-        />
-      </div>
-      <div className="absolute -right-10 bottom-40 w-32 h-32 opacity-50 transform rotate-6">
-        <Image
-          src="/images/mascots/mascot-kenya.png"
-          alt="Gopher with Microphone"
-          fill
-          className="object-contain floating-gopher delay-500"
-        />
-      </div>
+     
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-4xl font-medium text-center text-gray-900 mb-16">Tickets</h2>
         

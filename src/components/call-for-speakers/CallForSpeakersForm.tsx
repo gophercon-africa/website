@@ -2,11 +2,8 @@
 
 import React, { useState } from 'react';
 import { Plus_Jakarta_Sans } from 'next/font/google';
-import Header from '../components/header/Header';
-import Footer from '../components/footer/Footer';
-import '../styles/globals.css';
-import CallForSpeakers from '../components/call-for-speakers/CallForSpeakers';
-import { SpeakerFormData } from '../types/talk';
+import '@/src/styles/globals.css';
+import { SpeakerFormData } from '@/src/types/talk';
 
 const plusJakartaSans = Plus_Jakarta_Sans({ 
   subsets: ['latin'],
@@ -15,8 +12,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 
-
-export default function CallForSpeakersPage() {
+export default function CallForSpeakersForm() {
     const [formData, setFormData] = useState<SpeakerFormData>( {} as SpeakerFormData);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -35,15 +31,11 @@ export default function CallForSpeakersPage() {
 
   return (
     <div className={`min-h-screen bg-white ${plusJakartaSans.variable} font-sans`}>
-      <Header mounted={true} />
-      <div className="bg-gradient-to-b from-[#006B3F]/5 to-white">
+      <div className="bg-gradient-to-b from-[#006B3F]/5 to-white mt-12">
         <div className="py-16 px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto">
-            <CallForSpeakers />
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-[#006B3F] sm:text-5xl">
-                Call for Speakers
-              </h2>
+              
               <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
                 Share your expertise and passion for Go with the GopherCon Africa community.
                 We&apos;re looking for engaging talks that cover a wide range of Go topics.
@@ -258,7 +250,6 @@ export default function CallForSpeakersPage() {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 } 

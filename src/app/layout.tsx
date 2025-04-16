@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import { Plus_Jakarta_Sans } from 'next/font/google';
 import '../styles/globals.css';
 import Providers from './providers';
-
+import Header from '../components/header/Header';
+import Footer from '../components/footer/Footer';
 const plusJakartaSans = Plus_Jakarta_Sans({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -18,7 +19,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={plusJakartaSans.className}>
-        <Providers>{children}</Providers>
+        <Providers>
+          <Header mounted={true} />
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

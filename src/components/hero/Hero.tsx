@@ -47,7 +47,7 @@ export default function Hero() {
               <div className="flex items-center gap-4 mb-6">
                 <div className="flex items-center bg-black/30 backdrop-blur-sm rounded-full px-4 py-2">
                   <Calendar className="w-5 h-5 mr-2 text-white" />
-                  <span className="text-white">November 23-25, 2025</span>
+                  <span className="text-white">October 24-25, 2025</span>
                 </div>
                 <div className="flex items-center bg-black/30 backdrop-blur-sm rounded-full px-4 py-2">
                   <MapPin className="w-5 h-5 mr-2 text-white" />
