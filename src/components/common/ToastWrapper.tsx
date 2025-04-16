@@ -1,5 +1,5 @@
 import React from 'react';
-import { toast } from 'react-hot-toast';
+import { toast } from 'sonner';
 
 interface ToastWrapperProps {
   children: React.ReactNode;
@@ -31,10 +31,6 @@ const ToastWrapper: React.FC<ToastWrapperProps> = ({
         lineHeight: '1.5',
       },
       icon: '🎉',
-      iconTheme: {
-        primary: '#006B3F',
-        secondary: '#fff',
-      }
     });
   };
 

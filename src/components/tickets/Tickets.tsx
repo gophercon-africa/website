@@ -25,7 +25,7 @@ export default function Tickets() {
                       message="To be announced soon!" 
                       className="ml-4" 
                     >
-                      <span className="text-xl font-medium"> <button className="bg-[#006B3F] text-white px-4 py-2 rounded-md hover:bg-[#005A35] transition-colors duration-200">Get Ticket</button></span>
+                      <span className="text-xl font-medium"> <button className="bg-[#006B3F] text-white px-4 py-2 rounded-md hover:bg-[#005A35] transition-colors duration-200">Buy Ticket</button></span>
                     </ToastWrapper>
                   </div>
                 </div>
@@ -50,7 +50,7 @@ export default function Tickets() {
                       message="To be announced soon!" 
                       className="ml-4" 
                     >
-                      <span className="text-xl font-medium"> <button className="bg-[#006B3F] text-white px-4 py-2 rounded-md hover:bg-[#005A35] transition-colors duration-200">Get Ticket</button></span>
+                      <span className="text-xl font-medium"> <button className="bg-[#006B3F] text-white px-4 py-2 rounded-md hover:bg-[#005A35] transition-colors duration-200">Buy Ticket</button></span>
                     </ToastWrapper>
                   </div>
                 </div>
