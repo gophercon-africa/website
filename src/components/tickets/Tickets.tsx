@@ -3,12 +3,12 @@ import ToastWrapper from '../common/ToastWrapper';
 
 export default function Tickets() {
   return (
-    <section id="tickets" className="py-24 bg-gradient-to-b from-white via-[#E8F5E9] to-white relative overflow-hidden">
+    <section id="tickets" className="py-24 bg-linear-to-b from-white via-[#E8F5E9] to-white relative overflow-hidden">
      
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-4xl font-medium text-center text-gray-900 mb-16">Tickets</h2>
         
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+        <div className="bg-white rounded-xl shadow-2xs border border-gray-200 overflow-hidden">
           {/* Workshop Ticket */}
           <div className="border-b border-gray-200">
             <div className="p-6">

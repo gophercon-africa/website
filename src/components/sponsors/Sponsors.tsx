@@ -42,12 +42,12 @@ export default function Sponsors() {
       {
         duration: Infinity,
         position: 'top-center',
-        className: '!bg-transparent !p-0 !shadow-none',
+        className: 'bg-transparent! p-0! shadow-none!',
       }
     );
   };
   return (
-    <section className="py-24 bg-gradient-to-br from-white via-[#E8F5E9] to-[#F1F8E9] relative overflow-hidden" id="sponsors">
+    <section className="py-24 bg-linear-to-br from-white via-[#E8F5E9] to-[#F1F8E9] relative overflow-hidden" id="sponsors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-20">
           <span className="text-[#006B3F] font-medium mb-4 block">Our Amazing Partners</span>
@@ -60,12 +60,12 @@ export default function Sponsors() {
         {/* Platinum Sponsors */}
         <div className="mb-20">
           <div className="flex items-center justify-center mb-12">
-            <div className="h-px bg-gradient-to-r from-transparent via-[#6B46C1] to-transparent w-24"></div>
+            <div className="h-px bg-linear-to-r from-transparent via-[#6B46C1] to-transparent w-24"></div>
             <h3 className="text-lg font-medium text-[#6B46C1] px-4">Platinum Partners</h3>
-            <div className="h-px bg-gradient-to-r from-[#6B46C1] via-[#6B46C1] to-transparent w-24"></div>
+            <div className="h-px bg-linear-to-r from-[#6B46C1] via-[#6B46C1] to-transparent w-24"></div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-4xl mx-auto">
-            <div className="group bg-white rounded-2xl p-12 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+            <div className="group bg-white rounded-2xl p-12 shadow-2xs hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               <div className="relative h-20">
                 <Image
                   src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744802584/google_rcjqn1.png"
@@ -78,7 +78,7 @@ export default function Sponsors() {
                 <p className="text-gray-600 text-sm">Empowering Go developers worldwide</p>
               </div>
             </div>
-            <div className="group bg-white rounded-2xl p-12 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+            <div className="group bg-white rounded-2xl p-12 shadow-2xs hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               <div className="relative h-20">
                 <Image
                   src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744802584/moniepoint_tgy3ii.jpg"
@@ -97,12 +97,12 @@ export default function Sponsors() {
         {/* Gold Sponsors */}
         <div className="mb-20">
           <div className="flex items-center justify-center mb-12">
-            <div className="h-px bg-gradient-to-r from-transparent via-[#FFB800] to-transparent w-24"></div>
+            <div className="h-px bg-linear-to-r from-transparent via-[#FFB800] to-transparent w-24"></div>
             <h3 className="text-lg font-medium text-[#FFB800] px-4">Gold Partners</h3>
-            <div className="h-px bg-gradient-to-r from-[#FFB800] via-[#FFB800] to-transparent w-24"></div>
+            <div className="h-px bg-linear-to-r from-[#FFB800] via-[#FFB800] to-transparent w-24"></div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center max-w-3xl mx-auto">
-            <div className="group bg-white rounded-2xl p-10 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+            <div className="group bg-white rounded-2xl p-10 shadow-2xs hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               <div className="relative h-16">
                 <Image
                   src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744802583/APItoolkit_robwlq.png"
@@ -115,7 +115,7 @@ export default function Sponsors() {
                 <p className="text-gray-600 text-sm">API monitoring and debugging made easy</p>
               </div>
             </div>
-            <div className="group bg-white rounded-2xl p-10 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+            <div className="group bg-white rounded-2xl p-10 shadow-2xs hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               <div className="relative h-16">
                 <Image
                   src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744803732/getpartna_logo_ebd0iw.jpg"
@@ -133,7 +133,7 @@ export default function Sponsors() {
 
         {/* Become a Sponsor */}
         <div className="relative mt-20">
-          <div className="absolute inset-0 bg-gradient-to-r from-[#006B3F] via-[#008751] to-[#006B3F] rounded-3xl transform -rotate-1 shadow-2xl"></div>
+          <div className="absolute inset-0 bg-linear-to-r from-[#006B3F] via-[#008751] to-[#006B3F] rounded-3xl transform -rotate-1 shadow-2xl"></div>
           {/* Decorative Gophers */}
           <div className="absolute -left-16 -top-16 w-32 h-32 opacity-80">
             <Image
@@ -167,7 +167,7 @@ export default function Sponsors() {
               className="object-contain floating-gopher delay-600"
             />
           </div>
-          <div className="relative bg-white/95 backdrop-blur-sm rounded-3xl p-12 text-center border border-white/20 shadow-xl">
+          <div className="relative bg-white/95 backdrop-blur-xs rounded-3xl p-12 text-center border border-white/20 shadow-xl">
             <div className="max-w-2xl mx-auto">
               <h3 className="text-3xl font-bold text-[#006B3F] mb-6">Become a Partner</h3>
               <p className="text-gray-700 text-lg mb-8 leading-relaxed">

@@ -17,7 +17,7 @@ export default function About() {
   };
 
   return (
-    <section id="about" className="py-24 bg-gradient-to-br from-white via-[#E8F5E9] to-[#F1F8E9] relative overflow-hidden">
+    <section id="about" className="py-24 bg-linear-to-br from-white via-[#E8F5E9] to-[#F1F8E9] relative overflow-hidden">
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-20">
@@ -33,9 +33,9 @@ export default function About() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
           {/* Left Column - Conference Highlights */}
           <div className="space-y-8">
-            <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all duration-300">
+            <div className="bg-white rounded-2xl p-8 shadow-2xs hover:shadow-lg transition-all duration-300">
               <div className="flex items-start mb-4">
-                <div className="w-12 h-12 rounded-xl bg-[#F3E8FF] flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 rounded-xl bg-[#F3E8FF] flex items-center justify-center shrink-0">
                   <Lightbulb className="w-6 h-6 text-[#6B46C1]" />
                 </div>
                 <div className="ml-4">
@@ -45,9 +45,9 @@ export default function About() {
               </div>
             </div>
 
-            <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all duration-300">
+            <div className="bg-white rounded-2xl p-8 shadow-2xs hover:shadow-lg transition-all duration-300">
               <div className="flex items-start mb-4">
-                <div className="w-12 h-12 rounded-xl bg-[#F3E8FF] flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 rounded-xl bg-[#F3E8FF] flex items-center justify-center shrink-0">
                   <Users className="w-6 h-6 text-[#6B46C1]" />
                 </div>
                 <div className="ml-4">
@@ -57,9 +57,9 @@ export default function About() {
               </div>
             </div>
 
-            <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all duration-300">
+            <div className="bg-white rounded-2xl p-8 shadow-2xs hover:shadow-lg transition-all duration-300">
               <div className="flex items-start mb-4">
-                <div className="w-12 h-12 rounded-xl bg-[#F3E8FF] flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 rounded-xl bg-[#F3E8FF] flex items-center justify-center shrink-0">
                   <Coffee className="w-6 h-6 text-[#6B46C1]" />
                 </div>
                 <div className="ml-4">

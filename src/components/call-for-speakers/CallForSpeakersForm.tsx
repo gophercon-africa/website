@@ -31,7 +31,7 @@ export default function CallForSpeakersForm() {
 
   return (
     <div className={`min-h-screen bg-white ${plusJakartaSans.variable} font-sans`}>
-      <div className="bg-gradient-to-b from-[#006B3F]/5 to-white mt-12">
+      <div className="bg-linear-to-b from-[#006B3F]/5 to-white mt-12">
         <div className="py-16 px-4 sm:px-6 lg:px-8">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-12">
@@ -112,6 +112,7 @@ export default function CallForSpeakersForm() {
                       value={formData.title}
                       onChange={handleChange}
                       className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[#006B3F] focus:ring-[#006B3F] h-12 px-4 text-base transition-all duration-200 ease-in-out"
+
                     />
                   </div>
                 </div>
@@ -241,7 +242,7 @@ export default function CallForSpeakersForm() {
               <div className="flex justify-end">
                 <button
                   type="submit"
-                  className="inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-base font-medium rounded-lg text-white bg-[#006B3F] hover:bg-[#008751] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#006B3F] transition-colors"
+                  className="inline-flex justify-center py-3 px-6 border border-transparent shadow-2xs text-base font-medium rounded-lg text-white bg-[#006B3F] hover:bg-[#008751] focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-[#006B3F] transition-colors"
                 >
                   Submit Proposal
                 </button>

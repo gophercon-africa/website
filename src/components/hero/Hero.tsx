@@ -6,7 +6,7 @@ import TypewriterText from '../TypewriterText';
 import paths from '@/src/path';
 export default function Hero() {
   return (
-    <div className="relative min-h-[50vh] overflow-hidden bg-gradient-to-b from-[#004428] via-[#008751] to-[#004428]">
+    <div className="relative min-h-[50vh] overflow-hidden bg-linear-to-b from-[#004428] via-[#008751] to-[#004428]">
       {/* Dark overlay for better contrast */}
       <div className="absolute inset-0 bg-black/20"></div>
 
@@ -45,11 +45,11 @@ export default function Hero() {
                 />
               </h1>
               <div className="flex items-center gap-4 mb-6">
-                <div className="flex items-center bg-black/30 backdrop-blur-sm rounded-full px-4 py-2">
+                <div className="flex items-center bg-black/30 backdrop-blur-xs rounded-full px-4 py-2">
                   <Calendar className="w-5 h-5 mr-2 text-white" />
                   <span className="text-white">October 24-25, 2025</span>
                 </div>
-                <div className="flex items-center bg-black/30 backdrop-blur-sm rounded-full px-4 py-2">
+                <div className="flex items-center bg-black/30 backdrop-blur-xs rounded-full px-4 py-2">
                   <MapPin className="w-5 h-5 mr-2 text-white" />
                   <span className="text-white">Lagos, Nigeria</span>
                 </div>
@@ -65,7 +65,7 @@ export default function Hero() {
                 Get your ticket
                 <ChevronRight className="w-6 h-6 ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
-              <Link href={paths.callForSpeakers()} className="border-2 border-white hover:border-white text-white px-8 py-4 rounded-full font-bold text-lg transition-all hover:bg-white/20 backdrop-blur-sm">
+              <Link href={paths.callForSpeakers()} className="border-2 border-white hover:border-white text-white px-8 py-4 rounded-full font-bold text-lg transition-all hover:bg-white/20 backdrop-blur-xs">
                 Submit your talks
               </Link>
             </div>
@@ -90,15 +90,15 @@ export default function Hero() {
 
         {/* Conference highlights */}
         <div className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="bg-black/30 backdrop-blur-sm rounded-xl p-6 transform hover:scale-105 transition-all">
+          <div className="bg-black/30 backdrop-blur-xs rounded-xl p-6 transform hover:scale-105 transition-all">
             <div className="text-white text-4xl font-bold mb-2">10+</div>
             <div className="text-white">Expert Speakers</div>
           </div>
-          <div className="bg-black/30 backdrop-blur-sm rounded-xl p-6 transform hover:scale-105 transition-all">
+          <div className="bg-black/30 backdrop-blur-xs rounded-xl p-6 transform hover:scale-105 transition-all">
             <div className="text-white text-4xl font-bold mb-2">400+</div>
             <div className="text-white">Attendees Expected</div>
           </div>
-          <div className="bg-black/30 backdrop-blur-sm rounded-xl p-6 transform hover:scale-105 transition-all">
+          <div className="bg-black/30 backdrop-blur-xs rounded-xl p-6 transform hover:scale-105 transition-all">
             <div className="text-white text-4xl font-bold mb-2">2</div>
             <div className="text-white">Days of Learning and networking</div>
           </div>
