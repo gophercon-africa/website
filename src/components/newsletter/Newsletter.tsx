@@ -41,7 +41,7 @@ const Newsletter = () => {
         </div>
         <div className="hidden md:block">
           <Image    
-            src="/images/mascots/mascot-kenya.png"
+            src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744802566/mascot-kenya_pxfwhg.png"
             alt="Gopher mascot"
             width={192}
             height={192}

@@ -1,0 +1,1 @@
+export const imageBaseUrl = 'https://res.cloudinary.com/gophers-africa/image/upload';

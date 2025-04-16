@@ -11,35 +11,6 @@ export const authOptions: NextAuthOptions = {
 
   providers: [
     // ...add more providers here
-    CredentialsProvider({
-      name: "credentials",
-      credentials: {
-        email: { label: "email", type: "text" },
-        password: { label: "password", type: "password" },
-      },
-      async authorize(credentials) {
-        return (
-          axios
-            .post(`${process.env.REACT_APP_BASE_URL}/customer/accounts/token`, {
-              email: credentials!.email,
-              password: credentials!.password,
-            })
-            .then((response) => {
-              if (response.status === 200 && response.data) {
-                return {
-                  token: response.data.data.token,
-                  data: response.data.data.account,
-                } as unknown as Awaitable<User | null>;
-              }
-              throw new Error(JSON.stringify(response.data));
-            })
-            .catch((error) => {
-              console.log("error", error);
-              throw new Error(JSON.stringify(error.response.data));
-            }) || null
-        );
-      },
-    }),
     GoogleProvider({
       clientId:
         "",

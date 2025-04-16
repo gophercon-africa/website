@@ -17,7 +17,7 @@ export default function Header({ mounted }: HeaderProps) {
             {mounted ? (
               <Link href="/" className="flex items-center space-x-2 group no-underline">
                 <Image 
-                  src="/images/logos/offical.png" 
+                  src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744802548/offical_ga4rtq.png" 
                   alt="GopherCon" 
                   width={150} 
                   height={100} 

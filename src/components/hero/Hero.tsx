@@ -75,7 +75,7 @@ export default function Hero() {
           <div className="relative">
             <div className="relative h-[500px] gopher-container drop-shadow-[0_5px_15px_rgba(0,0,0,0.3)]">
               <Image
-                src="/images/mascots/mascot-kenya.png"
+                src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744802566/mascot-kenya_pxfwhg.png"
                 alt="Gopher Group"
                 fill
                 className="object-contain floating-gopher"

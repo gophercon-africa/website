@@ -1,5 +1,4 @@
 import React from 'react';
-import { X, Linkedin } from 'lucide-react';
 import Image from 'next/image';
 export default function Footer() {
   return (
@@ -8,7 +7,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="flex items-center mb-8 md:mb-0">
             <Image 
-              src="/images/logos/offical.png" 
+              src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744802548/offical_ga4rtq.png" 
               alt="GopherCon Africa Logo" 
               className="h-12 w-auto"
               width={100}
@@ -22,7 +21,13 @@ export default function Footer() {
               rel="noopener noreferrer" 
               className="text-gray-600 hover:text-[#1DA1F2] transition-colors"
             >
-              <X className="w-6 h-6" />
+               <Image 
+                src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744803296/X_logo_2023.svg_s6irtp.png" 
+                alt="Meetup Logo" 
+                className="w-8 h-8 object-contain"
+                width={32}
+                height={32}
+              />
             </a>
             <a 
               href="https://www.meetup.com/golangnigeria/" 
@@ -31,7 +36,7 @@ export default function Footer() {
               className="hover:opacity-80 transition-opacity flex items-center justify-center"
             >
               <Image 
-                src="/images/logos/meetupLogo.png" 
+                src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744802510/meetup-logo_bob5n9.png" 
                 alt="Meetup Logo" 
                 className="w-8 h-8 object-contain"
                 width={32}
@@ -44,7 +49,13 @@ export default function Footer() {
               rel="noopener noreferrer" 
               className="text-gray-600 hover:text-[#0077B5] transition-colors"
             >
-              <Linkedin className="w-6 h-6" />
+              <Image 
+                src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744803296/LinkedIn_icon.svg_ljtvmr.png" 
+                alt="Meetup Logo" 
+                className="w-8 h-8 object-contain"
+                width={32}
+                height={32}
+              />
             </a>
           </div>
         </div>

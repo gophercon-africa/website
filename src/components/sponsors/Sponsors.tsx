@@ -68,7 +68,7 @@ export default function Sponsors() {
             <div className="group bg-white rounded-2xl p-12 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               <div className="relative h-20">
                 <Image
-                  src="/images/sponsors/google.png"
+                  src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744802584/google_rcjqn1.png"
                   alt="Google"
                   fill
                   className="object-contain filter group-hover:brightness-110 transition-all duration-300"
@@ -81,7 +81,7 @@ export default function Sponsors() {
             <div className="group bg-white rounded-2xl p-12 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               <div className="relative h-20">
                 <Image
-                  src="/images/sponsors/moniepoint.jpg"
+                  src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744802584/moniepoint_tgy3ii.jpg"
                   alt="MoniePoint"
                   fill
                   className="object-contain filter group-hover:brightness-110 transition-all duration-300"
@@ -105,7 +105,7 @@ export default function Sponsors() {
             <div className="group bg-white rounded-2xl p-10 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               <div className="relative h-16">
                 <Image
-                  src="/images/sponsors/APItoolkit.png"
+                  src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744802583/APItoolkit_robwlq.png"
                   alt="APIToolkit"
                   fill
                   className="object-contain filter group-hover:brightness-110 transition-all duration-300"
@@ -118,7 +118,7 @@ export default function Sponsors() {
             <div className="group bg-white rounded-2xl p-10 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               <div className="relative h-16">
                 <Image
-                  src="/images/sponsors/partner.svg"
+                  src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744803732/getpartna_logo_ebd0iw.jpg"
                   alt="Partna"
                   fill
                   className="object-contain filter group-hover:brightness-110 transition-all duration-300"
@@ -137,7 +137,7 @@ export default function Sponsors() {
           {/* Decorative Gophers */}
           <div className="absolute -left-16 -top-16 w-32 h-32 opacity-80">
             <Image
-              src="/images/mascots/mascot-kenya.png"
+              src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744802566/mascot-kenya_pxfwhg.png"
               alt="Star Gopher"
               fill
               className="object-contain floating-gopher"
@@ -145,7 +145,7 @@ export default function Sponsors() {
           </div>
           <div className="absolute -right-16 -top-16 w-32 h-32 opacity-80">
             <Image
-              src="/images/mascots/mascot-kenya.png"
+              src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744802566/mascot-kenya_pxfwhg.png"
               alt="Loving Gopher"
               fill
               className="object-contain floating-gopher delay-200"
@@ -153,7 +153,7 @@ export default function Sponsors() {
           </div>
           <div className="absolute -left-16 -bottom-16 w-32 h-32 opacity-80">
             <Image
-              src="/images/mascots/mascot-kenya.png"
+              src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744802566/mascot-kenya_pxfwhg.png"
               alt="Waving Gopher"
               fill
               className="object-contain floating-gopher delay-400"
@@ -161,7 +161,7 @@ export default function Sponsors() {
           </div>
           <div className="absolute -right-16 -bottom-16 w-32 h-32 opacity-80">
             <Image
-              src="/images/mascots/mascot-kenya.png"
+              src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744802566/mascot-kenya_pxfwhg.png"
               alt="Dancing Gopher"
               fill
               className="object-contain floating-gopher delay-600"

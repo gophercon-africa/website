@@ -32,7 +32,7 @@ export default function InfoCards() {
             </div>
             <div className="absolute bottom-0 right-0 w-48 h-48">
               <Image
-                src="/images/mascots/mascot-kenya.png"
+                src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744802566/mascot-kenya_pxfwhg.png"
                 alt="Waving Gopher"
                 width={192}
                 height={192}
@@ -62,7 +62,7 @@ export default function InfoCards() {
             </div>
             <div className="absolute bottom-0 right-0 w-48 h-48">
               <Image
-                src="/images/mascots/mascot-kenya.png"
+                src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744802566/mascot-kenya_pxfwhg.png"
                 alt="Gopher with Book"
                 width={192}
                 height={192}
