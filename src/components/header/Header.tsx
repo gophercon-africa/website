@@ -34,10 +34,10 @@ export default function Header({ mounted = true }: HeaderProps) {
             </Link>
           </div>
           <div className="hidden md:flex items-center space-x-8">
-            <Link href="#about" className="text-gray-600 hover:text-[#006B3F] transition-colors font-medium">About</Link>
+            <Link href="/#about" className="text-gray-600 hover:text-[#006B3F] transition-colors font-medium">About</Link>
             <Link href={paths.callForSpeakers()} className="text-gray-600 hover:text-[#006B3F] transition-colors font-medium">Call for Speakers</Link>
-            <Link href="#sponsors" className="text-gray-600 hover:text-[#006B3F] transition-colors font-medium">Sponsors</Link>
-            <Link href="#tickets" className="bg-[#006B3F] text-white px-6 py-2 rounded-lg font-medium hover:bg-[#008751] transition-colors">
+            <Link href="/#sponsors" className="text-gray-600 hover:text-[#006B3F] transition-colors font-medium">Sponsors</Link>
+            <Link href="/#tickets" className="bg-[#006B3F] text-white px-6 py-2 rounded-lg font-medium hover:bg-[#008751] transition-colors">
               Buy Tickets
             </Link>
           </div>
@@ -52,7 +52,7 @@ export default function Header({ mounted = true }: HeaderProps) {
         {isMobileMenuOpen && (
           <div className="md:hidden py-4 space-y-4">
             <Link 
-              href="#about" 
+              href="/#about" 
               className="block text-gray-600 hover:text-[#006B3F] transition-colors font-medium"
               onClick={() => setIsMobileMenuOpen(false)}
             >
@@ -66,14 +66,14 @@ export default function Header({ mounted = true }: HeaderProps) {
               Call for Speakers
             </Link>
             <Link 
-              href="#sponsors" 
+              href="/#sponsors" 
               className="block text-gray-600 hover:text-[#006B3F] transition-colors font-medium"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Sponsors
             </Link>
             <Link 
-              href="#tickets" 
+              href="/#tickets" 
               className="block bg-[#006B3F] text-white px-6 py-2 rounded-lg font-medium hover:bg-[#008751] transition-colors text-center"
               onClick={() => setIsMobileMenuOpen(false)}
             >
