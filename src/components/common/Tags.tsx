@@ -140,7 +140,7 @@ const Tags: React.FC<TagsProps> = ({
             {editable && onRemove && (
               <button
                 onClick={() => onRemove(tag)}
-                className="ml-1.5 hover:text-gray-900 focus:outline-none"
+                className="ml-1.5 hover:text-gray-900 focus:outline-hidden"
               >
                 <X className={size === 'sm' ? 'h-3 w-3' : 'h-4 w-4'} />
               </button>
@@ -162,7 +162,7 @@ const Tags: React.FC<TagsProps> = ({
                   }}
                   onKeyDown={handleKeyDown}
                   onFocus={() => setShowSuggestions(true)}
-                  className="bg-transparent border-none focus:outline-none focus:ring-0 p-0 w-32"
+                  className="bg-transparent border-none focus:outline-hidden focus:ring-0 p-0 w-32"
                   placeholder="Add tag..."
                 />
                 <button
@@ -187,7 +187,7 @@ const Tags: React.FC<TagsProps> = ({
                       <button
                         key={index}
                         onClick={() => handleAddTag(suggestion)}
-                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
+                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:bg-gray-100 focus:outline-hidden"
                       >
                         {suggestion}
                       </button>
@@ -195,7 +195,7 @@ const Tags: React.FC<TagsProps> = ({
                     {inputValue && !filteredSuggestions.includes(inputValue) && (
                       <button
                         onClick={() => handleAddTag(inputValue)}
-                        className="w-full text-left px-4 py-2 text-sm text-primary-600 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
+                        className="w-full text-left px-4 py-2 text-sm text-primary-600 hover:bg-gray-100 focus:bg-gray-100 focus:outline-hidden"
                       >
                         Add {inputValue}
                       </button>

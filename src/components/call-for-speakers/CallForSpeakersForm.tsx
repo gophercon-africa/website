@@ -31,7 +31,7 @@ export default function CallForSpeakersForm() {
 
   return (
     <div className={`min-h-screen bg-white ${plusJakartaSans.variable} font-sans`}>
-      <div className="bg-gradient-to-b from-[#006B3F]/5 to-white mt-12">
+      <div className="bg-linear-to-b from-[#006B3F]/5 to-white mt-12">
         <div className="py-16 px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-12">
@@ -58,7 +58,7 @@ export default function CallForSpeakersForm() {
                       required
                       value={formData.fullName}
                       onChange={handleChange}
-                      className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[#006B3F] focus:ring-[#006B3F]"
+                      className="mt-1 block w-full rounded-lg border-gray-300 shadow-2xs focus:border-[#006B3F] focus:ring-[#006B3F]"
                     />
                   </div>
                   <div>
@@ -72,7 +72,7 @@ export default function CallForSpeakersForm() {
                       required
                       value={formData.email}
                       onChange={handleChange}
-                      className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[#006B3F] focus:ring-[#006B3F]"
+                      className="mt-1 block w-full rounded-lg border-gray-300 shadow-2xs focus:border-[#006B3F] focus:ring-[#006B3F]"
                     />
                   </div>
                   <div>
@@ -85,7 +85,7 @@ export default function CallForSpeakersForm() {
                       id="phone"
                       value={formData.phone}
                       onChange={handleChange}
-                      className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[#006B3F] focus:ring-[#006B3F]"
+                      className="mt-1 block w-full rounded-lg border-gray-300 shadow-2xs focus:border-[#006B3F] focus:ring-[#006B3F]"
                     />
                   </div>
                   <div>
@@ -98,7 +98,7 @@ export default function CallForSpeakersForm() {
                       id="company"
                       value={formData.company}
                       onChange={handleChange}
-                      className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[#006B3F] focus:ring-[#006B3F]"
+                      className="mt-1 block w-full rounded-lg border-gray-300 shadow-2xs focus:border-[#006B3F] focus:ring-[#006B3F]"
                     />
                   </div>
                   <div>
@@ -111,7 +111,7 @@ export default function CallForSpeakersForm() {
                       id="title"
                       value={formData.title}
                       onChange={handleChange}
-                      className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[#006B3F] focus:ring-[#006B3F]"
+                      className="mt-1 block w-full rounded-lg border-gray-300 shadow-2xs focus:border-[#006B3F] focus:ring-[#006B3F]"
                     />
                   </div>
                 </div>
@@ -129,7 +129,7 @@ export default function CallForSpeakersForm() {
                   required
                   value={formData.bio}
                   onChange={handleChange}
-                  className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[#006B3F] focus:ring-[#006B3F]"
+                  className="mt-1 block w-full rounded-lg border-gray-300 shadow-2xs focus:border-[#006B3F] focus:ring-[#006B3F]"
                   placeholder="Tell us about yourself and your experience with Go"
                 />
               </div>
@@ -148,7 +148,7 @@ export default function CallForSpeakersForm() {
                     required
                     value={formData.talkTitle}
                     onChange={handleChange}
-                    className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[#006B3F] focus:ring-[#006B3F]"
+                    className="mt-1 block w-full rounded-lg border-gray-300 shadow-2xs focus:border-[#006B3F] focus:ring-[#006B3F]"
                   />
                 </div>
                 <div>
@@ -162,7 +162,7 @@ export default function CallForSpeakersForm() {
                     required
                     value={formData.talkDescription}
                     onChange={handleChange}
-                    className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[#006B3F] focus:ring-[#006B3F]"
+                    className="mt-1 block w-full rounded-lg border-gray-300 shadow-2xs focus:border-[#006B3F] focus:ring-[#006B3F]"
                     placeholder="Provide a detailed description of your talk"
                   />
                 </div>
@@ -177,7 +177,7 @@ export default function CallForSpeakersForm() {
                       required
                       value={formData.talkDuration}
                       onChange={handleChange}
-                      className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[#006B3F] focus:ring-[#006B3F]"
+                      className="mt-1 block w-full rounded-lg border-gray-300 shadow-2xs focus:border-[#006B3F] focus:ring-[#006B3F]"
                     >
                       <option value="">Select duration</option>
                       <option value="30">30 minutes</option>
@@ -195,7 +195,7 @@ export default function CallForSpeakersForm() {
                       required
                       value={formData.talkLevel}
                       onChange={handleChange}
-                      className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[#006B3F] focus:ring-[#006B3F]"
+                      className="mt-1 block w-full rounded-lg border-gray-300 shadow-2xs focus:border-[#006B3F] focus:ring-[#006B3F]"
                     >
                       <option value="">Select level</option>
                       <option value="beginner">Beginner</option>
@@ -217,7 +217,7 @@ export default function CallForSpeakersForm() {
                   rows={4}
                   value={formData.previousSpeakingExperience}
                   onChange={handleChange}
-                  className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[#006B3F] focus:ring-[#006B3F]"
+                  className="mt-1 block w-full rounded-lg border-gray-300 shadow-2xs focus:border-[#006B3F] focus:ring-[#006B3F]"
                   placeholder="List any previous speaking engagements or relevant experience"
                 />
               </div>
@@ -233,7 +233,7 @@ export default function CallForSpeakersForm() {
                   rows={4}
                   value={formData.additionalNotes}
                   onChange={handleChange}
-                  className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[#006B3F] focus:ring-[#006B3F]"
+                  className="mt-1 block w-full rounded-lg border-gray-300 shadow-2xs focus:border-[#006B3F] focus:ring-[#006B3F]"
                   placeholder="Any additional information you'd like to share"
                 />
               </div>
@@ -241,7 +241,7 @@ export default function CallForSpeakersForm() {
               <div className="flex justify-end">
                 <button
                   type="submit"
-                  className="inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-base font-medium rounded-lg text-white bg-[#006B3F] hover:bg-[#008751] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#006B3F] transition-colors"
+                  className="inline-flex justify-center py-3 px-6 border border-transparent shadow-2xs text-base font-medium rounded-lg text-white bg-[#006B3F] hover:bg-[#008751] focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-[#006B3F] transition-colors"
                 >
                   Submit Proposal
                 </button>

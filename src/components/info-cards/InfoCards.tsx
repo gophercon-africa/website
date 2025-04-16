@@ -8,7 +8,7 @@ export default function InfoCards() {
   
 
   return (
-    <section className="py-24 bg-gradient-to-t from-[#F1F8E9] to-white">
+    <section className="py-24 bg-linear-to-t from-[#F1F8E9] to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* About Card */}
@@ -87,7 +87,7 @@ export default function InfoCards() {
                 The talks were truly inspiring, with deep insights into efficiency and performance in solutions, the importance of testing, and the value of clean coding. We also explored the power of interfaces and how they drive better software design
               </blockquote>
               <div className="flex items-center">
-                <div className="flex-shrink-0">
+                <div className="shrink-0">
                   <div className="w-12 h-12 rounded-full bg-[#6B46C1] flex items-center justify-center">
                     <span className="text-xl font-semibold">P</span>
                   </div>
@@ -112,7 +112,7 @@ export default function InfoCards() {
                 I enjoyed the #Gc24 with @nairobi_gophers with @gophers_africa. Made friends in it, its the first of many
               </blockquote>
               <div className="flex items-center">
-                <div className="flex-shrink-0">
+                <div className="shrink-0">
                   <div className="w-12 h-12 rounded-full bg-[#6B46C1] flex items-center justify-center">
                     <span className="text-xl font-semibold">A</span>
                   </div>
@@ -140,7 +140,7 @@ export default function InfoCards() {
 Go sounds pretty 💅🏼💅🏼
               </blockquote>
               <div className="flex items-center">
-                <div className="flex-shrink-0">
+                <div className="shrink-0">
                   <div className="w-12 h-12 rounded-full bg-[#6B46C1] flex items-center justify-center">
                     <span className="text-xl font-semibold">A</span>
                   </div>
