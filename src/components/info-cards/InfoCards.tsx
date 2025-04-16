@@ -25,10 +25,10 @@ export default function InfoCards() {
               <p className="text-gray-600 mb-8 text-lg font-normal">
                 We are pleased to announce the second annual GopherCon Africa conference. Two days of amazing talks, plentiful networking opportunities and great socials. GopherCon Africa offers the most up-to-date Go programming information and training.
               </p>
-              <a href="#about" className="inline-flex items-center text-gray-900 font-medium hover:text-[#6B46C1] transition-colors">
+              <Link href="#about" className="inline-flex items-center text-gray-900 font-medium hover:text-[#6B46C1] transition-colors">
                 Read about the event
                 <ChevronRight className="w-5 h-5 ml-1" />
-              </a>
+              </Link>
             </div>
             <div className="absolute bottom-0 right-0 w-48 h-48">
               <Image
@@ -41,7 +41,7 @@ export default function InfoCards() {
             </div>
           </motion.div>
 
-          {/* Call for Speackers Card */}
+          {/* Call for Speakers Card */}
           <motion.div 
             initial={{ x: -100, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
@@ -55,7 +55,7 @@ export default function InfoCards() {
               <p className="text-gray-600 mb-8 text-lg">
                 The GopherCon Africa 2025 Call for Speakers will be open early next year. Follow us on social media to find out about updates.
               </p>
-                <Link href={paths.callForSpeakers()} className="inline-flex items-center text-gray-900 font-semibold hover:text-[#FF6B6B] transition-colors">
+              <Link href={paths.callForSpeakers()} className="inline-flex items-center text-gray-900 font-semibold hover:text-[#FF6B6B] transition-colors">
                 Submit your proposal
                 <ChevronRight className="w-5 h-5 ml-1" />
               </Link>
@@ -118,8 +118,7 @@ export default function InfoCards() {
                   </div>
                 </div>
                 <div className="ml-4">
-                  <div className="font-semibold">
-                  Dr nutCase</div>
+                  <div className="font-semibold">Dr nutCase</div>
                 </div>
               </div>
             </div>
@@ -147,15 +146,12 @@ Go sounds pretty 💅🏼💅🏼
                   </div>
                 </div>
                 <div className="ml-4">
-                  <div className="font-semibold">
-                  KendiJ💙</div>
+                  <div className="font-semibold">KendiJ💙</div>
                 </div>
               </div>
             </div>
           </motion.div>
         </div>
-
-        
       </div>
     </section>
   );
