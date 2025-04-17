@@ -1,8 +1,8 @@
 import NextAuth from "next-auth";
-import { authOptions } from "@/auth";
+import { authConfig } from "@/src/lib/auth";
 
-export const dynamic = 'force-dynamic';
+const handler = NextAuth(authConfig);
 
-const handler = NextAuth(authOptions);
-
-export { handler as GET, handler as POST };
+// Use named exports for App Router
+export const GET = handler;
+export const POST = handler; 

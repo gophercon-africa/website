@@ -7,11 +7,11 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="flex items-center mb-8 md:mb-0">
             <Image 
-              src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744802548/offical_ga4rtq.png" 
+              src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744891071/GopherCon_Africa_25_vskz7n_obmh5q.png" 
               alt="GopherCon Africa Logo" 
               className="h-12 w-auto"
-              width={100}
-              height={100}
+              width={160}
+              height={160}
             />
           </div>
           <div className="flex space-x-6">

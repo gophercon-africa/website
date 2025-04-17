@@ -12,16 +12,26 @@ const publicPaths = [
   '/api/auth/signup',
   '/api/auth/callback',
   '/api/auth/signout',
+  '/api/auth/session',
+  '/api/auth/csrf',
+  '/api/auth/providers',
+  '/api/auth/callback/*',
+  '/api/auth/_log',
 ]
 
 export async function middleware(request: NextRequest) {
   const token = await getToken({ req: request })
   const { pathname } = request.nextUrl
 
+  // Always allow access to NextAuth.js API routes
+  if (pathname.startsWith('/api/auth')) {
+    return NextResponse.next()
+  }
+
   // Allow access to public paths
   if (publicPaths.some(path => pathname.startsWith(path))) {
     // If user is authenticated and tries to access auth pages, redirect to dashboard
-    if (token && (pathname === '/' ||pathname === '/signin' || pathname === '/signup')) {
+    if (token && (pathname === '/' || pathname === '/signin' || pathname === '/signup')) {
       return NextResponse.redirect(new URL('/dashboard', request.url))
     }
     return NextResponse.next()

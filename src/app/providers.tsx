@@ -10,7 +10,7 @@ interface ProvidersProps {
 export default function Providers({ children }: ProvidersProps) {
   return (
     <SessionProvider>
-      <Toaster position="top-center" />
+      <Toaster position="top-center" richColors duration={5000} />
       {children} 
     </SessionProvider>
   );
