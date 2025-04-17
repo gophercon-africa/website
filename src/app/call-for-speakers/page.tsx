@@ -3,11 +3,12 @@ import { Mail } from 'lucide-react';
 import CallForSpeakersForm from '@/src/components/call-for-speakers/CallForSpeakersForm';
 import { useRef } from 'react';
 import { useState } from 'react';
+import HeaderAuth from '@/src/components/header-auth/Header-auth';
+import { Navbar, NavbarContent } from '@nextui-org/react';
 
 export default function CallForSpeakersPage() {
   const [showForm, setShowForm] = useState(false);
   const formRef = useRef<HTMLDivElement>(null);
-
   const toggleForm = () => {
     setShowForm(prev => !prev);
     if (!showForm) {
@@ -16,6 +17,7 @@ export default function CallForSpeakersPage() {
       }, 100);
     }
   };
+
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -34,13 +36,14 @@ export default function CallForSpeakersPage() {
             className="bg-[#006B3F] text-white px-8 py-3 rounded-lg font-medium hover:bg-[#008751] transition-colors flex items-center space-x-2"
           >
             <span>Submit Your Talk</span>
+
             <Mail className="w-5 h-5" />
           </button>
         </div>
 
         <p className="mb-6">
-          GopherCon Lagos 2025 is an opportunity to bring together people with different backgrounds and perspectives on software development. 
-          We want you (yes, you!) to showcase your perspectives, views, knowledge, expertise, and ideas on technology with other conference 
+          GopherCon Lagos 2025 is an opportunity to bring together people with different backgrounds and perspectives on software development.
+          We want you (yes, you!) to showcase your perspectives, views, knowledge, expertise, and ideas on technology with other conference
           participants from across Africa and the rest of the world for mutual understanding of contexts, challenges, and opportunities.
         </p>
 
@@ -49,7 +52,7 @@ export default function CallForSpeakersPage() {
             Our Call for Speakers is now open and will run from the 1st of August to the 30th of September 2024.
           </p>
           <p className="mt-2">
-            If you think you have something great to discuss, submit your idea! If unsure, speak to someone or contact one of our 
+            If you think you have something great to discuss, submit your idea! If unsure, speak to someone or contact one of our
             speaker mentors to discuss your idea. When in doubt, submit your talk anyway! 😉
           </p>
         </div>
@@ -83,10 +86,10 @@ export default function CallForSpeakersPage() {
         </ul>
 
         <h2 className="text-2xl font-bold text-[#006B3F] mt-12 mb-6">Submission Guidelines</h2>
-        
+
         <h3 className="text-xl font-semibold mt-8 mb-4">Abstract</h3>
         <p className="mb-4">
-          Your abstract should clearly and concisely summarize the core idea of your talk, workshop, or tutorial in 150-400 words. 
+          Your abstract should clearly and concisely summarize the core idea of your talk, workshop, or tutorial in 150-400 words.
           A good abstract answers the questions:
         </p>
         <ul className="list-disc pl-6 space-y-2 mb-6">
@@ -118,10 +121,10 @@ export default function CallForSpeakersPage() {
 
         <div className="mt-12 space-y-6">
           <p>
-            If you require accessibility accommodations or have specific presentation needs, please email us. 
+            If you require accessibility accommodations or have specific presentation needs, please email us.
             We&apos;re happy to help ensure a positive experience for all.
           </p>
-          
+
           <p>
             If you would like to ask a question, you are always welcome to write to the Content Committee:
             <a href="mailto:content@gopherconafrica.org" className="ml-2 text-[#006B3F] hover:text-[#008751] inline-flex items-center">
@@ -129,6 +132,9 @@ export default function CallForSpeakersPage() {
               hello@gophers.africa
             </a>
           </p>
+        </div>
+        <div className="flex justify-end">
+          {/* <HeaderAuth /> */}
         </div>
         {showForm && <div ref={formRef}><CallForSpeakersForm /></div>}
       </div>
