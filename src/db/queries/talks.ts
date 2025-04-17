@@ -1,19 +1,34 @@
-// import type { Talk } from '@prisma/client';
-import { db } from '@/src/db';
+import db from '@/src/db';
+import { Talk } from '@prisma/client';
 
-// export type TalkWithData = Talk & {
-//   topic: { slug: string };
-//   user: { name: string | null };
-//   _count: { comments: number };
-// };
+export type TalkWithData = Talk;
 
-// export function fetchTalksByTopicSlug(slug: string): Promise<TalkWithData[]> {
-//   return db.talk.findMany({
-//     where: { topic: { slug } },
-//     include: {
-//       topic: { select: { slug: true } },
-//       user: { select: { name: true } },
-//       _count: { select: { comments: true } },
-//     },
-//   });
-// }
+export async function createTalk(talk: Omit<Talk, 'id' | 'createdAt' | 'updatedAt'>): Promise<Talk> {
+  const now = new Date();
+  return await db.talk.create({
+    data: {
+      ...talk,
+      createdAt: now,
+      updatedAt: now,
+    },
+  });
+}
+
+export async function fetchTalksByYear(year: string): Promise<Talk[]> {
+  return await db.talk.findMany({
+    where: { eventYear: year },
+  });
+}
+
+export async function fetchTalkById(id: string): Promise<Talk | null> {
+  return await db.talk.findUnique({
+    where: { id },
+  });
+}
+
+export async function updateTalk(talk: Talk): Promise<Talk> {
+  return await db.talk.update({
+    where: { id: talk.id },
+    data: talk,
+  });
+}

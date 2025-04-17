@@ -3,8 +3,6 @@ import { Mail } from 'lucide-react';
 import CallForSpeakersForm from '@/src/components/call-for-speakers/CallForSpeakersForm';
 import { useRef } from 'react';
 import { useState } from 'react';
-import HeaderAuth from '@/src/components/header-auth/Header-auth';
-import { Navbar, NavbarContent } from '@nextui-org/react';
 
 export default function CallForSpeakersPage() {
   const [showForm, setShowForm] = useState(false);
@@ -18,7 +16,7 @@ export default function CallForSpeakersPage() {
     }
   };
 
-
+  
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <div className="prose prose-lg max-w-none">

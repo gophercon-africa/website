@@ -1,0 +1,13 @@
+{
+  "extends": "next/core-web-vitals",
+  "overrides": [
+    {
+      "files": ["src/generated/prisma/wasm.js"],
+      "rules": {
+        "@typescript-eslint/*": "off",
+        "no-unused-expressions": "off",
+        "no-unused-vars": "off"
+      }
+    }
+  ]
+} 

@@ -20,10 +20,10 @@ export default function Header({ mounted = true }: HeaderProps) {
             <Link href="/" className="flex items-center space-x-2 group no-underline">
               {mounted ? (
                 <Image 
-                  src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744802548/offical_ga4rtq.png" 
+                  src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744891071/GopherCon_Africa_25_vskz7n_obmh5q.png" 
                   alt="GopherCon" 
-                  width={150} 
-                  height={100} 
+                  width={160} 
+                  height={160} 
                 />
               ) : (
                 <div className="flex items-center space-x-2">

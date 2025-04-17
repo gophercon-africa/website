@@ -1,8 +1,9 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 
-export default function ErrorPage() {
+function ErrorContent() {
   const searchParams = useSearchParams();
   const error = searchParams?.get('error') || 'An error occurred during authentication';
 
@@ -27,5 +28,23 @@ export default function ErrorPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ErrorPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow-lg">
+          <div>
+            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-600">
+              Loading...
+            </h2>
+          </div>
+        </div>
+      </div>
+    }>
+      <ErrorContent />
+    </Suspense>
   );
 } 
