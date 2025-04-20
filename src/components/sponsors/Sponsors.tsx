@@ -49,7 +49,7 @@ export default function Sponsors() {
   return (
     <section className="py-24 bg-linear-to-br from-white via-[#E8F5E9] to-[#F1F8E9] relative overflow-hidden" id="sponsors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-20">
+        {/*<div className="text-center mb-20">
           <span className="text-[#006B3F] font-medium mb-4 block">Our Amazing Partners</span>
           <h2 className="text-4xl font-medium text-gray-900 mb-6">Backed by Industry Leaders</h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -57,7 +57,7 @@ export default function Sponsors() {
           </p>
         </div>
 
-        {/* Platinum Sponsors */}
+        {/* Platinum Sponsors
         <div className="mb-20">
           <div className="flex items-center justify-center mb-12">
             <div className="h-px bg-linear-to-r from-transparent via-[#6B46C1] to-transparent w-24"></div>
@@ -94,7 +94,7 @@ export default function Sponsors() {
           </div>
         </div>
 
-        {/* Gold Sponsors */}
+        {/* Gold Sponsors
         <div className="mb-20">
           <div className="flex items-center justify-center mb-12">
             <div className="h-px bg-linear-to-r from-transparent via-[#FFB800] to-transparent w-24"></div>
@@ -129,7 +129,7 @@ export default function Sponsors() {
               </div>
             </div>
           </div>
-        </div>
+        </div>*/}
 
         {/* Become a Sponsor */}
         <div className="relative mt-20">
