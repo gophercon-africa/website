@@ -21,11 +21,11 @@ export default function CallForSpeakersPage() {
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <div className="prose prose-lg max-w-none">
         <h1 className="text-4xl font-bold text-[#006B3F] mb-8">
-          Call for Speakers for GopherCon Lagos 2025 is now open! 🎉
+          Call for Speakers for GopherCon Africa 2025 is now open! 🎉
         </h1>
 
         <p className="text-xl mb-8">
-          Hurray! The call for speakers for GopherCon Lagos 2025 is officially open! 🚀 Join us to make the event a memorable and fantastic one.
+          Hurray! The call for speakers for GopherCon Africa 2025 is officially open! 🚀 Join us to make the event a memorable and fantastic one.
         </p>
 
         <div className="flex justify-center mb-12">
@@ -40,7 +40,7 @@ export default function CallForSpeakersPage() {
         </div>
 
         <p className="mb-6">
-          GopherCon Lagos 2025 is an opportunity to bring together people with different backgrounds and perspectives on software development.
+          GopherCon Africa 2025 is an opportunity to bring together people with different backgrounds and perspectives on software development.
           We want you (yes, you!) to showcase your perspectives, views, knowledge, expertise, and ideas on technology with other conference
           participants from across Africa and the rest of the world for mutual understanding of contexts, challenges, and opportunities.
         </p>
@@ -95,7 +95,7 @@ export default function CallForSpeakersPage() {
           <li>Why is it important?</li>
           <li>What will attendees gain?</li>
         </ul>
-        <p>Make it engaging and relevant, showing why your session is valuable for GopherCon Lagos&apos;s audience.</p>
+        <p>Make it engaging and relevant, showing why your session is valuable for GopherCon Africa&apos;s audience.</p>
 
         <h3 className="text-xl font-semibold mt-8 mb-4">Audience Level</h3>
         <p className="mb-4">Tell us what technical level you think your talk is aimed at:</p>
