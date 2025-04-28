@@ -98,13 +98,51 @@ export default function CallForSpeakersPage() {
         <p>Make it engaging and relevant, showing why your session is valuable for GopherCon Africa&apos;s audience.</p>
 
         <h3 className="text-xl font-semibold mt-8 mb-4">Audience Level</h3>
-        <p className="mb-4">Tell us what technical level you think your talk is aimed at:</p>
-        <ul className="list-disc pl-6 space-y-2">
-          <li><strong>Not really applicable:</strong> this is not a technical talk</li>
-          <li><strong>Beginner:</strong> For those just starting with Go or programming</li>
-          <li><strong>Intermediate:</strong> For those with working knowledge who are looking to deepen their skills</li>
-          <li><strong>Expert:</strong> For seasoned professionals eager for cutting-edge ideas or advanced topics</li>
+        <p className="mb-4">
+          Please indicate the intended audience level for your session:
+        </p>
+        <ul className="list-disc pl-6 space-y-2 mb-6">
+          <li>Beginner: No prior knowledge of the topic required</li>
+          <li>Intermediate: Some experience with the topic recommended</li>
+          <li>Advanced: Deep understanding of the topic required</li>
         </ul>
+
+        <h2 className="text-2xl font-bold text-[#006B3F] mt-12 mb-6">Helpful Resources</h2>
+        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
+          <p className="mb-4">
+            To help you craft a compelling proposal, we recommend checking out these excellent resources:
+          </p>
+          <ul className="space-y-4">
+            <li>
+              <a 
+                href="https://blog.gopheracademy.com/gophercon-2017/writing-a-successful-gophercon-proposal/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#006B3F] hover:text-[#008751] font-medium flex items-center"
+              >
+                <span className="mr-2">📝</span>
+                Writing a Successful GopherCon Proposal
+              </a>
+              <p className="text-gray-600 mt-1 ml-6">
+                A comprehensive guide from Gopher Academy on crafting effective conference proposals
+              </p>
+            </li>
+            <li>
+              <a 
+                href="https://dave.cheney.net/2017/02/12/how-to-write-a-successful-conference-proposal"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#006B3F] hover:text-[#008751] font-medium flex items-center"
+              >
+                <span className="mr-2">📚</span>
+                How to Write a Successful Conference Proposal
+              </a>
+              <p className="text-gray-600 mt-1 ml-6">
+                Expert advice from Dave Cheney on creating compelling conference proposals
+              </p>
+            </li>
+          </ul>
+        </div>
 
         <div className="bg-[#006B3F]/10 p-6 rounded-lg mt-12 mb-8">
           <h2 className="text-2xl font-bold text-[#006B3F] mb-4">We Encourage Submissions From:</h2>
