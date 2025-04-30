@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { toast, Toaster } from 'sonner';
 import Image from 'next/image';
-import { subscribeToNewsletter } from '../../actions/newsleter/create';
+import { subscribeToNewsletter } from '@/src/actions/newsleter/create';
 const Newsletter = () => {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
