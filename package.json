@@ -11,7 +11,7 @@
     "postinstall": "prisma generate --no-engine"
   },
   "prisma": {
-    "schema": "./prisma/schema.prisma"
+    "schema": "./gophercon-prisma/prisma/schema.prisma"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.8.0",
