@@ -47,7 +47,7 @@ export default function CallForSpeakersPage() {
 
         <div className="bg-[#006B3F]/10 p-6 rounded-lg mb-8">
           <p className="font-medium">
-            Our Call for Speakers is now open and will run from the 1st of August to the 30th of September 2024.
+            Our Call for Speakers is now open!
           </p>
           <p className="mt-2">
             If you think you have something great to discuss, submit your idea! If unsure, speak to someone or contact one of our
