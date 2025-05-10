@@ -1,15 +1,35 @@
+"use client";
+
 import React, { useState } from 'react';
 import { toast, Toaster } from 'sonner';
-import { ExternalToast } from 'sonner';
 import Image from 'next/image';
+import { subscribeToNewsletter } from '@/src/actions/newsleter/create';
 const Newsletter = () => {
   const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement newsletter subscription logic
-    toast.success('Subscribing email:', email as ExternalToast);
-    setEmail('');
+    setIsSubmitting(true);
+    
+    try {
+      const formData = new FormData();
+      formData.append('email', email);
+      
+      const result = await subscribeToNewsletter(formData);
+      
+      if (result.success) {
+        toast.success(result.message);
+        setEmail('');
+      } else {
+        toast.error(result.message);
+      }
+    } catch (error) {
+      toast.error('Failed to subscribe. Please try again.');
+      console.error('Newsletter subscription error:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -33,9 +53,10 @@ const Newsletter = () => {
             />
             <button
               type="submit"
-              className="bg-[#2D3748] text-white px-6 py-2 rounded-md hover:bg-[#1A202C] transition-colors"
+              disabled={isSubmitting}
+              className="bg-[#2D3748] text-white px-6 py-2 rounded-md hover:bg-[#1A202C] transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              Subscribe
+              {isSubmitting ? 'Subscribing...' : 'Subscribe'}
             </button>
           </form>
         </div>
