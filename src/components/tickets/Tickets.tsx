@@ -10,7 +10,7 @@ export default function Tickets() {
 
         <div className="bg-white rounded-xl shadow-2xs border border-gray-200 overflow-hidden">
           {/* Conference Ticket */}
-          <div className="border-b border-gray-200">
+          {/* <div className="border-b border-gray-200">
             <div className="p-6">
               <div className="flex justify-between items-start mb-2">
                 <div>
@@ -31,7 +31,7 @@ export default function Tickets() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Conference Ticket */}
           <div className="border-b border-gray-200">
