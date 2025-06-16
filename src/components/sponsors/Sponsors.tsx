@@ -176,7 +176,7 @@ export default function Sponsors() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
-                  href="https://drive.google.com/file/d/1q0e5oC4L-ByWN9OBwoSbBLOZdfXxIlI8/view?usp=sharing"
+                  href="/gophercon-africa-2025-sponsorship-prospectus.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
