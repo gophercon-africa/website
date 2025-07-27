@@ -45,13 +45,14 @@ export interface TalkFormState {
 export async function createTalk(formState: TalkFormState, formData: FormData): Promise<TalkFormState> {
  
         // Check if user's email address is already in the database
-        const user = await db.talk.findFirst({
+        const user = await db.talk.findMany({
             where: {
                 email: formData.get('email') as string
             }
         });
-        if (user) {
-            return { errors: { email: ['You have already submitted a talk. Please wait for it to be reviewed.'] } };
+        // Check if user has already submitted a talk twice
+        if (user.length >= 2) {
+            return { errors: { email: ['You have already submitted two talks. Please wait for the previous talks to be reviewed.'] } };
         }
 
 
