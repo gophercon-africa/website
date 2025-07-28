@@ -120,7 +120,7 @@ export async function createTalk(formState: TalkFormState, formData: FormData): 
 
     // Send email to the user using Resend
     const resend = new Resend(process.env.RESEND_API_KEY);
-    const { data, error } = await resend.emails.send({
+    const { error } = await resend.emails.send({
         from: "hello@gophers.africa",
         to:  validatedFields.data.email,
         subject: 'Thank you for submitting your talk to the Gophers Conference 2025',
