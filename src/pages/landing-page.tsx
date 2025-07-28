@@ -9,6 +9,7 @@ import InfoCards from '../components/info-cards/InfoCards';
 import Tickets from '../components/tickets/Tickets';
 import Sponsors from '../components/sponsors/Sponsors';
 import Newsletter from '../components/newsletter/Newsletter';
+import VisaInfo from '../components/visa-info/VisaInfo';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -24,6 +25,7 @@ export default function LandingPage() {
       <About />
       <InfoCards />
       <Tickets />
+      <VisaInfo />
       <Sponsors />
       <Newsletter />
     </div>
