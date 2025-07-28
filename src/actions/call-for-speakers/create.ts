@@ -4,7 +4,9 @@ import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import db from "@/src/db";
 import paths from "@/src/path";
-
+import { Resend } from "resend";
+import { EmailTemplate } from "@/src/notification/email/templates/talk-submission-success";
+    
 const createTalkSchema = z.object({
     fullName: z.string().min(3, { message: "Full name must be at least 3 characters long" }),
     email: z.string().min(10, { message: "Email must be at least 10 characters long" }).email({ message: "Invalid email address" }),
@@ -114,6 +116,20 @@ export async function createTalk(formState: TalkFormState, formData: FormData): 
                 },
             };
         }
+    }
+
+    // Send email to the user using Resend
+    const resend = new Resend(process.env.RESEND_API_KEY);
+    const { data, error } = await resend.emails.send({
+        from: "hello@gophers.africa",
+        to:  validatedFields.data.email,
+        subject: 'Thank you for submitting your talk to the Gophers Conference 2025',
+        react: EmailTemplate({ firstName: validatedFields.data.fullName })
+    });
+
+    if (error) {
+        console.error(error);
+        return { errors: { email: ['Failed to send email'] } };
     }
 
     revalidatePath(paths.callForSpeakers());

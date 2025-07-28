@@ -15,8 +15,8 @@
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.8.0",
-    "@hookform/resolvers": "^4.1.3",
     "@heroui/react": "^2.6.11",
+    "@hookform/resolvers": "^4.1.3",
     "@prisma/client": "^6.6.0",
     "axios": "^1.8.1",
     "chart.js": "^4.4.8",
@@ -35,6 +35,7 @@
     "react-hot-toast": "^2.5.2",
     "react-router-dom": "^7.2.0",
     "react-youtube": "^10.1.0",
+    "resend": "^4.7.0",
     "sonner": "^2.0.1",
     "yup": "^1.6.1",
     "zod": "^3.24.2"
