@@ -38,9 +38,9 @@ export default function Tickets() {
             <div className="p-6">
               <div className="flex justify-between items-start mb-2">
                 <div>
-                  <h3 className="text-xl font-medium text-gray-900">Conference - <span className="text-gray-600 font-bold">Early Bird: NGN 25,000</span></h3>
+                  <h3 className="text-xl font-medium text-gray-900">Conference - <span className="text-gray-600 font-bold">NGN 30,000</span></h3>
                   <p className="text-gray-600 mt-1">
-                    Price of the ticket for the conference NGN 25,000 does not include workshop admission.
+                    Price of the ticket for the conference NGN 30,000 does not include workshop admission.
                   </p>
 
                 </div>
@@ -48,7 +48,7 @@ export default function Tickets() {
                   <div className="flex items-center space-x-4">
 
                     <span className="text-xl font-medium">
-                      <Link href="https://paystack.com/buy/general-admission-early-bird-dgraba" target="_blank">
+                      <Link href="https://paystack.com/buy/gophercon-africa-2025-general-admission" target="_blank">
                         <button className="bg-[#006B3F] text-white px-4 py-2 rounded-md hover:bg-[#005A35] transition-colors duration-200">Buy Ticket</button>
                       </Link>
                     </span>
