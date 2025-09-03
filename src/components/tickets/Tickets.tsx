@@ -62,9 +62,9 @@ export default function Tickets() {
             <div className="p-6">
               <div className="flex justify-between items-start mb-2">
                 <div>
-                  <h3 className="text-xl font-medium text-gray-900">Conference - <span className="text-gray-600 font-bold">Student: NGN 8,000</span></h3>
+                  <h3 className="text-xl font-medium text-gray-900">Conference - <span className="text-gray-600 font-bold">Student: NGN 15,000</span></h3>
                   <p className="text-gray-600 mt-1">
-                    Price of the ticket for the conference NGN 8,000 does not include workshop admission.
+                    Price of the ticket for the conference NGN 15,000 does not include workshop admission.
                   </p>
 
                 </div>
