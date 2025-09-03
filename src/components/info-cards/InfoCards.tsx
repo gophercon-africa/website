@@ -50,15 +50,15 @@ export default function InfoCards() {
             className="bg-[#FFF5F5] rounded-3xl p-12 relative overflow-hidden"
           >
             <div className="max-w-lg">
-              <div className="text-[#FF6B6B] mb-4">The best speakers</div>
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">Call for Speakers</h2>
+              <div className="text-[#FF6B6B] mb-4">🚫 closed</div>
+              <h2 className="text-4xl font-bold text-gray-900 mb-6">Call for Speakers is closed</h2>
               <p className="text-gray-600 mb-8 text-lg">
-                The GopherCon Africa 2025 Call for Speakers will be open early next year. Follow us on social media to find out about updates.
+                We will be contacting those who submitted proposals soon. Thank you to everyone who submitted a proposal!
               </p>
-              <Link href={paths.callForSpeakers()} className="inline-flex items-center text-gray-900 font-semibold hover:text-[#FF6B6B] transition-colors">
+              {/*}<Link href={paths.callForSpeakers()} className="inline-flex items-center text-gray-900 font-semibold hover:text-[#FF6B6B] transition-colors">
                 Submit your proposal
                 <ChevronRight className="w-5 h-5 ml-1" />
-              </Link>
+              </Link>*/}
             </div>
             <div className="absolute bottom-0 right-0 w-48 h-48">
               <Image

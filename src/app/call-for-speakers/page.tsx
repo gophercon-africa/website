@@ -21,9 +21,13 @@ export default function CallForSpeakersPage() {
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <div className="prose prose-lg max-w-none">
         <h1 className="text-4xl font-bold text-[#006B3F] mb-8">
-          Call for Speakers for GopherCon Africa 2025 is now open! 🎉
+          Call for Speakers for GopherCon Africa 2025 is now closed!
         </h1>
+        <p className="text-xl mb-8">
+          We will be contacting those who submitted proposals soon. Thank you to everyone who submitted a proposal!
+        </p>
 
+        {/*
         <p className="text-xl mb-8">
           Hurray! The call for speakers for GopherCon Africa 2025 is officially open! 🚀 Join us to make the event a memorable and fantastic one.
         </p>
@@ -170,9 +174,10 @@ export default function CallForSpeakersPage() {
           </p>
         </div>
         <div className="flex justify-end">
-          {/* <HeaderAuth /> */}
+          {/* <HeaderAuth /> *
         </div>
-        {showForm && <div ref={formRef}><CallForSpeakersForm /></div>}
+        showForm && <div ref={formRef}><CallForSpeakersForm /></div>
+      */}
       </div>
     </div>
   );

@@ -65,9 +65,9 @@ export default function Hero() {
                 Get your ticket
                 <ChevronRight className="w-6 h-6 ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
-              <a href={paths.callForSpeakers()} className="border-2 border-white hover:border-white text-white px-8 py-4 rounded-full font-bold text-lg transition-all hover:bg-white/20 backdrop-blur-xs">
+              {/*<a href={paths.callForSpeakers()} className="border-2 border-white hover:border-white text-white px-8 py-4 rounded-full font-bold text-lg transition-all hover:bg-white/20 backdrop-blur-xs">
                 Submit your talks
-              </a>
+              </a>*/}
             </div>
           </div>
 
