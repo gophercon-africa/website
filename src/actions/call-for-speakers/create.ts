@@ -4,7 +4,9 @@ import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import db from "@/src/db";
 import paths from "@/src/path";
-
+import { Resend } from "resend";
+import { EmailTemplate } from "@/src/notification/email/templates/talk-submission-success";
+    
 const createTalkSchema = z.object({
     fullName: z.string().min(3, { message: "Full name must be at least 3 characters long" }),
     email: z.string().min(10, { message: "Email must be at least 10 characters long" }).email({ message: "Invalid email address" }),
@@ -45,13 +47,14 @@ export interface TalkFormState {
 export async function createTalk(formState: TalkFormState, formData: FormData): Promise<TalkFormState> {
  
         // Check if user's email address is already in the database
-        const user = await db.talk.findFirst({
+        const user = await db.talk.findMany({
             where: {
                 email: formData.get('email') as string
             }
         });
-        if (user) {
-            return { errors: { email: ['You have already submitted a talk. Please wait for it to be reviewed.'] } };
+        // Check if user has already submitted a talk twice
+        if (user.length >= 2) {
+            return { errors: { email: ['You have already submitted two talks. Please wait for the previous talks to be reviewed.'] } };
         }
 
 
@@ -113,6 +116,21 @@ export async function createTalk(formState: TalkFormState, formData: FormData): 
                 },
             };
         }
+    }
+
+    // Send email to the user using Resend
+    const resend = new Resend(process.env.RESEND_API_KEY);
+    const { error } = await resend.emails.send({
+        from: "hello@gophercon.africa",
+        replyTo: "hello@gophers.africa",
+        to:  validatedFields.data.email,
+        subject: 'Thank you for submitting your talk to the Gophers Conference 2025',
+        react: EmailTemplate({ firstName: validatedFields.data.fullName })
+    });
+
+    if (error) {
+        console.error(error);
+        return { errors: { email: ['Failed to send email'] } };
     }
 
     revalidatePath(paths.callForSpeakers());
