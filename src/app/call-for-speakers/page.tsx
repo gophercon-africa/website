@@ -1,22 +1,20 @@
 'use client';
-import { Mail } from 'lucide-react';
-import CallForSpeakersForm from '@/src/components/call-for-speakers/CallForSpeakersForm';
-import { useRef } from 'react';
-import { useState } from 'react';
+// import { useRef } from 'react';
+// import { useState } from 'react';
 
 export default function CallForSpeakersPage() {
-  const [showForm, setShowForm] = useState(false);
-  const formRef = useRef<HTMLDivElement>(null);
-  const toggleForm = () => {
-    setShowForm(prev => !prev);
-    if (!showForm) {
-      setTimeout(() => {
-        formRef.current?.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
-    }
-  };
+  // const [showForm, setShowForm] = useState(false);
+  // const formRef = useRef<HTMLDivElement>(null);
+  // const toggleForm = () => {
+  //   setShowForm(prev => !prev);
+  //   if (!showForm) {
+  //     setTimeout(() => {
+  //       formRef.current?.scrollIntoView({ behavior: 'smooth' });
+  //     }, 100);
+  //   }
+  // };
 
-  
+
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <div className="prose prose-lg max-w-none">

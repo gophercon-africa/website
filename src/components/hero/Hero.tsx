@@ -3,7 +3,6 @@ import { Calendar, ChevronRight, MapPin } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import TypewriterText from '../TypewriterText';
-import paths from '@/src/path';
 export default function Hero() {
   return (
     <div className="relative min-h-[50vh] overflow-hidden bg-linear-to-b from-[#004428] via-[#008751] to-[#004428]">
