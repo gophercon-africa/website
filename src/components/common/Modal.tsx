@@ -24,7 +24,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, size = 
   return (
     <div className="fixed inset-0 z-100 overflow-y-auto">
       <div className="flex min-h-screen items-center justify-center p-4 text-center">
-        <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm transition-opacity" onClick={onClose} />
+        <div className="fixed inset-0 bg-black/30 backdrop-blur-md transition-opacity" onClick={onClose} />
 
         <div className={`relative w-full ${sizeClasses[size]} transform rounded-2xl bg-white p-6 shadow-xl transition-all`}>
           <div className="flex items-center justify-between mb-4">
