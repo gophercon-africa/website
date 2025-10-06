@@ -32,7 +32,7 @@ export default function SpeakersPage() {
               Meet the amazing speakers who will be sharing their knowledge and experience at GopherCon Africa
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {speakers.map((speaker) => (
               <SpeakerCard
                 key={speaker.id}
