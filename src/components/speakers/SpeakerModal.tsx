@@ -100,7 +100,7 @@ const SpeakerModal: React.FC<SpeakerModalProps> = ({ speaker, isOpen, onClose })
 
             <div>
               <Link
-                href="/schedule"
+                href={`/schedule?speaker=${encodeURIComponent(speaker.name)}`}
                 className="inline-flex items-center gap-2 text-sm text-blue-600 hover:text-blue-700 font-medium hover:underline"
               >
                 <Calendar className="w-4 h-4" />
