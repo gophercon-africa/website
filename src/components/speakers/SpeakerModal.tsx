@@ -25,7 +25,7 @@ const SpeakerModal: React.FC<SpeakerModalProps> = ({ speaker, isOpen, onClose })
       size="xl"
     >
       <div className="flex flex-col md:flex-row gap-6">
-        <div className="flex-shrink-0 flex flex-col items-center">
+        <div className="flex-shrink-0 flex flex-col">
           <Image
             src={speaker.imageUrl}
             alt={speaker.name}
@@ -34,7 +34,7 @@ const SpeakerModal: React.FC<SpeakerModalProps> = ({ speaker, isOpen, onClose })
             className="rounded-lg object-cover w-48 h-48 mb-4"
           />
           
-          <div className="flex gap-3 justify-center">
+          <div className="flex gap-3">
             {speaker.twitter && (
               <a
                 href={speaker.twitter}
