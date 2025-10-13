@@ -1,5 +1,6 @@
 import { ScheduleActivity } from '@/src/types/schedule';
-import { Clock, User, MessageSquare } from 'lucide-react';
+import { Clock, User, MessageSquare, ExternalLink } from 'lucide-react';
+import Link from 'next/link';
 
 interface ScheduleCardProps {
   activity: ScheduleActivity;
@@ -61,12 +62,16 @@ export default function ScheduleCard({ activity }: ScheduleCardProps) {
       </div>
 
       {activity.speaker && (
-        <div className="flex items-center gap-2 mb-2">
-          <User className="w-4 h-4 text-gray-600" />
-          <span className="text-sm font-medium text-gray-700">
+        <Link 
+          href={`/speakers?name=${encodeURIComponent(activity.speaker)}`}
+          className="flex items-center gap-2 mb-2 group w-fit"
+        >
+          <User className="w-4 h-4 text-gray-600 group-hover:text-blue-600 transition-colors" />
+          <span className="text-sm font-medium text-gray-700 group-hover:text-blue-600 group-hover:underline transition-colors">
             {activity.speaker}
           </span>
-        </div>
+          <ExternalLink className="w-3 h-3 text-gray-400 group-hover:text-blue-600 transition-colors" />
+        </Link>
       )}
 
       {activity.talk && (
