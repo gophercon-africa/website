@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import SpeakerCard from '@/src/components/speakers/SpeakerCard';
 import SpeakerModal from '@/src/components/speakers/SpeakerModal';
 import { speakers } from '@/src/data/speakers';
@@ -9,6 +10,21 @@ import { Speaker } from '@/src/types/speaker';
 export default function SpeakersPage() {
   const [selectedSpeaker, setSelectedSpeaker] = useState<Speaker | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    if (!searchParams) return;
+    const speakerName = searchParams.get('name');
+    if (speakerName) {
+      const speaker = speakers.find(
+        (s) => s.name.toLowerCase() === speakerName.toLowerCase()
+      );
+      if (speaker) {
+        setSelectedSpeaker(speaker);
+        setIsModalOpen(true);
+      }
+    }
+  }, [searchParams]);
 
   const handleSpeakerClick = (speaker: Speaker) => {
     setSelectedSpeaker(speaker);
