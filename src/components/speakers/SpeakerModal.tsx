@@ -95,15 +95,18 @@ const SpeakerModal: React.FC<SpeakerModalProps> = ({ speaker, isOpen, onClose })
                 {speaker.talkDescription && (
                   <p className="text-gray-700 leading-relaxed mb-3">{speaker.talkDescription}</p>
                 )}
-                <Link
-                  href="/schedule"
-                  className="inline-flex items-center gap-2 text-sm text-blue-600 hover:text-blue-700 font-medium hover:underline"
-                >
-                  <Calendar className="w-4 h-4" />
-                  View in Schedule
-                </Link>
               </div>
             )}
+
+            <div>
+              <Link
+                href="/schedule"
+                className="inline-flex items-center gap-2 text-sm text-blue-600 hover:text-blue-700 font-medium hover:underline"
+              >
+                <Calendar className="w-4 h-4" />
+                View in Schedule
+              </Link>
+            </div>
           </div>
         </div>
       </div>
