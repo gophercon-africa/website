@@ -1,12 +1,21 @@
 import { ScheduleActivity } from '@/src/types/schedule';
 import { Clock, User, MessageSquare, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
+import { useEffect, useRef } from 'react';
 
 interface ScheduleCardProps {
   activity: ScheduleActivity;
+  isHighlighted?: boolean;
 }
 
-export default function ScheduleCard({ activity }: ScheduleCardProps) {
+export default function ScheduleCard({ activity, isHighlighted = false }: ScheduleCardProps) {
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isHighlighted && cardRef.current) {
+      cardRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, [isHighlighted]);
   const getActivityColor = (activityType: string) => {
     switch (activityType.toLowerCase()) {
       case 'workshop':
@@ -42,9 +51,10 @@ export default function ScheduleCard({ activity }: ScheduleCardProps) {
 
   return (
     <div
-      className={`border-2 rounded-lg p-4 hover:shadow-md transition-shadow ${getActivityColor(
+      ref={cardRef}
+      className={`border-2 rounded-lg p-4 hover:shadow-md transition-all ${getActivityColor(
         activity.activity
-      )}`}
+      )} ${isHighlighted ? 'ring-4 ring-blue-500 shadow-xl scale-105' : ''}`}
     >
       <div className="flex items-start justify-between mb-2">
         <div className="flex items-center gap-2">
