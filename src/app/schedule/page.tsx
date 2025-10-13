@@ -7,10 +7,53 @@ import { CalendarDays, Info } from 'lucide-react';
 
 export default function SchedulePage() {
   const [selectedDay, setSelectedDay] = useState<number | null>(null);
+  const [selectedActivityTypes, setSelectedActivityTypes] = useState<string[]>([]);
+
+  const activityTypes = [
+    { name: 'Workshop', color: 'bg-purple-200' },
+    { name: 'Keynote', color: 'bg-blue-200' },
+    { name: 'Talk', color: 'bg-green-200' },
+    { name: 'Meals', color: 'bg-orange-200' },
+    { name: 'Women Who Go', color: 'bg-pink-200' },
+    { name: 'Registration', color: 'bg-indigo-200' },
+    { name: 'Break', color: 'bg-gray-200' },
+  ];
+
+  const toggleActivityType = (activityType: string) => {
+    setSelectedActivityTypes((prev) =>
+      prev.includes(activityType)
+        ? prev.filter((type) => type !== activityType)
+        : [...prev, activityType]
+    );
+  };
+
+  const filterActivities = (activities: any[]) => {
+    if (selectedActivityTypes.length === 0) return activities;
+    
+    return activities.filter((activity) => {
+      const activityLower = activity.activity.toLowerCase();
+      return selectedActivityTypes.some((type) => {
+        const typeLower = type.toLowerCase();
+        if (typeLower === 'meals') {
+          return activityLower.includes('breakfast') || activityLower.includes('lunch');
+        }
+        if (typeLower === 'registration') {
+          return activityLower.includes('registration');
+        }
+        return activityLower.includes(typeLower);
+      });
+    });
+  };
 
   const displaySchedule = selectedDay
-    ? scheduleData.filter((day) => day.day === selectedDay)
-    : scheduleData;
+    ? scheduleData.filter((day) => day.day === selectedDay).map((day) => ({
+        ...day,
+        activities: filterActivities(day.activities),
+      }))
+    : scheduleData.map((day) => ({
+        ...day,
+        activities: filterActivities(day.activities),
+      }));
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-16">
@@ -61,7 +104,7 @@ export default function SchedulePage() {
           </button>
         </div>
 
-        <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-6 mb-12">
+        <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-6 mb-6">
           <div className="flex items-start gap-3">
             <Info className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" />
             <div>
@@ -77,46 +120,40 @@ export default function SchedulePage() {
           </div>
         </div>
 
+        <div className="bg-white rounded-lg p-6 shadow-md mb-12">
+          <h3 className="font-bold text-lg text-gray-900 mb-4">
+            Filter by Activity Type
+          </h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {activityTypes.map((type) => (
+              <button
+                key={type.name}
+                onClick={() => toggleActivityType(type.name)}
+                className={`flex items-center gap-2 p-2 rounded-lg border-2 transition-all ${
+                  selectedActivityTypes.includes(type.name)
+                    ? 'border-blue-500 bg-blue-50'
+                    : 'border-gray-200 hover:border-gray-300'
+                }`}
+              >
+                <div className={`w-4 h-4 ${type.color} rounded`}></div>
+                <span className="text-sm text-gray-700 font-medium">{type.name}</span>
+              </button>
+            ))}
+          </div>
+          {selectedActivityTypes.length > 0 && (
+            <button
+              onClick={() => setSelectedActivityTypes([])}
+              className="mt-4 text-sm text-blue-600 hover:text-blue-700 font-medium"
+            >
+              Clear all filters
+            </button>
+          )}
+        </div>
+
         <div>
           {displaySchedule.map((daySchedule) => (
             <DaySchedule key={daySchedule.day} schedule={daySchedule} />
           ))}
-        </div>
-
-        <div className="mt-12 bg-white rounded-lg p-6 shadow-md">
-          <h3 className="font-bold text-lg text-gray-900 mb-4">
-            Activity Types
-          </h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-purple-200 rounded"></div>
-              <span className="text-sm text-gray-700">Workshop</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-blue-200 rounded"></div>
-              <span className="text-sm text-gray-700">Keynote</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-green-200 rounded"></div>
-              <span className="text-sm text-gray-700">Talk</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-orange-200 rounded"></div>
-              <span className="text-sm text-gray-700">Meals</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-pink-200 rounded"></div>
-              <span className="text-sm text-gray-700">Women Who Go</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-indigo-200 rounded"></div>
-              <span className="text-sm text-gray-700">Registration</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-gray-200 rounded"></div>
-              <span className="text-sm text-gray-700">Break</span>
-            </div>
-          </div>
         </div>
       </div>
     </div>
