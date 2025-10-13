@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import DaySchedule from '@/src/components/schedule/DaySchedule';
 import { scheduleData } from '@/src/data/schedule';
 import { CalendarDays, Info } from 'lucide-react';
@@ -8,6 +9,17 @@ import { CalendarDays, Info } from 'lucide-react';
 export default function SchedulePage() {
   const [selectedDay, setSelectedDay] = useState<number | null>(null);
   const [selectedActivityTypes, setSelectedActivityTypes] = useState<string[]>([]);
+  const [highlightedSpeaker, setHighlightedSpeaker] = useState<string | null>(null);
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    if (!searchParams) return;
+    const speakerName = searchParams.get('speaker');
+    if (speakerName) {
+      setHighlightedSpeaker(speakerName);
+      setTimeout(() => setHighlightedSpeaker(null), 3000);
+    }
+  }, [searchParams]);
 
   const activityTypes = [
     { name: 'Workshop', color: 'bg-purple-200' },
@@ -152,7 +164,11 @@ export default function SchedulePage() {
 
         <div>
           {displaySchedule.map((daySchedule) => (
-            <DaySchedule key={daySchedule.day} schedule={daySchedule} />
+            <DaySchedule 
+              key={daySchedule.day} 
+              schedule={daySchedule} 
+              highlightedSpeaker={highlightedSpeaker}
+            />
           ))}
         </div>
       </div>
