@@ -62,8 +62,8 @@ export const scheduleData: DaySchedule[] = [
         startTime: '14:05',
         endTime: '14:35',
         duration: '0:30',
-        speaker: 'Olusola Enoch Alao',
-        talk: 'Go-Powered AI Agents: Building Intelligent Web Apps with Gowhisper, Langchaingo, and Web Search',
+        speaker: 'Olusola Alao',
+        talk: 'AI Agents the Go Way: Production Patterns Without Python',
       },
       {
         activity: 'Talk',
