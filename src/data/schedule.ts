@@ -163,7 +163,7 @@ export const scheduleData: DaySchedule[] = [
         startTime: '14:35',
         endTime: '14:55',
         duration: '0:20',
-        speaker: 'Ayo (freshman.tech)',
+        speaker: 'Ayooluwa Isaiah',
         talk: 'Building Command Line Applications in Go',
       },
       {

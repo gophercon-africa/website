@@ -170,10 +170,10 @@ export const speakers: Speaker[] = [
   },
   {
     id: '16',
-    name: 'Ayo (freshman.tech)',
+    name: 'Ayooluwa Isaiah',
     title: 'Content Creator & Developer',
     company: 'freshman.tech',
-    bio: 'Ayo is a developer and content creator who teaches programming through practical tutorials.',
+    bio: 'Ayooluwa Isaiah is a developer and content creator who teaches programming through practical tutorials.',
     imageUrl: '/speakers/placeholder.jpg',
     talkTitle: 'Building Command Line Applications in Go',
     talkDescription: 'Learn the fundamentals of building powerful command-line applications with Go.',
