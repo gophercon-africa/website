@@ -2,8 +2,10 @@
 
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Speaker } from '@/src/types/speaker';
 import { FaTwitter, FaLinkedin, FaGithub, FaGlobe } from 'react-icons/fa';
+import { Calendar } from 'lucide-react';
 import Modal from '@/src/components/common/Modal';
 
 interface SpeakerModalProps {
@@ -91,10 +93,20 @@ const SpeakerModal: React.FC<SpeakerModalProps> = ({ speaker, isOpen, onClose })
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Talk</h3>
                 <p className="text-[#006B3F] font-semibold mb-1">{speaker.talkTitle}</p>
                 {speaker.talkDescription && (
-                  <p className="text-gray-700 leading-relaxed">{speaker.talkDescription}</p>
+                  <p className="text-gray-700 leading-relaxed mb-3">{speaker.talkDescription}</p>
                 )}
               </div>
             )}
+
+            <div>
+              <Link
+                href={`/schedule?speaker=${encodeURIComponent(speaker.name)}`}
+                className="inline-flex items-center gap-2 text-sm text-blue-600 hover:text-blue-700 font-medium hover:underline"
+              >
+                <Calendar className="w-4 h-4" />
+                View in Schedule
+              </Link>
+            </div>
           </div>
         </div>
       </div>
