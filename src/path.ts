@@ -11,6 +11,7 @@ const paths = {
   talkCreate: () => `/talks/create`,
   talkEdit: (talkId: string) => `/talks/${talkId}/edit`,
   callForSpeakers: () => `/call-for-speakers`,
+  speakers: () => `/speakers`,
 };      
 
 export default paths;

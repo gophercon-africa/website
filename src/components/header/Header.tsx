@@ -35,6 +35,7 @@ export default function Header({ mounted = true }: HeaderProps) {
           </div>
           <div className="hidden md:flex items-center space-x-8">
             <Link href="/#about" className="text-gray-600 hover:text-[#006B3F] transition-colors font-medium">About</Link>
+            <Link href={paths.speakers()} className="text-gray-600 hover:text-[#006B3F] transition-colors font-medium">Speakers</Link>
             <Link href={paths.callForSpeakers()} className="text-gray-600 hover:text-[#006B3F] transition-colors font-medium">Call for Speakers</Link>
             <Link href="/#sponsors" className="text-gray-600 hover:text-[#006B3F] transition-colors font-medium">Sponsors</Link>
             <Link href="/#tickets" className="bg-[#006B3F] text-white px-6 py-2 rounded-lg font-medium hover:bg-[#008751] transition-colors">
@@ -57,6 +58,13 @@ export default function Header({ mounted = true }: HeaderProps) {
               onClick={() => setIsMobileMenuOpen(false)}
             >
               About
+            </Link>
+            <Link 
+              href={paths.speakers()} 
+              className="block text-gray-600 hover:text-[#006B3F] transition-colors font-medium"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Speakers
             </Link>
             <Link 
               href={paths.callForSpeakers()} 
