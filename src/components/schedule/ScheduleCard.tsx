@@ -95,15 +95,6 @@ export default function ScheduleCard({ activity, isHighlighted = false }: Schedu
         </p>
       )}
 
-      {activity.notes && (
-        <div className="text-sm text-gray-600 mt-2 border-t pt-2">
-          <span className="font-semibold">Note:</span>
-          <div className="whitespace-pre-line leading-relaxed mt-1">
-            {activity.notes}
-          </div>
-        </div>
-      )}
-
       {activity.requirements && (
         <div className="text-sm text-gray-600 mt-1">
           <span className="font-semibold">Requirements:</span>
