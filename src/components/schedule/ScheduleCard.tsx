@@ -59,11 +59,11 @@ export default function ScheduleCard({ activity, isHighlighted = false }: Schedu
       <div className="flex items-start justify-between mb-2">
         <div className="flex items-center gap-2">
           {getActivityIcon(activity.activity)}
-          <h3 className="font-bold text-lg text-gray-900">
+          <h3 className="font-bold text-xl text-gray-900">
             {activity.activity}
           </h3>
         </div>
-        <div className="flex items-center gap-2 text-sm text-gray-600">
+        <div className="flex items-center gap-2 text-base text-gray-600">
           <Clock className="w-4 h-4" />
           <span className="font-medium">
             {activity.startTime} - {activity.endTime}
@@ -77,7 +77,7 @@ export default function ScheduleCard({ activity, isHighlighted = false }: Schedu
           className="flex items-center gap-2 mb-2 group w-fit"
         >
           <User className="w-4 h-4 text-gray-600 group-hover:text-blue-600 transition-colors" />
-          <span className="text-sm font-medium text-gray-700 group-hover:text-blue-600 group-hover:underline transition-colors">
+          <span className="text-base font-medium text-gray-700 group-hover:text-blue-600 group-hover:underline transition-colors">
             {activity.speaker}
           </span>
           <ExternalLink className="w-3 h-3 text-gray-400 group-hover:text-blue-600 transition-colors" />
@@ -85,19 +85,19 @@ export default function ScheduleCard({ activity, isHighlighted = false }: Schedu
       )}
 
       {activity.talk && (
-        <p className="text-sm text-gray-800 mb-2 font-medium">
+        <p className="text-base text-gray-800 mb-2 font-medium">
           {activity.talk}
         </p>
       )}
 
       {activity.notes && (
-        <p className="text-xs text-gray-600 italic mt-2 border-t pt-2">
+        <p className="text-sm text-gray-600 italic mt-2 border-t pt-2">
           Note: {activity.notes}
         </p>
       )}
 
       {activity.requirements && (
-        <p className="text-xs text-gray-600 mt-1">
+        <p className="text-sm text-gray-600 mt-1">
           <span className="font-semibold">Requirements:</span>{' '}
           {activity.requirements}
         </p>
