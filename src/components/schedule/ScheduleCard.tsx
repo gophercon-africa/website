@@ -1,7 +1,8 @@
 import { ScheduleActivity } from '@/src/types/schedule';
-import { Clock, User, MessageSquare, ExternalLink } from 'lucide-react';
+import { Clock, User, MessageSquare, ExternalLink, Eye } from 'lucide-react';
 import Link from 'next/link';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import TalkDetailModal from './TalkDetailModal';
 
 interface ScheduleCardProps {
   activity: ScheduleActivity;
@@ -10,6 +11,7 @@ interface ScheduleCardProps {
 
 export default function ScheduleCard({ activity, isHighlighted = false }: ScheduleCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     if (isHighlighted && cardRef.current) {
@@ -24,13 +26,15 @@ export default function ScheduleCard({ activity, isHighlighted = false }: Schedu
         return 'bg-blue-50 border-blue-200';
       case 'talk':
         return 'bg-green-50 border-green-200';
+      case 'general':
+        return 'bg-pink-50 border-pink-200';
       case 'breakfast':
       case 'lunch break':
         return 'bg-orange-50 border-orange-200';
       case 'break':
         return 'bg-gray-50 border-gray-200';
-      case 'women who go':
-        return 'bg-pink-50 border-pink-200';
+      case 'partna talk':
+        return 'bg-indigo-50 border-indigo-200';
       case 'arrival & registration':
         return 'bg-indigo-50 border-indigo-200';
       default:
@@ -43,6 +47,7 @@ export default function ScheduleCard({ activity, isHighlighted = false }: Schedu
       case 'workshop':
       case 'keynote':
       case 'talk':
+      case 'general':
         return <MessageSquare className="w-5 h-5" />;
       default:
         return <Clock className="w-5 h-5" />;
@@ -91,17 +96,46 @@ export default function ScheduleCard({ activity, isHighlighted = false }: Schedu
       )}
 
       {activity.notes && (
-        <p className="text-sm text-gray-600 italic mt-2 border-t pt-2">
-          Note: {activity.notes}
-        </p>
+        <div className="text-sm text-gray-600 mt-2 border-t pt-2">
+          <span className="font-semibold">Note:</span>
+          <div className="whitespace-pre-line leading-relaxed mt-1">
+            {activity.notes}
+          </div>
+        </div>
       )}
 
       {activity.requirements && (
-        <p className="text-sm text-gray-600 mt-1">
-          <span className="font-semibold">Requirements:</span>{' '}
-          {activity.requirements}
-        </p>
+        <div className="text-sm text-gray-600 mt-1">
+          <span className="font-semibold">Requirements:</span>
+          <div className="whitespace-pre-line leading-relaxed mt-1">
+            {activity.requirements}
+          </div>
+        </div>
       )}
+
+      {/* View Detail Button - Only show for talks, workshops, keynotes, general sessions, and other relevant activities */}
+      {(activity.activity.toLowerCase().includes('talk') || 
+        activity.activity.toLowerCase().includes('workshop') || 
+        activity.activity.toLowerCase().includes('keynote') ||
+        activity.activity.toLowerCase().includes('general') ||
+        activity.activity.toLowerCase().includes('partna talk')) && (
+        <div className="mt-4 pt-3 border-t border-gray-200">
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
+          >
+            <Eye className="w-4 h-4" />
+            View Details
+          </button>
+        </div>
+      )}
+
+      {/* Talk Detail Modal */}
+      <TalkDetailModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        activity={activity}
+      />
     </div>
   );
 }
