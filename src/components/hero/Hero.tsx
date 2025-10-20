@@ -50,7 +50,7 @@ export default function Hero() {
                 </div>
                 <div className="flex items-center bg-black/30 backdrop-blur-xs rounded-full px-4 py-2">
                   <MapPin className="w-5 h-5 mr-2 text-white" />
-                  <span className="text-white">Lagos, Nigeria</span>
+                  <span className="text-white">Plot 9, Gbagada Industrial Scheme, beside UPS, Gbagada-Oworonshoki Expressway. Lagos, Nigeria.</span>
                 </div>
               </div>
               <p className="text-xl sm:text-2xl text-white leading-relaxed max-w-xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
