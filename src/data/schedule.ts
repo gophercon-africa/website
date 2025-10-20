@@ -237,19 +237,17 @@ The workshop culminates in building a comprehensive test suite for an HTTP servi
         endTime: '13:00',
         duration: '1:00',
         talk: 'Women Who Go - Interactive Session',
-        notes: `This session will cover the following topics:
+        notes: `This session shall be moderated by Irene and/or Cecilia and will cover the following topics:
 
-Agenda:
-1️⃣ Introduction
+Agenda – Women Who Go Africa Panel @ GopherCon Africa 2025
+1️⃣ Introduction & Welcome
 2️⃣ About Women Who Go (WWG)
-3️⃣ Purpose & Vision
-4️⃣ Global Footprint
-5️⃣ What WWG Does
-6️⃣ Impact
-7️⃣ How to Get Involved
-8️⃣ Takeaways
-9️⃣ Q&A / Open Discussion
-✨ Closing Message`,
+3️⃣ Purpose & Vision of WWG
+4️⃣ Meet the Panelists
+5️⃣ Building with Go: Experiences & Challenges
+6️⃣ Career Growth & Community Impact
+7️⃣ Advice for Women Entering the Go Ecosystem
+8️⃣ Audience Q&A & Closing Reflections`,
       },
       {
         activity: 'Talk',
