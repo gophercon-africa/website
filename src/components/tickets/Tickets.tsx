@@ -1,6 +1,5 @@
 import React from 'react';
 import ToastWrapper from '../common/ToastWrapper';
-import Link from 'next/link';
 export default function Tickets() {
   return (
     <section id="tickets" className="py-24 bg-linear-to-b from-white via-[#E8F5E9] to-white relative overflow-hidden">
@@ -46,13 +45,11 @@ export default function Tickets() {
                 </div>
                 <div className="flex items-center space-x-4">
                   <div className="flex items-center space-x-4">
-
                     <span className="text-xl font-medium">
-                      <Link href="https://paystack.com/buy/gophercon-africa-2025-general-admission" target="_blank">
-                        <button className="bg-[#006B3F] text-white px-4 py-2 rounded-md hover:bg-[#005A35] transition-colors duration-200">Buy Ticket</button>
-                      </Link>
+                      <button className="bg-gray-400 text-white px-4 py-2 rounded-md cursor-not-allowed" disabled>
+                        Tickets Not Available
+                      </button>
                     </span>
-
                   </div>
                 </div>
               </div>
@@ -70,11 +67,10 @@ export default function Tickets() {
                 </div>
                 <div className="flex items-center space-x-4">
                   <div className="flex items-center space-x-4">
-            
                     <span className="text-xl font-medium">
-                      <Link href="https://paystack.com/buy/student-tickets-hwygws" target="_blank">
-                        <button className="bg-[#006B3F] text-white px-4 py-2 rounded-md hover:bg-[#005A35] transition-colors duration-200">Buy Ticket</button>
-                      </Link>
+                      <button className="bg-gray-400 text-white px-4 py-2 rounded-md cursor-not-allowed" disabled>
+                        Tickets Not Available
+                      </button>
                     </span>
                   </div>
                 </div>
