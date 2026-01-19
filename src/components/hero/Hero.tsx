@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar, ChevronRight, MapPin } from 'lucide-react';
+import { ChevronRight, MapPin } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import TypewriterText from '../TypewriterText';
@@ -37,36 +37,28 @@ export default function Hero() {
                   speed={100}
                 />
                 <TypewriterText 
-                  text="AFRICA 2025" 
+                  text="AFRICA 2026" 
                   className="text-white block mt-2 drop-shadow-[0_0_15px_rgba(0,0,0,0.5)]"
                   speed={100}
                   delay={1000}
                 />
               </h1>
-              <div className="flex items-center gap-4 mb-6">
-                <div className="flex items-center bg-black/30 backdrop-blur-xs rounded-full px-4 py-2">
-                  <Calendar className="w-5 h-5 mr-2 text-white" />
-                  <span className="text-white">October 24-25, 2025</span>
-                </div>
-                <div className="flex items-center bg-black/30 backdrop-blur-xs rounded-full px-4 py-2">
-                  <MapPin className="w-5 h-5 mr-2 text-white" />
-                  <span className="text-white">Plot 9, Gbagada Industrial Scheme, beside UPS, Gbagada-Oworonshoki Expressway. Lagos, Nigeria.</span>
-                </div>
+              <div className="flex items-center space-x-6 mb-6">
+              <div className="flex items-center space-x-2">
+                <MapPin className="w-6 h-6 text-white" />
+                <span className="text-white">Nairobi, Kenya</span>
               </div>
+            </div>
               <p className="text-xl sm:text-2xl text-white leading-relaxed max-w-xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
                 Join Africa&apos;s largest Go conference! Experience two days of 
-                knowledge sharing, networking, and innovation in the heart of Lagos.
+                knowledge sharing, networking, and innovation in the heart of Nairobi, Kenya.
               </p>
             </div>
-            
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/#tickets" className="bg-white hover:bg-white/90 text-[#006B3F] px-8 py-4 rounded-full font-bold text-lg transition-all transform hover:scale-105 hover:shadow-xl inline-flex items-center justify-center group">
-                Get your ticket
+              <Link href="/call-for-speakers" className="bg-white hover:bg-white/90 text-[#006B3F] px-8 py-4 rounded-full font-bold text-lg transition-all transform hover:scale-105 hover:shadow-xl inline-flex items-center justify-center group">
+                Submit your talk
                 <ChevronRight className="w-6 h-6 ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
-              {/*<a href={paths.callForSpeakers()} className="border-2 border-white hover:border-white text-white px-8 py-4 rounded-full font-bold text-lg transition-all hover:bg-white/20 backdrop-blur-xs">
-                Submit your talks
-              </a>*/}
             </div>
           </div>
 
@@ -84,22 +76,6 @@ export default function Hero() {
               <div className="absolute bottom-20 left-0 floating-star delay-200 text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">⭐</div>
               <div className="absolute top-40 right-20 floating-star delay-500 text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">⭐</div>
             </div>
-          </div>
-        </div>
-
-        {/* Conference highlights */}
-        <div className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="bg-black/30 backdrop-blur-xs rounded-xl p-6 transform hover:scale-105 transition-all">
-            <div className="text-white text-4xl font-bold mb-2">10+</div>
-            <div className="text-white">Expert Speakers</div>
-          </div>
-          <div className="bg-black/30 backdrop-blur-xs rounded-xl p-6 transform hover:scale-105 transition-all">
-            <div className="text-white text-4xl font-bold mb-2">400+</div>
-            <div className="text-white">Attendees Expected</div>
-          </div>
-          <div className="bg-black/30 backdrop-blur-xs rounded-xl p-6 transform hover:scale-105 transition-all">
-            <div className="text-white text-4xl font-bold mb-2">2</div>
-            <div className="text-white">Days of Learning and networking</div>
           </div>
         </div>
       </div>

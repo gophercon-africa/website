@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { Code2, Menu, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import paths from '@/src/path';
 
 interface HeaderProps {
   mounted?: boolean;
@@ -35,12 +34,7 @@ export default function Header({ mounted = true }: HeaderProps) {
           </div>
           <div className="hidden md:flex items-center space-x-8">
             <Link href="/#about" className="text-gray-600 hover:text-[#006B3F] transition-colors font-medium">About</Link>
-            <Link href={paths.speakers()} className="text-gray-600 hover:text-[#006B3F] transition-colors font-medium">Speakers</Link>
-            <Link href={paths.schedule()} className="text-gray-600 hover:text-[#006B3F] transition-colors font-medium">Schedule</Link>
             <Link href="/#sponsors" className="text-gray-600 hover:text-[#006B3F] transition-colors font-medium">Sponsors</Link>
-            <Link href="/#tickets" className="bg-[#006B3F] text-white px-6 py-2 rounded-lg font-medium hover:bg-[#008751] transition-colors">
-              Buy Tickets
-            </Link>
           </div>
           <button
             className="md:hidden text-gray-600 hover:text-[#006B3F] transition-colors"
@@ -60,32 +54,11 @@ export default function Header({ mounted = true }: HeaderProps) {
               About
             </Link>
             <Link 
-              href={paths.speakers()} 
-              className="block text-gray-600 hover:text-[#006B3F] transition-colors font-medium"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Speakers
-            </Link>
-            <Link 
-              href={paths.schedule()} 
-              className="block text-gray-600 hover:text-[#006B3F] transition-colors font-medium"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Schedule
-            </Link>
-            <Link 
               href="/#sponsors" 
               className="block text-gray-600 hover:text-[#006B3F] transition-colors font-medium"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Sponsors
-            </Link>
-            <Link 
-              href="/#tickets" 
-              className="block bg-[#006B3F] text-white px-6 py-2 rounded-lg font-medium hover:bg-[#008751] transition-colors text-center"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Buy Tickets
             </Link>
           </div>
         )}
