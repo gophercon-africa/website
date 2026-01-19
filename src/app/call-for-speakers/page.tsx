@@ -1,48 +1,22 @@
 'use client';
-// import { useRef } from 'react';
-// import { useState } from 'react';
+import CallForSpeakersForm from '@components/call-for-speakers/CallForSpeakersForm';
 
 export default function CallForSpeakersPage() {
-  // const [showForm, setShowForm] = useState(false);
-  // const formRef = useRef<HTMLDivElement>(null);
-  // const toggleForm = () => {
-  //   setShowForm(prev => !prev);
-  //   if (!showForm) {
-  //     setTimeout(() => {
-  //       formRef.current?.scrollIntoView({ behavior: 'smooth' });
-  //     }, 100);
-  //   }
-  // };
+
 
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <div className="prose prose-lg max-w-none">
         <h1 className="text-4xl font-bold text-[#006B3F] mb-8">
-          Call for Speakers for GopherCon Africa 2025 is now closed!
+          Call for Speakers for GopherCon Africa 2026 is Now Open! 🚀
         </h1>
         <p className="text-xl mb-8">
-          We will be contacting those who submitted proposals soon. Thank you to everyone who submitted a proposal!
+          Hurray! The call for speakers for GopherCon Africa 2026 is officially open! Join us to make the event a memorable and fantastic one.
         </p>
-
-        {/*
-        <p className="text-xl mb-8">
-          Hurray! The call for speakers for GopherCon Africa 2025 is officially open! 🚀 Join us to make the event a memorable and fantastic one.
-        </p>
-
-        <div className="flex justify-center mb-12">
-          <button
-            onClick={toggleForm}
-            className="bg-[#006B3F] text-white px-8 py-3 rounded-lg font-medium hover:bg-[#008751] transition-colors flex items-center space-x-2"
-          >
-            <span>Submit Your Talk</span>
-
-            <Mail className="w-5 h-5" />
-          </button>
-        </div>
 
         <p className="mb-6">
-          GopherCon Africa 2025 is an opportunity to bring together people with different backgrounds and perspectives on software development.
+          GopherCon Africa 2026 is an opportunity to bring together people with different backgrounds and perspectives on software development.
           We want you (yes, you!) to showcase your perspectives, views, knowledge, expertise, and ideas on technology with other conference
           participants from across Africa and the rest of the world for mutual understanding of contexts, challenges, and opportunities.
         </p>
@@ -165,17 +139,16 @@ export default function CallForSpeakersPage() {
 
           <p>
             If you would like to ask a question, you are always welcome to write to the Content Committee:
-            <a href="mailto:content@gopherconafrica.org" className="ml-2 text-[#006B3F] hover:text-[#008751] inline-flex items-center">
-              <Mail className="w-5 h-5 mr-1" />
+            <a href="mailto:hello@gophers.africa" className="ml-2 text-[#006B3F] hover:text-[#008751] font-medium">
               hello@gophers.africa
             </a>
           </p>
         </div>
-        <div className="flex justify-end">
-          {/* <HeaderAuth /> *
-        </div>
-        showForm && <div ref={formRef}><CallForSpeakersForm /></div>
-      */}
+      </div>
+
+      {/* Call for Speakers Form */}
+      <div className="mt-12">
+        <CallForSpeakersForm />
       </div>
     </div>
   );
