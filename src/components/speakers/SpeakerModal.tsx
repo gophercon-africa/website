@@ -25,7 +25,7 @@ const SpeakerModal: React.FC<SpeakerModalProps> = ({ speaker, isOpen, onClose })
       size="xl"
     >
       <div className="flex flex-col md:flex-row gap-6">
-        <div className="flex-shrink-0 flex flex-col">
+        <div className="shrink-0 flex flex-col">
           <Image
             src={speaker.imageUrl}
             alt={speaker.name}

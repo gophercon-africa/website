@@ -107,7 +107,7 @@ export default function CallForSpeakersForm() {
     };  
 
     return (
-        <div className={`min-h-screen bg-gradient-to-b from-[#006B3F]/5 via-white to-[#B91C1C]/5 ${plusJakartaSans.variable} font-sans`}>
+        <div className={`min-h-screen bg-linear-to-b from-[#006B3F]/5 via-white to-[#B91C1C]/5 ${plusJakartaSans.variable} font-sans`}>
             <div className="mt-12">
                 <div className="py-16 px-4 sm:px-6 lg:px-8">
                     <div className="max-w-5xl mx-auto">
@@ -372,7 +372,7 @@ export default function CallForSpeakersForm() {
                                 <button
                                     type="submit"
                                     disabled={isSubmitting}
-                                    className="inline-flex justify-center py-3 px-6 border border-transparent shadow-2xs text-base font-medium rounded-lg text-white bg-gradient-to-r from-[#006B3F] via-[#000000] to-[#B91C1C] hover:opacity-90 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-[#006B3F] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="inline-flex justify-center py-3 px-6 border border-transparent shadow-2xs text-base font-medium rounded-lg text-white bg-linear-to-r from-[#006B3F] via-[#000000] to-[#B91C1C] hover:opacity-90 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-[#006B3F] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                     {isSubmitting ? 'Submitting...' : 'Submit Proposal'}
                                 </button>
