@@ -16,6 +16,7 @@ const createTalkSchema = z.object({
     bio: z.string().min(50, { message: "Bio must be at least 50 characters long" }),
     talkTitle: z.string().min(3, { message: "Talk title must be at least 3 characters long" }),
     talkDescription: z.string().min(50, { message: "Talk description must be at least 50 characters long" }),
+    talkCategory: z.string().min(1, { message: "Please select a talk category" }),
     talkDuration: z.string().min(1, { message: "Talk duration must be at least 1 character long" }) ,
     talkLevel: z.string().min(1, { message: "Talk level must be at least 1 character long" }),
     previousSpeakingExperience: z.string().min(1, { message: "Previous speaking experience must be at least 1 character long" }),
@@ -34,6 +35,7 @@ export interface TalkFormState {
         bio?: string[];
         talkTitle?: string[];
         talkDescription?: string[];
+        talkCategory?: string[];
         talkDuration?: string[];
         talkLevel?: string[];
         previousSpeakingExperience?: string[];
@@ -67,6 +69,7 @@ export async function createTalk(formState: TalkFormState, formData: FormData): 
         bio: formData.get('bio'),
         talkTitle: formData.get('talkTitle'),
         talkDescription: formData.get('talkDescription'),
+        talkCategory: formData.get('talkCategory'),
         talkDuration: formData.get('talkDuration'),
         talkLevel: formData.get('talkLevel'),
         previousSpeakingExperience: formData.get('previousSpeakingExperience'),
@@ -100,6 +103,7 @@ export async function createTalk(formState: TalkFormState, formData: FormData): 
                     bio: [err.message],
                     talkTitle: [err.message],
                     talkDescription: [err.message],
+                    talkCategory: [err.message],
                     talkDuration: [err.message],
                     talkLevel: [err.message],
                     previousSpeakingExperience: [err.message],
