@@ -19,13 +19,14 @@ const TypewriterText: React.FC<TypewriterTextProps> = ({
   const [isComplete, setIsComplete] = useState(false);
 
   useEffect(() => {
+    if (currentIndex >= text.length) {
+      setIsComplete(true);
+      return;
+    }
+
     const timeout = setTimeout(() => {
-      if (currentIndex < text.length) {
-        setDisplayText(prev => prev + text[currentIndex]);
-        setCurrentIndex(prev => prev + 1);
-      } else {
-        setIsComplete(true);
-      }
+      setDisplayText(prev => prev + text[currentIndex]);
+      setCurrentIndex(prev => prev + 1);
     }, speed);
 
     return () => clearTimeout(timeout);
@@ -34,7 +35,7 @@ const TypewriterText: React.FC<TypewriterTextProps> = ({
   return (
     <span className={className}>
       {displayText}
-      {!isComplete && <span className="animate-blink">|</span>}
+      {!isComplete ? <span className="animate-blink">|</span> : null}
     </span>
   );
 };

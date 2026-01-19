@@ -2,8 +2,8 @@
 
 import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import DaySchedule from '@/src/components/schedule/DaySchedule';
-import { scheduleData } from '@/src/data/schedule';
+import DaySchedule from '@components/schedule/DaySchedule';
+import { scheduleData } from '@data/schedule';
 import { ScheduleActivity } from '@/src/types/schedule';
 import { CalendarDays, Info } from 'lucide-react';
 

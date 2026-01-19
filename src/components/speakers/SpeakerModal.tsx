@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { Speaker } from '@/src/types/speaker';
 import { FaTwitter, FaLinkedin, FaGithub, FaGlobe } from 'react-icons/fa';
 import { Calendar } from 'lucide-react';
-import Modal from '@/src/components/common/Modal';
+import Modal from '@components/common/Modal';
 
 interface SpeakerModalProps {
   speaker: Speaker | null;

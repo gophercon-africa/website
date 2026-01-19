@@ -13,13 +13,8 @@ const nextConfig = {
   },
   output: 'standalone',
   turbopack: {},
-  webpack: (config, { isServer }) => {
-    // Ignore wasm.js file
-    config.module.rules.push({
-      test: /wasm\.js$/,
-      use: 'null-loader',
-    });
-    return config;
+  experimental: {
+    optimizePackageImports: ['lucide-react'],
   },
 };
 

@@ -1,9 +1,11 @@
 'use server';
 
-import { z } from "zod";
-import { revalidatePath } from "next/cache";
-import db from "@/src/db";
-import paths from "@/src/path";
+import { z } from 'zod';
+import type { Talk } from '@prisma/client';
+import { db } from '@/src/db';
+import { revalidatePath } from 'next/cache';
+import { sendEmail } from '@/src/lib/email';
+import paths from '@path';
 import { Resend } from "resend";
 import { EmailTemplate } from "@/src/notification/email/templates/talk-submission-success";
     

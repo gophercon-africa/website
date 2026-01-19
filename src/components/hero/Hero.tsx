@@ -2,7 +2,7 @@ import React from 'react';
 import { ChevronRight, MapPin } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import TypewriterText from '../TypewriterText';
+import TypewriterText from '@components/TypewriterText';
 export default function Hero() {
   return (
     <div className="relative min-h-[50vh] overflow-hidden bg-linear-to-b from-[#004428] via-[#008751] to-[#004428]">

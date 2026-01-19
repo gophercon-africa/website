@@ -2,9 +2,9 @@
 
 import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import SpeakerCard from '@/src/components/speakers/SpeakerCard';
-import SpeakerModal from '@/src/components/speakers/SpeakerModal';
-import { speakers } from '@/src/data/speakers';
+import SpeakerCard from '@components/speakers/SpeakerCard';
+import SpeakerModal from '@components/speakers/SpeakerModal';
+import { speakers } from '@data/speakers';
 import { Speaker } from '@/src/types/speaker';
 
 function SpeakersContent() {

@@ -1,5 +1,5 @@
 import React from 'react';
-import ToastWrapper from '../common/ToastWrapper';
+import ToastWrapper from '@components/common/ToastWrapper';
 export default function Tickets() {
   return (
     <section id="tickets" className="py-24 bg-linear-to-b from-white via-[#E8F5E9] to-white relative overflow-hidden">

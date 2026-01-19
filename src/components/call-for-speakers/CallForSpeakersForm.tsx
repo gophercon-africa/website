@@ -2,8 +2,8 @@
 
 import React, { useActionState, useState, startTransition } from 'react';
 import { Plus_Jakarta_Sans } from 'next/font/google';
-import '@/src/styles/globals.css';
-import * as actions from "@/src/actions";
+import '@styles/globals.css';
+import * as actions from "@actions/index";
 import { TalkFormState } from '@actions/call-for-speakers/create';
 import { toast } from 'sonner';
 import { redirect } from 'next/navigation';
