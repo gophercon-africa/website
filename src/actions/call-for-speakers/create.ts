@@ -1,7 +1,7 @@
 'use server';
 
 import { z } from 'zod';
-import type { Talk } from '@prisma/client';
+import type { Talk } from '@/src/generated/prisma/client';
 import { db } from '@/src/db';
 import { revalidatePath } from 'next/cache';
 import { sendEmail } from '@/src/lib/email';
