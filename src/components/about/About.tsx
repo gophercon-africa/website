@@ -24,7 +24,7 @@ export default function About() {
           <span className="text-[#006B3F] font-medium mb-4 block">About GopherCon Africa</span>
           <h2 className="text-4xl font-medium text-gray-900 mb-6">Africa&apos;s Premier Go Conference</h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            We are pleased to announce the second annual GopherCon Africa conference. Two days of amazing talks, 
+            We are pleased to announce the third annual GopherCon Africa conference. Two days of amazing talks, 
             plentiful networking opportunities, and great socials. GopherCon Africa offers the most up-to-date 
             Go programming information and training.
           </p>
@@ -111,7 +111,7 @@ export default function About() {
             <div className="p-6 bg-white">
               <h3 className="text-lg font-medium text-gray-900 mb-2">Effective Testing Strategies for Large Data Inserts into PostgreSQL Tables</h3>
               <div className="flex items-center">
-                <div className="w-8 h-8 rounded-full bg-[#6B46C1] flex items-center justify-center mr-3">
+                <div className="w-8 h-8 rounded-full bg-[#006B3F] flex items-center justify-center mr-3">
                   <span className="text-sm font-medium text-white">UI</span>
                 </div>
                 <span className="text-gray-600">Ufia Irene & Orji Cecilia</span>
@@ -132,7 +132,7 @@ export default function About() {
             <div className="p-6 bg-white">
               <h3 className="text-lg font-medium text-gray-900 mb-2">Go for Infrastructure Test Automation</h3>
               <div className="flex items-center">
-                <div className="w-8 h-8 rounded-full bg-[#6B46C1] flex items-center justify-center mr-3">
+                <div className="w-8 h-8 rounded-full bg-[#006B3F] flex items-center justify-center mr-3">
                   <span className="text-sm font-medium text-white">CO</span>
                 </div>
                 <span className="text-gray-600">Chris Otta</span>
@@ -141,11 +141,11 @@ export default function About() {
           </div>
 
           {/* Video Card 3 */}
-          <div className="relative rounded-2xl bg-[#6B46C1] p-8 flex flex-col justify-between h-full">
+          <div className="relative rounded-2xl bg-[#006B3F] p-8 flex flex-col justify-between h-full">
             <div>
               <h3 className="text-2xl font-medium text-white mb-4">Discover More Content</h3>
               <p className="text-white/90 mb-8">
-                Watch all our previous talks and get excited for what&apos;s coming at GopherCon Africa 2025.
+                Watch all our previous talks and get excited for what&apos;s coming at GopherCon Africa 2026.
               </p>
             </div>
             <a 

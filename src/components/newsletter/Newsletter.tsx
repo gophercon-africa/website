@@ -15,7 +15,7 @@ const Newsletter = () => {
   return (
     <section className="container mx-auto px-4 py-16">
       <Toaster position="top-center" richColors />
-      <div className="bg-[#FDF7F5] p-8 rounded-lg flex items-center justify-between max-w-6xl mx-auto">
+      <div className="bg-linear-to-r from-[#006B3F]/10 via-white to-[#B91C1C]/10 p-8 rounded-lg flex items-center justify-between max-w-6xl mx-auto">
         <div className="flex-1 pr-8">
           <h2 className="text-3xl font-bold mb-2">Stay up-to-date with GopherCon Africa</h2>
           <p className="text-gray-600 mb-4">
@@ -33,7 +33,7 @@ const Newsletter = () => {
             />
             <button
               type="submit"
-              className="bg-[#2D3748] text-white px-6 py-2 rounded-md hover:bg-[#1A202C] transition-colors"
+              className="bg-linear-to-r from-[#006B3F] to-[#000000] text-white px-6 py-2 rounded-md hover:opacity-90 transition-all"
             >
               Subscribe
             </button>

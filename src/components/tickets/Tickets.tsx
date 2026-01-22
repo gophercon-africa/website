@@ -1,5 +1,5 @@
 import React from 'react';
-import ToastWrapper from '../common/ToastWrapper';
+import ToastWrapper from '@components/common/ToastWrapper';
 export default function Tickets() {
   return (
     <section id="tickets" className="py-24 bg-linear-to-b from-white via-[#E8F5E9] to-white relative overflow-hidden">
@@ -35,44 +35,20 @@ export default function Tickets() {
           {/* Conference Ticket */}
           <div className="border-b border-gray-200">
             <div className="p-6">
-              <div className="flex justify-between items-start mb-2">
+              <div className="mb-2">
                 <div>
-                  <h3 className="text-xl font-medium text-gray-900">Conference - <span className="text-gray-600 font-bold">NGN 30,000</span></h3>
-                  <p className="text-gray-600 mt-1">
-                    Price of the ticket for the conference NGN 30,000 does not include workshop admission.
-                  </p>
-
-                </div>
-                <div className="flex items-center space-x-4">
-                  <div className="flex items-center space-x-4">
-                    <span className="text-xl font-medium">
-                      <button className="bg-gray-400 text-white px-4 py-2 rounded-md cursor-not-allowed" disabled>
-                        Tickets Not Available
-                      </button>
-                    </span>
-                  </div>
+                  <h3 className="text-xl font-medium text-gray-900">Conference - <span className="text-gray-600 font-bold">KSH 30,000</span></h3>
+                  <p className="text-[#006B3F] font-semibold mt-2">Coming Soon</p>
                 </div>
               </div>
             </div>
           </div>
           <div className="border-b border-gray-200">
             <div className="p-6">
-              <div className="flex justify-between items-start mb-2">
+              <div className="mb-2">
                 <div>
-                  <h3 className="text-xl font-medium text-gray-900">Conference - <span className="text-gray-600 font-bold">Student: NGN 15,000</span></h3>
-                  <p className="text-gray-600 mt-1">
-                    Price of the ticket for the conference NGN 15,000 does not include workshop admission.
-                  </p>
-
-                </div>
-                <div className="flex items-center space-x-4">
-                  <div className="flex items-center space-x-4">
-                    <span className="text-xl font-medium">
-                      <button className="bg-gray-400 text-white px-4 py-2 rounded-md cursor-not-allowed" disabled>
-                        Tickets Not Available
-                      </button>
-                    </span>
-                  </div>
+                  <h3 className="text-xl font-medium text-gray-900">Conference - <span className="text-gray-600 font-bold">Student: KSH 15,000</span></h3>
+                  <p className="text-[#006B3F] font-semibold mt-2">Coming Soon</p>
                 </div>
               </div>
             </div>
@@ -81,12 +57,10 @@ export default function Tickets() {
           {/* Extra Swag */}
           <div className="border-b border-gray-200">
             <div className="p-6">
-              <div className="flex justify-between items-start mb-2">
+              <div className="mb-2">
                 <div>
                   <h3 className="text-xl font-medium text-gray-900">Misc: Extra Swag</h3>
-                  <p className="text-gray-600 mt-1">
-                    Looking to get an extra T-shirt or other limited swag? You can buy this at the registration table!
-                  </p>
+                  <p className="text-[#006B3F] font-semibold mt-2">Coming Soon</p>
                 </div>
               </div>
             </div>

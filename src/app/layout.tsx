@@ -2,13 +2,13 @@ import type { Metadata } from 'next';
 import { Plus_Jakarta_Sans } from 'next/font/google';
 import '../styles/globals.css';
 import Providers from './providers';
-import Header from '../components/header/Header';
-import Footer from '../components/footer/Footer';
+import Header from '@components/header/Header';
+import Footer from '@components/footer/Footer';
 const plusJakartaSans = Plus_Jakarta_Sans({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'GopherCon Africa - The Premier Go Conference in Africa',
-  description: 'Join Africa is largest Go conference! Experience two days of knowledge sharing, networking, and innovation in the heart of Lagos.',
+  title: 'GopherCon Africa 2026 - The Premier Go Conference in Africa',
+  description: 'Join Africa\'s largest Go conference! Experience two days of knowledge sharing, networking, and innovation in Nairobi, Kenya.',
   icons: {
     icon: 'https://res.cloudinary.com/dlmqe0two/image/upload/v1744891071/GopherCon_Africa_25_vskz7n_obmh5q.png',
   },

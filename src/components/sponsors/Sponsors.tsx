@@ -49,15 +49,15 @@ export default function Sponsors() {
   return (
     <section className="py-24 bg-linear-to-br from-white via-[#E8F5E9] to-[#F1F8E9] relative overflow-hidden" id="sponsors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/*<div className="text-center mb-20">
-          <span className="text-[#006B3F] font-medium mb-4 block">Our Amazing Partners</span>
-          <h2 className="text-4xl font-medium text-gray-900 mb-6">Backed by Industry Leaders</h2>
+        <div className="text-center mb-20">
+          <span className="text-[#006B3F] font-medium mb-4 block">Previous Sponsors</span>
+          <h2 className="text-4xl font-medium text-gray-900 mb-6">Our Past Partners</h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            GopherCon Africa is made possible by these amazing organizations supporting the Go community in Africa.
+            Thank you to these amazing organizations who supported GopherCon Africa in previous years.
           </p>
         </div>
 
-        {/* Platinum Sponsors
+        {/* Platinum Sponsors */}
         <div className="mb-20">
           <div className="flex items-center justify-center mb-12">
             <div className="h-px bg-linear-to-r from-transparent via-[#6B46C1] to-transparent w-24"></div>
@@ -94,7 +94,7 @@ export default function Sponsors() {
           </div>
         </div>
 
-        {/* Gold Sponsors
+        {/* Gold Sponsors */}
         <div className="mb-20">
           <div className="flex items-center justify-center mb-12">
             <div className="h-px bg-linear-to-r from-transparent via-[#FFB800] to-transparent w-24"></div>
@@ -129,7 +129,7 @@ export default function Sponsors() {
               </div>
             </div>
           </div>
-        </div>*/}
+        </div>
 
         {/* Become a Sponsor */}
         <div className="relative mt-20">
@@ -176,7 +176,7 @@ export default function Sponsors() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
-                  href="/gophercon-africa-2025-sponsorship-prospectus.pdf"
+                  href="/gophercon-africa-2026-sponsorship-prospectus.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

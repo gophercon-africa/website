@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { Speaker } from '@/src/types/speaker';
 import { FaTwitter, FaLinkedin, FaGithub, FaGlobe } from 'react-icons/fa';
 import { Calendar } from 'lucide-react';
-import Modal from '@/src/components/common/Modal';
+import Modal from '@components/common/Modal';
 
 interface SpeakerModalProps {
   speaker: Speaker | null;
@@ -25,7 +25,7 @@ const SpeakerModal: React.FC<SpeakerModalProps> = ({ speaker, isOpen, onClose })
       size="xl"
     >
       <div className="flex flex-col md:flex-row gap-6">
-        <div className="flex-shrink-0 flex flex-col">
+        <div className="shrink-0 flex flex-col">
           <Image
             src={speaker.imageUrl}
             alt={speaker.name}

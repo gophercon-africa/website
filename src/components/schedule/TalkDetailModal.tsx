@@ -1,6 +1,6 @@
 import { ScheduleActivity } from '@/src/types/schedule';
 import { Clock, User, MessageSquare, Calendar, Info } from 'lucide-react';
-import Modal from '@/src/components/common/Modal';
+import Modal from '@components/common/Modal';
 
 interface TalkDetailModalProps {
   isOpen: boolean;

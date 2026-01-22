@@ -239,7 +239,7 @@ The workshop culminates in building a comprehensive test suite for an HTTP servi
         talk: 'Women Who Go - Interactive Session',
         notes: `This session shall be moderated by Irene and/or Cecilia and will cover the following topics:
 
-Agenda – Women Who Go Africa Panel @ GopherCon Africa 2025
+Agenda – Women Who Go Africa Panel @ GopherCon Africa 2026
 1️⃣ Introduction & Welcome
 2️⃣ About Women Who Go (WWG)
 3️⃣ Purpose & Vision of WWG

@@ -30,8 +30,8 @@ const Tags: React.FC<TagsProps> = ({
   limit,
   suggestions = []
 }) => {
-  const [inputValue, setInputValue] = React.useState('');
-  const [isAdding, setIsAdding] = React.useState(false);
+  const [inputValue, setInputValue] = useState('');
+  const [isAdding, setIsAdding] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -137,18 +137,18 @@ const Tags: React.FC<TagsProps> = ({
             )} ${getSizeClasses()}`}
           >
             {tag.label}
-            {editable && onRemove && (
+            {editable && onRemove ? (
               <button
                 onClick={() => onRemove(tag)}
                 className="ml-1.5 hover:text-gray-900 focus:outline-hidden"
               >
                 <X className={size === 'sm' ? 'h-3 w-3' : 'h-4 w-4'} />
               </button>
-            )}
+            ) : null}
           </span>
         ))}
 
-        {showAddButton && (
+        {showAddButton ? (
           isAdding ? (
             <div className="relative">
               <div className={`inline-flex items-center rounded-full border border-gray-300 bg-white ${getSizeClasses()}`}>
@@ -177,7 +177,7 @@ const Tags: React.FC<TagsProps> = ({
                 </button>
               </div>
 
-              {showSuggestions && (
+              {showSuggestions ? (
                 <div
                   ref={suggestionsRef}
                   className="absolute z-10 mt-1 w-48 bg-white rounded-md shadow-lg border border-gray-200"
@@ -192,17 +192,17 @@ const Tags: React.FC<TagsProps> = ({
                         {suggestion}
                       </button>
                     ))}
-                    {inputValue && !filteredSuggestions.includes(inputValue) && (
+                    {inputValue && !filteredSuggestions.includes(inputValue) ? (
                       <button
                         onClick={() => handleAddTag(inputValue)}
                         className="w-full text-left px-4 py-2 text-sm text-primary-600 hover:bg-gray-100 focus:bg-gray-100 focus:outline-hidden"
                       >
                         Add {inputValue}
                       </button>
-                    )}
+                    ) : null}
                   </div>
                 </div>
-              )}
+              ) : null}
             </div>
           ) : (
             <button
@@ -213,7 +213,7 @@ const Tags: React.FC<TagsProps> = ({
               Add Tag
             </button>
           )
-        )}
+        ) : null}
       </div>
     </div>
   );

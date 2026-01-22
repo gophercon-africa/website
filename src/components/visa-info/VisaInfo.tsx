@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function VisaInfo() {
     return (
-        <section id="visa-info" className="py-24 bg-gradient-to-b from-white via-[#E8F5E9] to-white relative overflow-hidden">
+        <section id="visa-info" className="py-24 bg-linear-to-b from-white via-[#E8F5E9] to-white relative overflow-hidden">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-16">
                     <h2 className="text-4xl font-bold text-gray-900 mb-4">Visa Information</h2>
@@ -12,7 +12,7 @@ export default function VisaInfo() {
 
                 {/* Main Content Card */}
                 <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden mb-12">
-                    <div className="bg-gradient-to-r from-[#006B3F] to-[#00A86B] p-6">
+                    <div className="bg-linear-to-r from-[#006B3F] to-[#00A86B] p-6">
                         <h3 className="text-2xl font-bold text-white mb-2">🌍 Traveling to Nigeria</h3>
                         <p className="text-green-100">Everything you need to know about obtaining a Nigerian visa</p>
                     </div>
@@ -31,7 +31,7 @@ export default function VisaInfo() {
                             {/* Official Website Card */}
                             <div className="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow duration-300">
                                 <div className="flex items-start space-x-4">
-                                    <div className="flex-shrink-0">
+                                    <div className="shrink-0">
                                         <div className="w-12 h-12 bg-[#006B3F] rounded-lg flex items-center justify-center">
                                             <span className="text-white text-xl">🏛️</span>
                                         </div>
@@ -53,7 +53,7 @@ export default function VisaInfo() {
                             {/* e-Visa Portal Card */}
                             <div className="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow duration-300">
                                 <div className="flex items-start space-x-4">
-                                    <div className="flex-shrink-0">
+                                    <div className="shrink-0">
                                         <div className="w-12 h-12 bg-[#00A86B] rounded-lg flex items-center justify-center">
                                             <span className="text-white text-xl">💻</span>
                                         </div>
@@ -76,7 +76,7 @@ export default function VisaInfo() {
                         {/* Important Notice */}
                         <div className="mt-8 bg-amber-50 border border-amber-200 rounded-xl p-6">
                             <div className="flex items-start space-x-3">
-                                <div className="flex-shrink-0">
+                                <div className="shrink-0">
                                     <span className="text-2xl">⚠️</span>
                                 </div>
                                 <div>

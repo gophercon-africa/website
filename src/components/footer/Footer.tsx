@@ -60,7 +60,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-8 pt-8 border-t border-gray-200 text-center text-gray-600">
-          <p>&copy; 2025 GopherCon Africa. All rights reserved.</p>
+          <p>&copy; 2026 GopherCon Africa. All rights reserved.</p>
           
         </div>
       </div>

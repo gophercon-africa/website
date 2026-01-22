@@ -2,12 +2,12 @@
 
 import React, { useActionState, useState, startTransition } from 'react';
 import { Plus_Jakarta_Sans } from 'next/font/google';
-import '@/src/styles/globals.css';
-import * as actions from "@/src/actions";
-import { TalkFormState } from '@/src/actions/call-for-speakers/create';
+import '@styles/globals.css';
+import * as actions from "@actions/index";
+import { TalkFormState } from '@actions/call-for-speakers/create';
 import { toast } from 'sonner';
 import { redirect } from 'next/navigation';
-import paths from '@/src/path'; 
+import paths from '@path'; 
 
 const plusJakartaSans = Plus_Jakarta_Sans({ 
   subsets: ['latin'],
@@ -28,6 +28,7 @@ export default function CallForSpeakersForm() {
         bio: '',
         talkTitle: '',
         talkDescription: '',
+        talkCategory: '',
         talkDuration: '',
         talkLevel: '',
         previousSpeakingExperience: '',
@@ -75,6 +76,7 @@ export default function CallForSpeakersForm() {
         formDataObj.append('bio', formData.bio);
         formDataObj.append('talkTitle', formData.talkTitle);
         formDataObj.append('talkDescription', formData.talkDescription);
+        formDataObj.append('talkCategory', formData.talkCategory);
         formDataObj.append('talkDuration', formData.talkDuration);
         formDataObj.append('talkLevel', formData.talkLevel);
         formDataObj.append('previousSpeakingExperience', formData.previousSpeakingExperience);
@@ -105,8 +107,8 @@ export default function CallForSpeakersForm() {
     };  
 
     return (
-        <div className={`min-h-screen bg-white ${plusJakartaSans.variable} font-sans`}>
-            <div className="bg-linear-to-b from-[#006B3F]/5 to-white mt-12">
+        <div className={`min-h-screen bg-linear-to-b from-[#006B3F]/5 via-white to-[#B91C1C]/5 ${plusJakartaSans.variable} font-sans`}>
+            <div className="mt-12">
                 <div className="py-16 px-4 sm:px-6 lg:px-8">
                     <div className="max-w-5xl mx-auto">
                         <div className="text-center mb-12">
@@ -267,6 +269,29 @@ export default function CallForSpeakersForm() {
                                     />
                                     <p className="text-red-500 text-sm">{formState?.errors?.talkDescription}</p>
                                 </div>
+
+                                <div>
+                                    <label htmlFor="talkCategory" className="block text-sm font-medium text-gray-700">
+                                        Talk Category
+                                    </label>
+                                    <select
+                                        name="talkCategory"
+                                        id="talkCategory"
+                                        required
+                                        value={formData.talkCategory}
+                                        onChange={handleChange}
+                                        className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[#006B3F] focus:ring-[#006B3F] h-12 px-4 text-base transition-all duration-200 ease-in-out"
+                                    >
+                                        <option value="">Select a category</option>
+                                        <option value="AI">AI</option>
+                                        <option value="DevOps/Infrastructure">DevOps/Infrastructure</option>
+                                        <option value="Compiler/Interpreter">Compiler/Interpreter</option>
+                                        <option value="Security">Security</option>
+                                        <option value="API">API</option>
+                                        <option value="Observability">Observability</option>
+                                    </select>
+                                    <p className="text-red-500 text-sm">{formState?.errors?.talkCategory}</p>
+                                </div>
                                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                                     <div>
                                         <label htmlFor="talkDuration" className="block text-sm font-medium text-gray-700">
@@ -346,7 +371,8 @@ export default function CallForSpeakersForm() {
                             <div className="flex justify-end">
                                 <button
                                     type="submit"
-                                    className="inline-flex justify-center py-3 px-6 border border-transparent shadow-2xs text-base font-medium rounded-lg text-white bg-[#006B3F] hover:bg-[#008751] focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-[#006B3F] transition-colors"
+                                    disabled={isSubmitting}
+                                    className="inline-flex justify-center py-3 px-6 border border-transparent shadow-2xs text-base font-medium rounded-lg text-white bg-linear-to-r from-[#006B3F] via-[#000000] to-[#B91C1C] hover:opacity-90 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-[#006B3F] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                     {isSubmitting ? 'Submitting...' : 'Submit Proposal'}
                                 </button>
