@@ -33,7 +33,7 @@ model Talk {
   bio                        String
   talkTitle                  String
   talkDescription            String
-  talkCategory               String
+  talkCategory               String  @default("")
   talkDuration               String
   talkLevel                  String
   previousSpeakingExperience String

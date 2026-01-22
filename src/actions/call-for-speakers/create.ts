@@ -53,7 +53,8 @@ export async function createTalk(formState: TalkFormState, formData: FormData): 
         // Check if user's email address is already in the database
         const user = await db.talk.findMany({
             where: {
-                email: formData.get('email') as string
+                email: formData.get('email') as string,
+                eventYear: formData.get('eventYear') as string
             }
         });
         // Check if user has already submitted a talk twice
