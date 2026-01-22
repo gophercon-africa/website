@@ -18,6 +18,8 @@
     "@heroui/react": "^2.8.7",
     "@hookform/resolvers": "^5.2.2",
     "@prisma/client": "^7.2.0",
+    "@react-email/components": "^1.0.6",
+    "@react-email/render": "^2.0.4",
     "axios": "^1.13.2",
     "chart.js": "^4.5.1",
     "date-fns": "^4.1.0",
