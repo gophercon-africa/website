@@ -24,10 +24,10 @@ const SpeakerCard: React.FC<SpeakerCardProps> = ({ speaker, onClick }) => {
         />
       </div>
       <div className="p-4">
-        <h3 className="text-lg font-bold text-gray-900 mb-1 group-hover:text-[#006B3F] transition-colors">
+        <h3 className="text-lg font-bold text-gray-900 mb-1 group-hover:text-[#8B4513] transition-colors">
           {speaker.name}
         </h3>
-        <p className="text-[#006B3F] font-semibold text-sm mb-1">{speaker.title}</p>
+        <p className="text-[#8B4513] font-semibold text-sm mb-1">{speaker.title}</p>
         <p className="text-gray-600 text-xs">{speaker.company}</p>
       </div>
     </div>

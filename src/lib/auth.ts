@@ -4,7 +4,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import db  from "@/src/db";
 
 export const authConfig: NextAuthOptions = {
-  adapter: PrismaAdapter(db),
+  adapter: PrismaAdapter(db as never),
   providers: [
     CredentialsProvider({
       name: "credentials",
