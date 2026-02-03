@@ -37,7 +37,7 @@ export default function Tickets() {
             <div className="p-6">
               <div className="mb-2">
                 <div>
-                  <h3 className="text-xl font-medium text-gray-900">Conference - <span className="text-gray-600 font-bold">KSH 30,000</span></h3>
+                  <h3 className="text-xl font-medium text-gray-900">Conference - <span className="text-gray-600 font-bold">KSH 3,000</span></h3>
                   <p className="text-[#006B3F] font-semibold mt-2">Coming Soon</p>
                 </div>
               </div>
@@ -47,7 +47,7 @@ export default function Tickets() {
             <div className="p-6">
               <div className="mb-2">
                 <div>
-                  <h3 className="text-xl font-medium text-gray-900">Conference - <span className="text-gray-600 font-bold">Student: KSH 15,000</span></h3>
+                  <h3 className="text-xl font-medium text-gray-900">Conference - <span className="text-gray-600 font-bold">Student: KSH 1,500</span></h3>
                   <p className="text-[#006B3F] font-semibold mt-2">Coming Soon</p>
                 </div>
               </div>

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import TypewriterText from '@components/TypewriterText';
 export default function Hero() {
   return (
-    <div className="relative min-h-[50vh] overflow-hidden bg-linear-to-b from-[#004428] via-[#008751] to-[#004428]">
+    <div className="relative min-h-[50vh] overflow-hidden bg-linear-to-b from-[#8B4513] via-[#CD853F] to-[#D2691E]">
       {/* Dark overlay for better contrast */}
       <div className="absolute inset-0 bg-black/20"></div>
 
@@ -55,7 +55,7 @@ export default function Hero() {
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/call-for-speakers" className="bg-white hover:bg-white/90 text-[#006B3F] px-8 py-4 rounded-full font-bold text-lg transition-all transform hover:scale-105 hover:shadow-xl inline-flex items-center justify-center group">
+              <Link href="/call-for-speakers" className="bg-white hover:bg-white/90 text-[#8B4513] px-8 py-4 rounded-full font-bold text-lg transition-all transform hover:scale-105 hover:shadow-xl inline-flex items-center justify-center group">
                 Submit your talk
                 <ChevronRight className="w-6 h-6 ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>

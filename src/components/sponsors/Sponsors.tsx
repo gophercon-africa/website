@@ -26,7 +26,7 @@ export default function Sponsors() {
               <div className="font-medium text-gray-900">hello@gophers.africa</div>
             </div>
           </div>
-          <div className="flex items-center p-4 bg-gray-50 rounded-lg">
+          {/* <div className="flex items-center p-4 bg-gray-50 rounded-lg">
             <div className="w-12 h-12 rounded-full bg-[#006B3F] flex items-center justify-center">
               <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -36,7 +36,7 @@ export default function Sponsors() {
               <div className="text-sm text-gray-500">Phone</div>
               <div className="font-medium text-gray-900">+000 000 000 000</div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>,
       {
@@ -176,7 +176,7 @@ export default function Sponsors() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
-                  href="/gophercon-africa-2026-sponsorship-prospectus.pdf"
+                  href="https://drive.google.com/file/d/18qeTBnc9inbyJ568bthVpvWxdXjkAJU4/view"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
