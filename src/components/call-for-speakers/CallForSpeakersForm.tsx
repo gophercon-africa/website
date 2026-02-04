@@ -289,6 +289,7 @@ export default function CallForSpeakersForm() {
                                         <option value="Security">Security</option>
                                         <option value="API">API</option>
                                         <option value="Observability">Observability</option>
+                                        <option value="Others">Others</option>
                                     </select>
                                     <p className="text-red-500 text-sm">{formState?.errors?.talkCategory}</p>
                                 </div>
@@ -306,9 +307,8 @@ export default function CallForSpeakersForm() {
                                             className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[#006B3F] focus:ring-[#006B3F] h-12 px-4 text-base transition-all duration-200 ease-in-out"
                                         >
                                             <option value="">Select duration</option>
+                                            <option value="20">20 minutes</option>
                                             <option value="30">30 minutes</option>
-                                            <option value="45">45 minutes</option>
-                                            <option value="60">60 minutes</option>
                                         </select>
                                         <p className="text-red-500 text-sm">{formState?.errors?.talkDuration}</p>
                                     </div>

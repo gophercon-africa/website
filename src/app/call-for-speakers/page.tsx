@@ -36,7 +36,6 @@ export default function CallForSpeakersPage() {
           <li>Short talk (30 mins)</li>
           <li>Long talk (45 mins)</li>
           <li>Keynote (1hr)</li>
-          <li>Workshop (2hrs)</li>
         </ul>
 
         <h2 className="text-2xl font-bold text-[#006B3F] mt-12 mb-6">Session Tracks</h2>
@@ -46,6 +45,7 @@ export default function CallForSpeakersPage() {
           <li>Go for Web Development</li>
           <li>Systems Programming with Go</li>
           <li>Go Tools and Developer Experience</li>
+          <li>AI and Go</li>
         </ul>
 
         <h2 className="text-2xl font-bold text-[#006B3F] mt-12 mb-6">Topics We&apos;re Looking For</h2>
@@ -56,6 +56,7 @@ export default function CallForSpeakersPage() {
           <li>Pushing Go to its limits</li>
           <li>The Go community, culture, history, past, present & future</li>
           <li>Security best practices in Go</li>
+          <li>AI and Go</li>
           <li>Whatever you deem appropriate – it&apos;s your conference after all!</li>
         </ul>
 
@@ -63,7 +64,7 @@ export default function CallForSpeakersPage() {
 
         <h3 className="text-xl font-semibold mt-8 mb-4">Abstract</h3>
         <p className="mb-4">
-          Your abstract should clearly and concisely summarize the core idea of your talk, workshop, or tutorial in 150-400 words.
+          Your abstract should clearly and concisely summarize the core idea of your talk or tutorial in 150-400 words.
           A good abstract answers the questions:
         </p>
         <ul className="list-disc pl-6 space-y-2 mb-6">
