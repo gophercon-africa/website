@@ -1,5 +1,5 @@
 import db from '@/src/db';
-import { Talk } from '@prisma/client';
+import { Talk } from '@/src/generated/prisma/client';
 
 export type TalkWithData = Talk;
 
