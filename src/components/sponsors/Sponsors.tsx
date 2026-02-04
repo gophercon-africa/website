@@ -78,7 +78,7 @@ export default function Sponsors() {
                 <p className="text-gray-600 text-sm">Empowering Go developers worldwide</p>
               </div>
             </div>
-            <div className="group bg-white rounded-2xl p-12 shadow-2xs hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+            {/* <div className="group bg-white rounded-2xl p-12 shadow-2xs hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               <div className="relative h-20">
                 <Image
                   src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744802584/moniepoint_tgy3ii.jpg"
@@ -90,7 +90,7 @@ export default function Sponsors() {
               <div className="mt-6 text-center">
                 <p className="text-gray-600 text-sm">Leading fintech innovation in Africa</p>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
 
