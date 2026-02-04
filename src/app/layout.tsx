@@ -10,8 +10,19 @@ export const metadata: Metadata = {
   title: 'GopherCon Africa 2026 - The Premier Go Conference in Africa',
   description: 'Join Africa\'s largest Go conference! Experience two days of knowledge sharing, networking, and innovation in Nairobi, Kenya.',
   icons: {
-    icon: 'https://res.cloudinary.com/dlmqe0two/image/upload/v1744891071/GopherCon_Africa_25_vskz7n_obmh5q.png',
+    icon: [
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: '/apple-touch-icon.png',
+    other: [
+      {
+        rel: 'icon',
+        url: '/favicon.ico',
+      },
+    ],
   },
+  manifest: '/site.webmanifest',
 };
 
 export default function RootLayout({
