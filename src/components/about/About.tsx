@@ -74,7 +74,7 @@ export default function About() {
           <div className="group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-xl transition-all duration-300">
             <div className="aspect-video relative overflow-hidden">
               <YouTubePlayer
-                videoId="onJpueD8xZE"
+                videoId="zwkomnt--Lg"
                 opts={videoOpts}
                 className="w-full h-full absolute inset-0"
                 iframeClassName="w-full h-full"
@@ -82,14 +82,15 @@ export default function About() {
             </div>
             <div className="p-6 bg-white">
               <div className="text-[#6B46C1] font-medium mb-2">Featured Talk</div>
-              <h3 className="text-xl font-medium text-gray-900 mb-2">How to accidentally lose $2million to API breaking changes</h3>
+              <h3 className="text-xl font-medium text-gray-900 mb-2">Postgres Protocol Sniffer in Go</h3>
               <div className="flex items-center">
                 <div className="w-10 h-10 rounded-full bg-[#6B46C1] flex items-center justify-center mr-3">
                   <span className="text-sm font-medium text-white">AA</span>
                 </div>
                 <div>
-                  <div className="font-medium">Anthony Alaribe</div>
-                  <div className="text-gray-600 text-sm">Founder at APIToolkit</div>
+                  <div className="font-medium">
+                  Chukwuemeka Chukwurah</div>
+                  <div className="text-gray-600 text-sm">Software Engineer</div>
                 </div>
               </div>
             </div>
@@ -102,19 +103,20 @@ export default function About() {
           <div className="group relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition-all duration-300">
             <div className="aspect-video relative overflow-hidden">
               <YouTubePlayer
-                videoId="KE4A6d8bV7s"
+                videoId="T4QhWoyI4x8"
                 opts={videoOpts}
                 className="w-full h-full absolute inset-0"
                 iframeClassName="w-full h-full"
               />
             </div>
             <div className="p-6 bg-white">
-              <h3 className="text-lg font-medium text-gray-900 mb-2">Effective Testing Strategies for Large Data Inserts into PostgreSQL Tables</h3>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">Behavior-Driven Development in Go: Automating Acceptance Criteria with GoDog</h3>
               <div className="flex items-center">
                 <div className="w-8 h-8 rounded-full bg-[#006B3F] flex items-center justify-center mr-3">
                   <span className="text-sm font-medium text-white">UI</span>
                 </div>
-                <span className="text-gray-600">Ufia Irene & Orji Cecilia</span>
+                <span className="text-gray-600">
+                David Aniebo</span>
               </div>
             </div>
           </div>
@@ -123,19 +125,20 @@ export default function About() {
           <div className="group relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition-all duration-300">
             <div className="aspect-video relative overflow-hidden">
               <YouTubePlayer
-                videoId="6FiqCLjys1s"
+                videoId="T4QhWoyI4x8"
                 opts={videoOpts}
                 className="w-full h-full absolute inset-0"
                 iframeClassName="w-full h-full"
               />
             </div>
             <div className="p-6 bg-white">
-              <h3 className="text-lg font-medium text-gray-900 mb-2">Go for Infrastructure Test Automation</h3>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">Behavior-Driven Development in Go: Automating Acceptance Criteria with GoDog</h3>
               <div className="flex items-center">
                 <div className="w-8 h-8 rounded-full bg-[#006B3F] flex items-center justify-center mr-3">
-                  <span className="text-sm font-medium text-white">CO</span>
+                  <span className="text-sm font-medium text-white">UI</span>
                 </div>
-                <span className="text-gray-600">Chris Otta</span>
+                <span className="text-gray-600">
+                David Aniebo</span>
               </div>
             </div>
           </div>
@@ -143,9 +146,9 @@ export default function About() {
           {/* Video Card 3 */}
           <div className="relative rounded-2xl bg-[#006B3F] p-8 flex flex-col justify-between h-full">
             <div>
-              <h3 className="text-2xl font-medium text-white mb-4">Discover More Content</h3>
+              <h3 className="text-2xl font-medium text-white mb-4">Discover More Content (2025 videos to be uploaded soon)</h3>
               <p className="text-white/90 mb-8">
-                Watch all our previous talks and get excited for what&apos;s coming at GopherCon Africa 2026.
+                Watch all our previous talks and get excited for what&apos;s coming at GopherCon Africa 2024.
               </p>
             </div>
             <a 

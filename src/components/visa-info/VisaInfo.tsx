@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { showContactModal } from '@utils/showContactModal';
 
 export default function VisaInfo() {
     return (
@@ -122,7 +123,10 @@ export default function VisaInfo() {
                         <p className="text-gray-600 mb-4">
                             If you have questions about the eTA process or visa requirements, feel free to reach out to our team.
                         </p>
-                        <button className="bg-gray-900 text-white px-6 py-2 rounded-lg hover:bg-gray-800 transition-colors duration-200">
+                        <button
+                            onClick={showContactModal}
+                            className="bg-gray-900 text-white px-6 py-2 rounded-lg hover:bg-gray-800 transition-colors duration-200"
+                        >
                             Contact Support
                         </button>
                     </div>
