@@ -135,7 +135,7 @@ export default function Sponsors() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
-                  href="https://drive.google.com/file/d/18qeTBnc9inbyJ568bthVpvWxdXjkAJU4/view"
+                  href="https://drive.google.com/file/d/1ns6v4lcfNOekBcqkT1DhPD3s2Nmc6FD5/view"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
