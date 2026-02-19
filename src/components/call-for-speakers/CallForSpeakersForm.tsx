@@ -372,7 +372,7 @@ export default function CallForSpeakersForm() {
                                 <button
                                     type="submit"
                                     disabled={isSubmitting}
-                                    className="inline-flex justify-center py-3 px-6 border border-transparent shadow-2xs text-base font-medium rounded-lg text-white bg-linear-to-r from-[#006B3F] via-[#000000] to-[#B91C1C] hover:opacity-90 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-[#006B3F] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="inline-flex justify-center py-3 px-6 border border-transparent shadow-2xs text-base font-medium rounded-lg text-white bg-linear-to-r from-[#006B3F] via-[#000000] to-[#B91C1C] hover:opacity-90 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-[#006B3F] transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                     {isSubmitting ? 'Submitting...' : 'Submit Proposal'}
                                 </button>
