@@ -2,22 +2,27 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { getToken } from 'next-auth/jwt'
 
-// Define public paths that should be accessible to everyone
-const publicPaths = [
+// Public routes should never force authentication.
+// Keep this list explicit so "startsWith('/')" doesn't accidentally make everything public.
+const publicExact = new Set([
   '/',
+  '/workshops',
+  '/schedule',
+  '/speakers',
+  '/call-for-speakers',
   '/signin',
   '/signup',
-  '/api/auth',
-  '/api/auth/signin',
-  '/api/auth/signup',
-  '/api/auth/callback',
-  '/api/auth/signout',
-  '/api/auth/session',
-  '/api/auth/csrf',
-  '/api/auth/providers',
-  '/api/auth/callback/*',
-  '/api/auth/_log',
+  '/error',
+])
+
+const publicPrefixes = [
+  '/api/auth', // NextAuth endpoints
 ]
+
+function isPublicPath(pathname: string) {
+  if (publicExact.has(pathname)) return true
+  return publicPrefixes.some((prefix) => pathname.startsWith(prefix))
+}
 
 export async function middleware(request: NextRequest) {
   const token = await getToken({ req: request })
@@ -29,10 +34,10 @@ export async function middleware(request: NextRequest) {
   }
 
   // Allow access to public paths
-  if (publicPaths.some(path => pathname.startsWith(path))) {
-    // If user is authenticated and tries to access auth pages, redirect to dashboard
-    if (token && (pathname === '/' || pathname === '/signin' || pathname === '/signup')) {
-      return NextResponse.redirect(new URL('/dashboard', request.url))
+  if (isPublicPath(pathname)) {
+    // If user is authenticated and tries to access auth pages, redirect home.
+    if (token && (pathname === '/signin' || pathname === '/signup')) {
+      return NextResponse.redirect(new URL('/', request.url))
     }
     return NextResponse.next()
   }

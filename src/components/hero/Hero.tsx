@@ -3,6 +3,8 @@ import { ChevronRight, MapPin } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import TypewriterText from '@components/TypewriterText';
+
+const TICKETS_URL = 'https://www.clooza.com/en/events/GCA2026';
 export default function Hero() {
   return (
     <div className="relative min-h-[50vh] overflow-hidden bg-linear-to-b from-[#8B4513] via-[#CD853F] to-[#D2691E]">
@@ -59,6 +61,14 @@ export default function Hero() {
                 Submit your talk
                 <ChevronRight className="w-6 h-6 ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
+              <a
+                href={TICKETS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border-2 border-white/70 hover:border-white text-white hover:text-white bg-white/0 hover:bg-white/10 px-8 py-4 rounded-full font-bold text-lg transition-all transform hover:scale-105 hover:shadow-xl inline-flex items-center justify-center"
+              >
+                Get tickets
+              </a>
             </div>
           </div>
 

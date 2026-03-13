@@ -34,6 +34,7 @@ export default function Header({ mounted = true }: HeaderProps) {
           </div>
           <div className="hidden md:flex items-center space-x-8">
             <Link href="/#about" className="text-gray-600 hover:text-[#006B3F] transition-colors font-medium">About</Link>
+            <Link href="/workshops" className="text-gray-600 hover:text-[#006B3F] transition-colors font-medium">Workshops</Link>
             <Link href="/#sponsors" className="text-gray-600 hover:text-[#006B3F] transition-colors font-medium">Sponsors</Link>
           </div>
           <button
@@ -52,6 +53,13 @@ export default function Header({ mounted = true }: HeaderProps) {
               onClick={() => setIsMobileMenuOpen(false)}
             >
               About
+            </Link>
+            <Link 
+              href="/workshops" 
+              className="block text-gray-600 hover:text-[#006B3F] transition-colors font-medium"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Workshops
             </Link>
             <Link 
               href="/#sponsors" 
