@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { Inter } from 'next/font/google';
 import '../app/hero.css';
 import Hero from '@components/hero/Hero';
 import About from '@components/about/About';
@@ -11,16 +10,10 @@ import Sponsors from '@components/sponsors/Sponsors';
 import Newsletter from '@components/newsletter/Newsletter';
 import VisaInfo from '@components/visa-info/VisaInfo';
 
-const inter = Inter({ 
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-inter',
-});
-
 export default function LandingPage() {
 
   return (
-    <div className={`min-h-screen bg-white ${inter.variable} font-sans`}>
+    <div className="min-h-screen bg-white font-sans">
       <Hero />
       <About />
       <InfoCards />

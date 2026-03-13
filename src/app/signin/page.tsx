@@ -3,10 +3,10 @@
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { useMemo, useState } from 'react';
+import { Suspense, useMemo, useState } from 'react';
 import { Lock, Mail } from 'lucide-react';
 
-export default function SignInPage() {
+function SignInPageInner() {
   const searchParams = useSearchParams();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [email, setEmail] = useState('');
@@ -113,3 +113,12 @@ export default function SignInPage() {
   );
 }
 
+export default function SignInPage() {
+  return (
+    <Suspense
+      fallback={<div className="min-h-screen bg-gray-50 py-16 font-sans" />}
+    >
+      <SignInPageInner />
+    </Suspense>
+  );
+}

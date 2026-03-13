@@ -1,19 +1,12 @@
 'use client';
 
 import React, { useActionState, useState, startTransition } from 'react';
-import { Plus_Jakarta_Sans } from 'next/font/google';
 import '@styles/globals.css';
 import * as actions from "@actions/index";
 import { TalkFormState } from '@actions/call-for-speakers/create';
 import { toast } from 'sonner';
 import { redirect } from 'next/navigation';
 import paths from '@path'; 
-
-const plusJakartaSans = Plus_Jakarta_Sans({ 
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-plus-jakarta-sans',
-});
 
 export default function CallForSpeakersForm() {
     const [formState, formAction, isSubmitting] = useActionState(actions.createTalk, {
@@ -107,7 +100,7 @@ export default function CallForSpeakersForm() {
     };  
 
     return (
-        <div className={`min-h-screen bg-linear-to-b from-[#006B3F]/5 via-white to-[#B91C1C]/5 ${plusJakartaSans.variable} font-sans`}>
+        <div className="min-h-screen bg-linear-to-b from-[#006B3F]/5 via-white to-[#B91C1C]/5 font-sans">
             <div className="mt-12">
                 <div className="py-16 px-4 sm:px-6 lg:px-8">
                     <div className="max-w-5xl mx-auto">
