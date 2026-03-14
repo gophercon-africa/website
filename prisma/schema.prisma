@@ -1,10 +1,11 @@
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../src/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -43,4 +44,33 @@ model Talk {
   IsPendingReview            Boolean
   createdAt                  DateTime @default(now())
   updatedAt                  DateTime @updatedAt 
+  reviews                    Review[]
+}
+
+model OtpToken {
+  id        String   @id @default(cuid())
+  email     String
+  tokenHash String
+  expiresAt DateTime
+  attempts  Int      @default(0)
+  used      Boolean  @default(false)
+  role      String
+  createdAt DateTime @default(now())
+
+  @@index([email])
+  @@index([tokenHash])
+}
+
+model Review {
+  id            String   @id @default(cuid())
+  talkId        String
+  reviewerEmail String
+  rating        Int
+  notes         String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  talk          Talk     @relation(fields: [talkId], references: [id])
+
+  @@unique([talkId, reviewerEmail])
 }
