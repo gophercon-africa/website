@@ -1,26 +1,26 @@
 'use client';
 
-import { useActionState, useEffect } from 'react';
+import { useActionState, useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { OtpFormState } from '@/src/types/otp';
-
-// Placeholder action — will be replaced when Task 6 (sendOtp) is implemented
-async function sendOtpPlaceholder(_: OtpFormState, formData: FormData): Promise<OtpFormState> {
-  // This will be replaced with: import { sendOtp } from '@/src/actions/auth/otp'
-  return { errors: { _form: ['OTP action not yet implemented'] } };
-}
+import { sendOtp } from '@/src/actions/auth/otp';
 
 export default function OtpLoginPage() {
-  const [state, formAction, isPending] = useActionState(sendOtpPlaceholder, {});
+  const router = useRouter();
+  const [state, formAction, isPending] = useActionState(sendOtp, {});
+  const emailRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (state.success) {
       toast.success('Code sent! Check your email.');
+      const email = emailRef.current?.value ?? '';
+      router.push('/auth/otp-verify?email=' + encodeURIComponent(email));
     }
     if (state.errors?._form) {
       toast.error(state.errors._form[0]);
     }
-  }, [state]);
+  }, [state, router]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
@@ -43,6 +43,7 @@ export default function OtpLoginPage() {
                 required
                 autoComplete="email"
                 placeholder="you@example.com"
+                ref={emailRef}
                 className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-[#006B3F] focus:ring-2 focus:ring-[#006B3F] focus:outline-none"
               />
               {state.errors?.email && (
