@@ -1,30 +1,29 @@
 'use client';
 
 import { useActionState, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { Suspense } from 'react';
 import { toast } from 'sonner';
 import { OtpFormState } from '@/src/types/otp';
-
-// Placeholder action — will be replaced when Task 7 (verifyOtp) is implemented
-async function verifyOtpPlaceholder(_: OtpFormState, formData: FormData): Promise<OtpFormState> {
-  // This will be replaced with: import { verifyOtpAction } from '@/src/actions/auth/otp'
-  return { errors: { _form: ['Verify action not yet implemented'] } };
-}
+import { verifyOtpAction } from '@/src/actions/auth/otp';
 
 function OtpVerifyForm() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const email = searchParams.get('email') ?? '';
-  const [state, formAction, isPending] = useActionState(verifyOtpPlaceholder, {});
+  const [state, formAction, isPending] = useActionState(verifyOtpAction, {} as OtpFormState);
 
   useEffect(() => {
     if (state.success) {
       toast.success('Signed in successfully!');
+      if (state.redirectTo) {
+        router.push(state.redirectTo);
+      }
     }
     if (state.errors?._form) {
       toast.error(state.errors._form[0]);
     }
-  }, [state]);
+  }, [state, router]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">

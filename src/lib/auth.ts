@@ -1,7 +1,8 @@
 import { NextAuthOptions } from "next-auth";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import CredentialsProvider from "next-auth/providers/credentials";
-import db  from "@/src/db";
+import db from "@/src/db";
+import { verifyOtp as verifyOtpHash } from "@/src/lib/otp";
 
 export const authConfig: NextAuthOptions = {
   adapter: PrismaAdapter(db as never),
@@ -10,26 +11,39 @@ export const authConfig: NextAuthOptions = {
       name: "credentials",
       credentials: {
         email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" }
+        otp: { label: "OTP", type: "text" },
       },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) {
+        if (!credentials?.email || !credentials?.otp) {
           return null;
         }
 
-        // TODO: Add your authentication logic here
-        // This is where you would validate the credentials against your database
-        // For testing purposes, let's return a mock user
-        return {
-          id: "1",
-          email: credentials.email,
-          name: "Test User"
-        };
-      }
-    })
+        const normalizedEmail = credentials.email.toLowerCase().trim();
+
+        const otpRecord = await db.otpToken.findFirst({
+          where: {
+            email: normalizedEmail,
+            used: true,
+            expiresAt: { gte: new Date(Date.now() - 60000) },
+          },
+          orderBy: { updatedAt: "desc" },
+        });
+
+        if (otpRecord && verifyOtpHash(credentials.otp, otpRecord.tokenHash)) {
+          return {
+            id: normalizedEmail,
+            email: normalizedEmail,
+            name: normalizedEmail,
+            role: otpRecord.role,
+          };
+        }
+
+        return null;
+      },
+    }),
   ],
   pages: {
-    signIn: "/signin",
+    signIn: "/auth/otp-login",
     error: "/error",
   },
   session: {
@@ -40,16 +54,19 @@ export const authConfig: NextAuthOptions = {
       if (user) {
         token.id = user.id;
         token.email = user.email;
+        token.role = (user as { role?: string }).role;
       }
       return token;
     },
-    async session({ session }) {
+    async session({ session, token }) {
       if (session.user) {
-        //session.user.id = token.id;
+        (session.user as { id?: string; email?: string | null; role?: string }).id = token.id as string;
+        session.user.email = token.email as string;
+        (session.user as { role?: string }).role = token.role as string;
       }
       return session;
-    }
+    },
   },
   secret: process.env.NEXTAUTH_SECRET,
   debug: process.env.NODE_ENV === "development",
-}; 
+};
