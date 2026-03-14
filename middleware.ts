@@ -2,8 +2,7 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { getToken } from 'next-auth/jwt'
 
-// Public routes should never force authentication.
-// Keep this list explicit so "startsWith('/')" doesn't accidentally make everything public.
+// Public routes — never require authentication
 const publicExact = new Set([
   '/',
   '/workshops',
@@ -13,10 +12,22 @@ const publicExact = new Set([
   '/signin',
   '/signup',
   '/error',
+  '/auth/otp-login',
+  '/auth/otp-verify',
 ])
 
 const publicPrefixes = [
   '/api/auth', // NextAuth endpoints
+]
+
+// Routes that require reviewer OR admin role
+const reviewerPrefixes = [
+  '/reviews',
+]
+
+// Routes that require admin role only
+const adminPrefixes = [
+  '/admin',
 ]
 
 function isPublicPath(pathname: string) {
@@ -24,44 +35,66 @@ function isPublicPath(pathname: string) {
   return publicPrefixes.some((prefix) => pathname.startsWith(prefix))
 }
 
+function isReviewerPath(pathname: string) {
+  return reviewerPrefixes.some((prefix) => pathname === prefix || pathname.startsWith(prefix + '/'))
+}
+
+function isAdminPath(pathname: string) {
+  return adminPrefixes.some((prefix) => pathname === prefix || pathname.startsWith(prefix + '/'))
+}
+
 export async function middleware(request: NextRequest) {
   const token = await getToken({ req: request })
   const { pathname } = request.nextUrl
 
-  // Always allow access to NextAuth.js API routes
+  // Always allow NextAuth API routes
   if (pathname.startsWith('/api/auth')) {
     return NextResponse.next()
   }
 
-  // Allow access to public paths
+  // Allow public paths
   if (isPublicPath(pathname)) {
-    // If user is authenticated and tries to access auth pages, redirect home.
-    if (token && (pathname === '/signin' || pathname === '/signup')) {
-      return NextResponse.redirect(new URL('/', request.url))
+    // Redirect authenticated users away from auth pages
+    if (token && (pathname === '/signin' || pathname === '/signup' || pathname === '/auth/otp-login' || pathname === '/auth/otp-verify')) {
+      const role = token.role as string | undefined
+      return NextResponse.redirect(new URL(role === 'admin' ? '/admin/dashboard' : '/reviews', request.url))
     }
     return NextResponse.next()
   }
 
-  // For all other routes, require authentication
+  // Require authentication for all protected routes
   if (!token) {
-    const signInUrl = new URL('/signin', request.url)
-    signInUrl.searchParams.set('callbackUrl', pathname)
-    return NextResponse.redirect(signInUrl)
+    const loginUrl = new URL('/auth/otp-login', request.url)
+    loginUrl.searchParams.set('callbackUrl', pathname)
+    return NextResponse.redirect(loginUrl)
   }
 
+  const role = token.role as string | undefined
+
+  // Admin routes: require admin role
+  if (isAdminPath(pathname)) {
+    if (role !== 'admin') {
+      return NextResponse.redirect(new URL('/reviews', request.url))
+    }
+    return NextResponse.next()
+  }
+
+  // Reviewer routes: require reviewer or admin role
+  if (isReviewerPath(pathname)) {
+    if (role !== 'reviewer' && role !== 'admin') {
+      const loginUrl = new URL('/auth/otp-login', request.url)
+      loginUrl.searchParams.set('callbackUrl', pathname)
+      return NextResponse.redirect(loginUrl)
+    }
+    return NextResponse.next()
+  }
+
+  // All other authenticated routes: allow
   return NextResponse.next()
 }
 
-// Configure which routes to run middleware on
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * - public folder
-     */
     '/((?!_next/static|_next/image|favicon.ico|public).*)',
   ],
-} 
+}
