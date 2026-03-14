@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
+  posts Post[]
+}
+
+model Post {
+  id        Int     @id @default(autoincrement())
+  title     String
+  content   String?
+  published Boolean @default(false)
+  authorId  Int?
+  author    User?   @relation(fields: [authorId], references: [id])
+}
+
+model Talk {
+  id                         String   @id @default(cuid())
+  fullName                   String
+  email                      String
+  phone                      String
+  company                    String
+  title                      String
+  bio                        String
+  talkTitle                  String
+  talkDescription            String
+  talkCategory               String   @default("")
+  talkDuration               String
+  talkLevel                  String
+  previousSpeakingExperience String
+  additionalNotes            String
+  eventYear                  String
+  IsAccepted                 Boolean
+  IsPendingReview            Boolean
+  createdAt                  DateTime @default(now())
+  updatedAt                  DateTime @updatedAt
+  reviews                    Review[]
+}
+
+model OtpToken {
+  id        String   @id @default(cuid())
+  email     String
+  tokenHash String
+  expiresAt DateTime
+  attempts  Int      @default(0)
+  used      Boolean  @default(false)
+  role      String
+  createdAt DateTime @default(now())
+
+  @@index([email])
+  @@index([tokenHash])
+}
+
+model Review {
+  id            String   @id @default(cuid())
+  talkId        String
+  reviewerEmail String
+  rating        Int
+  notes         String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  talk          Talk     @relation(fields: [talkId], references: [id])
+
+  @@unique([talkId, reviewerEmail])
+}

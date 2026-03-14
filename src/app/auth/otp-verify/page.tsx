@@ -1,29 +1,53 @@
 'use client';
 
-import { useActionState, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { Suspense } from 'react';
+import { signIn } from 'next-auth/react';
 import { toast } from 'sonner';
-import { OtpFormState } from '@/src/types/otp';
-import { verifyOtpAction } from '@/src/actions/auth/otp';
 
 function OtpVerifyForm() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const email = searchParams.get('email') ?? '';
-  const [state, formAction, isPending] = useActionState(verifyOtpAction, {} as OtpFormState);
+  const email = searchParams?.get('email') ?? '';
+  const [isPending, setIsPending] = useState(false);
+  const [otpError, setOtpError] = useState<string | null>(null);
+  const otpRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    if (state.success) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const otp = otpRef.current?.value ?? '';
+
+    if (!otp || otp.length !== 6) {
+      setOtpError('Enter the 6-digit code from your email');
+      return;
+    }
+
+    setIsPending(true);
+    setOtpError(null);
+
+    const result = await signIn('credentials', {
+      email,
+      otp,
+      redirect: false,
+    });
+
+    setIsPending(false);
+
+    if (result?.error) {
+      setOtpError('Incorrect or expired code. Please try again.');
+      toast.error('Incorrect or expired code');
+      return;
+    }
+
+    if (result?.ok) {
       toast.success('Signed in successfully!');
-      if (state.redirectTo) {
-        router.push(state.redirectTo);
-      }
+      const { getSession } = await import('next-auth/react');
+      const session = await getSession();
+      const role = (session?.user as { role?: string } | undefined)?.role;
+      router.push(role === 'admin' ? '/admin/dashboard' : '/reviews');
     }
-    if (state.errors?._form) {
-      toast.error(state.errors._form[0]);
-    }
-  }, [state, router]);
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
@@ -36,9 +60,7 @@ function OtpVerifyForm() {
             </p>
           </div>
 
-          <form action={formAction} className="space-y-6">
-            <input type="hidden" name="email" value={email} />
-
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label htmlFor="otp" className="block text-sm font-medium text-gray-700 mb-1">
                 Sign-in code
@@ -53,13 +75,11 @@ function OtpVerifyForm() {
                 required
                 autoComplete="one-time-code"
                 placeholder="000000"
+                ref={otpRef}
                 className="w-full rounded-lg border border-gray-300 px-4 py-3 text-center text-2xl font-mono tracking-widest focus:border-[#006B3F] focus:ring-2 focus:ring-[#006B3F] focus:outline-none"
               />
-              {state.errors?.otp && (
-                <p className="mt-1 text-sm text-red-600">{state.errors.otp[0]}</p>
-              )}
-              {state.errors?._form && (
-                <p className="mt-1 text-sm text-red-600">{state.errors._form[0]}</p>
+              {otpError && (
+                <p className="mt-1 text-sm text-red-600">{otpError}</p>
               )}
             </div>
 
