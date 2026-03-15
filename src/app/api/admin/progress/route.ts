@@ -1,19 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
+import { getToken } from 'next-auth/jwt';
 import { db } from '@/src/db';
-import { authConfig } from '@/src/lib/auth';
 import { REVIEWER_EMAILS, ADMIN_EMAILS } from '@/src/lib/config';
 import { AdminProgressResponse } from '@/src/types/admin';
 
 // GET /api/admin/progress - Fetch reviewer progress
 export async function GET(request: NextRequest) {
-  const session = await getServerSession(authConfig);
+  const token = await getToken({ req: request });
 
-  if (!session?.user?.email) {
+  if (!token?.email) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const userRole = (session.user as any).role;
+  const userRole = token.role as string | undefined;
   if (userRole !== 'admin') {
     return NextResponse.json({ error: 'Forbidden - Admin only' }, { status: 403 });
   }
@@ -29,8 +28,8 @@ export async function GET(request: NextRequest) {
       },
     });
 
-    // Get all reviewers (combine REVIEWER_EMAILS and ADMIN_EMAILS)
-    const allReviewers = [...REVIEWER_EMAILS, ...ADMIN_EMAILS];
+    // Get all reviewers (combine REVIEWER_EMAILS and ADMIN_EMAILS, deduplicated)
+    const allReviewers = [...new Set([...REVIEWER_EMAILS, ...ADMIN_EMAILS])];
 
     // For each reviewer, count how many reviews they've submitted
     const reviewerProgress = await Promise.all(

@@ -1,18 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
+import { getToken } from 'next-auth/jwt';
 import { db } from '@/src/db';
-import { authConfig } from '@/src/lib/auth';
 import { AdminStats } from '@/src/types/admin';
 
 // GET /api/admin/stats - Fetch submission statistics
 export async function GET(request: NextRequest) {
-  const session = await getServerSession(authConfig);
+  const token = await getToken({ req: request });
 
-  if (!session?.user?.email) {
+  if (!token?.email) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const userRole = (session.user as any).role;
+  const userRole = token.role as string | undefined;
   if (userRole !== 'admin') {
     return NextResponse.json({ error: 'Forbidden - Admin only' }, { status: 403 });
   }

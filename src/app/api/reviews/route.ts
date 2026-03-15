@@ -1,23 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
+import { getToken } from 'next-auth/jwt';
 import { z } from 'zod';
 import db from '@/src/db';
-import { authConfig } from '@/src/lib/auth';
 
 const reviewSchema = z.object({
   talkId: z.string().cuid(),
-  rating: z.number().int().min(1).max(5),
+  rating: z.number().min(0.5).max(5).multipleOf(0.5),
   notes: z.string().max(5000).optional().default(''),
 });
 
 export async function GET(request: NextRequest) {
-  const session = await getServerSession(authConfig);
+  const token = await getToken({ req: request });
 
-  if (!session?.user?.email) {
+  if (!token?.email) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const userRole = (session.user as { role?: string }).role;
+  const userRole = token.role as string | undefined;
   if (userRole !== 'reviewer' && userRole !== 'admin') {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
   }
@@ -32,7 +31,7 @@ export async function GET(request: NextRequest) {
       include: {
         reviews: {
           where: {
-            reviewerEmail: session.user.email.toLowerCase(),
+            reviewerEmail: (token.email as string).toLowerCase(),
           },
         },
       },
@@ -47,13 +46,13 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  const session = await getServerSession(authConfig);
+  const token = await getToken({ req: request });
 
-  if (!session?.user?.email) {
+  if (!token?.email) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const userRole = (session.user as { role?: string }).role;
+  const userRole = token.role as string | undefined;
   if (userRole !== 'reviewer' && userRole !== 'admin') {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
   }
@@ -70,7 +69,7 @@ export async function POST(request: NextRequest) {
     }
 
     const { talkId, rating, notes } = result.data;
-    const reviewerEmail = session.user.email.toLowerCase();
+    const reviewerEmail = (token.email as string).toLowerCase();
 
     const review = await db.review.upsert({
       where: {
