@@ -43,7 +43,7 @@ function isAdminPath(pathname: string) {
   return adminPrefixes.some((prefix) => pathname === prefix || pathname.startsWith(prefix + '/'))
 }
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const token = await getToken({ req: request })
   const { pathname } = request.nextUrl
 
