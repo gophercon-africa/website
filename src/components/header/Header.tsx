@@ -39,12 +39,12 @@ export default function Header({ mounted = true }: HeaderProps) {
             <Link href="/workshops" className="text-gray-600 hover:text-[#006B3F] transition-colors font-medium">Workshops</Link>
             <Link href="/#sponsors" className="text-gray-600 hover:text-[#006B3F] transition-colors font-medium">Sponsors</Link>
             {session && (
-              <button
-                onClick={() => signOut({ callbackUrl: '/otp-login' })}
-                className="text-gray-600 hover:text-[#006B3F] transition-colors font-medium"
-              >
-                Sign out
-              </button>
+               <button
+                 onClick={() => signOut({ callbackUrl: '/' })}
+                 className="text-gray-600 hover:text-[#006B3F] transition-colors font-medium"
+               >
+                 Sign out
+               </button>
             )}
           </div>
           <button
@@ -79,15 +79,15 @@ export default function Header({ mounted = true }: HeaderProps) {
               Sponsors
             </Link>
             {session && (
-              <button
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  signOut({ callbackUrl: '/otp-login' });
-                }}
-                className="block text-gray-600 hover:text-[#006B3F] transition-colors font-medium text-left"
-              >
-                Sign out
-              </button>
+               <button
+                 onClick={() => {
+                   setIsMobileMenuOpen(false);
+                   signOut({ callbackUrl: '/' });
+                 }}
+                 className="block text-gray-600 hover:text-[#006B3F] transition-colors font-medium text-left"
+               >
+                 Sign out
+               </button>
             )}
           </div>
         )}
