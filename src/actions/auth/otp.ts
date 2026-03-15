@@ -30,20 +30,6 @@ export async function sendOtp(_: OtpFormState, formData: FormData): Promise<OtpF
   }
 
   try {
-    const oneMinuteAgo = new Date(Date.now() - 60 * 1000);
-    const recentOtp = await db.otpToken.findFirst({
-      where: {
-        email: normalizedEmail,
-        createdAt: { gte: oneMinuteAgo },
-      },
-      orderBy: { createdAt: 'desc' },
-    });
-
-    if (recentOtp) {
-      const remainingSeconds = Math.ceil((recentOtp.createdAt.getTime() + 60000 - Date.now()) / 1000);
-      return { errors: { _form: [`Please wait ${remainingSeconds} seconds before requesting another code`] } };
-    }
-
     const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
     const hourlyCount = await db.otpToken.count({
       where: {
