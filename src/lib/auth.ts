@@ -71,7 +71,7 @@ export const authConfig: NextAuthOptions = {
     }),
   ],
   pages: {
-    signIn: "/auth/otp-login",
+    signIn: "/otp-login",
     error: "/error",
   },
   session: {

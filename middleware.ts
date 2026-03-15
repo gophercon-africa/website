@@ -12,8 +12,8 @@ const publicExact = new Set([
   '/signin',
   '/signup',
   '/error',
-  '/auth/otp-login',
-  '/auth/otp-verify',
+  '/otp-login',
+  '/otp-verify',
 ])
 
 const publicPrefixes = [
@@ -55,16 +55,16 @@ export async function middleware(request: NextRequest) {
   // Allow public paths
   if (isPublicPath(pathname)) {
     // Redirect authenticated users away from auth pages
-    if (token && (pathname === '/signin' || pathname === '/signup' || pathname === '/auth/otp-login' || pathname === '/auth/otp-verify')) {
+    if (token && (pathname === '/signin' || pathname === '/signup' || pathname === '/otp-login' || pathname === '/otp-verify')) {
       const role = token.role as string | undefined
-      return NextResponse.redirect(new URL(role === 'admin' ? '/admin/dashboard' : '/reviews', request.url))
+      return NextResponse.redirect(new URL(role === 'admin' ? '/admin' : '/reviews', request.url))
     }
     return NextResponse.next()
   }
 
   // Require authentication for all protected routes
   if (!token) {
-    const loginUrl = new URL('/auth/otp-login', request.url)
+    const loginUrl = new URL('/otp-login', request.url)
     loginUrl.searchParams.set('callbackUrl', pathname)
     return NextResponse.redirect(loginUrl)
   }
@@ -82,7 +82,7 @@ export async function middleware(request: NextRequest) {
   // Reviewer routes: require reviewer or admin role
   if (isReviewerPath(pathname)) {
     if (role !== 'reviewer' && role !== 'admin') {
-      const loginUrl = new URL('/auth/otp-login', request.url)
+      const loginUrl = new URL('/otp-login', request.url)
       loginUrl.searchParams.set('callbackUrl', pathname)
       return NextResponse.redirect(loginUrl)
     }

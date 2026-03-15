@@ -145,7 +145,7 @@ export async function verifyOtpAction(_: OtpFormState, formData: FormData): Prom
     });
 
     const role = otpRecord.role;
-    const redirectUrl = role === 'admin' ? '/admin/dashboard' : '/reviews';
+    const redirectUrl = role === 'admin' ? '/admin' : '/reviews';
 
     return {
       success: true,

@@ -1,0 +1,47 @@
+# Task 3: URL Migration Verification
+# Date: 2026-03-15
+
+## Step A: File Moves
+- src/app/otp-login/page.tsx: EXISTS (moved from src/app/auth/otp-login/page.tsx)
+- src/app/otp-verify/page.tsx: EXISTS (moved from src/app/auth/otp-verify/page.tsx)
+- src/app/admin/page.tsx: EXISTS (moved from src/app/admin/dashboard/page.tsx)
+- src/app/auth/: DELETED
+- src/app/admin/dashboard/: DELETED
+
+## Step E: Stale Ref Check
+Command: grep -r "/auth/otp-login\|/auth/otp-verify\|/admin/dashboard" src/ middleware.ts --include="*.ts" --include="*.tsx"
+Result: 0 results (exit code 1 = no matches found)
+
+## Step F: TypeScript Check
+Command: npx tsc --noEmit
+Result: exit code 0 (no errors)
+
+## Changes Made:
+### middleware.ts (6 changes):
+- Line 15: '/auth/otp-login' -> '/otp-login'
+- Line 16: '/auth/otp-verify' -> '/otp-verify'
+- Line 58: pathname === '/auth/otp-login' -> pathname === '/otp-login'
+- Line 58: pathname === '/auth/otp-verify' -> pathname === '/otp-verify'
+- Line 60: '/admin/dashboard' -> '/admin'
+- Line 67: new URL('/auth/otp-login', ...) -> new URL('/otp-login', ...)
+- Line 85: new URL('/auth/otp-login', ...) -> new URL('/otp-login', ...)
+
+### src/lib/auth.ts (1 change):
+- Line 74: signIn: "/auth/otp-login" -> signIn: "/otp-login"
+
+### src/actions/auth/otp.ts (1 change):
+- Line 148: '/admin/dashboard' -> '/admin'
+
+### src/app/otp-login/page.tsx (1 change):
+- Line 18: '/auth/otp-verify?email=' -> '/otp-verify?email='
+
+### src/app/otp-verify/page.tsx (2 changes):
+- Line 48: '/admin/dashboard' -> '/admin'
+- Line 96: href="/auth/otp-login" -> href="/otp-login"
+
+### next.config.ts (3 redirect rules added):
+- /auth/otp-login -> /otp-login (permanent: true)
+- /auth/otp-verify -> /otp-verify (permanent: true)
+- /admin/dashboard -> /admin (permanent: true)
+
+## .next cache: CLEARED

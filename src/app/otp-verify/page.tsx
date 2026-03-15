@@ -45,7 +45,7 @@ function OtpVerifyForm() {
       const { getSession } = await import('next-auth/react');
       const session = await getSession();
       const role = (session?.user as { role?: string } | undefined)?.role;
-      router.push(role === 'admin' ? '/admin/dashboard' : '/reviews');
+      router.push(role === 'admin' ? '/admin' : '/reviews');
     }
   }
 
@@ -93,7 +93,7 @@ function OtpVerifyForm() {
 
             <p className="text-center text-sm text-gray-500">
               Didn&apos;t receive a code?{' '}
-              <a href="/auth/otp-login" className="text-[#006B3F] hover:underline font-medium">
+              <a href="/otp-login" className="text-[#006B3F] hover:underline font-medium">
                 Try again
               </a>
             </p>

@@ -1,0 +1,32 @@
+VERIFICATION: 1-Minute Cooldown Removal
+========================================
+
+Test 1: oneMinuteAgo variable
+Command: grep -n "oneMinuteAgo" src/actions/auth/otp.ts
+Result: (no output)
+Status: ✅ PASS - Variable deleted
+
+Test 2: recentOtp query
+Command: grep -n "recentOtp" src/actions/auth/otp.ts
+Result: (no output)
+Status: ✅ PASS - Query deleted
+
+Test 3: "Please wait" error message
+Command: grep -n "Please wait" src/actions/auth/otp.ts
+Result: (no output)
+Status: ✅ PASS - Error message deleted
+
+Test 4: hourlyCount check (should be preserved)
+Command: grep -n "hourlyCount" src/actions/auth/otp.ts
+Result: 
+  34:    const hourlyCount = await db.otpToken.count({
+  41:    if (hourlyCount >= 5) {
+Status: ✅ PASS - Hourly rate limit preserved
+
+Test 5: "Too many OTP" error (should be preserved)
+Command: grep -n "Too many OTP" src/actions/auth/otp.ts
+Result:
+  42:      return { errors: { _form: ['Too many OTP requests. Try again in an hour.'] } };
+Status: ✅ PASS - Hourly error message preserved
+
+SUMMARY: All cooldown checks removed, hourly rate limit intact

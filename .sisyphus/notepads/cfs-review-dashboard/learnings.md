@@ -291,3 +291,57 @@
 - Focus rings maintained for keyboard users.
 - Readonly mode uses `role="img"` with an appropriate `aria-label`.
 - Screen reader announcements handled via `aria-live="polite"` for the numeric display.
+
+## Task 9: Review API Endpoints (COMPLETED)
+
+**Date**: 2026-03-14
+
+### Implementation Details
+
+- File: `src/app/api/reviews/route.ts`
+- GET: Returns all talks with `IsPendingReview: true` for current year, with only the current user's reviews joined
+- POST: Upserts review using `talkId_reviewerEmail` compound unique key
+
+### Key Patterns
+
+1. **DB import**: `import db from '@/src/db'` (default export, not named)
+2. **Auth import**: `import { authConfig } from '@/src/lib/auth'` (named export)
+3. **Role check**: Cast `session.user` to `{ role?: string }` to access role field (avoids `any`)
+4. **Upsert key**: `talkId_reviewerEmail` — Prisma compound unique constraint naming (snake_case join of field names)
+5. **Privacy**: `include: { reviews: { where: { reviewerEmail: ... } } }` ensures only current user's reviews are returned
+6. **Zod validation**: `z.string().cuid()` for talkId, `z.number().int().min(1).max(5)` for rating
+
+### Pre-existing TypeScript Errors (NOT caused by this task)
+
+- `db.review` and `db.talk` show TS errors because Prisma client hasn't been regenerated after schema changes
+- Same root cause as `otpToken` missing — `prisma generate` needed
+- Code is semantically correct and will work once Prisma client is regenerated
+
+### Commit
+
+- Message: `feat(api): add review GET and POST endpoints`
+- Files: `src/app/api/reviews/route.ts`
+
+- Reviews dashboard successfully created using Modal and StarRating components.
+- Handled Modal default export properly.
+
+## Task 16: Admin Progress Endpoint
+
+**Created**: `src/app/api/admin/progress/route.ts`
+
+**Key Implementation Details**:
+- GET endpoint returns `AdminProgressResponse` with reviewers array and totalSubmissions
+- Combines REVIEWER_EMAILS and ADMIN_EMAILS for all reviewers
+- Counts reviews per reviewer using nested Prisma where: `{ reviewerEmail, talk: { eventYear } }`
+- Calculates percentage: `Math.round((reviewsCompleted / totalSubmissions) * 100)`
+- Sorts by percentageComplete descending (highest first)
+- Admin-only check: `userRole !== 'admin'` returns 403
+- Authentication required: missing email returns 401
+- Filters talks by `IsPendingReview: true` for totalSubmissions count
+- Current year filter: `new Date().getFullYear().toString()`
+
+**Pattern Consistency**:
+- Follows same structure as `stats/route.ts`
+- Uses `(session.user as any).role` for role access
+- Error handling with try/catch and console.error logging
+- Created admin dashboard UI component at `/admin/dashboard/page.tsx` integrating with stats and progress API endpoints.

@@ -15,7 +15,7 @@ export default function OtpLoginPage() {
     if (state.success) {
       toast.success('Code sent! Check your email.');
       const email = emailRef.current?.value ?? '';
-      router.push('/auth/otp-verify?email=' + encodeURIComponent(email));
+      router.push('/otp-verify?email=' + encodeURIComponent(email));
     }
     if (state.errors?._form) {
       toast.error(state.errors._form[0]);
