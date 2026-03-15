@@ -38,21 +38,6 @@ const nextConfig: NextConfig = {
         destination: '/dashboard',
         permanent: false,
       },
-      {
-        source: '/auth/otp-login',
-        destination: '/otp-login',
-        permanent: true,
-      },
-      {
-        source: '/auth/otp-verify',
-        destination: '/otp-verify',
-        permanent: true,
-      },
-      {
-        source: '/admin/dashboard',
-        destination: '/admin',
-        permanent: true,
-      },
     ];
   },
 };
