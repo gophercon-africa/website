@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Code2, Menu, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useSession, signOut } from 'next-auth/react';
 
 interface HeaderProps {
   mounted?: boolean;
@@ -10,6 +11,7 @@ interface HeaderProps {
 
 export default function Header({ mounted = true }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { data: session } = useSession();
 
   return (
     <header className="bg-white">
@@ -36,6 +38,14 @@ export default function Header({ mounted = true }: HeaderProps) {
             <Link href="/#about" className="text-gray-600 hover:text-[#006B3F] transition-colors font-medium">About</Link>
             <Link href="/workshops" className="text-gray-600 hover:text-[#006B3F] transition-colors font-medium">Workshops</Link>
             <Link href="/#sponsors" className="text-gray-600 hover:text-[#006B3F] transition-colors font-medium">Sponsors</Link>
+            {session && (
+              <button
+                onClick={() => signOut({ callbackUrl: '/otp-login' })}
+                className="text-gray-600 hover:text-[#006B3F] transition-colors font-medium"
+              >
+                Sign out
+              </button>
+            )}
           </div>
           <button
             className="md:hidden text-gray-600 hover:text-[#006B3F] transition-colors"
@@ -68,6 +78,17 @@ export default function Header({ mounted = true }: HeaderProps) {
             >
               Sponsors
             </Link>
+            {session && (
+              <button
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  signOut({ callbackUrl: '/otp-login' });
+                }}
+                className="block text-gray-600 hover:text-[#006B3F] transition-colors font-medium text-left"
+              >
+                Sign out
+              </button>
+            )}
           </div>
         )}
       </nav>
