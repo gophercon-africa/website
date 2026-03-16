@@ -38,7 +38,7 @@ export async function sendOtp(_: OtpFormState, formData: FormData): Promise<OtpF
       },
     });
 
-    if (hourlyCount >= 5) {
+    if (hourlyCount >= 10) {
       return { errors: { _form: ['Too many OTP requests. Try again in an hour.'] } };
     }
 
