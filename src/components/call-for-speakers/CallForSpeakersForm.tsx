@@ -39,7 +39,7 @@ export default function CallForSpeakersForm() {
                 toast.success('Your talk has been submitted successfully. We will review it and get back to you soon. Thank you for your submission!');
                 redirect(paths.callForSpeakers());
             } else {
-                toast.error('There was an error submitting your form. Please try again or contact us directly at hello@gophercon.africa');
+                toast.error('There was an error submitting your form. Please try again or contact us directly at hello@gophers.africa');
             }
         }
         isSubmittingRef.current = isSubmitting;
@@ -86,7 +86,7 @@ export default function CallForSpeakersForm() {
                 formAction(formDataObj);
             } catch (error) {
                 console.error('Form submission error:', error);
-                toast.error('There was an error submitting your talk. Please try again or contact us directly at hello@gophercon.africa');
+                toast.error('There was an error submitting your talk. Please try again or contact us directly at hello@gophers.africa');
             }
         });
     };

@@ -65,7 +65,7 @@ export async function sendOtp(_: OtpFormState, formData: FormData): Promise<OtpF
 
     const resend = new Resend(process.env.RESEND_API_KEY);
     const { error } = await resend.emails.send({
-      from: 'hello@gophercon.africa',
+      from: 'hello@gophers.africa',
       to: normalizedEmail,
       subject: 'GopherCon Africa — Sign-In Code',
       react: OtpEmail({ otp, expiresInMinutes: OTP_EXPIRY_MINUTES }),
