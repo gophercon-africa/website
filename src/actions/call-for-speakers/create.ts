@@ -1,7 +1,7 @@
 'use server';
 
 import { z } from 'zod';
-import type { Talk } from '@/src/generated/prisma/client';
+import type { Talk } from '@/src/generated/prisma';
 import { db } from '@/src/db';
 import { revalidatePath } from 'next/cache';
 import { sendEmail } from '@/src/lib/email';
@@ -128,7 +128,7 @@ export async function createTalk(formState: TalkFormState, formData: FormData): 
     // Send email to the user using Resend
     const resend = new Resend(process.env.RESEND_API_KEY);
     const { error } = await resend.emails.send({
-        from: "hello@gophercon.africa",
+        from: "hello@gophers.africa",
         replyTo: "hello@gophers.africa",
         to:  validatedFields.data.email,
         subject: 'Thank you for submitting your talk to the Gophers Conference 2025',

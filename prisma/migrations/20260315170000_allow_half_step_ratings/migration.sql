@@ -1,0 +1,2 @@
+-- Review.rating was created as DOUBLE PRECISION in the initial migration.
+-- This migration is retained for history but is a no-op.
