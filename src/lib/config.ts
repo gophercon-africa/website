@@ -1,8 +1,5 @@
-const parseEmailList = (envVar: string | undefined, name: string): string[] => {
+const parseEmailList = (envVar: string | undefined): string[] => {
   if (!envVar || envVar.trim() === '') {
-    if (process.env.NODE_ENV === 'production') {
-      throw new Error(`${name} environment variable must be configured`);
-    }
     return [];
   }
   return envVar.split(',').map((e) => e.trim().toLowerCase()).filter(Boolean);
@@ -13,8 +10,8 @@ const parsePositiveInt = (value: string | undefined, defaultValue: number): numb
   return Number.isFinite(parsed) && parsed > 0 ? parsed : defaultValue;
 };
 
-export const REVIEWER_EMAILS = parseEmailList(process.env.REVIEWER_EMAILS, 'REVIEWER_EMAILS');
-export const ADMIN_EMAILS = parseEmailList(process.env.ADMIN_EMAILS, 'ADMIN_EMAILS');
+export const REVIEWER_EMAILS = parseEmailList(process.env.REVIEWER_EMAILS);
+export const ADMIN_EMAILS = parseEmailList(process.env.ADMIN_EMAILS);
 export const OTP_EXPIRY_MINUTES = parsePositiveInt(process.env.OTP_EXPIRY_MINUTES, 10);
 export const SESSION_EXPIRY_DAYS = parsePositiveInt(process.env.SESSION_EXPIRY_DAYS, 3);
 

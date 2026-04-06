@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx prisma:*)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\('prisma:', d.get\\('devDependencies',{}\\).get\\('prisma', d.get\\('dependencies',{}\\).get\\('prisma','N/A'\\)\\)\\); print\\('@prisma/client:', d.get\\('dependencies',{}\\).get\\('@prisma/client', d.get\\('devDependencies',{}\\).get\\('@prisma/client','N/A'\\)\\)\\)\")",
+      "Bash(npm run:*)",
+      "Bash(python3 -c \"import sys,json; print\\(json.load\\(sys.stdin\\)['version']\\)\")",
+      "Bash(npm install:*)",
+      "Bash(/Users/adeshina/Workspace/projects/opensource/javascript/gopher-africa/gophers-ui-v1/node_modules/.bin/prisma --version)",
+      "Bash(npm uninstall:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
+    ]
+  }
+}
