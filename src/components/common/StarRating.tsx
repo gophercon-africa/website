@@ -85,6 +85,7 @@ export function StarRating({
             <div key={star} className="relative h-6 w-6">
               <button
                 type="button"
+                role="radio"
                 name={name}
                 value={star - 0.5}
                 onClick={() => onChange(star - 0.5)}
@@ -93,10 +94,11 @@ export function StarRating({
                 onBlur={() => setHoverRating(0)}
                 className="absolute left-0 top-0 h-6 w-3 focus:outline-none focus:ring-2 focus:ring-[#006B3F] focus:ring-offset-2 rounded-l"
                 aria-label={`${star - 0.5} stars`}
-                aria-pressed={value === star - 0.5}
+                aria-checked={value === star - 0.5}
               />
               <button
                 type="button"
+                role="radio"
                 name={name}
                 value={star}
                 onClick={() => onChange(star)}
@@ -105,7 +107,7 @@ export function StarRating({
                 onBlur={() => setHoverRating(0)}
                 className="absolute right-0 top-0 h-6 w-3 focus:outline-none focus:ring-2 focus:ring-[#006B3F] focus:ring-offset-2 rounded-r"
                 aria-label={`${star} star${star !== 1 ? 's' : ''}`}
-                aria-pressed={value === star}
+                aria-checked={value === star}
               />
               <span className="pointer-events-none absolute inset-0 text-amber-400">
                 <span className="relative inline-block h-6 w-6">

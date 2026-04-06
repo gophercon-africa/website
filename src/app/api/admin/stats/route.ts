@@ -32,17 +32,13 @@ export async function GET(request: NextRequest) {
       },
     });
 
-    // Count reviewed (has at least one review)
-    const talksWithReviews = await db.talk.findMany({
-      where: { eventYear: currentYear },
-      select: {
-        id: true,
-        _count: {
-          select: { reviews: true },
-        },
+    // Count reviewed (has at least one review) — done directly in the DB
+    const reviewed = await db.talk.count({
+      where: {
+        eventYear: currentYear,
+        reviews: { some: {} },
       },
     });
-    const reviewed = talksWithReviews.filter(t => t._count.reviews > 0).length;
 
     // Count accepted
     const accepted = await db.talk.count({

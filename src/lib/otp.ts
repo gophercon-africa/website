@@ -5,7 +5,7 @@ import * as crypto from 'crypto';
  * Uses crypto.randomInt for uniform distribution (no Math.random).
  */
 export function generateOtp(): string {
-  return crypto.randomInt(100000, 999999).toString();
+  return crypto.randomInt(100000, 1000000).toString();
 }
 
 /**

@@ -35,14 +35,15 @@ export const authConfig: NextAuthOptions = {
           return null;
         }
 
-        // Increment attempts BEFORE checking (prevents timing oracle)
-        await db.otpToken.update({
+        // Increment attempts and check the updated count
+        const updated = await db.otpToken.update({
           where: { id: otpRecord.id },
           data: { attempts: { increment: 1 } },
+          select: { attempts: true },
         });
 
-        // Check attempt limit (otpRecord.attempts is the value BEFORE increment)
-        if (otpRecord.attempts >= 5) {
+        // Block after 5 failed attempts
+        if (updated.attempts > 5) {
           await db.otpToken.update({
             where: { id: otpRecord.id },
             data: { used: true },

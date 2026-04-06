@@ -1,3 +1,2 @@
-ALTER TABLE "Review"
-ALTER COLUMN "rating" TYPE DOUBLE PRECISION
-USING "rating"::double precision;
+-- Review.rating was created as DOUBLE PRECISION in the initial migration.
+-- This migration is retained for history but is a no-op.

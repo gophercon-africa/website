@@ -1,25 +1,31 @@
 'use client';
 
 import { useActionState, useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 import { toast } from 'sonner';
 import { OtpFormState } from '@/src/types/otp';
 import { sendOtp } from '@/src/actions/auth/otp';
 
-export default function OtpLoginPage() {
+function OtpLoginForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams?.get('callbackUrl') ?? '';
   const [state, formAction, isPending] = useActionState(sendOtp, {});
   const [email, setEmail] = useState('');
 
   useEffect(() => {
     if (state.success) {
       toast.success('Code sent! Check your email.');
-      router.push('/otp-verify?email=' + encodeURIComponent(email));
+      const verifyUrl = new URL('/otp-verify', window.location.origin);
+      verifyUrl.searchParams.set('email', email);
+      if (callbackUrl) verifyUrl.searchParams.set('callbackUrl', callbackUrl);
+      router.push(verifyUrl.pathname + verifyUrl.search);
     }
     if (state.errors?._form) {
       toast.error(state.errors._form[0]);
     }
-  }, [state, router, email]);
+  }, [state, router, email, callbackUrl]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
@@ -59,5 +65,13 @@ export default function OtpLoginPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function OtpLoginPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center" role="status" aria-live="polite">Loading...</div>}>
+      <OtpLoginForm />
+    </Suspense>
   );
 }

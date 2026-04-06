@@ -31,30 +31,31 @@ export async function GET(request: NextRequest) {
     // Get all reviewers (combine REVIEWER_EMAILS and ADMIN_EMAILS, deduplicated)
     const allReviewers = [...new Set([...REVIEWER_EMAILS, ...ADMIN_EMAILS])];
 
-    // For each reviewer, count how many reviews they've submitted
-    const reviewerProgress = await Promise.all(
-      allReviewers.map(async (reviewerEmail) => {
-        const reviewsCompleted = await db.review.count({
-          where: {
-            reviewerEmail,
-            talk: {
-              eventYear: currentYear,
-            },
-          },
-        });
+    // Single query: count reviews per reviewer for talks in the current year
+    const reviewCounts = await db.review.groupBy({
+      by: ['reviewerEmail'],
+      where: {
+        talk: { eventYear: currentYear },
+      },
+      _count: { id: true },
+    });
 
-        const percentageComplete = totalSubmissions > 0
-          ? Math.round((reviewsCompleted / totalSubmissions) * 100)
-          : 0;
+    const countByEmail = new Map(reviewCounts.map((r) => [r.reviewerEmail, r._count.id]));
 
-        return {
-          reviewerEmail,
-          reviewsCompleted,
-          totalSubmissions,
-          percentageComplete,
-        };
-      })
-    );
+    // Build progress for every configured reviewer (including those with 0 reviews)
+    const reviewerProgress = allReviewers.map((reviewerEmail) => {
+      const reviewsCompleted = countByEmail.get(reviewerEmail) ?? 0;
+      const percentageComplete = totalSubmissions > 0
+        ? Math.round((reviewsCompleted / totalSubmissions) * 100)
+        : 0;
+
+      return {
+        reviewerEmail,
+        reviewsCompleted,
+        totalSubmissions,
+        percentageComplete,
+      };
+    });
 
     // Sort by completion percentage (highest first)
     reviewerProgress.sort((a, b) => b.percentageComplete - a.percentageComplete);

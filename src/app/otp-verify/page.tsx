@@ -45,7 +45,18 @@ function OtpVerifyForm() {
       const { getSession } = await import('next-auth/react');
       const session = await getSession();
       const role = (session?.user as { role?: string } | undefined)?.role;
-      router.push(role === 'admin' ? '/admin' : '/reviews');
+
+      // Honour the callbackUrl if it's a safe internal path
+      const rawCallback = searchParams?.get('callbackUrl') ?? '';
+      const isSafeCallback =
+        rawCallback.startsWith('/') &&
+        !rawCallback.startsWith('//') &&
+        !rawCallback.startsWith('/otp-');
+      if (isSafeCallback) {
+        router.push(rawCallback);
+      } else {
+        router.push(role === 'admin' ? '/admin' : '/reviews');
+      }
     }
   }
 

@@ -27,27 +27,34 @@ export async function GET(request: NextRequest) {
   try {
     const currentYear = new Date().getFullYear().toString();
 
-    // Fetch all talks with their reviews for the current year
+    // Fetch talks with aggregated review stats in a single query
     const talks = await db.talk.findMany({
       where: { eventYear: currentYear },
-      include: {
-        reviews: {
-          select: { rating: true },
-        },
+      select: {
+        id: true,
+        talkTitle: true,
+        fullName: true,
+        talkCategory: true,
+        _count: { select: { reviews: true } },
+        reviews: { select: { rating: true } },
       },
     });
 
-    // Compute aggregates in JavaScript
-    const submissions: AdminSubmission[] = talks.map(talk => ({
-      id: talk.id,
-      talkTitle: talk.talkTitle,
-      fullName: talk.fullName,
-      talkCategory: talk.talkCategory,
-      averageRating: talk.reviews.length > 0
-        ? talk.reviews.reduce((sum, r) => sum + r.rating, 0) / talk.reviews.length
-        : null,
-      reviewCount: talk.reviews.length,
-    }));
+    const submissions: AdminSubmission[] = talks.map((talk) => {
+      const reviewCount = talk._count.reviews;
+      const averageRating =
+        reviewCount > 0
+          ? talk.reviews.reduce((sum, r) => sum + r.rating, 0) / reviewCount
+          : null;
+      return {
+        id: talk.id,
+        talkTitle: talk.talkTitle,
+        fullName: talk.fullName,
+        talkCategory: talk.talkCategory,
+        averageRating,
+        reviewCount,
+      };
+    });
 
     // Sort by reviewCount desc, then averageRating desc as tiebreaker
     submissions.sort((a, b) => 
