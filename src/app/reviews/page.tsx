@@ -3,12 +3,10 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
-import { Star } from 'lucide-react';
+import { Star, Ban } from 'lucide-react';
 
 interface Talk {
   id: string;
-  fullName: string;
-  email: string;
   talkTitle: string;
   talkDescription: string;
   talkCategory: string;
@@ -18,8 +16,9 @@ interface Talk {
   previousSpeakingExperience: string;
   reviews: Array<{
     id: string;
-    rating: number;
+    rating: number | null;
     notes: string;
+    skipped: boolean;
   }>;
 }
 
@@ -46,8 +45,10 @@ export default function ReviewsPage() {
     }
   }
 
-  const reviewedCount = talks.filter(t => t.reviews.length > 0).length;
-  const progressPercentage = talks.length > 0 ? Math.round((reviewedCount / talks.length) * 100) : 0;
+  const reviewedCount = talks.filter(t => t.reviews.length > 0 && !t.reviews[0].skipped).length;
+  const skippedCount = talks.filter(t => t.reviews.length > 0 && t.reviews[0].skipped).length;
+  const completedCount = reviewedCount + skippedCount;
+  const progressPercentage = talks.length > 0 ? Math.round((completedCount / talks.length) * 100) : 0;
 
   if (loading) {
     return (
@@ -66,7 +67,7 @@ export default function ReviewsPage() {
             <div className="flex-1 max-w-md">
               <div className="flex items-center justify-between mb-1">
                 <span className="text-sm text-gray-600">
-                  Progress: {reviewedCount}/{talks.length} reviewed
+                  Progress: {completedCount}/{talks.length} reviewed
                 </span>
                 <span className="text-sm font-medium text-gray-700">{progressPercentage}%</span>
               </div>
@@ -90,7 +91,6 @@ export default function ReviewsPage() {
               <thead className="bg-gray-50 border-b border-gray-200">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Title</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Speaker</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Category</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Level</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
@@ -99,7 +99,8 @@ export default function ReviewsPage() {
               <tbody className="divide-y divide-gray-200">
                 {talks.map((talk) => {
                   const review = talk.reviews[0];
-                  const reviewed = !!review;
+                  const reviewed = !!review && !review.skipped;
+                  const skipped = !!review && review.skipped;
                   return (
                     <tr
                       key={talk.id}
@@ -109,14 +110,18 @@ export default function ReviewsPage() {
                       <td className="px-6 py-4">
                         <p className="font-medium text-gray-900">{talk.talkTitle}</p>
                       </td>
-                      <td className="px-6 py-4 text-gray-600">{talk.fullName}</td>
                       <td className="px-6 py-4 text-gray-600">{talk.talkCategory}</td>
                       <td className="px-6 py-4 text-gray-600">{talk.talkLevel}</td>
                       <td className="px-6 py-4">
-                        {reviewed ? (
+                        {skipped ? (
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">
+                            <Ban className="w-3 h-3" />
+                            Skipped
+                          </span>
+                        ) : reviewed ? (
                           <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                             <Star className="w-3 h-3 fill-current" />
-                            {review.rating.toFixed(1)}
+                            {review.rating?.toFixed(1)}
                           </span>
                         ) : (
                           <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">

@@ -5,9 +5,13 @@ import db from '@/src/db';
 
 const reviewSchema = z.object({
   talkId: z.string().cuid(),
-  rating: z.number().min(0.5).max(5).multipleOf(0.5),
+  rating: z.number().min(0.5).max(5).multipleOf(0.5).nullable().optional(),
   notes: z.string().max(5000).optional().default(''),
-});
+  skipped: z.boolean().optional().default(false),
+}).refine(
+  (data) => data.skipped || (data.rating !== null && data.rating !== undefined),
+  { message: 'Rating is required when not skipping', path: ['rating'] }
+);
 
 export async function GET(request: NextRequest) {
   const token = await getToken({ req: request });
@@ -28,10 +32,25 @@ export async function GET(request: NextRequest) {
         eventYear: currentYear,
         IsPendingReview: true,
       },
-      include: {
+      select: {
+        id: true,
+        talkTitle: true,
+        talkDescription: true,
+        talkCategory: true,
+        talkLevel: true,
+        talkDuration: true,
+        bio: true,
+        previousSpeakingExperience: true,
+        additionalNotes: true,
         reviews: {
           where: {
             reviewerEmail: (token.email as string).toLowerCase(),
+          },
+          select: {
+            id: true,
+            rating: true,
+            notes: true,
+            skipped: true,
           },
         },
       },
@@ -68,8 +87,30 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { talkId, rating, notes } = result.data;
+    const { talkId, rating, notes, skipped } = result.data;
     const reviewerEmail = (token.email as string).toLowerCase();
+    const currentYear = new Date().getFullYear().toString();
+
+    const talk = await db.talk.findFirst({
+      where: { id: talkId, eventYear: currentYear, IsPendingReview: true },
+      select: { id: true },
+    });
+
+    if (!talk) {
+      return NextResponse.json({ error: 'Talk not found or not reviewable' }, { status: 404 });
+    }
+
+    const existing = await db.review.findUnique({
+      where: { talkId_reviewerEmail: { talkId, reviewerEmail } },
+      select: { skipped: true },
+    });
+
+    if (existing?.skipped) {
+      return NextResponse.json(
+        { error: 'This talk has been permanently skipped and cannot be changed' },
+        { status: 409 }
+      );
+    }
 
     const review = await db.review.upsert({
       where: {
@@ -79,15 +120,17 @@ export async function POST(request: NextRequest) {
         },
       },
       update: {
-        rating,
+        rating: skipped ? null : rating,
         notes,
+        skipped,
         updatedAt: new Date(),
       },
       create: {
         talkId,
         reviewerEmail,
-        rating,
+        rating: skipped ? null : rating,
         notes,
+        skipped,
       },
     });
 

@@ -4,7 +4,6 @@ import { z } from 'zod';
 import type { Talk } from '@/src/generated/prisma';
 import { db } from '@/src/db';
 import { revalidatePath } from 'next/cache';
-import { sendEmail } from '@/src/lib/email';
 import paths from '@path';
 import { Resend } from "resend";
 import { EmailTemplate } from "@/src/notification/email/templates/talk-submission-success";
@@ -131,7 +130,7 @@ export async function createTalk(formState: TalkFormState, formData: FormData): 
         from: "hello@gophercon.africa",
         replyTo: "hello@gophercon.africa",
         to:  validatedFields.data.email,
-        subject: 'Thank you for submitting your talk to the Gophers Conference 2025',
+        subject: 'Thank you for submitting your talk to GopherCon Africa 2026',
         react: EmailTemplate({ firstName: validatedFields.data.fullName })
     });
 
