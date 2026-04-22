@@ -14,12 +14,12 @@ import {
   ArrowLeft,
   List,
   Keyboard,
+  SkipForward,
+  Ban,
 } from 'lucide-react';
 
 interface Talk {
   id: string;
-  fullName: string;
-  email: string;
   talkTitle: string;
   talkDescription: string;
   talkCategory: string;
@@ -27,14 +27,16 @@ interface Talk {
   talkDuration: string;
   bio: string;
   previousSpeakingExperience: string;
+  additionalNotes: string;
   reviews: Array<{
     id: string;
-    rating: number;
+    rating: number | null;
     notes: string;
+    skipped: boolean;
   }>;
 }
 
-type FilterType = 'all' | 'reviewed' | 'pending';
+type FilterType = 'all' | 'reviewed' | 'pending' | 'skipped';
 
 export default function ReviewWorkspacePage() {
   const params = useParams<{ talkId: string }>();
@@ -51,15 +53,22 @@ export default function ReviewWorkspacePage() {
 
   const currentTalkId = params?.talkId;
 
-  const reviewedTalks = talks.filter((t) => t.reviews.length > 0);
+  const reviewedTalks = talks.filter((t) => t.reviews.length > 0 && !t.reviews[0].skipped);
+  const skippedTalks = talks.filter((t) => t.reviews.length > 0 && t.reviews[0].skipped);
   const pendingTalks = talks.filter((t) => t.reviews.length === 0);
 
   const filteredTalks =
-    filter === 'all' ? talks : filter === 'reviewed' ? reviewedTalks : pendingTalks;
+    filter === 'all'
+      ? talks
+      : filter === 'reviewed'
+        ? reviewedTalks
+        : filter === 'skipped'
+          ? skippedTalks
+          : pendingTalks;
 
   const currentTalk = talks.find((t) => t.id === currentTalkId) || null;
   const progressPercentage =
-    talks.length > 0 ? Math.round((reviewedTalks.length / talks.length) * 100) : 0;
+    talks.length > 0 ? Math.round(((reviewedTalks.length + skippedTalks.length) / talks.length) * 100) : 0;
 
   useEffect(() => {
     loadTalks();
@@ -102,6 +111,8 @@ export default function ReviewWorkspacePage() {
     [currentTalkId]
   );
 
+  const isCurrentTalkSkipped = currentTalk?.reviews[0]?.skipped ?? false;
+
   const handleSkip = useCallback(() => {
     const next = findNextUnreviewed(talks);
     if (next) {
@@ -112,9 +123,57 @@ export default function ReviewWorkspacePage() {
     }
   }, [findNextUnreviewed, talks, navigateToTalk, router]);
 
+  const handlePermanentSkip = useCallback(async () => {
+    if (!currentTalk) return;
+
+    setSaving(true);
+    try {
+      const res = await fetch('/api/reviews', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          talkId: currentTalk.id,
+          skipped: true,
+          notes,
+        }),
+      });
+
+      if (!res.ok) throw new Error('Failed to save skip');
+
+      toast.success('Talk permanently skipped');
+
+      const updatedTalks = talks.map((t) => {
+        if (t.id === currentTalk.id) {
+          return {
+            ...t,
+            reviews: [{ id: 'temp-' + Date.now(), rating: null, notes, skipped: true }],
+          };
+        }
+        return t;
+      });
+
+      setTalks(updatedTalks);
+
+      const next = updatedTalks.find(
+        (t) => t.reviews.length === 0 && t.id !== currentTalk.id
+      );
+      if (next) {
+        navigateToTalk(next.id);
+      } else {
+        toast.success('All talks reviewed!');
+        router.push('/reviews');
+      }
+    } catch (error) {
+      toast.error('Failed to skip talk');
+      console.error(error);
+    } finally {
+      setSaving(false);
+    }
+  }, [currentTalk, notes, talks, navigateToTalk, router]);
+
   const saveReview = useCallback(async () => {
-    if (!currentTalk || rating === 0) {
-      toast.error('Please select a rating');
+    if (!currentTalk || rating === 0 || isCurrentTalkSkipped) {
+      if (!isCurrentTalkSkipped) toast.error('Please select a rating');
       return;
     }
 
@@ -138,7 +197,7 @@ export default function ReviewWorkspacePage() {
         if (t.id === currentTalk.id) {
           return {
             ...t,
-            reviews: [{ id: 'temp-' + Date.now(), rating, notes }],
+            reviews: [{ id: 'temp-' + Date.now(), rating, notes, skipped: false }],
           };
         }
         return t;
@@ -177,18 +236,20 @@ export default function ReviewWorkspacePage() {
 
       switch (e.key) {
         case 's':
+          if (isCurrentTalkSkipped) return;
           e.preventDefault();
           notesTextareaRef.current?.focus();
           break;
         case 'Enter':
           e.preventDefault();
-          if (!saving) saveReview();
+          if (!saving && !isCurrentTalkSkipped) saveReview();
           break;
         case '1':
         case '2':
         case '3':
         case '4':
         case '5':
+          if (isCurrentTalkSkipped) return;
           e.preventDefault();
           setRating(parseInt(e.key, 10));
           break;
@@ -213,7 +274,7 @@ export default function ReviewWorkspacePage() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentTalkId, filteredTalks, saving, saveReview, navigateToTalk]);
+  }, [currentTalkId, filteredTalks, saving, saveReview, navigateToTalk, isCurrentTalkSkipped]);
 
   if (loading) {
     return (
@@ -269,7 +330,7 @@ export default function ReviewWorkspacePage() {
               <div className="flex items-center justify-between mb-1">
                 <span className="text-sm font-semibold text-gray-900">Review Progress</span>
                 <span className="text-sm text-gray-500 font-medium">
-                  {reviewedTalks.length} / {talks.length} ({progressPercentage}%)
+                  {reviewedTalks.length + skippedTalks.length} / {talks.length} ({progressPercentage}%)
                 </span>
               </div>
               <div className="w-full bg-gray-100 rounded-full h-2 overflow-hidden">
@@ -316,10 +377,9 @@ export default function ReviewWorkspacePage() {
           <div className="flex-1 flex flex-col max-w-4xl mx-auto w-full">
             <div className="p-6 md:p-8 flex-1">
               <div className="mb-6">
-                <h1 className="text-2xl font-bold text-gray-900 leading-tight mb-2">
+                <h1 className="text-2xl font-bold text-gray-900 leading-tight">
                   {currentTalk.talkTitle}
                 </h1>
-                <p className="text-lg text-gray-600 font-medium">{currentTalk.fullName}</p>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
@@ -381,12 +441,23 @@ export default function ReviewWorkspacePage() {
                     {currentTalk.previousSpeakingExperience}
                   </div>
                 </div>
+
+                {currentTalk.additionalNotes && (
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                      Additional Notes
+                    </h3>
+                    <div className="bg-amber-50 rounded-lg p-4 border border-amber-100 whitespace-pre-wrap text-gray-700">
+                      {currentTalk.additionalNotes}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
 
             <div className="bg-gray-50 border-t border-gray-200 p-6 md:p-8 shrink-0">
-              <div className="mb-6">
+              <div className={`mb-6 ${isCurrentTalkSkipped ? 'opacity-50 pointer-events-none' : ''}`}>
                 <StarRating
                   value={rating}
                   name="rating"
@@ -412,21 +483,32 @@ export default function ReviewWorkspacePage() {
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
                   rows={3}
-                  className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-[#006B3F] focus:ring-2 focus:ring-[#006B3F]/20 focus:outline-none transition-shadow bg-white resize-y"
-                  placeholder="Add your thoughts here... (Press 's' to focus)"
+                  disabled={isCurrentTalkSkipped}
+                  className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-[#006B3F] focus:ring-2 focus:ring-[#006B3F]/20 focus:outline-none transition-shadow bg-white resize-y disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50"
+                  placeholder={isCurrentTalkSkipped ? 'This talk has been permanently skipped' : "Add your thoughts here... (Press 's' to focus)"}
                 />
               </div>
 
               <div className="flex flex-col-reverse sm:flex-row items-center justify-between gap-4">
-                <button
-                  onClick={handleSkip}
-                  className="w-full sm:w-auto px-6 py-2.5 text-sm font-medium text-gray-600 bg-white border border-gray-300 hover:bg-gray-50 hover:text-gray-900 rounded-lg transition-colors focus:ring-2 focus:ring-[#006B3F] focus:outline-none"
-                >
-                  Skip for now
-                </button>
+                <div className="flex gap-2 w-full sm:w-auto">
+                  <button
+                    onClick={handleSkip}
+                    className="flex-1 sm:flex-none px-4 py-2.5 text-sm font-medium text-gray-600 bg-white border border-gray-300 hover:bg-gray-50 hover:text-gray-900 rounded-lg transition-colors focus:ring-2 focus:ring-[#006B3F] focus:outline-none"
+                  >
+                    Skip for now
+                  </button>
+                  <button
+                    onClick={handlePermanentSkip}
+                    disabled={saving || isCurrentTalkSkipped}
+                    className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-4 py-2.5 text-sm font-medium text-orange-700 bg-orange-50 border border-orange-200 hover:bg-orange-100 rounded-lg disabled:opacity-60 disabled:cursor-not-allowed transition-colors focus:ring-2 focus:ring-orange-400 focus:outline-none"
+                  >
+                    <SkipForward className="w-4 h-4" />
+                    {isCurrentTalkSkipped ? 'Skipped' : 'Permanently Skip'}
+                  </button>
+                </div>
                 <button
                   onClick={saveReview}
-                  disabled={saving || rating === 0}
+                  disabled={saving || rating === 0 || isCurrentTalkSkipped}
                   className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-2.5 text-sm font-medium text-white bg-[#006B3F] hover:bg-[#008751] rounded-lg disabled:opacity-60 disabled:cursor-not-allowed transition-colors focus:ring-2 focus:ring-[#006B3F] focus:ring-offset-2 focus:outline-none shadow-sm"
                 >
                   {saving ? 'Saving...' : 'Save & Next'}
@@ -439,7 +521,7 @@ export default function ReviewWorkspacePage() {
 
         <div className="w-full md:w-80 lg:w-96 shrink-0 bg-gray-50 border-t md:border-t-0 md:border-l border-gray-200 flex flex-col h-64 md:h-auto">
           <div className="flex items-center p-2 bg-gray-100/50 border-b border-gray-200 shrink-0">
-            {(['all', 'pending', 'reviewed'] as FilterType[]).map((f) => (
+            {(['all', 'pending', 'reviewed', 'skipped'] as FilterType[]).map((f) => (
               <button
                 key={f}
                 onClick={() => setFilter(f)}
@@ -454,7 +536,9 @@ export default function ReviewWorkspacePage() {
                   ? talks.length
                   : f === 'pending'
                     ? pendingTalks.length
-                    : reviewedTalks.length}
+                    : f === 'skipped'
+                      ? skippedTalks.length
+                      : reviewedTalks.length}
                 )
               </button>
             ))}
@@ -470,7 +554,8 @@ export default function ReviewWorkspacePage() {
               filteredTalks.map((talk) => {
                 const isSelected = talk.id === currentTalkId;
                 const review = talk.reviews[0];
-                const isReviewed = !!review;
+                const isReviewed = !!review && !review.skipped;
+                const isSkipped = !!review && review.skipped;
 
                 return (
                   <button
@@ -490,17 +575,21 @@ export default function ReviewWorkspacePage() {
                       >
                         {talk.talkTitle}
                       </h4>
-                      {isReviewed ? (
+                      {isSkipped ? (
+                        <div className="flex items-center gap-1 bg-gray-50 text-gray-500 px-1.5 py-0.5 rounded text-xs font-bold border border-gray-200 shrink-0">
+                          <Ban className="w-3 h-3" />
+                          <span>Skipped</span>
+                        </div>
+                      ) : isReviewed ? (
                         <div className="flex items-center gap-1 bg-green-50 text-green-700 px-1.5 py-0.5 rounded text-xs font-bold border border-green-100 shrink-0">
                           <Star className="w-3 h-3 fill-current" />
-                          <span>{review.rating.toFixed(1)}</span>
+                          <span>{review.rating?.toFixed(1)}</span>
                         </div>
                       ) : (
                         <Circle className="w-2.5 h-2.5 text-yellow-500 fill-yellow-500 mt-1 shrink-0" />
                       )}
                     </div>
                     <div className="flex items-center justify-between">
-                      <p className="text-xs text-gray-500 truncate pr-2">{talk.fullName}</p>
                       {isSelected && (
                         <span className="text-[10px] font-bold uppercase text-[#006B3F] tracking-wider shrink-0">
                           Selected

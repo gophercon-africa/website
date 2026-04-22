@@ -32,11 +32,11 @@ export async function GET(request: NextRequest) {
       },
     });
 
-    // Count reviewed (has at least one review) — done directly in the DB
+    // Count reviewed (has at least one non-skipped review) — done directly in the DB
     const reviewed = await db.talk.count({
       where: {
         eventYear: currentYear,
-        reviews: { some: {} },
+        reviews: { some: { skipped: false } },
       },
     });
 

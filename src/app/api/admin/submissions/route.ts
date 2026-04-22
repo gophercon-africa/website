@@ -9,6 +9,7 @@ interface AdminSubmission {
   talkCategory: string;
   averageRating: number | null;
   reviewCount: number;
+  skippedCount: number;
 }
 
 // GET /api/admin/submissions - Fetch all submissions with review aggregation
@@ -35,16 +36,18 @@ export async function GET(request: NextRequest) {
         talkTitle: true,
         fullName: true,
         talkCategory: true,
-        _count: { select: { reviews: true } },
-        reviews: { select: { rating: true } },
+        _count: { select: { reviews: { where: { skipped: false } } } },
+        reviews: { select: { rating: true, skipped: true } },
       },
     });
 
     const submissions: AdminSubmission[] = talks.map((talk) => {
-      const reviewCount = talk._count.reviews;
+      const ratedReviews = talk.reviews.filter((r) => !r.skipped && r.rating !== null);
+      const skippedCount = talk.reviews.filter((r) => r.skipped).length;
+      const reviewCount = ratedReviews.length;
       const averageRating =
         reviewCount > 0
-          ? talk.reviews.reduce((sum, r) => sum + r.rating, 0) / reviewCount
+          ? ratedReviews.reduce((sum, r) => sum + (r.rating ?? 0), 0) / reviewCount
           : null;
       return {
         id: talk.id,
@@ -53,6 +56,7 @@ export async function GET(request: NextRequest) {
         talkCategory: talk.talkCategory,
         averageRating,
         reviewCount,
+        skippedCount,
       };
     });
 
