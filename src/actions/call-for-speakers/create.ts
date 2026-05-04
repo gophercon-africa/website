@@ -130,7 +130,7 @@ export async function createTalk(formState: TalkFormState, formData: FormData): 
         from: "hello@gophercon.africa",
         replyTo: "hello@gophercon.africa",
         to:  validatedFields.data.email,
-        subject: 'Thank you for submitting your talk to GopherCon Africa 2026',
+        subject: 'Thank you for submitting your talk to Gophers Conference 2026',
         react: EmailTemplate({ firstName: validatedFields.data.fullName })
     });
 
