@@ -39,9 +39,7 @@ export async function GET(request: NextRequest) {
         talkCategory: true,
         talkLevel: true,
         talkDuration: true,
-        bio: true,
         previousSpeakingExperience: true,
-        additionalNotes: true,
         reviews: {
           where: {
             reviewerEmail: (token.email as string).toLowerCase(),
