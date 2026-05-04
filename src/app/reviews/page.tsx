@@ -67,7 +67,7 @@ export default function ReviewsPage() {
             <div className="flex-1 max-w-md">
               <div className="flex items-center justify-between mb-1">
                 <span className="text-sm text-gray-600">
-                  Progress: {completedCount}/{talks.length} reviewed
+                  Progress: {completedCount}/{talks.length} completed
                 </span>
                 <span className="text-sm font-medium text-gray-700">{progressPercentage}%</span>
               </div>
