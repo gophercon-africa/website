@@ -2,32 +2,23 @@ export interface ReviewData {
   id: string;
   talkId: string;
   reviewerEmail: string;
-  rating: number;
+  rating: number | null;
   notes: string;
+  skipped: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
 
 export interface TalkWithReview {
   id: string;
-  fullName: string;
-  email: string;
-  phone: string;
-  company: string;
-  title: string;
-  bio: string;
   talkTitle: string;
   talkDescription: string;
   talkCategory: string;
   talkDuration: string;
   talkLevel: string;
+  bio: string;
   previousSpeakingExperience: string;
   additionalNotes: string;
-  eventYear: string;
-  IsAccepted: boolean;
-  IsPendingReview: boolean;
-  createdAt: Date;
-  updatedAt: Date;
   reviews: ReviewData[];
 }
 

@@ -65,8 +65,9 @@ model Review {
   id            String   @id @default(cuid())
   talkId        String
   reviewerEmail String
-  rating        Float
+  rating        Float?
   notes         String
+  skipped       Boolean  @default(false)
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
   talk          Talk     @relation(fields: [talkId], references: [id])
