@@ -20,7 +20,7 @@ const ticketOptions: TicketOption[] = [
   {
     title: "Student Conference Tickets",
     type: "Single",
-    price: "KSh 3,000",
+    price: "KSh 1,500",
     description: "Access to conference for students with a valid student ID.",
     perks: ["Access to the conference days, valid with a student ID."],
     days: ["conference"],
@@ -28,7 +28,7 @@ const ticketOptions: TicketOption[] = [
   {
     title: "Conference Days Standard",
     type: "Single",
-    price: "KSh 8,000",
+    price: "KSh 3,000",
     description: "Access to conference days.",
     perks: ["Access to conference days only."],
     days: ["conference"],
