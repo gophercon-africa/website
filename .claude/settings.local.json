@@ -9,7 +9,8 @@
       "Bash(/Users/adeshina/Workspace/projects/opensource/javascript/gopher-africa/gophers-ui-v1/node_modules/.bin/prisma --version)",
       "Bash(npm uninstall:*)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(git push *)"
     ]
   }
 }
