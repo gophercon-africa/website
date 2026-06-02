@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronRight, MapPin } from 'lucide-react';
+import { ChevronRight, MapPin, Calendar } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import TypewriterText from '@components/TypewriterText';
@@ -45,10 +45,14 @@ export default function Hero() {
                   delay={1000}
                 />
               </h1>
-              <div className="flex items-center space-x-6 mb-6">
+              <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mb-6">
+              <div className="flex items-center space-x-2">
+                <Calendar className="w-6 h-6 text-white" />
+                <span className="text-white">15th &ndash; 17th October 2026</span>
+              </div>
               <div className="flex items-center space-x-2">
                 <MapPin className="w-6 h-6 text-white" />
-                <span className="text-white">Nairobi, Kenya</span>
+                <span className="text-white">PrideInn Azure Hotel Limited, Lantana Road, Nairobi, Kenya</span>
               </div>
             </div>
               <p className="text-xl sm:text-2xl text-white leading-relaxed max-w-xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
