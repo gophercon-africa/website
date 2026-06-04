@@ -7,6 +7,7 @@ import { revalidatePath } from 'next/cache';
 import paths from '@path';
 import { Resend } from "resend";
 import { EmailTemplate } from "@/src/notification/email/templates/talk-submission-success";
+import { CALL_FOR_SPEAKERS_OPEN } from "@/src/lib/config";
     
 const createTalkSchema = z.object({
     fullName: z.string().min(3, { message: "Full name must be at least 3 characters long" }),
@@ -48,7 +49,12 @@ export interface TalkFormState {
 }
 
 export async function createTalk(formState: TalkFormState, formData: FormData): Promise<TalkFormState> {
- 
+
+        // Reject submissions when the Call for Speakers is closed
+        if (!CALL_FOR_SPEAKERS_OPEN) {
+            return { errors: { _form: ['The Call for Speakers is now closed and is no longer accepting submissions.'] } };
+        }
+
         // Check if user's email address is already in the database
         const user = await db.talk.findMany({
             where: {

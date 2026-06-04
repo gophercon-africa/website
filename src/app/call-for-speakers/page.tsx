@@ -1,9 +1,41 @@
-'use client';
+import Link from 'next/link';
 import CallForSpeakersForm from '@components/call-for-speakers/CallForSpeakersForm';
+import { CALL_FOR_SPEAKERS_OPEN } from '@/src/lib/config';
 
 export default function CallForSpeakersPage() {
 
-
+  if (!CALL_FOR_SPEAKERS_OPEN) {
+    return (
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+        <div className="text-center">
+          <h1 className="text-4xl font-bold text-[#006B3F] mb-6">
+            Call for Speakers is Now Closed
+          </h1>
+          <p className="text-xl text-gray-600 mb-4">
+            Thank you to everyone who submitted a talk for GopherCon Africa 2026! 🎉
+          </p>
+          <p className="text-lg text-gray-600 mb-10">
+            Submissions are no longer being accepted. Selected speakers will be notified by our
+            Content Committee. Keep an eye on our channels for the announcement of the final lineup.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              href="/"
+              className="inline-flex justify-center py-3 px-6 rounded-lg text-white font-medium bg-[#006B3F] hover:bg-[#008751] transition-colors"
+            >
+              Back to Home
+            </Link>
+            <a
+              href="mailto:hello@gophers.africa"
+              className="inline-flex justify-center py-3 px-6 rounded-lg font-medium text-[#006B3F] border border-[#006B3F] hover:bg-[#006B3F]/5 transition-colors"
+            >
+              Contact the Content Committee
+            </a>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">

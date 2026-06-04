@@ -3,8 +3,8 @@ import { ChevronRight} from 'lucide-react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-export default function InfoCards() {
-  
+export default function InfoCards({ cfsOpen = false }: { cfsOpen?: boolean }) {
+
 
   return (
     <section className="py-24 bg-linear-to-t from-[#F1F8E9] to-white">
@@ -49,15 +49,27 @@ export default function InfoCards() {
             className="bg-[#FFF5F5] rounded-3xl p-12 relative overflow-hidden"
           >
             <div className="max-w-lg">
-              <div className="text-[#006B3F] mb-4">✅ Open Now</div>
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">Call for Speakers is Open!</h2>
-              <p className="text-gray-600 mb-8 text-lg">
-                Share your expertise and passion for Go with the GopherCon Africa community. We're looking for engaging talks that cover a wide range of Go topics.
-              </p>
-              <Link href="/call-for-speakers" className="inline-flex items-center text-gray-900 font-semibold hover:text-[#006B3F] transition-colors">
-                Submit your proposal
-                <ChevronRight className="w-5 h-5 ml-1" />
-              </Link>
+              {cfsOpen ? (
+                <>
+                  <div className="text-[#006B3F] mb-4">✅ Open Now</div>
+                  <h2 className="text-4xl font-bold text-gray-900 mb-6">Call for Speakers is Open!</h2>
+                  <p className="text-gray-600 mb-8 text-lg">
+                    Share your expertise and passion for Go with the GopherCon Africa community. We're looking for engaging talks that cover a wide range of Go topics.
+                  </p>
+                  <Link href="/call-for-speakers" className="inline-flex items-center text-gray-900 font-semibold hover:text-[#006B3F] transition-colors">
+                    Submit your proposal
+                    <ChevronRight className="w-5 h-5 ml-1" />
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <div className="text-gray-500 mb-4">🔒 Submissions Closed</div>
+                  <h2 className="text-4xl font-bold text-gray-900 mb-6">Call for Speakers is Closed</h2>
+                  <p className="text-gray-600 mb-8 text-lg">
+                    Thank you to everyone who submitted a talk! Submissions are now closed. Selected speakers will be notified soon — stay tuned for the lineup announcement.
+                  </p>
+                </>
+              )}
             </div>
             <div className="absolute bottom-0 right-0 w-48 h-48">
               <Image

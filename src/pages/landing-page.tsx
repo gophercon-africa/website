@@ -10,13 +10,13 @@ import Sponsors from '@components/sponsors/Sponsors';
 import Newsletter from '@components/newsletter/Newsletter';
 import VisaInfo from '@components/visa-info/VisaInfo';
 
-export default function LandingPage() {
+export default function LandingPage({ cfsOpen }: { cfsOpen: boolean }) {
 
   return (
     <div className="min-h-screen bg-white font-sans">
-      <Hero />
+      <Hero cfsOpen={cfsOpen} />
       <About />
-      <InfoCards />
+      <InfoCards cfsOpen={cfsOpen} />
       <Tickets />
       <Sponsors />
       <VisaInfo />
