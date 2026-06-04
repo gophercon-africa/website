@@ -15,7 +15,9 @@
       "Bash(grep -n -iE \"oct|nov|dec|date|2026|[0-9]{1,2}th\" src/components/header/Header.tsx)",
       "Bash(grep -rn -iE \"oct|two days|2 days|[0-9]{1,2}\\(st|nd|rd|th\\)|2026 .*[0-9]|date\" --include=\"*.tsx\" src/components/sponsors src/components/newsletter src/components/visa-info src/components/footer src/app/layout.tsx)",
       "Bash(grep -n -iE \"oct|date|2026|2025|[0-9]{1,2}\\(st|nd|rd|th\\)|nairobi|venue\" src/components/footer/Footer.tsx)",
-      "Bash(grep -rn -iE \"oct[a-z]*|[0-9]{1,2}\\\\s*[-–—to]+\\\\s*[0-9]{1,2}\\\\s*\\(oct|october\\)\" --include=\"*.tsx\" --include=\"*.ts\" --include=\"*.md\" --include=\"*.json\" .)"
+      "Bash(grep -rn -iE \"oct[a-z]*|[0-9]{1,2}\\\\s*[-–—to]+\\\\s*[0-9]{1,2}\\\\s*\\(oct|october\\)\" --include=\"*.tsx\" --include=\"*.ts\" --include=\"*.md\" --include=\"*.json\" .)",
+      "Bash(npx tsc *)",
+      "Bash(npx next *)"
     ]
   }
 }

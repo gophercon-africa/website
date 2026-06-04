@@ -5,7 +5,7 @@ import Link from 'next/link';
 import TypewriterText from '@components/TypewriterText';
 
 const TICKETS_URL = 'https://www.clooza.com/en/events/GCA2026';
-export default function Hero() {
+export default function Hero({ cfsOpen = false }: { cfsOpen?: boolean }) {
   return (
     <div className="relative min-h-[50vh] overflow-hidden bg-linear-to-b from-[#8B4513] via-[#CD853F] to-[#D2691E]">
       {/* Dark overlay for better contrast */}
@@ -61,10 +61,12 @@ export default function Hero() {
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/call-for-speakers" className="bg-white hover:bg-white/90 text-[#8B4513] px-8 py-4 rounded-full font-bold text-lg transition-all transform hover:scale-105 hover:shadow-xl inline-flex items-center justify-center group">
-                Submit your talk
-                <ChevronRight className="w-6 h-6 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Link>
+              {cfsOpen && (
+                <Link href="/call-for-speakers" className="bg-white hover:bg-white/90 text-[#8B4513] px-8 py-4 rounded-full font-bold text-lg transition-all transform hover:scale-105 hover:shadow-xl inline-flex items-center justify-center group">
+                  Submit your talk
+                  <ChevronRight className="w-6 h-6 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              )}
               <a
                 href={TICKETS_URL}
                 target="_blank"
