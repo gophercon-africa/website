@@ -4,6 +4,7 @@ import { useEffect, useState, useRef, useCallback } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { StarRating } from '@/src/components/common/StarRating';
+import Modal from '@/src/components/common/Modal';
 import {
   Star,
   Circle,
@@ -16,6 +17,7 @@ import {
   Keyboard,
   SkipForward,
   Ban,
+  ExternalLink,
 } from 'lucide-react';
 
 interface Talk {
@@ -48,6 +50,8 @@ export default function ReviewWorkspacePage() {
   const [rating, setRating] = useState(0);
   const [notes, setNotes] = useState('');
   const [saving, setSaving] = useState(false);
+  const [showSkipModal, setShowSkipModal] = useState(false);
+  const [skipReason, setSkipReason] = useState('');
 
   const notesTextareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -123,9 +127,11 @@ export default function ReviewWorkspacePage() {
     }
   }, [findNextUnreviewed, talks, navigateToTalk, router]);
 
-  const handlePermanentSkip = useCallback(async () => {
+  const handlePermanentSkip = useCallback(async (reason?: string) => {
     if (!currentTalk) return;
 
+    setShowSkipModal(false);
+    setSkipReason('');
     setSaving(true);
     try {
       const res = await fetch('/api/reviews', {
@@ -135,6 +141,7 @@ export default function ReviewWorkspacePage() {
           talkId: currentTalk.id,
           skipped: true,
           notes,
+          ...(reason ? { skipReason: reason } : {}),
         }),
       });
 
@@ -342,31 +349,43 @@ export default function ReviewWorkspacePage() {
             </div>
           </div>
 
-          <div className="hidden lg:flex items-center gap-4 text-xs text-gray-500 bg-gray-50 px-3 py-2 rounded-md border border-gray-100">
-            <Keyboard className="w-4 h-4" />
-            <div className="flex gap-3">
-              <span title="Navigate up/down">
-                <kbd className="bg-white border border-gray-200 rounded px-1 font-mono">
-                  ↑↓
-                </kbd>{' '}
-                Nav
-              </span>
-              <span title="Set rating">
-                <kbd className="bg-white border border-gray-200 rounded px-1 font-mono">
-                  1-5
-                </kbd>{' '}
-                Rate
-              </span>
-              <span title="Focus notes">
-                <kbd className="bg-white border border-gray-200 rounded px-1 font-mono">s</kbd>{' '}
-                Notes
-              </span>
-              <span title="Save and Next">
-                <kbd className="bg-white border border-gray-200 rounded px-1 font-mono">
-                  ↵
-                </kbd>{' '}
-                Save
-              </span>
+          <div className="flex items-center gap-3 shrink-0">
+            <a
+              href="https://docs.google.com/document/d/1DDoJZz93_n8_YqXCgZoAydPaOi3MQMpKxg0cAqaX-_8/edit?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-xs font-medium text-[#006B3F] hover:underline"
+            >
+              <ExternalLink className="w-3.5 h-3.5" />
+              <span>Review Guidelines</span>
+            </a>
+
+            <div className="hidden lg:flex items-center gap-4 text-xs text-gray-500 bg-gray-50 px-3 py-2 rounded-md border border-gray-100">
+              <Keyboard className="w-4 h-4" />
+              <div className="flex gap-3">
+                <span title="Navigate up/down">
+                  <kbd className="bg-white border border-gray-200 rounded px-1 font-mono">
+                    ↑↓
+                  </kbd>{' '}
+                  Nav
+                </span>
+                <span title="Set rating">
+                  <kbd className="bg-white border border-gray-200 rounded px-1 font-mono">
+                    1-5
+                  </kbd>{' '}
+                  Rate
+                </span>
+                <span title="Focus notes">
+                  <kbd className="bg-white border border-gray-200 rounded px-1 font-mono">s</kbd>{' '}
+                  Notes
+                </span>
+                <span title="Save and Next">
+                  <kbd className="bg-white border border-gray-200 rounded px-1 font-mono">
+                    ↵
+                  </kbd>{' '}
+                  Save
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -498,7 +517,7 @@ export default function ReviewWorkspacePage() {
                     Skip for now
                   </button>
                   <button
-                    onClick={handlePermanentSkip}
+                    onClick={() => setShowSkipModal(true)}
                     disabled={saving || isCurrentTalkSkipped}
                     className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-4 py-2.5 text-sm font-medium text-orange-700 bg-orange-50 border border-orange-200 hover:bg-orange-100 rounded-lg disabled:opacity-60 disabled:cursor-not-allowed transition-colors focus:ring-2 focus:ring-orange-400 focus:outline-none"
                   >
@@ -603,6 +622,41 @@ export default function ReviewWorkspacePage() {
           </div>
         </div>
       </div>
+
+      <Modal
+        isOpen={showSkipModal}
+        onClose={() => { setShowSkipModal(false); setSkipReason(''); }}
+        title="Permanently Skip Talk"
+        size="sm"
+      >
+        <p className="text-sm text-gray-600 mb-4">
+          This talk will be permanently marked as skipped and cannot be reviewed later. Optionally explain why.
+        </p>
+        <textarea
+          value={skipReason}
+          onChange={(e) => setSkipReason(e.target.value)}
+          rows={3}
+          maxLength={1000}
+          placeholder="Optional: why are you skipping this talk?"
+          className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-[#006B3F] focus:ring-2 focus:ring-[#006B3F]/20 focus:outline-none transition-shadow bg-white resize-y mb-4"
+        />
+        <div className="flex justify-end gap-3">
+          <button
+            onClick={() => { setShowSkipModal(false); setSkipReason(''); }}
+            className="px-4 py-2 text-sm font-medium text-gray-600 bg-white border border-gray-300 hover:bg-gray-50 rounded-lg transition-colors"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={() => handlePermanentSkip(skipReason || undefined)}
+            disabled={saving}
+            className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-orange-700 bg-orange-50 border border-orange-200 hover:bg-orange-100 rounded-lg disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+          >
+            <SkipForward className="w-4 h-4" />
+            Permanently Skip
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 }

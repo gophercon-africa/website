@@ -8,6 +8,7 @@ const reviewSchema = z.object({
   rating: z.number().min(0.5).max(5).multipleOf(0.5).nullable().optional(),
   notes: z.string().max(5000).optional().default(''),
   skipped: z.boolean().optional().default(false),
+  skipReason: z.string().max(1000).optional(),
 }).refine(
   (data) => data.skipped || (data.rating !== null && data.rating !== undefined),
   { message: 'Rating is required when not skipping', path: ['rating'] }
@@ -87,7 +88,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { talkId, rating, notes, skipped } = result.data;
+    const { talkId, rating, notes, skipped, skipReason } = result.data;
     const reviewerEmail = (token.email as string).toLowerCase();
     const currentYear = new Date().getFullYear().toString();
 
@@ -123,6 +124,7 @@ export async function POST(request: NextRequest) {
         rating: skipped ? null : rating,
         notes,
         skipped,
+        skipReason: skipped ? (skipReason ?? null) : null,
         updatedAt: new Date(),
       },
       create: {
@@ -131,6 +133,7 @@ export async function POST(request: NextRequest) {
         rating: skipped ? null : rating,
         notes,
         skipped,
+        skipReason: skipped ? (skipReason ?? null) : null,
       },
     });
 
