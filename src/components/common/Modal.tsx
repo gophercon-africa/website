@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { X } from 'lucide-react';
 
 interface ModalProps {
@@ -11,18 +11,51 @@ interface ModalProps {
   size?: 'sm' | 'md' | 'lg' | 'xl';
 }
 
+const FOCUSABLE = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, size = 'md' }) => {
+  const panelRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (!isOpen) return;
-    const handleKeyDown = (event: KeyboardEvent) => {
+
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+
+    // Move focus into the modal on open
+    const firstFocusable = panelRef.current?.querySelectorAll<HTMLElement>(FOCUSABLE)[0];
+    firstFocusable?.focus();
+
+    function handleKeyDown(event: KeyboardEvent) {
       if (event.key === 'Escape') {
         onClose();
+        return;
       }
-    };
+
+      if (event.key !== 'Tab') return;
+
+      const focusable = Array.from(panelRef.current?.querySelectorAll<HTMLElement>(FOCUSABLE) ?? []);
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey) {
+        if (document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        }
+      } else {
+        if (document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+    }
 
     document.addEventListener('keydown', handleKeyDown);
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
+      previouslyFocused?.focus();
     };
   }, [isOpen, onClose]);
 
@@ -40,7 +73,12 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, size = 
       <div className="flex min-h-screen items-center justify-center p-4">
         <div className="fixed inset-0 bg-black/30 backdrop-blur-md transition-opacity" onClick={onClose} />
 
-        <div className={`relative w-full ${sizeClasses[size]} transform rounded-2xl bg-white p-6 shadow-xl transition-all text-left max-h-[calc(100vh-8rem)] flex flex-col`}>
+        <div
+          ref={panelRef}
+          role="dialog"
+          aria-modal="true"
+          className={`relative w-full ${sizeClasses[size]} transform rounded-2xl bg-white p-6 shadow-xl transition-all text-left max-h-[calc(100vh-8rem)] flex flex-col`}
+        >
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-xl font-semibold text-gray-900">{title}</h3>
             <button

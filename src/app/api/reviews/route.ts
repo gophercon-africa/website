@@ -101,18 +101,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Talk not found or not reviewable' }, { status: 404 });
     }
 
-    const existing = await db.review.findUnique({
-      where: { talkId_reviewerEmail: { talkId, reviewerEmail } },
-      select: { skipped: true },
-    });
-
-    if (existing?.skipped) {
-      return NextResponse.json(
-        { error: 'This talk has been permanently skipped and cannot be changed' },
-        { status: 409 }
-      );
-    }
-
     const review = await db.review.upsert({
       where: {
         talkId_reviewerEmail: {
