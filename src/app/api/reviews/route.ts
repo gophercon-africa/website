@@ -39,6 +39,8 @@ export async function GET(request: NextRequest) {
         talkCategory: true,
         talkLevel: true,
         talkDuration: true,
+        bio: true,
+        additionalNotes: true,
         previousSpeakingExperience: true,
         reviews: {
           where: {
