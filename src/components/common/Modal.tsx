@@ -15,19 +15,20 @@ const FOCUSABLE = 'button, [href], input, select, textarea, [tabindex]:not([tabi
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, size = 'md' }) => {
   const panelRef = useRef<HTMLDivElement>(null);
+  const onCloseRef = useRef(onClose);
+  useEffect(() => { onCloseRef.current = onClose; });
 
   useEffect(() => {
     if (!isOpen) return;
 
     const previouslyFocused = document.activeElement as HTMLElement | null;
 
-    // Move focus into the modal on open
     const firstFocusable = panelRef.current?.querySelectorAll<HTMLElement>(FOCUSABLE)[0];
     firstFocusable?.focus();
 
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === 'Escape') {
-        onClose();
+        onCloseRef.current();
         return;
       }
 
@@ -57,7 +58,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, size = 
       document.removeEventListener('keydown', handleKeyDown);
       previouslyFocused?.focus();
     };
-  }, [isOpen, onClose]);
+  }, [isOpen]);
 
   if (!isOpen) return null;
 

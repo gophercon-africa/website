@@ -231,6 +231,8 @@ export default function ReviewWorkspacePage() {
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
+      if (showSkipModal) return;
+
       const activeTag = document.activeElement?.tagName;
       const isInputFocused = activeTag === 'TEXTAREA' || activeTag === 'INPUT';
 
@@ -279,7 +281,7 @@ export default function ReviewWorkspacePage() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentTalkId, filteredTalks, saving, saveReview, navigateToTalk]);
+  }, [currentTalkId, filteredTalks, saving, saveReview, navigateToTalk, showSkipModal]);
 
   if (loading) {
     return (
