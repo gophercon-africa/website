@@ -2,30 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
-
-interface AdminStats {
-  total: number;
-  pending: number;
-  reviewed: number;
-  accepted: number;
-  rejected: number;
-}
-
-interface ReviewerProgress {
-  reviewerEmail: string;
-  reviewsCompleted: number;
-  totalSubmissions: number;
-  percentageComplete: number;
-}
-
-interface AdminSubmission {
-  id: string;
-  talkTitle: string;
-  fullName: string;
-  talkCategory: string;
-  averageRating: number | null;
-  reviewCount: number;
-}
+import { AdminSubmissionsTable } from '@/src/app/admin/_components/AdminSubmissionsTable';
+import type { AdminStats, ReviewerProgress, AdminSubmission } from '@/src/types/admin';
 
 export default function AdminDashboardPage() {
   const [stats, setStats] = useState<AdminStats | null>(null);
@@ -174,43 +152,7 @@ export default function AdminDashboardPage() {
           )}
         </div>
 
-        <div className="bg-white rounded-lg shadow overflow-hidden mt-8">
-          <div className="px-6 py-4 border-b border-gray-200">
-            <h2 className="text-lg font-semibold text-gray-900">Submissions Overview</h2>
-          </div>
-          {submissions.length === 0 ? (
-            <div className="p-8 text-center text-gray-500">
-              No submissions found
-            </div>
-          ) : (
-            <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Speaker</th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Avg Rating</th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Reviews</th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  {submissions.map((submission) => (
-                    <tr key={submission.id} className="hover:bg-gray-50 transition-colors">
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{submission.talkTitle}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{submission.fullName}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{submission.talkCategory}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                        {submission.averageRating !== null ? submission.averageRating.toFixed(1) : '—'}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{submission.reviewCount}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </div>
+        <AdminSubmissionsTable submissions={submissions} />
       </div>
     </div>
   );
