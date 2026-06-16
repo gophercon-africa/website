@@ -30,6 +30,9 @@ export function AdminUsersTable({
       if (!res.ok) {
         throw new Error('Failed to update user');
       }
+
+      const roleLabel = role === 'isAdmin' ? 'Admin' : 'Reviewer';
+      toast.success(`${user.email} ${nextValue ? 'granted' : 'removed from'} ${roleLabel}`);
     } catch (error) {
       onUsersChange(previousUsers);
       toast.error('Failed to update user');
