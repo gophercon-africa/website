@@ -65,3 +65,11 @@ export interface AdminProgressResponse {
   reviewers: ReviewerProgress[];
   totalSubmissions: number;
 }
+
+export interface AuthorizedUserDto {
+  id: string;
+  email: string;
+  isAdmin: boolean;
+  isReviewer: boolean;
+  createdAt: string;
+}

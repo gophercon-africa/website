@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { toast } from 'sonner';
 import { AdminSubmissionsTable } from '@/src/app/admin/_components/AdminSubmissionsTable';
 import type { AdminStats, ReviewerProgress, AdminSubmission } from '@/src/types/admin';
@@ -70,9 +71,14 @@ export default function AdminDashboardPage() {
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
-          <p className="text-gray-600 mt-2">Review system statistics and progress</p>
+        <div className="mb-8 flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
+            <p className="text-gray-600 mt-2">Review system statistics and progress</p>
+          </div>
+          <Link href="/admin/users" className="text-sm font-medium text-[#006B3F] hover:underline">
+            Manage Users
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-8">

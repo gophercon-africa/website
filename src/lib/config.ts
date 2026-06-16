@@ -26,14 +26,3 @@ export const SESSION_EXPIRY_DAYS = parsePositiveInt(process.env.SESSION_EXPIRY_D
 // set CALL_FOR_SPEAKERS_OPEN=true to reopen.
 export const CALL_FOR_SPEAKERS_OPEN = parseBoolean(process.env.CALL_FOR_SPEAKERS_OPEN, false);
 
-export function isAuthorizedEmail(email: string): boolean {
-  const normalized = email.toLowerCase();
-  return REVIEWER_EMAILS.includes(normalized) || ADMIN_EMAILS.includes(normalized);
-}
-
-export function getEmailRole(email: string): 'reviewer' | 'admin' | null {
-  const normalized = email.toLowerCase();
-  if (ADMIN_EMAILS.includes(normalized)) return 'admin';
-  if (REVIEWER_EMAILS.includes(normalized)) return 'reviewer';
-  return null;
-}
