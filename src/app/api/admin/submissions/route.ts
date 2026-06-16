@@ -1,16 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 import { db } from '@/src/db';
-
-interface AdminSubmission {
-  id: string;
-  talkTitle: string;
-  fullName: string;
-  talkCategory: string;
-  averageRating: number | null;
-  reviewCount: number;
-  skippedCount: number;
-}
+import { getTalkStatus } from '@/src/lib/talkStatus';
+import { computeReviewStats } from '@/src/lib/reviewStats';
+import type { AdminSubmission } from '@/src/types/admin';
 
 // GET /api/admin/submissions - Fetch all submissions with review aggregation
 export async function GET(request: NextRequest) {
@@ -35,33 +28,44 @@ export async function GET(request: NextRequest) {
         id: true,
         talkTitle: true,
         fullName: true,
+        email: true,
         talkCategory: true,
-        _count: { select: { reviews: { where: { skipped: false } } } },
+        IsAccepted: true,
+        IsPendingReview: true,
         reviews: { select: { rating: true, skipped: true } },
       },
     });
 
+    // Group talks by case-insensitive email to detect repeat submitters
+    const talksByEmail = new Map<string, { id: string; talkTitle: string }[]>();
+    for (const talk of talks) {
+      const key = talk.email.toLowerCase().trim();
+      const group = talksByEmail.get(key) ?? [];
+      group.push({ id: talk.id, talkTitle: talk.talkTitle });
+      talksByEmail.set(key, group);
+    }
+
     const submissions: AdminSubmission[] = talks.map((talk) => {
-      const ratedReviews = talk.reviews.filter((r) => !r.skipped && r.rating !== null);
-      const skippedCount = talk.reviews.filter((r) => r.skipped).length;
-      const reviewCount = ratedReviews.length;
-      const averageRating =
-        reviewCount > 0
-          ? ratedReviews.reduce((sum, r) => sum + (r.rating ?? 0), 0) / reviewCount
-          : null;
+      const { averageRating, reviewCount, skippedCount } = computeReviewStats(talk.reviews);
+      const group = talksByEmail.get(talk.email.toLowerCase().trim()) ?? [];
+
       return {
         id: talk.id,
         talkTitle: talk.talkTitle,
         fullName: talk.fullName,
+        email: talk.email,
         talkCategory: talk.talkCategory,
+        status: getTalkStatus(talk),
         averageRating,
         reviewCount,
         skippedCount,
+        duplicateCount: group.length,
+        duplicateTalks: group.filter((t) => t.id !== talk.id),
       };
     });
 
     // Sort by reviewCount desc, then averageRating desc as tiebreaker
-    submissions.sort((a, b) => 
+    submissions.sort((a, b) =>
       b.reviewCount - a.reviewCount || (b.averageRating ?? 0) - (a.averageRating ?? 0)
     );
 

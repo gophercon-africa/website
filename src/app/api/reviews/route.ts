@@ -35,6 +35,7 @@ export async function GET(request: NextRequest) {
       },
       select: {
         id: true,
+        email: true,
         talkTitle: true,
         talkDescription: true,
         talkCategory: true,
@@ -58,7 +59,31 @@ export async function GET(request: NextRequest) {
       orderBy: { createdAt: 'desc' },
     });
 
-    return NextResponse.json(talks);
+    // Same-author detection (by email) across all of this year's talks, not just
+    // this reviewer's pending queue, so siblings already decided still surface.
+    // The author's name/email itself is never sent to the client — only sibling
+    // talk titles — to preserve the existing blind-review anonymization.
+    const allTalksThisYear = await db.talk.findMany({
+      where: { eventYear: currentYear },
+      select: { id: true, email: true, talkTitle: true },
+    });
+
+    const talksByEmail = new Map<string, { id: string; talkTitle: string }[]>();
+    for (const talk of allTalksThisYear) {
+      const key = talk.email.toLowerCase().trim();
+      const group = talksByEmail.get(key) ?? [];
+      group.push({ id: talk.id, talkTitle: talk.talkTitle });
+      talksByEmail.set(key, group);
+    }
+
+    const response = talks.map(({ email, ...talk }) => {
+      const siblings = (talksByEmail.get(email.toLowerCase().trim()) ?? []).filter(
+        (t) => t.id !== talk.id
+      );
+      return { ...talk, otherSubmissionsByAuthor: siblings };
+    });
+
+    return NextResponse.json(response);
   } catch (error) {
     console.error('GET /api/reviews error:', error);
     return NextResponse.json({ error: 'Failed to fetch reviews' }, { status: 500 });

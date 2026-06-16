@@ -18,6 +18,7 @@ import {
   SkipForward,
   Ban,
   ExternalLink,
+  Users,
 } from 'lucide-react';
 
 interface Talk {
@@ -30,6 +31,7 @@ interface Talk {
   bio: string;
   previousSpeakingExperience: string;
   additionalNotes: string;
+  otherSubmissionsByAuthor: Array<{ id: string; talkTitle: string }>;
   reviews: Array<{
     id: string;
     rating: number | null;
@@ -468,6 +470,42 @@ export default function ReviewWorkspacePage() {
                     </h3>
                     <div className="bg-amber-50 rounded-lg p-4 border border-amber-100 whitespace-pre-wrap text-gray-700">
                       {currentTalk.additionalNotes}
+                    </div>
+                  </div>
+                )}
+
+                {currentTalk.otherSubmissionsByAuthor.length > 0 && (
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2 flex items-center gap-2">
+                      <Users className="w-4 h-4 text-[#006B3F]" />
+                      Other Submissions by This Author
+                    </h3>
+                    <div className="bg-blue-50 rounded-lg p-4 border border-blue-100 text-gray-700">
+                      <p className="text-sm text-gray-500 mb-2">
+                        This author also submitted{' '}
+                        {currentTalk.otherSubmissionsByAuthor.length === 1 ? 'this talk' : 'these talks'} this year:
+                      </p>
+                      <ul className="list-disc list-inside space-y-1 text-sm">
+                        {currentTalk.otherSubmissionsByAuthor.map((t) => {
+                          const isNavigable = talks.some((talk) => talk.id === t.id);
+                          return (
+                            <li key={t.id}>
+                              {isNavigable ? (
+                                <button
+                                  onClick={() => navigateToTalk(t.id)}
+                                  className="text-[#006B3F] hover:underline text-left"
+                                >
+                                  {t.talkTitle}
+                                </button>
+                              ) : (
+                                <span className="text-gray-500">
+                                  {t.talkTitle} <span className="text-xs">(already decided)</span>
+                                </span>
+                              )}
+                            </li>
+                          );
+                        })}
+                      </ul>
                     </div>
                   </div>
                 )}

@@ -20,12 +20,11 @@ export async function GET(request: NextRequest) {
   try {
     const currentYear = new Date().getFullYear().toString();
 
-    // Get total submissions for current year
+    // Get total submissions for current year (independent of decision status,
+    // so a talk being accepted/rejected mid-cycle doesn't shrink the denominator
+    // below a reviewer's already-recorded review count)
     const totalSubmissions = await db.talk.count({
-      where: {
-        eventYear: currentYear,
-        IsPendingReview: true,
-      },
+      where: { eventYear: currentYear },
     });
 
     // Get all reviewers (combine REVIEWER_EMAILS and ADMIN_EMAILS, deduplicated)
