@@ -4,6 +4,7 @@ import { useEffect, useState, useRef, useCallback } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { StarRating } from '@/src/components/common/StarRating';
+import Modal from '@/src/components/common/Modal';
 import {
   Star,
   Circle,
@@ -16,6 +17,7 @@ import {
   Keyboard,
   SkipForward,
   Ban,
+  ExternalLink,
 } from 'lucide-react';
 
 interface Talk {
@@ -48,6 +50,8 @@ export default function ReviewWorkspacePage() {
   const [rating, setRating] = useState(0);
   const [notes, setNotes] = useState('');
   const [saving, setSaving] = useState(false);
+  const [showSkipModal, setShowSkipModal] = useState(false);
+  const [skipReason, setSkipReason] = useState('');
 
   const notesTextareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -123,9 +127,11 @@ export default function ReviewWorkspacePage() {
     }
   }, [findNextUnreviewed, talks, navigateToTalk, router]);
 
-  const handlePermanentSkip = useCallback(async () => {
+  const handlePermanentSkip = useCallback(async (reason?: string) => {
     if (!currentTalk) return;
 
+    setShowSkipModal(false);
+    setSkipReason('');
     setSaving(true);
     try {
       const res = await fetch('/api/reviews', {
@@ -135,6 +141,7 @@ export default function ReviewWorkspacePage() {
           talkId: currentTalk.id,
           skipped: true,
           notes,
+          ...(reason ? { skipReason: reason } : {}),
         }),
       });
 
@@ -172,8 +179,8 @@ export default function ReviewWorkspacePage() {
   }, [currentTalk, notes, talks, navigateToTalk, router]);
 
   const saveReview = useCallback(async () => {
-    if (!currentTalk || rating === 0 || isCurrentTalkSkipped) {
-      if (!isCurrentTalkSkipped) toast.error('Please select a rating');
+    if (!currentTalk || rating === 0) {
+      toast.error('Please select a rating');
       return;
     }
 
@@ -191,7 +198,7 @@ export default function ReviewWorkspacePage() {
 
       if (!res.ok) throw new Error('Failed to save review');
 
-      toast.success('Review saved');
+      toast.success(isCurrentTalkSkipped ? 'Skip undone — review saved' : 'Review saved');
 
       const updatedTalks = talks.map((t) => {
         if (t.id === currentTalk.id) {
@@ -224,6 +231,8 @@ export default function ReviewWorkspacePage() {
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
+      if (showSkipModal) return;
+
       const activeTag = document.activeElement?.tagName;
       const isInputFocused = activeTag === 'TEXTAREA' || activeTag === 'INPUT';
 
@@ -236,20 +245,18 @@ export default function ReviewWorkspacePage() {
 
       switch (e.key) {
         case 's':
-          if (isCurrentTalkSkipped) return;
           e.preventDefault();
           notesTextareaRef.current?.focus();
           break;
         case 'Enter':
           e.preventDefault();
-          if (!saving && !isCurrentTalkSkipped) saveReview();
+          if (!saving) saveReview();
           break;
         case '1':
         case '2':
         case '3':
         case '4':
         case '5':
-          if (isCurrentTalkSkipped) return;
           e.preventDefault();
           setRating(parseInt(e.key, 10));
           break;
@@ -274,7 +281,7 @@ export default function ReviewWorkspacePage() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentTalkId, filteredTalks, saving, saveReview, navigateToTalk, isCurrentTalkSkipped]);
+  }, [currentTalkId, filteredTalks, saving, saveReview, navigateToTalk, showSkipModal]);
 
   if (loading) {
     return (
@@ -342,31 +349,43 @@ export default function ReviewWorkspacePage() {
             </div>
           </div>
 
-          <div className="hidden lg:flex items-center gap-4 text-xs text-gray-500 bg-gray-50 px-3 py-2 rounded-md border border-gray-100">
-            <Keyboard className="w-4 h-4" />
-            <div className="flex gap-3">
-              <span title="Navigate up/down">
-                <kbd className="bg-white border border-gray-200 rounded px-1 font-mono">
-                  ↑↓
-                </kbd>{' '}
-                Nav
-              </span>
-              <span title="Set rating">
-                <kbd className="bg-white border border-gray-200 rounded px-1 font-mono">
-                  1-5
-                </kbd>{' '}
-                Rate
-              </span>
-              <span title="Focus notes">
-                <kbd className="bg-white border border-gray-200 rounded px-1 font-mono">s</kbd>{' '}
-                Notes
-              </span>
-              <span title="Save and Next">
-                <kbd className="bg-white border border-gray-200 rounded px-1 font-mono">
-                  ↵
-                </kbd>{' '}
-                Save
-              </span>
+          <div className="flex items-center gap-3 shrink-0">
+            <a
+              href="https://docs.google.com/document/d/1DDoJZz93_n8_YqXCgZoAydPaOi3MQMpKxg0cAqaX-_8/edit?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-xs font-medium text-[#006B3F] hover:underline"
+            >
+              <ExternalLink className="w-3.5 h-3.5" />
+              <span>Review Guidelines</span>
+            </a>
+
+            <div className="hidden lg:flex items-center gap-4 text-xs text-gray-500 bg-gray-50 px-3 py-2 rounded-md border border-gray-100">
+              <Keyboard className="w-4 h-4" />
+              <div className="flex gap-3">
+                <span title="Navigate up/down">
+                  <kbd className="bg-white border border-gray-200 rounded px-1 font-mono">
+                    ↑↓
+                  </kbd>{' '}
+                  Nav
+                </span>
+                <span title="Set rating">
+                  <kbd className="bg-white border border-gray-200 rounded px-1 font-mono">
+                    1-5
+                  </kbd>{' '}
+                  Rate
+                </span>
+                <span title="Focus notes">
+                  <kbd className="bg-white border border-gray-200 rounded px-1 font-mono">s</kbd>{' '}
+                  Notes
+                </span>
+                <span title="Save and Next">
+                  <kbd className="bg-white border border-gray-200 rounded px-1 font-mono">
+                    ↵
+                  </kbd>{' '}
+                  Save
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -457,7 +476,17 @@ export default function ReviewWorkspacePage() {
 
 
             <div className="bg-gray-50 border-t border-gray-200 p-6 md:p-8 shrink-0">
-              <div className={`mb-6 ${isCurrentTalkSkipped ? 'opacity-50 pointer-events-none' : ''}`}>
+              {isCurrentTalkSkipped && (
+                <div className="mb-5 flex items-start gap-3 rounded-lg border border-orange-200 bg-orange-50 px-4 py-3 text-sm text-orange-800">
+                  <Ban className="w-4 h-4 mt-0.5 shrink-0" />
+                  <span>
+                    You permanently skipped this talk.{' '}
+                    <span className="font-medium">To undo, select a rating and save.</span>
+                  </span>
+                </div>
+              )}
+
+              <div className="mb-6">
                 <StarRating
                   value={rating}
                   name="rating"
@@ -483,9 +512,8 @@ export default function ReviewWorkspacePage() {
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
                   rows={3}
-                  disabled={isCurrentTalkSkipped}
-                  className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-[#006B3F] focus:ring-2 focus:ring-[#006B3F]/20 focus:outline-none transition-shadow bg-white resize-y disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50"
-                  placeholder={isCurrentTalkSkipped ? 'This talk has been permanently skipped' : "Add your thoughts here... (Press 's' to focus)"}
+                  className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-[#006B3F] focus:ring-2 focus:ring-[#006B3F]/20 focus:outline-none transition-shadow bg-white resize-y"
+                  placeholder="Add your thoughts here... (Press 's' to focus)"
                 />
               </div>
 
@@ -497,21 +525,23 @@ export default function ReviewWorkspacePage() {
                   >
                     Skip for now
                   </button>
-                  <button
-                    onClick={handlePermanentSkip}
-                    disabled={saving || isCurrentTalkSkipped}
-                    className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-4 py-2.5 text-sm font-medium text-orange-700 bg-orange-50 border border-orange-200 hover:bg-orange-100 rounded-lg disabled:opacity-60 disabled:cursor-not-allowed transition-colors focus:ring-2 focus:ring-orange-400 focus:outline-none"
-                  >
-                    <SkipForward className="w-4 h-4" />
-                    {isCurrentTalkSkipped ? 'Skipped' : 'Permanently Skip'}
-                  </button>
+                  {!isCurrentTalkSkipped && (
+                    <button
+                      onClick={() => setShowSkipModal(true)}
+                      disabled={saving}
+                      className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-4 py-2.5 text-sm font-medium text-orange-700 bg-orange-50 border border-orange-200 hover:bg-orange-100 rounded-lg disabled:opacity-60 disabled:cursor-not-allowed transition-colors focus:ring-2 focus:ring-orange-400 focus:outline-none"
+                    >
+                      <SkipForward className="w-4 h-4" />
+                      Permanently Skip
+                    </button>
+                  )}
                 </div>
                 <button
                   onClick={saveReview}
-                  disabled={saving || rating === 0 || isCurrentTalkSkipped}
+                  disabled={saving || rating === 0}
                   className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-2.5 text-sm font-medium text-white bg-[#006B3F] hover:bg-[#008751] rounded-lg disabled:opacity-60 disabled:cursor-not-allowed transition-colors focus:ring-2 focus:ring-[#006B3F] focus:ring-offset-2 focus:outline-none shadow-sm"
                 >
-                  {saving ? 'Saving...' : 'Save & Next'}
+                  {saving ? 'Saving...' : isCurrentTalkSkipped ? 'Save Rating & Undo Skip' : 'Save & Next'}
                   {!saving && <ChevronRight className="w-4 h-4" />}
                 </button>
               </div>
@@ -603,6 +633,51 @@ export default function ReviewWorkspacePage() {
           </div>
         </div>
       </div>
+
+      <Modal
+        isOpen={showSkipModal}
+        onClose={() => { setShowSkipModal(false); setSkipReason(''); }}
+        title="Permanently Skip Talk"
+        size="sm"
+      >
+        {currentTalk?.reviews[0]?.rating != null && (
+          <div className="mb-4 flex items-start gap-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2.5 text-sm text-amber-800">
+            <Ban className="w-4 h-4 mt-0.5 shrink-0" />
+            <span>
+              Your existing rating of{' '}
+              <span className="font-semibold">{currentTalk.reviews[0].rating}/5</span>{' '}
+              will be removed.
+            </span>
+          </div>
+        )}
+        <p className="text-sm text-gray-600 mb-4">
+          This talk will be marked as permanently skipped. You can undo this later by selecting a rating. Optionally explain why.
+        </p>
+        <textarea
+          value={skipReason}
+          onChange={(e) => setSkipReason(e.target.value)}
+          rows={3}
+          maxLength={1000}
+          placeholder="Optional: why are you skipping this talk?"
+          className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-[#006B3F] focus:ring-2 focus:ring-[#006B3F]/20 focus:outline-none transition-shadow bg-white resize-y mb-4"
+        />
+        <div className="flex justify-end gap-3">
+          <button
+            onClick={() => { setShowSkipModal(false); setSkipReason(''); }}
+            className="px-4 py-2 text-sm font-medium text-gray-600 bg-white border border-gray-300 hover:bg-gray-50 rounded-lg transition-colors"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={() => handlePermanentSkip(skipReason || undefined)}
+            disabled={saving}
+            className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-orange-700 bg-orange-50 border border-orange-200 hover:bg-orange-100 rounded-lg disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+          >
+            <SkipForward className="w-4 h-4" />
+            Permanently Skip
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 }
