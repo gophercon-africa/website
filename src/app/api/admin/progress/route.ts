@@ -30,7 +30,7 @@ export async function GET(request: NextRequest) {
     // Get all reviewers (anyone with the reviewer or admin flag, from the DB)
     const authorizedUsers = await listAuthorizedUsers();
     const allReviewers = authorizedUsers
-      .filter((u) => u.isReviewer || u.isAdmin)
+      .filter((u) => u.isReviewer)
       .map((u) => u.email);
 
     // Single query: count reviews per reviewer for talks in the current year

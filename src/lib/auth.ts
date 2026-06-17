@@ -3,7 +3,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import CredentialsProvider from "next-auth/providers/credentials";
 import db from "@/src/db";
 import { verifyOtp as verifyOtpHash } from "@/src/lib/otp";
-import { SESSION_EXPIRY_DAYS } from "@/src/lib/config";
+import { SESSION_EXPIRY_DAYS, REVIEWER_EMAILS } from "@/src/lib/config";
 
 export const authConfig: NextAuthOptions = {
   adapter: PrismaAdapter(db as never),
@@ -85,14 +85,21 @@ export const authConfig: NextAuthOptions = {
         token.id = user.id;
         token.email = user.email;
         token.role = (user as { role?: string }).role;
+
+        const email = (user.email ?? "").toLowerCase();
+        const dbUser = await db.authorizedUser.findUnique({ where: { email } });
+        // If a DB row exists, use its isReviewer flag directly.
+        // Fall back to env list for emails not yet in the DB.
+        token.isReviewer = dbUser ? dbUser.isReviewer : REVIEWER_EMAILS.includes(email);
       }
       return token;
     },
     async session({ session, token }) {
       if (session.user) {
-        (session.user as { id?: string; email?: string | null; role?: string }).id = token.id as string;
+        session.user.id = token.id;
         session.user.email = token.email as string;
-        (session.user as { role?: string }).role = token.role as string;
+        session.user.role = token.role;
+        session.user.isReviewer = token.isReviewer;
       }
       return session;
     },

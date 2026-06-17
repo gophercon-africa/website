@@ -79,9 +79,10 @@ export async function proxy(request: NextRequest) {
     return NextResponse.next()
   }
 
-  // Reviewer routes: require reviewer or admin role
+  // Reviewer routes: require reviewer role or admin-who-is-also-a-reviewer
   if (isReviewerPath(pathname)) {
-    if (role !== 'reviewer' && role !== 'admin') {
+    const isReviewer = token.isReviewer as boolean | undefined
+    if (role !== 'reviewer' && !isReviewer) {
       const loginUrl = new URL('/otp-login', request.url)
       loginUrl.searchParams.set('callbackUrl', pathname)
       return NextResponse.redirect(loginUrl)
