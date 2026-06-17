@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 import { db } from '@/src/db';
-import { REVIEWER_EMAILS, ADMIN_EMAILS } from '@/src/lib/config';
+import { listAuthorizedUsers } from '@/src/lib/authorizedUsers';
 import { AdminProgressResponse } from '@/src/types/admin';
 
 // GET /api/admin/progress - Fetch reviewer progress
@@ -27,8 +27,11 @@ export async function GET(request: NextRequest) {
       where: { eventYear: currentYear },
     });
 
-    // Get all reviewers (combine REVIEWER_EMAILS and ADMIN_EMAILS, deduplicated)
-    const allReviewers = [...new Set([...REVIEWER_EMAILS, ...ADMIN_EMAILS])];
+    // Get all reviewers (anyone with the reviewer or admin flag, from the DB)
+    const authorizedUsers = await listAuthorizedUsers();
+    const allReviewers = authorizedUsers
+      .filter((u) => u.isReviewer || u.isAdmin)
+      .map((u) => u.email);
 
     // Single query: count reviews per reviewer for talks in the current year
     const reviewCounts = await db.review.groupBy({

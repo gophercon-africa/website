@@ -4,7 +4,8 @@ import { z } from 'zod';
 import { db } from '@/src/db';
 import { Resend } from 'resend';
 import { generateOtp, hashOtp } from '@/src/lib/otp';
-import { OTP_EXPIRY_MINUTES, getEmailRole } from '@/src/lib/config';
+import { OTP_EXPIRY_MINUTES } from '@/src/lib/config';
+import { getEmailRole } from '@/src/lib/authorizedUsers';
 import { OtpFormState } from '@/src/types/otp';
 import { OtpEmail } from '@/src/notification/email/templates/otp-verification';
 
@@ -24,7 +25,7 @@ export async function sendOtp(_: OtpFormState, formData: FormData): Promise<OtpF
   const { email } = result.data;
   const normalizedEmail = email.toLowerCase().trim();
 
-  const role = getEmailRole(normalizedEmail);
+  const role = await getEmailRole(normalizedEmail);
   if (!role) {
     return { errors: { email: ['Email not authorized'] } };
   }
