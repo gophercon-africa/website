@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
-import { Star, Ban } from 'lucide-react';
+import { Star, Ban, ArrowRight } from 'lucide-react';
 
 interface Talk {
   id: string;
@@ -49,6 +49,7 @@ export default function ReviewsPage() {
   const skippedCount = talks.filter(t => t.reviews.length > 0 && t.reviews[0].skipped).length;
   const completedCount = reviewedCount + skippedCount;
   const progressPercentage = talks.length > 0 ? Math.round((completedCount / talks.length) * 100) : 0;
+  const nextPendingTalk = talks.find(t => t.reviews.length === 0);
 
   if (loading) {
     return (
@@ -62,22 +63,33 @@ export default function ReviewsPage() {
     <div className="min-h-screen bg-gray-50 py-8 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Review Submissions</h1>
-          <div className="mt-3 flex items-center gap-4">
-            <div className="flex-1 max-w-md">
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-sm text-gray-600">
-                  Progress: {completedCount}/{talks.length} completed
-                </span>
-                <span className="text-sm font-medium text-gray-700">{progressPercentage}%</span>
-              </div>
-              <div className="w-full bg-gray-200 rounded-full h-2">
-                <div
-                  className="bg-[#006B3F] h-2 rounded-full transition-all duration-500"
-                  style={{ width: `${progressPercentage}%` }}
-                />
-              </div>
+          <div className="flex items-center justify-between gap-4">
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900">Review Submissions</h1>
+              <p className="mt-1 text-sm text-gray-500">
+                {completedCount} of {talks.length} completed
+              </p>
             </div>
+            {nextPendingTalk ? (
+              <button
+                onClick={() => router.push(`/reviews/${nextPendingTalk.id}`)}
+                className="flex items-center gap-2 bg-[#006B3F] hover:bg-[#005a34] text-white text-sm font-semibold px-4 py-2.5 rounded-lg transition-colors shrink-0"
+              >
+                Continue reviewing
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            ) : completedCount > 0 ? (
+              <span className="text-sm font-medium text-[#006B3F]">All done ✓</span>
+            ) : null}
+          </div>
+          <div className="mt-4 flex items-center gap-3">
+            <div className="flex-1 bg-gray-200 rounded-full h-2">
+              <div
+                className="bg-[#006B3F] h-2 rounded-full transition-all duration-500"
+                style={{ width: `${progressPercentage}%` }}
+              />
+            </div>
+            <span className="text-sm font-medium text-gray-600 w-9 text-right">{progressPercentage}%</span>
           </div>
         </div>
 

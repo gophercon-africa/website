@@ -3,7 +3,8 @@ import Script from 'next/script';
 import '../styles/globals.css';
 import Providers from './providers';
 import Header from '@components/header/Header';
-import Footer from '@components/footer/Footer';
+import ConditionalFooter from '@components/footer/ConditionalFooter';
+import TawkController from '@components/TawkController';
 
 export const metadata: Metadata = {
   title: 'GopherCon Africa 2026 - The Premier Go Conference in Africa',
@@ -31,11 +32,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="font-sans">
+      <body className="font-sans flex flex-col min-h-screen">
         <Providers>
           <Header mounted={true} />
           {children}
-          <Footer />
+          <ConditionalFooter />
+          <TawkController />
         </Providers>
         <Script id="tawk-to" strategy="afterInteractive">
           {`

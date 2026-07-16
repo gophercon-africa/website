@@ -12,6 +12,7 @@ import {
   BookOpen,
   Award,
   ChevronRight,
+  ChevronLeft,
   ArrowLeft,
   List,
   Keyboard,
@@ -56,6 +57,7 @@ export default function ReviewWorkspacePage() {
   const [skipReason, setSkipReason] = useState('');
 
   const notesTextareaRef = useRef<HTMLTextAreaElement>(null);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   const currentTalkId = params?.talkId;
 
@@ -79,6 +81,15 @@ export default function ReviewWorkspacePage() {
   useEffect(() => {
     loadTalks();
   }, []);
+
+  useEffect(() => {
+    const stored = localStorage.getItem('review-sidebar-collapsed');
+    if (stored !== null) setSidebarCollapsed(stored === 'true');
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('review-sidebar-collapsed', String(sidebarCollapsed));
+  }, [sidebarCollapsed]);
 
   useEffect(() => {
     if (!currentTalk) return;
@@ -322,7 +333,7 @@ export default function ReviewWorkspacePage() {
   }
 
   return (
-    <div className="h-[calc(100vh-80px)] min-h-[600px] flex flex-col bg-gray-50 overflow-hidden">
+    <div className="flex-1 min-h-0 flex flex-col bg-gray-50 overflow-hidden">
 
       <div className="bg-white border-b border-gray-200 shrink-0">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between px-4 sm:px-6 py-3 gap-3">
@@ -393,9 +404,9 @@ export default function ReviewWorkspacePage() {
         </div>
       </div>
 
-      <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
-        <div className="flex-1 overflow-y-auto bg-white flex flex-col relative">
-          <div className="flex-1 flex flex-col max-w-4xl mx-auto w-full">
+      <div className="flex-1 flex flex-col sm:flex-row overflow-hidden">
+        <div className="flex-1 overflow-y-auto bg-white flex flex-col relative min-w-0">
+          <div className={`flex-1 flex flex-col mx-auto w-full ${sidebarCollapsed ? 'max-w-5xl' : 'max-w-4xl'}`}>
             <div className="p-6 md:p-8 flex-1">
               <div className="mb-6">
                 <h1 className="text-2xl font-bold text-gray-900 leading-tight">
@@ -587,88 +598,111 @@ export default function ReviewWorkspacePage() {
           </div>
         </div>
 
-        <div className="w-full md:w-80 lg:w-96 shrink-0 bg-gray-50 border-t md:border-t-0 md:border-l border-gray-200 flex flex-col h-64 md:h-auto">
-          <div className="flex items-center p-2 bg-gray-100/50 border-b border-gray-200 shrink-0">
-            {(['all', 'pending', 'reviewed', 'skipped'] as FilterType[]).map((f) => (
-              <button
-                key={f}
-                onClick={() => setFilter(f)}
-                className={`flex-1 py-2 text-xs font-semibold rounded-md capitalize transition-all ${
-                  filter === f
-                    ? 'bg-white text-gray-900 shadow-sm ring-1 ring-gray-200'
-                    : 'text-gray-500 hover:text-gray-700 hover:bg-gray-200/50'
-                }`}
-              >
-                {f} (
-                {f === 'all'
-                  ? talks.length
-                  : f === 'pending'
-                    ? pendingTalks.length
-                    : f === 'skipped'
-                      ? skippedTalks.length
-                      : reviewedTalks.length}
-                )
-              </button>
-            ))}
-          </div>
-
-
-          <div className="flex-1 overflow-y-auto p-2 space-y-1">
-            {filteredTalks.length === 0 ? (
-              <div className="p-8 text-center text-sm text-gray-500">
-                No talks found in this category.
-              </div>
-            ) : (
-              filteredTalks.map((talk) => {
-                const isSelected = talk.id === currentTalkId;
-                const review = talk.reviews[0];
-                const isReviewed = !!review && !review.skipped;
-                const isSkipped = !!review && review.skipped;
-
-                return (
+        <div
+          className={`shrink-0 bg-gray-50 sm:border-l border-gray-200 flex flex-col transition-all duration-200 ease-in-out
+            ${sidebarCollapsed
+              ? 'w-full sm:w-9 h-9 sm:h-auto border-t sm:border-t-0 overflow-hidden'
+              : 'w-full sm:w-80 lg:w-96 h-52 sm:h-auto border-t sm:border-t-0'
+            }`}
+        >
+          {/* Sidebar header: tabs + collapse toggle */}
+          <div className="flex items-center bg-gray-100/50 border-b border-gray-200 shrink-0">
+            {!sidebarCollapsed && (
+              <div className="flex flex-1 p-2 gap-0">
+                {(['all', 'pending', 'reviewed', 'skipped'] as FilterType[]).map((f) => (
                   <button
-                    key={talk.id}
-                    onClick={() => navigateToTalk(talk.id)}
-                    className={`w-full text-left p-3 rounded-lg border transition-all ${
-                      isSelected
-                        ? 'bg-[#006B3F]/5 border-[#006B3F]/20 ring-1 ring-[#006B3F]/20'
-                        : 'bg-white border-transparent hover:border-gray-200 hover:shadow-sm'
+                    key={f}
+                    onClick={() => setFilter(f)}
+                    className={`flex-1 py-2 text-xs font-semibold rounded-md capitalize transition-all ${
+                      filter === f
+                        ? 'bg-white text-gray-900 shadow-sm ring-1 ring-gray-200'
+                        : 'text-gray-500 hover:text-gray-700 hover:bg-gray-200/50'
                     }`}
                   >
-                    <div className="flex items-start justify-between gap-3 mb-1">
-                      <h4
-                        className={`text-sm font-semibold line-clamp-2 leading-snug ${
-                          isSelected ? 'text-[#006B3F]' : 'text-gray-900'
-                        }`}
-                      >
-                        {talk.talkTitle}
-                      </h4>
-                      {isSkipped ? (
-                        <div className="flex items-center gap-1 bg-gray-50 text-gray-500 px-1.5 py-0.5 rounded text-xs font-bold border border-gray-200 shrink-0">
-                          <Ban className="w-3 h-3" />
-                          <span>Skipped</span>
-                        </div>
-                      ) : isReviewed ? (
-                        <div className="flex items-center gap-1 bg-green-50 text-green-700 px-1.5 py-0.5 rounded text-xs font-bold border border-green-100 shrink-0">
-                          <Star className="w-3 h-3 fill-current" />
-                          <span>{review.rating?.toFixed(1)}</span>
-                        </div>
-                      ) : (
-                        <Circle className="w-2.5 h-2.5 text-yellow-500 fill-yellow-500 mt-1 shrink-0" />
-                      )}
-                    </div>
-                    <div className="flex items-center justify-between">
+                    {f} (
+                    {f === 'all'
+                      ? talks.length
+                      : f === 'pending'
+                        ? pendingTalks.length
+                        : f === 'skipped'
+                          ? skippedTalks.length
+                          : reviewedTalks.length}
+                    )
+                  </button>
+                ))}
+              </div>
+            )}
+            <button
+              onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+              title={sidebarCollapsed ? 'Show submissions' : 'Hide submissions'}
+              className={`hidden sm:flex items-center justify-center text-gray-400 hover:text-gray-700 hover:bg-gray-200/60 transition-colors shrink-0
+                ${sidebarCollapsed ? 'w-9 h-9' : 'w-8 h-9 mr-1'}`}
+            >
+              {sidebarCollapsed ? (
+                <ChevronLeft className="w-4 h-4" />
+              ) : (
+                <ChevronRight className="w-4 h-4" />
+              )}
+            </button>
+          </div>
+
+          {/* Submissions list — hidden when collapsed */}
+          {!sidebarCollapsed && (
+            <div className="flex-1 overflow-y-auto p-2 space-y-1">
+              {filteredTalks.length === 0 ? (
+                <div className="p-8 text-center text-sm text-gray-500">
+                  No talks found in this category.
+                </div>
+              ) : (
+                filteredTalks.map((talk) => {
+                  const isSelected = talk.id === currentTalkId;
+                  const review = talk.reviews[0];
+                  const isReviewed = !!review && !review.skipped;
+                  const isSkipped = !!review && review.skipped;
+
+                  return (
+                    <button
+                      key={talk.id}
+                      onClick={() => navigateToTalk(talk.id)}
+                      className={`w-full text-left p-3 rounded-lg border transition-all ${
+                        isSelected
+                          ? 'bg-[#006B3F]/5 border-[#006B3F]/20 ring-1 ring-[#006B3F]/20'
+                          : 'bg-white border-transparent hover:border-gray-200 hover:shadow-sm'
+                      }`}
+                    >
+                      <div className="flex items-start justify-between gap-3 mb-1">
+                        <h4
+                          className={`text-sm font-semibold line-clamp-2 leading-snug ${
+                            isSelected ? 'text-[#006B3F]' : 'text-gray-900'
+                          }`}
+                        >
+                          {talk.talkTitle}
+                        </h4>
+                        {isSkipped ? (
+                          <div className="flex items-center gap-1 bg-gray-50 text-gray-500 px-1.5 py-0.5 rounded text-xs font-bold border border-gray-200 shrink-0">
+                            <Ban className="w-3 h-3" />
+                            <span>Skipped</span>
+                          </div>
+                        ) : isReviewed ? (
+                          <div className="flex items-center gap-1 bg-green-50 text-green-700 px-1.5 py-0.5 rounded text-xs font-bold border border-green-100 shrink-0">
+                            <Star className="w-3 h-3 fill-current" />
+                            <span>{review.rating?.toFixed(1)}</span>
+                          </div>
+                        ) : (
+                          <Circle className="w-2.5 h-2.5 text-yellow-500 fill-yellow-500 mt-1 shrink-0" />
+                        )}
+                      </div>
                       {isSelected && (
-                        <span className="text-[10px] font-bold uppercase text-[#006B3F] tracking-wider shrink-0">
+                        <span className="text-[10px] font-bold uppercase text-[#006B3F] tracking-wider">
                           Selected
                         </span>
                       )}
-                    </div>
-                  </button>
-                );
-              })
-            )}
-          </div>
+                    </button>
+                  );
+                })
+              )}
+            </div>
+          )}
         </div>
       </div>
 
