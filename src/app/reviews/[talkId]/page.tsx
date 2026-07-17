@@ -57,6 +57,7 @@ export default function ReviewWorkspacePage() {
   const [skipReason, setSkipReason] = useState('');
 
   const notesTextareaRef = useRef<HTMLTextAreaElement>(null);
+  const mainScrollRef = useRef<HTMLDivElement>(null);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   const currentTalkId = params?.talkId;
@@ -82,6 +83,13 @@ export default function ReviewWorkspacePage() {
     loadTalks();
   }, []);
 
+  // Cap the shared <body> to viewport height while the workspace is mounted so
+  // the main column and sidebar list scroll independently instead of the window.
+  useEffect(() => {
+    document.body.classList.add('review-workspace-lock');
+    return () => document.body.classList.remove('review-workspace-lock');
+  }, []);
+
   useEffect(() => {
     const stored = localStorage.getItem('review-sidebar-collapsed');
     if (stored !== null) setSidebarCollapsed(stored === 'true');
@@ -96,6 +104,9 @@ export default function ReviewWorkspacePage() {
     const existing = currentTalk.reviews[0];
     setRating(existing?.rating || 0);
     setNotes(existing?.notes || '');
+    // Reset the main column to the top when switching talks; leave the sidebar
+    // list scroll position untouched so the reviewer keeps their place.
+    mainScrollRef.current?.scrollTo({ top: 0 });
   }, [currentTalk]);
 
   async function loadTalks() {
@@ -298,10 +309,10 @@ export default function ReviewWorkspacePage() {
 
   if (loading) {
     return (
-      <div className="min-h-[calc(100vh-80px)] flex items-center justify-center bg-gray-50">
+      <div className="min-h-[calc(100vh-80px)] flex items-center justify-center bg-gray-50 dark:bg-gray-950">
         <div className="flex flex-col items-center gap-3">
           <div className="w-8 h-8 border-4 border-[#006B3F]/20 border-t-[#006B3F] rounded-full animate-spin" />
-          <p className="text-gray-500 font-medium">Loading workspace...</p>
+          <p className="text-gray-500 dark:text-gray-400 font-medium">Loading workspace...</p>
         </div>
       </div>
     );
@@ -309,13 +320,13 @@ export default function ReviewWorkspacePage() {
 
   if (talks.length === 0 || !currentTalk) {
     return (
-      <div className="min-h-[calc(100vh-80px)] flex items-center justify-center bg-gray-50 p-4">
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8 text-center max-w-md w-full">
-          <List className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-          <h2 className="text-xl font-semibold text-gray-900 mb-2">
+      <div className="min-h-[calc(100vh-80px)] flex items-center justify-center bg-gray-50 dark:bg-gray-950 p-4">
+        <div className="bg-white dark:bg-gray-900 rounded-lg shadow-sm border border-gray-200 dark:border-gray-800 p-8 text-center max-w-md w-full">
+          <List className="w-12 h-12 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
             {talks.length === 0 ? 'No Submissions Yet' : 'Talk Not Found'}
           </h2>
-          <p className="text-gray-500 mb-4">
+          <p className="text-gray-500 dark:text-gray-400 mb-4">
             {talks.length === 0
               ? 'There are no talks available to review at this time.'
               : 'The requested talk could not be found.'}
@@ -333,27 +344,27 @@ export default function ReviewWorkspacePage() {
   }
 
   return (
-    <div className="flex-1 min-h-0 flex flex-col bg-gray-50 overflow-hidden">
+    <div className="flex-1 min-h-0 flex flex-col bg-gray-50 dark:bg-gray-950 overflow-hidden">
 
-      <div className="bg-white border-b border-gray-200 shrink-0">
+      <div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 shrink-0">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between px-4 sm:px-6 py-3 gap-3">
-          <div className="flex items-center gap-4 flex-1 w-full">
+          <div className="flex items-center gap-4 sm:gap-6 flex-1 w-full">
             <button
               onClick={() => router.push('/reviews')}
-              className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-900 transition-colors shrink-0"
+              className="inline-flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors shrink-0"
             >
               <ArrowLeft className="w-4 h-4" />
               <span className="hidden sm:inline">All submissions</span>
             </button>
 
-            <div className="flex-1 max-w-md">
+            <div className="flex-1 max-w-xl sm:pl-6 sm:border-l border-gray-200 dark:border-gray-800">
               <div className="flex items-center justify-between mb-1">
-                <span className="text-sm font-semibold text-gray-900">Review Progress</span>
-                <span className="text-sm text-gray-500 font-medium">
+                <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">Review Progress</span>
+                <span className="text-sm text-gray-500 dark:text-gray-400 font-medium">
                   {reviewedTalks.length + skippedTalks.length} / {talks.length} ({progressPercentage}%)
                 </span>
               </div>
-              <div className="w-full bg-gray-100 rounded-full h-2 overflow-hidden">
+              <div className="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-2 overflow-hidden">
                 <div
                   className="bg-[#006B3F] h-2 rounded-full transition-all duration-500 ease-out"
                   style={{ width: `${progressPercentage}%` }}
@@ -367,33 +378,33 @@ export default function ReviewWorkspacePage() {
               href="https://docs.google.com/document/d/1DDoJZz93_n8_YqXCgZoAydPaOi3MQMpKxg0cAqaX-_8/edit?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs font-medium text-[#006B3F] hover:underline"
+              className="inline-flex items-center gap-1.5 text-xs font-medium text-[#006B3F] dark:text-emerald-400 hover:underline"
             >
               <ExternalLink className="w-3.5 h-3.5" />
               <span>Review Guidelines</span>
             </a>
 
-            <div className="hidden lg:flex items-center gap-4 text-xs text-gray-500 bg-gray-50 px-3 py-2 rounded-md border border-gray-100">
+            <div className="hidden lg:flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 px-3 py-2 rounded-md border border-gray-100 dark:border-gray-700">
               <Keyboard className="w-4 h-4" />
               <div className="flex gap-3">
                 <span title="Navigate up/down">
-                  <kbd className="bg-white border border-gray-200 rounded px-1 font-mono">
+                  <kbd className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded px-1 font-mono">
                     ↑↓
                   </kbd>{' '}
                   Nav
                 </span>
                 <span title="Set rating">
-                  <kbd className="bg-white border border-gray-200 rounded px-1 font-mono">
+                  <kbd className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded px-1 font-mono">
                     1-5
                   </kbd>{' '}
                   Rate
                 </span>
                 <span title="Focus notes">
-                  <kbd className="bg-white border border-gray-200 rounded px-1 font-mono">s</kbd>{' '}
+                  <kbd className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded px-1 font-mono">s</kbd>{' '}
                   Notes
                 </span>
                 <span title="Save and Next">
-                  <kbd className="bg-white border border-gray-200 rounded px-1 font-mono">
+                  <kbd className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded px-1 font-mono">
                     ↵
                   </kbd>{' '}
                   Save
@@ -404,82 +415,82 @@ export default function ReviewWorkspacePage() {
         </div>
       </div>
 
-      <div className="flex-1 flex flex-col sm:flex-row overflow-hidden">
-        <div className="flex-1 overflow-y-auto bg-white flex flex-col relative min-w-0">
+      <div className="flex-1 flex flex-col sm:flex-row overflow-hidden min-h-0">
+        <div ref={mainScrollRef} className="flex-1 overflow-y-auto bg-white dark:bg-gray-900 flex flex-col relative min-w-0">
           <div className={`flex-1 flex flex-col mx-auto w-full ${sidebarCollapsed ? 'max-w-5xl' : 'max-w-4xl'}`}>
             <div className="p-6 md:p-8 flex-1">
               <div className="mb-6">
-                <h1 className="text-2xl font-bold text-gray-900 leading-tight">
+                <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 leading-tight">
                   {currentTalk.talkTitle}
                 </h1>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-                <div className="bg-gray-50 rounded-lg p-3 border border-gray-100 flex items-start gap-3">
+                <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-3 border border-gray-100 dark:border-gray-700 flex items-start gap-3">
                   <BookOpen className="w-5 h-5 text-[#006B3F] shrink-0 mt-0.5" />
                   <div>
-                    <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-0.5">
+                    <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-0.5">
                       Category
                     </p>
-                    <p className="text-sm font-medium text-gray-900">
+                    <p className="text-sm font-medium text-gray-900 dark:text-gray-100">
                       {currentTalk.talkCategory}
                     </p>
                   </div>
                 </div>
-                <div className="bg-gray-50 rounded-lg p-3 border border-gray-100 flex items-start gap-3">
+                <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-3 border border-gray-100 dark:border-gray-700 flex items-start gap-3">
                   <Award className="w-5 h-5 text-[#006B3F] shrink-0 mt-0.5" />
                   <div>
-                    <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-0.5">
+                    <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-0.5">
                       Level
                     </p>
-                    <p className="text-sm font-medium text-gray-900">
+                    <p className="text-sm font-medium text-gray-900 dark:text-gray-100">
                       {currentTalk.talkLevel}
                     </p>
                   </div>
                 </div>
-                <div className="bg-gray-50 rounded-lg p-3 border border-gray-100 flex items-start gap-3">
+                <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-3 border border-gray-100 dark:border-gray-700 flex items-start gap-3">
                   <Clock className="w-5 h-5 text-[#006B3F] shrink-0 mt-0.5" />
                   <div>
-                    <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-0.5">
+                    <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-0.5">
                       Duration
                     </p>
-                    <p className="text-sm font-medium text-gray-900">
+                    <p className="text-sm font-medium text-gray-900 dark:text-gray-100">
                       {currentTalk.talkDuration}
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="prose prose-sm sm:prose-base max-w-none text-gray-700 mb-8 space-y-6">
+              <div className="prose prose-sm sm:prose-base max-w-none text-gray-700 dark:text-gray-300 mb-8 space-y-6">
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Description</h3>
-                  <div className="bg-gray-50 rounded-lg p-4 border border-gray-100 whitespace-pre-wrap">
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Description</h3>
+                  <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-100 dark:border-gray-700 whitespace-pre-wrap">
                     {currentTalk.talkDescription}
                   </div>
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Speaker Bio</h3>
-                  <div className="bg-gray-50 rounded-lg p-4 border border-gray-100 whitespace-pre-wrap">
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Speaker Bio</h3>
+                  <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-100 dark:border-gray-700 whitespace-pre-wrap">
                     {currentTalk.bio}
                   </div>
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
                     Previous Experience
                   </h3>
-                  <div className="bg-gray-50 rounded-lg p-4 border border-gray-100 whitespace-pre-wrap">
+                  <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-100 dark:border-gray-700 whitespace-pre-wrap">
                     {currentTalk.previousSpeakingExperience}
                   </div>
                 </div>
 
                 {currentTalk.additionalNotes && (
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
                       Additional Notes
                     </h3>
-                    <div className="bg-amber-50 rounded-lg p-4 border border-amber-100 whitespace-pre-wrap text-gray-700">
+                    <div className="bg-amber-50 dark:bg-amber-950/40 rounded-lg p-4 border border-amber-100 dark:border-amber-900/50 whitespace-pre-wrap text-gray-700 dark:text-amber-100/90">
                       {currentTalk.additionalNotes}
                     </div>
                   </div>
@@ -487,12 +498,12 @@ export default function ReviewWorkspacePage() {
 
                 {currentTalk.otherSubmissionsByAuthor.length > 0 && (
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2 flex items-center gap-2">
-                      <Users className="w-4 h-4 text-[#006B3F]" />
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2 flex items-center gap-2">
+                      <Users className="w-4 h-4 text-[#006B3F] dark:text-emerald-400" />
                       Other Submissions by This Author
                     </h3>
-                    <div className="bg-blue-50 rounded-lg p-4 border border-blue-100 text-gray-700">
-                      <p className="text-sm text-gray-500 mb-2">
+                    <div className="bg-blue-50 dark:bg-blue-950/40 rounded-lg p-4 border border-blue-100 dark:border-blue-900/50 text-gray-700 dark:text-gray-300">
+                      <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
                         This author also submitted{' '}
                         {currentTalk.otherSubmissionsByAuthor.length === 1 ? 'this talk' : 'these talks'} this year:
                       </p>
@@ -504,12 +515,12 @@ export default function ReviewWorkspacePage() {
                               {isNavigable ? (
                                 <button
                                   onClick={() => navigateToTalk(t.id)}
-                                  className="text-[#006B3F] hover:underline text-left"
+                                  className="text-[#006B3F] dark:text-emerald-400 hover:underline text-left"
                                 >
                                   {t.talkTitle}
                                 </button>
                               ) : (
-                                <span className="text-gray-500">
+                                <span className="text-gray-500 dark:text-gray-400">
                                   {t.talkTitle} <span className="text-xs">(already decided)</span>
                                 </span>
                               )}
@@ -524,9 +535,9 @@ export default function ReviewWorkspacePage() {
             </div>
 
 
-            <div className="bg-gray-50 border-t border-gray-200 p-6 md:p-8 shrink-0">
+            <div className="bg-gray-50 dark:bg-gray-950/60 border-t border-gray-200 dark:border-gray-800 p-6 md:p-8 shrink-0">
               {isCurrentTalkSkipped && (
-                <div className="mb-5 flex items-start gap-3 rounded-lg border border-orange-200 bg-orange-50 px-4 py-3 text-sm text-orange-800">
+                <div className="mb-5 flex items-start gap-3 rounded-lg border border-orange-200 dark:border-orange-900/50 bg-orange-50 dark:bg-orange-950/40 px-4 py-3 text-sm text-orange-800 dark:text-orange-300">
                   <Ban className="w-4 h-4 mt-0.5 shrink-0" />
                   <span>
                     You permanently skipped this talk.{' '}
@@ -548,10 +559,10 @@ export default function ReviewWorkspacePage() {
               <div className="mb-6">
                 <label
                   htmlFor="notes-textarea"
-                  className="block text-sm font-medium text-gray-700 mb-1"
+                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
                 >
                   Review Notes{' '}
-                  <span className="text-gray-400 font-normal">
+                  <span className="text-gray-400 dark:text-gray-500 font-normal">
                     (Private, visible to committee)
                   </span>
                 </label>
@@ -561,7 +572,7 @@ export default function ReviewWorkspacePage() {
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
                   rows={3}
-                  className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-[#006B3F] focus:ring-2 focus:ring-[#006B3F]/20 focus:outline-none transition-shadow bg-white resize-y"
+                  className="w-full rounded-lg border border-gray-300 dark:border-gray-700 px-4 py-3 text-sm text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:border-[#006B3F] focus:ring-2 focus:ring-[#006B3F]/20 focus:outline-none transition-shadow bg-white dark:bg-gray-900 resize-y"
                   placeholder="Add your thoughts here... (Press 's' to focus)"
                 />
               </div>
@@ -570,7 +581,7 @@ export default function ReviewWorkspacePage() {
                 <div className="flex gap-2 w-full sm:w-auto">
                   <button
                     onClick={handleSkip}
-                    className="flex-1 sm:flex-none px-4 py-2.5 text-sm font-medium text-gray-600 bg-white border border-gray-300 hover:bg-gray-50 hover:text-gray-900 rounded-lg transition-colors focus:ring-2 focus:ring-[#006B3F] focus:outline-none"
+                    className="flex-1 sm:flex-none px-4 py-2.5 text-sm font-medium text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-100 rounded-lg transition-colors focus:ring-2 focus:ring-[#006B3F] focus:outline-none"
                   >
                     Skip for now
                   </button>
@@ -578,7 +589,7 @@ export default function ReviewWorkspacePage() {
                     <button
                       onClick={() => setShowSkipModal(true)}
                       disabled={saving}
-                      className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-4 py-2.5 text-sm font-medium text-orange-700 bg-orange-50 border border-orange-200 hover:bg-orange-100 rounded-lg disabled:opacity-60 disabled:cursor-not-allowed transition-colors focus:ring-2 focus:ring-orange-400 focus:outline-none"
+                      className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-4 py-2.5 text-sm font-medium text-orange-700 dark:text-orange-300 bg-orange-50 dark:bg-orange-950/40 border border-orange-200 dark:border-orange-900/50 hover:bg-orange-100 dark:hover:bg-orange-950/60 rounded-lg disabled:opacity-60 disabled:cursor-not-allowed transition-colors focus:ring-2 focus:ring-orange-400 focus:outline-none"
                     >
                       <SkipForward className="w-4 h-4" />
                       Permanently Skip
@@ -599,14 +610,14 @@ export default function ReviewWorkspacePage() {
         </div>
 
         <div
-          className={`shrink-0 bg-gray-50 sm:border-l border-gray-200 flex flex-col transition-all duration-200 ease-in-out
+          className={`shrink-0 bg-gray-50 dark:bg-gray-950 sm:border-l border-gray-200 dark:border-gray-800 flex flex-col transition-all duration-200 ease-in-out
             ${sidebarCollapsed
               ? 'w-full sm:w-9 h-9 sm:h-auto border-t sm:border-t-0 overflow-hidden'
               : 'w-full sm:w-80 lg:w-96 h-52 sm:h-auto border-t sm:border-t-0'
             }`}
         >
           {/* Sidebar header: tabs + collapse toggle */}
-          <div className="flex items-center bg-gray-100/50 border-b border-gray-200 shrink-0">
+          <div className="flex items-center bg-gray-100/50 dark:bg-gray-900/50 border-b border-gray-200 dark:border-gray-800 shrink-0">
             {!sidebarCollapsed && (
               <div className="flex flex-1 p-2 gap-0">
                 {(['all', 'pending', 'reviewed', 'skipped'] as FilterType[]).map((f) => (
@@ -615,8 +626,8 @@ export default function ReviewWorkspacePage() {
                     onClick={() => setFilter(f)}
                     className={`flex-1 py-2 text-xs font-semibold rounded-md capitalize transition-all ${
                       filter === f
-                        ? 'bg-white text-gray-900 shadow-sm ring-1 ring-gray-200'
-                        : 'text-gray-500 hover:text-gray-700 hover:bg-gray-200/50'
+                        ? 'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-sm ring-1 ring-gray-200 dark:ring-gray-700'
+                        : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200/50 dark:hover:bg-gray-800/50'
                     }`}
                   >
                     {f} (
@@ -635,7 +646,7 @@ export default function ReviewWorkspacePage() {
             <button
               onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
               title={sidebarCollapsed ? 'Show submissions' : 'Hide submissions'}
-              className={`hidden sm:flex items-center justify-center text-gray-400 hover:text-gray-700 hover:bg-gray-200/60 transition-colors shrink-0
+              className={`hidden sm:flex items-center justify-center text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200/60 dark:hover:bg-gray-800/60 transition-colors shrink-0
                 ${sidebarCollapsed ? 'w-9 h-9' : 'w-8 h-9 mr-1'}`}
             >
               {sidebarCollapsed ? (
@@ -650,7 +661,7 @@ export default function ReviewWorkspacePage() {
           {!sidebarCollapsed && (
             <div className="flex-1 overflow-y-auto p-2 space-y-1">
               {filteredTalks.length === 0 ? (
-                <div className="p-8 text-center text-sm text-gray-500">
+                <div className="p-8 text-center text-sm text-gray-500 dark:text-gray-400">
                   No talks found in this category.
                 </div>
               ) : (
@@ -666,25 +677,25 @@ export default function ReviewWorkspacePage() {
                       onClick={() => navigateToTalk(talk.id)}
                       className={`w-full text-left p-3 rounded-lg border transition-all ${
                         isSelected
-                          ? 'bg-[#006B3F]/5 border-[#006B3F]/20 ring-1 ring-[#006B3F]/20'
-                          : 'bg-white border-transparent hover:border-gray-200 hover:shadow-sm'
+                          ? 'bg-[#006B3F]/5 dark:bg-emerald-500/10 border-[#006B3F]/20 dark:border-emerald-500/30 ring-1 ring-[#006B3F]/20 dark:ring-emerald-500/30'
+                          : 'bg-white dark:bg-gray-900 border-transparent hover:border-gray-200 dark:hover:border-gray-700 hover:shadow-sm'
                       }`}
                     >
                       <div className="flex items-start justify-between gap-3 mb-1">
                         <h4
                           className={`text-sm font-semibold line-clamp-2 leading-snug ${
-                            isSelected ? 'text-[#006B3F]' : 'text-gray-900'
+                            isSelected ? 'text-[#006B3F] dark:text-emerald-400' : 'text-gray-900 dark:text-gray-100'
                           }`}
                         >
                           {talk.talkTitle}
                         </h4>
                         {isSkipped ? (
-                          <div className="flex items-center gap-1 bg-gray-50 text-gray-500 px-1.5 py-0.5 rounded text-xs font-bold border border-gray-200 shrink-0">
+                          <div className="flex items-center gap-1 bg-gray-50 dark:bg-gray-800 text-gray-500 dark:text-gray-400 px-1.5 py-0.5 rounded text-xs font-bold border border-gray-200 dark:border-gray-700 shrink-0">
                             <Ban className="w-3 h-3" />
                             <span>Skipped</span>
                           </div>
                         ) : isReviewed ? (
-                          <div className="flex items-center gap-1 bg-green-50 text-green-700 px-1.5 py-0.5 rounded text-xs font-bold border border-green-100 shrink-0">
+                          <div className="flex items-center gap-1 bg-green-50 dark:bg-green-950/50 text-green-700 dark:text-green-400 px-1.5 py-0.5 rounded text-xs font-bold border border-green-100 dark:border-green-900/50 shrink-0">
                             <Star className="w-3 h-3 fill-current" />
                             <span>{review.rating?.toFixed(1)}</span>
                           </div>
@@ -693,7 +704,7 @@ export default function ReviewWorkspacePage() {
                         )}
                       </div>
                       {isSelected && (
-                        <span className="text-[10px] font-bold uppercase text-[#006B3F] tracking-wider">
+                        <span className="text-[10px] font-bold uppercase text-[#006B3F] dark:text-emerald-400 tracking-wider">
                           Selected
                         </span>
                       )}
@@ -713,7 +724,7 @@ export default function ReviewWorkspacePage() {
         size="sm"
       >
         {currentTalk?.reviews[0]?.rating != null && (
-          <div className="mb-4 flex items-start gap-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2.5 text-sm text-amber-800">
+          <div className="mb-4 flex items-start gap-2 rounded-lg border border-amber-200 dark:border-amber-900/50 bg-amber-50 dark:bg-amber-950/40 px-3 py-2.5 text-sm text-amber-800 dark:text-amber-300">
             <Ban className="w-4 h-4 mt-0.5 shrink-0" />
             <span>
               Your existing rating of{' '}
@@ -722,7 +733,7 @@ export default function ReviewWorkspacePage() {
             </span>
           </div>
         )}
-        <p className="text-sm text-gray-600 mb-4">
+        <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
           This talk will be marked as permanently skipped. You can undo this later by selecting a rating. Optionally explain why.
         </p>
         <textarea
@@ -731,19 +742,19 @@ export default function ReviewWorkspacePage() {
           rows={3}
           maxLength={1000}
           placeholder="Optional: why are you skipping this talk?"
-          className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-[#006B3F] focus:ring-2 focus:ring-[#006B3F]/20 focus:outline-none transition-shadow bg-white resize-y mb-4"
+          className="w-full rounded-lg border border-gray-300 dark:border-gray-700 px-4 py-3 text-sm text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:border-[#006B3F] focus:ring-2 focus:ring-[#006B3F]/20 focus:outline-none transition-shadow bg-white dark:bg-gray-900 resize-y mb-4"
         />
         <div className="flex justify-end gap-3">
           <button
             onClick={() => { setShowSkipModal(false); setSkipReason(''); }}
-            className="px-4 py-2 text-sm font-medium text-gray-600 bg-white border border-gray-300 hover:bg-gray-50 rounded-lg transition-colors"
+            className="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-colors"
           >
             Cancel
           </button>
           <button
             onClick={() => handlePermanentSkip(skipReason || undefined)}
             disabled={saving}
-            className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-orange-700 bg-orange-50 border border-orange-200 hover:bg-orange-100 rounded-lg disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+            className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-orange-700 dark:text-orange-300 bg-orange-50 dark:bg-orange-950/40 border border-orange-200 dark:border-orange-900/50 hover:bg-orange-100 dark:hover:bg-orange-950/60 rounded-lg disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
           >
             <SkipForward className="w-4 h-4" />
             Permanently Skip

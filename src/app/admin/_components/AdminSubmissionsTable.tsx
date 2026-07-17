@@ -16,9 +16,9 @@ const STATUS_LABELS: Record<AdminSubmission['status'], string> = {
 };
 
 const STATUS_BADGE_CLASSES: Record<AdminSubmission['status'], string> = {
-  pending: 'bg-yellow-50 text-yellow-700 border-yellow-200',
-  accepted: 'bg-green-50 text-green-700 border-green-200',
-  rejected: 'bg-red-50 text-red-700 border-red-200',
+  pending: 'bg-yellow-50 text-yellow-700 border-yellow-200 dark:bg-yellow-950/40 dark:text-yellow-400 dark:border-yellow-900/50',
+  accepted: 'bg-green-50 text-green-700 border-green-200 dark:bg-green-950/40 dark:text-green-400 dark:border-green-900/50',
+  rejected: 'bg-red-50 text-red-700 border-red-200 dark:bg-red-950/40 dark:text-red-400 dark:border-red-900/50',
 };
 
 const EXPORT_COLUMNS: { key: string; label: string }[] = [
@@ -108,21 +108,21 @@ export function AdminSubmissionsTable({ submissions }: { submissions: AdminSubmi
   const selectedSubmissions = submissions.filter((s) => selectedIds.has(s.id));
 
   return (
-    <div className="bg-white rounded-lg shadow overflow-hidden mt-8">
-      <div className="px-6 py-4 border-b border-gray-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-        <h2 className="text-lg font-semibold text-gray-900">Submissions Overview</h2>
+    <div className="bg-white dark:bg-gray-900 rounded-lg shadow dark:shadow-black/40 overflow-hidden mt-8 border border-transparent dark:border-gray-800">
+      <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-800 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Submissions Overview</h2>
         <div className="flex flex-wrap items-center gap-2">
           <input
             type="text"
             value={search}
             onChange={(e) => updateSearch(e.target.value)}
             placeholder="Search by name, email, or title..."
-            className="text-sm rounded-lg border border-gray-300 px-3 py-1.5 focus:border-[#006B3F] focus:ring-2 focus:ring-[#006B3F]/20 focus:outline-none w-full sm:w-64"
+            className="text-sm rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 px-3 py-1.5 focus:border-[#006B3F] focus:ring-2 focus:ring-[#006B3F]/20 focus:outline-none w-full sm:w-64"
           />
           <select
             value={statusFilter}
             onChange={(e) => updateStatusFilter(e.target.value as StatusFilter)}
-            className="text-sm rounded-lg border border-gray-300 px-3 py-1.5 focus:border-[#006B3F] focus:ring-2 focus:ring-[#006B3F]/20 focus:outline-none"
+            className="text-sm rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-3 py-1.5 focus:border-[#006B3F] focus:ring-2 focus:ring-[#006B3F]/20 focus:outline-none"
           >
             <option value="all">All statuses</option>
             <option value="pending">Pending</option>
@@ -132,17 +132,17 @@ export function AdminSubmissionsTable({ submissions }: { submissions: AdminSubmi
         </div>
       </div>
 
-      <div className="px-6 py-3 border-b border-gray-200 flex flex-wrap items-center gap-4">
-        <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+      <div className="px-6 py-3 border-b border-gray-200 dark:border-gray-800 flex flex-wrap items-center gap-4">
+        <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
           Export columns:
         </span>
         {EXPORT_COLUMNS.map((col) => (
-          <label key={col.key} className="flex items-center gap-1.5 text-sm text-gray-700">
+          <label key={col.key} className="flex items-center gap-1.5 text-sm text-gray-700 dark:text-gray-300">
             <input
               type="checkbox"
               checked={exportColumns.has(col.key)}
               onChange={() => toggleExportColumn(col.key)}
-              className="rounded border-gray-300 text-[#006B3F] focus:ring-[#006B3F]"
+              className="rounded border-gray-300 dark:border-gray-600 text-[#006B3F] focus:ring-[#006B3F]"
             />
             {col.label}
           </label>
@@ -151,7 +151,7 @@ export function AdminSubmissionsTable({ submissions }: { submissions: AdminSubmi
         <button
           onClick={() => exportRows(filteredSubmissions, 'submissions-filtered.csv')}
           disabled={filteredSubmissions.length === 0}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-[#006B3F] bg-[#006B3F]/5 hover:bg-[#006B3F]/10 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-[#006B3F] dark:text-emerald-400 bg-[#006B3F]/5 dark:bg-emerald-500/10 hover:bg-[#006B3F]/10 dark:hover:bg-emerald-500/20 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           <Download className="w-4 h-4" />
           Export filtered ({filteredSubmissions.length})
@@ -159,7 +159,7 @@ export function AdminSubmissionsTable({ submissions }: { submissions: AdminSubmi
         <button
           onClick={() => exportRows(selectedSubmissions, 'submissions-selected.csv')}
           disabled={selectedSubmissions.length === 0}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-[#006B3F] bg-[#006B3F]/5 hover:bg-[#006B3F]/10 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-[#006B3F] dark:text-emerald-400 bg-[#006B3F]/5 dark:bg-emerald-500/10 hover:bg-[#006B3F]/10 dark:hover:bg-emerald-500/20 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           <Download className="w-4 h-4" />
           Export selected ({selectedSubmissions.length})
@@ -167,34 +167,34 @@ export function AdminSubmissionsTable({ submissions }: { submissions: AdminSubmi
       </div>
 
       {filteredSubmissions.length === 0 ? (
-        <div className="p-8 text-center text-gray-500">No submissions found</div>
+        <div className="p-8 text-center text-gray-500 dark:text-gray-400">No submissions found</div>
       ) : (
         <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
+          <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-800">
+            <thead className="bg-gray-50 dark:bg-gray-800/50">
               <tr>
                 <th scope="col" className="px-4 py-3 w-10">
                   <input
                     type="checkbox"
                     checked={allFilteredSelected}
                     onChange={toggleSelectAllFiltered}
-                    className="rounded border-gray-300 text-[#006B3F] focus:ring-[#006B3F]"
+                    className="rounded border-gray-300 dark:border-gray-600 text-[#006B3F] focus:ring-[#006B3F]"
                     aria-label="Select all filtered submissions"
                   />
                 </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Speaker</th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Avg Rating</th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Reviews</th>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Title</th>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Speaker</th>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Category</th>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Status</th>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Avg Rating</th>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Reviews</th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
+            <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800">
               {filteredSubmissions.map((submission) => (
                 <tr
                   key={submission.id}
-                  className="hover:bg-gray-50 transition-colors cursor-pointer"
+                  className="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors cursor-pointer"
                   onClick={() => router.push(`/admin/submissions/${submission.id}`)}
                 >
                   <td className="px-4 py-4 w-10" onClick={(e) => e.stopPropagation()}>
@@ -202,12 +202,12 @@ export function AdminSubmissionsTable({ submissions }: { submissions: AdminSubmi
                       type="checkbox"
                       checked={selectedIds.has(submission.id)}
                       onChange={() => toggleRow(submission.id)}
-                      className="rounded border-gray-300 text-[#006B3F] focus:ring-[#006B3F]"
+                      className="rounded border-gray-300 dark:border-gray-600 text-[#006B3F] focus:ring-[#006B3F]"
                       aria-label={`Select ${submission.talkTitle}`}
                     />
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{submission.talkTitle}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{submission.talkTitle}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">
                     <div className="flex items-center gap-2">
                       <span>{submission.fullName}</span>
                       {submission.duplicateCount > 1 && (
@@ -221,23 +221,23 @@ export function AdminSubmissionsTable({ submissions }: { submissions: AdminSubmi
                             }
                           }}
                           title={`Also submitted: ${submission.duplicateTalks.map((t) => t.talkTitle).join(', ')}`}
-                          className="px-1.5 py-0.5 rounded text-xs font-bold border bg-amber-50 text-amber-700 border-amber-200 hover:bg-amber-100 transition-colors"
+                          className="px-1.5 py-0.5 rounded text-xs font-bold border bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/40 dark:text-amber-400 dark:border-amber-900/50 hover:bg-amber-100 dark:hover:bg-amber-950/60 transition-colors"
                         >
                           ×{submission.duplicateCount}
                         </button>
                       )}
                     </div>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{submission.talkCategory}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">{submission.talkCategory}</td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <span className={`inline-block px-2 py-0.5 rounded text-xs font-medium border ${STATUS_BADGE_CLASSES[submission.status]}`}>
                       {STATUS_LABELS[submission.status]}
                     </span>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">
                     {submission.averageRating !== null ? submission.averageRating.toFixed(1) : '—'}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{submission.reviewCount}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">{submission.reviewCount}</td>
                 </tr>
               ))}
             </tbody>
@@ -259,7 +259,7 @@ export function AdminSubmissionsTable({ submissions }: { submissions: AdminSubmi
                   setDuplicateModalSubmission(null);
                   router.push(`/admin/submissions/${t.id}`);
                 }}
-                className="text-sm text-[#006B3F] hover:underline text-left"
+                className="text-sm text-[#006B3F] dark:text-emerald-400 hover:underline text-left"
               >
                 {t.talkTitle}
               </button>

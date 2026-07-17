@@ -70,10 +70,10 @@ export default function AdminSubmissionDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-[calc(100vh-80px)] flex items-center justify-center bg-gray-50">
+      <div className="min-h-[calc(100vh-80px)] flex items-center justify-center bg-gray-50 dark:bg-gray-950">
         <div className="flex flex-col items-center gap-3">
           <div className="w-8 h-8 border-4 border-[#006B3F]/20 border-t-[#006B3F] rounded-full animate-spin" />
-          <p className="text-gray-500 font-medium">Loading submission...</p>
+          <p className="text-gray-500 dark:text-gray-400 font-medium">Loading submission...</p>
         </div>
       </div>
     );
@@ -81,13 +81,13 @@ export default function AdminSubmissionDetailPage() {
 
   if (!submission) {
     return (
-      <div className="min-h-[calc(100vh-80px)] flex items-center justify-center bg-gray-50 p-4">
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8 text-center max-w-md w-full">
-          <List className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-          <h2 className="text-xl font-semibold text-gray-900 mb-2">Submission Not Found</h2>
+      <div className="min-h-[calc(100vh-80px)] flex items-center justify-center bg-gray-50 dark:bg-gray-950 p-4">
+        <div className="bg-white dark:bg-gray-900 rounded-lg shadow-sm border border-gray-200 dark:border-gray-800 p-8 text-center max-w-md w-full">
+          <List className="w-12 h-12 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">Submission Not Found</h2>
           <button
             onClick={() => router.push('/admin')}
-            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-[#006B3F] hover:bg-[#006B3F]/5 rounded-lg transition-colors"
+            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-[#006B3F] dark:text-emerald-400 hover:bg-[#006B3F]/5 dark:hover:bg-emerald-500/10 rounded-lg transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to dashboard
@@ -98,12 +98,12 @@ export default function AdminSubmissionDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="bg-white border-b border-gray-200">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
+      <div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
         <div className="px-4 sm:px-6 py-3 max-w-6xl mx-auto">
           <button
             onClick={() => router.push('/admin')}
-            className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-900 transition-colors"
+            className="inline-flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to dashboard
@@ -112,59 +112,59 @@ export default function AdminSubmissionDetailPage() {
       </div>
 
       <div className="max-w-6xl mx-auto p-4 sm:p-6 flex flex-col md:flex-row gap-6">
-        <div className="flex-1 bg-white rounded-lg shadow-sm border border-gray-200 p-6 md:p-8">
-          <h1 className="text-2xl font-bold text-gray-900 leading-tight mb-1">{submission.talkTitle}</h1>
-          <p className="text-sm text-gray-500 mb-6">
+        <div className="flex-1 bg-white dark:bg-gray-900 rounded-lg shadow-sm border border-gray-200 dark:border-gray-800 p-6 md:p-8">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 leading-tight mb-1">{submission.talkTitle}</h1>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
             {submission.fullName} &lt;{submission.email}&gt; · {submission.company} · {submission.phone}
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-            <div className="bg-gray-50 rounded-lg p-3 border border-gray-100 flex items-start gap-3">
+            <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-3 border border-gray-100 dark:border-gray-700 flex items-start gap-3">
               <BookOpen className="w-5 h-5 text-[#006B3F] shrink-0 mt-0.5" />
               <div>
-                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-0.5">Category</p>
-                <p className="text-sm font-medium text-gray-900">{submission.talkCategory}</p>
+                <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-0.5">Category</p>
+                <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{submission.talkCategory}</p>
               </div>
             </div>
-            <div className="bg-gray-50 rounded-lg p-3 border border-gray-100 flex items-start gap-3">
+            <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-3 border border-gray-100 dark:border-gray-700 flex items-start gap-3">
               <Award className="w-5 h-5 text-[#006B3F] shrink-0 mt-0.5" />
               <div>
-                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-0.5">Level</p>
-                <p className="text-sm font-medium text-gray-900">{submission.talkLevel}</p>
+                <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-0.5">Level</p>
+                <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{submission.talkLevel}</p>
               </div>
             </div>
-            <div className="bg-gray-50 rounded-lg p-3 border border-gray-100 flex items-start gap-3">
+            <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-3 border border-gray-100 dark:border-gray-700 flex items-start gap-3">
               <Clock className="w-5 h-5 text-[#006B3F] shrink-0 mt-0.5" />
               <div>
-                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-0.5">Duration</p>
-                <p className="text-sm font-medium text-gray-900">{submission.talkDuration}</p>
+                <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-0.5">Duration</p>
+                <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{submission.talkDuration}</p>
               </div>
             </div>
           </div>
 
-          <div className="prose prose-sm sm:prose-base max-w-none text-gray-700 space-y-6">
+          <div className="prose prose-sm sm:prose-base max-w-none text-gray-700 dark:text-gray-300 space-y-6">
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Description</h3>
-              <div className="bg-gray-50 rounded-lg p-4 border border-gray-100 whitespace-pre-wrap">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Description</h3>
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-100 dark:border-gray-700 whitespace-pre-wrap">
                 {submission.talkDescription}
               </div>
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Speaker Bio</h3>
-              <div className="bg-gray-50 rounded-lg p-4 border border-gray-100 whitespace-pre-wrap">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Speaker Bio</h3>
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-100 dark:border-gray-700 whitespace-pre-wrap">
                 {submission.bio}
               </div>
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Previous Experience</h3>
-              <div className="bg-gray-50 rounded-lg p-4 border border-gray-100 whitespace-pre-wrap">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Previous Experience</h3>
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-100 dark:border-gray-700 whitespace-pre-wrap">
                 {submission.previousSpeakingExperience}
               </div>
             </div>
             {submission.additionalNotes && (
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Additional Notes</h3>
-                <div className="bg-amber-50 rounded-lg p-4 border border-amber-100 whitespace-pre-wrap text-gray-700">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Additional Notes</h3>
+                <div className="bg-amber-50 dark:bg-amber-950/40 rounded-lg p-4 border border-amber-100 dark:border-amber-900/50 whitespace-pre-wrap text-gray-700 dark:text-amber-100/90">
                   {submission.additionalNotes}
                 </div>
               </div>
@@ -173,20 +173,20 @@ export default function AdminSubmissionDetailPage() {
         </div>
 
         <div className="w-full md:w-96 shrink-0 flex flex-col gap-6">
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-5">
-            <h3 className="text-sm font-semibold text-gray-900 mb-3">
+          <div className="bg-white dark:bg-gray-900 rounded-lg shadow-sm border border-gray-200 dark:border-gray-800 p-5">
+            <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-3">
               Reviews ({submission.reviewCount}
               {submission.averageRating !== null ? `, avg ${submission.averageRating.toFixed(1)}` : ''})
             </h3>
             {submission.reviews.length === 0 ? (
-              <p className="text-sm text-gray-500">No reviews yet.</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">No reviews yet.</p>
             ) : (
               <ul className="space-y-4">
                 {submission.reviews.map((review: AdminReview) => (
-                  <li key={review.id} className="border-b border-gray-100 pb-3 last:border-0 last:pb-0">
-                    <p className="text-sm font-medium text-gray-900 mb-1">{review.reviewerEmail}</p>
+                  <li key={review.id} className="border-b border-gray-100 dark:border-gray-800 pb-3 last:border-0 last:pb-0">
+                    <p className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-1">{review.reviewerEmail}</p>
                     {review.skipped ? (
-                      <div className="flex items-center gap-1.5 text-xs text-gray-500">
+                      <div className="flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400">
                         <Ban className="w-3.5 h-3.5" />
                         Skipped{review.skipReason ? `: ${review.skipReason}` : ''}
                       </div>
@@ -194,7 +194,7 @@ export default function AdminSubmissionDetailPage() {
                       <StarRating value={review.rating ?? 0} name={`rating-${review.id}`} onChange={() => {}} readonly />
                     )}
                     {review.notes && (
-                      <p className="text-sm text-gray-600 mt-2 whitespace-pre-wrap">{review.notes}</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mt-2 whitespace-pre-wrap">{review.notes}</p>
                     )}
                   </li>
                 ))}
@@ -202,8 +202,8 @@ export default function AdminSubmissionDetailPage() {
             )}
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-5">
-            <h3 className="text-sm font-semibold text-gray-900 mb-3">Decision</h3>
+          <div className="bg-white dark:bg-gray-900 rounded-lg shadow-sm border border-gray-200 dark:border-gray-800 p-5">
+            <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-3">Decision</h3>
             <div className="flex gap-2 mb-4">
               {(['pending', 'accepted', 'rejected'] as Status[]).map((s) => (
                 <button
@@ -212,14 +212,14 @@ export default function AdminSubmissionDetailPage() {
                   className={`flex-1 px-3 py-2 text-sm font-medium rounded-lg border transition-colors ${
                     status === s
                       ? 'bg-[#006B3F] text-white border-[#006B3F]'
-                      : 'bg-white text-gray-600 border-gray-300 hover:bg-gray-50'
+                      : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700'
                   }`}
                 >
                   {STATUS_LABELS[s]}
                 </button>
               ))}
             </div>
-            <label htmlFor="decision-notes" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="decision-notes" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Decision Notes
             </label>
             <textarea
@@ -228,7 +228,7 @@ export default function AdminSubmissionDetailPage() {
               onChange={(e) => setDecisionNotes(e.target.value)}
               rows={4}
               placeholder="Optional notes about this decision..."
-              className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-[#006B3F] focus:ring-2 focus:ring-[#006B3F]/20 focus:outline-none transition-shadow bg-white resize-y mb-4"
+              className="w-full rounded-lg border border-gray-300 dark:border-gray-700 px-4 py-3 text-sm text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:border-[#006B3F] focus:ring-2 focus:ring-[#006B3F]/20 focus:outline-none transition-shadow bg-white dark:bg-gray-800 resize-y mb-4"
             />
             <button
               onClick={saveDecision}

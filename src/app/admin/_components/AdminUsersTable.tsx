@@ -68,31 +68,31 @@ export function AdminUsersTable({
   }
 
   if (users.length === 0) {
-    return <div className="p-8 text-center text-gray-500">No authorized users yet</div>;
+    return <div className="p-8 text-center text-gray-500 dark:text-gray-400">No authorized users yet</div>;
   }
 
   return (
     <div className="overflow-x-auto">
-      <table className="min-w-full divide-y divide-gray-200">
-        <thead className="bg-gray-50">
+      <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-800">
+        <thead className="bg-gray-50 dark:bg-gray-800/50">
           <tr>
-            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Admin</th>
-            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Reviewer</th>
-            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
+            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Email</th>
+            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Admin</th>
+            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Reviewer</th>
+            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider"></th>
           </tr>
         </thead>
-        <tbody className="bg-white divide-y divide-gray-200">
+        <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800">
           {users.map((user) => (
-            <tr key={user.id} className="hover:bg-gray-50 transition-colors">
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{user.email}</td>
+            <tr key={user.id} className="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{user.email}</td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <input
                   type="checkbox"
                   checked={user.isAdmin}
                   disabled={pendingIds.has(user.id)}
                   onChange={() => toggleRole(user, 'isAdmin')}
-                  className="rounded border-gray-300 text-[#006B3F] focus:ring-[#006B3F]"
+                  className="rounded border-gray-300 dark:border-gray-600 text-[#006B3F] focus:ring-[#006B3F]"
                   aria-label={`${user.email} is admin`}
                 />
               </td>
@@ -102,14 +102,14 @@ export function AdminUsersTable({
                   checked={user.isReviewer}
                   disabled={pendingIds.has(user.id)}
                   onChange={() => toggleRole(user, 'isReviewer')}
-                  className="rounded border-gray-300 text-[#006B3F] focus:ring-[#006B3F]"
+                  className="rounded border-gray-300 dark:border-gray-600 text-[#006B3F] focus:ring-[#006B3F]"
                   aria-label={`${user.email} is reviewer`}
                 />
               </td>
               <td className="px-6 py-4 whitespace-nowrap text-right">
                 <button
                   onClick={() => deleteUser(user)}
-                  className="text-sm font-medium text-red-600 hover:text-red-700"
+                  className="text-sm font-medium text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300"
                 >
                   Remove
                 </button>

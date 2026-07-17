@@ -1,5 +1,8 @@
 @import 'tailwindcss';
 
+/* Class-based dark mode (Tailwind v4). next-themes toggles `.dark` on <html>. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-primary-50: #fff7ed;
   --color-primary-100: #ffedd5;
@@ -31,6 +34,20 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentcolor);
   }
+}
+
+/*
+  Review workspace lock: while the reviewer is on /reviews/[talkId] we cap the
+  shared <body> (normally `min-h-screen`, i.e. it grows with content) to exactly
+  the viewport height and hide its overflow. This turns the body flex column into
+  a fixed-height frame so the workspace's flex-1 pane fills the space under the
+  header and its main column + sidebar list each scroll independently — no magic
+  header-height constant needed. Toggled by ReviewWorkspacePage on mount/unmount.
+*/
+body.review-workspace-lock {
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .bg-grid-pattern {

@@ -62,21 +62,21 @@ export default function AdminDashboardPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-gray-500">Loading dashboard...</p>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-950">
+        <p className="text-gray-500 dark:text-gray-400">Loading dashboard...</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 py-8 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="mb-8 flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
-            <p className="text-gray-600 mt-2">Review system statistics and progress</p>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Admin Dashboard</h1>
+            <p className="text-gray-600 dark:text-gray-400 mt-2">Review system statistics and progress</p>
           </div>
-          <Link href="/admin/users" className="text-sm font-medium text-[#006B3F] hover:underline">
+          <Link href="/admin/users" className="text-sm font-medium text-[#006B3F] dark:text-emerald-400 hover:underline">
             Manage Users
           </Link>
         </div>
@@ -109,43 +109,43 @@ export default function AdminDashboardPage() {
           />
         </div>
 
-        <div className="bg-white rounded-lg shadow overflow-hidden">
-          <div className="px-6 py-4 border-b border-gray-200">
-            <h2 className="text-lg font-semibold text-gray-900">Reviewer Progress</h2>
+        <div className="bg-white dark:bg-gray-900 rounded-lg shadow dark:shadow-black/40 overflow-hidden border border-transparent dark:border-gray-800">
+          <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-800">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Reviewer Progress</h2>
           </div>
-          
+
           {progress.length === 0 ? (
-            <div className="p-8 text-center text-gray-500">
+            <div className="p-8 text-center text-gray-500 dark:text-gray-400">
               No reviewer data available
             </div>
           ) : (
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
+              <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-800">
+                <thead className="bg-gray-50 dark:bg-gray-800/50">
                   <tr>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Reviewer</th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Completed</th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Progress</th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Reviewer</th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Completed</th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Progress</th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+                <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800">
                   {progress.map((reviewer) => (
-                    <tr key={reviewer.reviewerEmail} className="hover:bg-gray-50 transition-colors">
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <tr key={reviewer.reviewerEmail} className="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
                         {reviewer.reviewerEmail}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">
                         {reviewer.reviewsCompleted} / {reviewer.totalSubmissions}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center gap-3">
-                          <div className="flex-1 w-full bg-gray-200 rounded-full h-2 min-w-[100px]">
+                          <div className="flex-1 w-full bg-gray-200 dark:bg-gray-800 rounded-full h-2 min-w-[100px]">
                             <div
                               className="bg-[#006B3F] h-2 rounded-full transition-all duration-500"
                               style={{ width: `${reviewer.percentageComplete}%` }}
                             />
                           </div>
-                          <span className="text-sm font-medium text-gray-700 min-w-[3rem] text-right">
+                          <span className="text-sm font-medium text-gray-700 dark:text-gray-300 min-w-[3rem] text-right">
                             {reviewer.percentageComplete}%
                           </span>
                         </div>
@@ -166,16 +166,16 @@ export default function AdminDashboardPage() {
 
 function StatCard({ title, value, color }: { title: string; value: number; color: string }) {
   const colors = {
-    blue: 'bg-blue-50 text-blue-700',
-    yellow: 'bg-yellow-50 text-yellow-700',
-    purple: 'bg-purple-50 text-purple-700',
-    green: 'bg-green-50 text-green-700',
-    red: 'bg-red-50 text-red-700',
+    blue: 'bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400',
+    yellow: 'bg-yellow-50 text-yellow-700 dark:bg-yellow-950/40 dark:text-yellow-400',
+    purple: 'bg-purple-50 text-purple-700 dark:bg-purple-950/40 dark:text-purple-400',
+    green: 'bg-green-50 text-green-700 dark:bg-green-950/40 dark:text-green-400',
+    red: 'bg-red-50 text-red-700 dark:bg-red-950/40 dark:text-red-400',
   };
 
   return (
-    <div className="bg-white rounded-lg shadow p-6">
-      <p className="text-sm font-medium text-gray-600 mb-1">{title}</p>
+    <div className="bg-white dark:bg-gray-900 rounded-lg shadow dark:shadow-black/40 p-6 border border-transparent dark:border-gray-800">
+      <p className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">{title}</p>
       <p className={`text-3xl font-bold ${colors[color as keyof typeof colors]}`}>
         {value}
       </p>
