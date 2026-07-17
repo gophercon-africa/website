@@ -59,7 +59,7 @@ export function StarRating({
             </span>
           ))}
         </div>
-        <span className="text-sm font-medium text-gray-700">{value}/5</span>
+        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{value}/5</span>
       </div>
     );
   }
@@ -67,7 +67,7 @@ export function StarRating({
   return (
     <div className="space-y-2">
       {label && (
-        <label className="block text-sm font-medium text-gray-700">
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
           {label}
           {required && <span className="text-red-600 ml-1">*</span>}
         </label>
@@ -136,7 +136,7 @@ export function StarRating({
             </div>
           ))}
         </div>
-        <span className="text-sm font-medium text-gray-700" aria-live="polite">
+        <span className="text-sm font-medium text-gray-700 dark:text-gray-300" aria-live="polite">
           {displayRating}/5
         </span>
       </div>

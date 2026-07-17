@@ -74,32 +74,32 @@ export default function AdminUsersPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-gray-500">Loading users...</p>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-950">
+        <p className="text-gray-500 dark:text-gray-400">Loading users...</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 py-8 px-4">
       <div className="max-w-5xl mx-auto">
         <div className="mb-8 flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Manage Users</h1>
-            <p className="text-gray-600 mt-2">Configure who has reviewer and admin access</p>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Manage Users</h1>
+            <p className="text-gray-600 dark:text-gray-400 mt-2">Configure who has reviewer and admin access</p>
           </div>
-          <Link href="/admin" className="text-sm font-medium text-[#006B3F] hover:underline">
+          <Link href="/admin" className="text-sm font-medium text-[#006B3F] dark:text-emerald-400 hover:underline">
             Back to dashboard
           </Link>
         </div>
 
-        <div className="bg-white rounded-lg shadow overflow-hidden mb-8">
-          <div className="px-6 py-4 border-b border-gray-200">
-            <h2 className="text-lg font-semibold text-gray-900">Add user</h2>
+        <div className="bg-white dark:bg-gray-900 rounded-lg shadow dark:shadow-black/40 overflow-hidden mb-8 border border-transparent dark:border-gray-800">
+          <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-800">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Add user</h2>
           </div>
           <form onSubmit={handleSubmit} className="px-6 py-4 flex flex-wrap items-end gap-4">
             <div className="flex-1 min-w-[240px]">
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Email
               </label>
               <input
@@ -108,24 +108,24 @@ export default function AdminUsersPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="name@example.com"
-                className="w-full text-sm rounded-lg border border-gray-300 px-3 py-2 focus:border-[#006B3F] focus:ring-2 focus:ring-[#006B3F]/20 focus:outline-none"
+                className="w-full text-sm rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 px-3 py-2 focus:border-[#006B3F] focus:ring-2 focus:ring-[#006B3F]/20 focus:outline-none"
               />
             </div>
-            <label className="flex items-center gap-1.5 text-sm text-gray-700 pb-2">
+            <label className="flex items-center gap-1.5 text-sm text-gray-700 dark:text-gray-300 pb-2">
               <input
                 type="checkbox"
                 checked={isAdmin}
                 onChange={(e) => setIsAdmin(e.target.checked)}
-                className="rounded border-gray-300 text-[#006B3F] focus:ring-[#006B3F]"
+                className="rounded border-gray-300 dark:border-gray-600 text-[#006B3F] focus:ring-[#006B3F]"
               />
               Admin
             </label>
-            <label className="flex items-center gap-1.5 text-sm text-gray-700 pb-2">
+            <label className="flex items-center gap-1.5 text-sm text-gray-700 dark:text-gray-300 pb-2">
               <input
                 type="checkbox"
                 checked={isReviewer}
                 onChange={(e) => setIsReviewer(e.target.checked)}
-                className="rounded border-gray-300 text-[#006B3F] focus:ring-[#006B3F]"
+                className="rounded border-gray-300 dark:border-gray-600 text-[#006B3F] focus:ring-[#006B3F]"
               />
               Reviewer
             </label>
@@ -139,9 +139,9 @@ export default function AdminUsersPage() {
           </form>
         </div>
 
-        <div className="bg-white rounded-lg shadow overflow-hidden">
-          <div className="px-6 py-4 border-b border-gray-200">
-            <h2 className="text-lg font-semibold text-gray-900">Authorized users</h2>
+        <div className="bg-white dark:bg-gray-900 rounded-lg shadow dark:shadow-black/40 overflow-hidden border border-transparent dark:border-gray-800">
+          <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-800">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Authorized users</h2>
           </div>
           <AdminUsersTable users={users} onUsersChange={setUsers} />
         </div>

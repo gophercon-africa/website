@@ -1,9 +1,11 @@
 'use client';
-import { useState } from 'react';
-import { Code2, Menu, X } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Code2, Menu, X, Sun, Moon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useSession, signOut } from 'next-auth/react';
+import { useTheme } from 'next-themes';
 
 interface HeaderProps {
   mounted?: boolean;
@@ -12,6 +14,11 @@ interface HeaderProps {
 export default function Header({ mounted = true }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { data: session } = useSession();
+  const pathname = usePathname();
+  const { resolvedTheme, setTheme } = useTheme();
+  const [themeMounted, setThemeMounted] = useState(false);
+
+  useEffect(() => setThemeMounted(true), []);
 
   const isAdmin = session?.user?.role === 'admin';
   const roles = [
@@ -19,8 +26,20 @@ export default function Header({ mounted = true }: HeaderProps) {
     session?.user?.isReviewer && 'reviewer',
   ].filter(Boolean).join(' · ');
 
+  // Dark mode is scoped to the internal tools (admin + reviews). The `.dark`
+  // class lives on <html> globally, so we only apply the header's dark styles on
+  // internal routes — that keeps the marketing pages light even when the stored
+  // preference is dark.
+  const isInternal =
+    pathname?.startsWith('/admin') || pathname?.startsWith('/reviews');
+
+  const isDark = resolvedTheme === 'dark';
+  const navLink = `text-gray-600 hover:text-[#006B3F] transition-colors font-medium${
+    isInternal ? ' dark:text-gray-300 dark:hover:text-emerald-400' : ''
+  }`;
+
   return (
-    <header className="bg-white">
+    <header className={`bg-white${isInternal ? ' dark:bg-gray-900' : ''}`}>
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-6">
           <div className="flex items-center space-x-4">
@@ -41,11 +60,11 @@ export default function Header({ mounted = true }: HeaderProps) {
             </Link>
           </div>
           <div className="hidden md:flex items-center space-x-8">
-            <Link href="/#about" className="text-gray-600 hover:text-[#006B3F] transition-colors font-medium">About</Link>
-            <Link href="/workshops" className="text-gray-600 hover:text-[#006B3F] transition-colors font-medium">Workshops</Link>
-            <Link href="/#sponsors" className="text-gray-600 hover:text-[#006B3F] transition-colors font-medium">Sponsors</Link>
+            <Link href="/#about" className={navLink}>About</Link>
+            <Link href="/workshops" className={navLink}>Workshops</Link>
+            <Link href="/#sponsors" className={navLink}>Sponsors</Link>
             {isAdmin && (
-              <Link href="/admin" className="text-gray-600 hover:text-[#006B3F] transition-colors font-medium">
+              <Link href="/admin" className={navLink}>
                 Admin
               </Link>
             )}
@@ -53,7 +72,7 @@ export default function Header({ mounted = true }: HeaderProps) {
               <div className="relative group">
                 <button
                   onClick={() => signOut({ callbackUrl: '/' })}
-                  className="text-gray-600 hover:text-[#006B3F] transition-colors font-medium"
+                  className={navLink}
                 >
                   Sign out
                 </button>
@@ -63,9 +82,21 @@ export default function Header({ mounted = true }: HeaderProps) {
                 </div>
               </div>
             )}
+            {isInternal && themeMounted && (
+              <button
+                onClick={() => setTheme(isDark ? 'light' : 'dark')}
+                aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+                title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+                className="text-gray-600 hover:text-[#006B3F] dark:text-gray-300 dark:hover:text-emerald-400 transition-colors"
+              >
+                {isDark ? <Sun size={20} /> : <Moon size={20} />}
+              </button>
+            )}
           </div>
           <button
-            className="md:hidden text-gray-600 hover:text-[#006B3F] transition-colors"
+            className={`md:hidden text-gray-600 hover:text-[#006B3F] transition-colors${
+              isInternal ? ' dark:text-gray-300 dark:hover:text-emerald-400' : ''
+            }`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -76,21 +107,21 @@ export default function Header({ mounted = true }: HeaderProps) {
           <div className="md:hidden py-4 space-y-4">
             <Link
               href="/#about"
-              className="block text-gray-600 hover:text-[#006B3F] transition-colors font-medium"
+              className={`block ${navLink}`}
               onClick={() => setIsMobileMenuOpen(false)}
             >
               About
             </Link>
             <Link
               href="/workshops"
-              className="block text-gray-600 hover:text-[#006B3F] transition-colors font-medium"
+              className={`block ${navLink}`}
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Workshops
             </Link>
             <Link
               href="/#sponsors"
-              className="block text-gray-600 hover:text-[#006B3F] transition-colors font-medium"
+              className={`block ${navLink}`}
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Sponsors
@@ -98,15 +129,27 @@ export default function Header({ mounted = true }: HeaderProps) {
             {isAdmin && (
               <Link
                 href="/admin"
-                className="block text-gray-600 hover:text-[#006B3F] transition-colors font-medium"
+                className={`block ${navLink}`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Admin
               </Link>
             )}
+            {isInternal && themeMounted && (
+              <button
+                onClick={() => {
+                  setTheme(isDark ? 'light' : 'dark');
+                  setIsMobileMenuOpen(false);
+                }}
+                className={`flex items-center gap-2 ${navLink}`}
+              >
+                {isDark ? <Sun size={18} /> : <Moon size={18} />}
+                {isDark ? 'Light mode' : 'Dark mode'}
+              </button>
+            )}
             {session && (
               <>
-                <div className="pt-1 border-t border-gray-100">
+                <div className="pt-1 border-t border-gray-100 dark:border-gray-800">
                   <p className="text-xs text-gray-500 truncate">{session.user?.email}</p>
                   {roles && <p className="text-xs text-gray-400 mt-0.5">{roles}</p>}
                 </div>
@@ -115,7 +158,7 @@ export default function Header({ mounted = true }: HeaderProps) {
                     setIsMobileMenuOpen(false);
                     signOut({ callbackUrl: '/' });
                   }}
-                  className="block text-gray-600 hover:text-[#006B3F] transition-colors font-medium text-left"
+                  className={`block text-left ${navLink}`}
                 >
                   Sign out
                 </button>
