@@ -2,6 +2,8 @@
 
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { useParams, useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 import { toast } from 'sonner';
 import { StarRating } from '@/src/components/common/StarRating';
 import Modal from '@/src/components/common/Modal';
@@ -19,6 +21,7 @@ import {
   SkipForward,
   Ban,
   ExternalLink,
+  ShieldCheck,
   Users,
 } from 'lucide-react';
 
@@ -46,6 +49,8 @@ type FilterType = 'all' | 'reviewed' | 'pending' | 'skipped';
 export default function ReviewWorkspacePage() {
   const params = useParams<{ talkId: string }>();
   const router = useRouter();
+  const { data: session } = useSession();
+  const isAdmin = session?.user?.role === 'admin';
 
   const [talks, setTalks] = useState<Talk[]>([]);
   const [loading, setLoading] = useState(true);
@@ -374,6 +379,15 @@ export default function ReviewWorkspacePage() {
           </div>
 
           <div className="flex items-center gap-3 shrink-0">
+            {isAdmin && (
+              <Link
+                href={`/admin/submissions/${currentTalk.id}`}
+                className="inline-flex items-center gap-1.5 text-xs font-medium text-[#006B3F] dark:text-emerald-400 hover:underline"
+              >
+                <ShieldCheck className="w-3.5 h-3.5" />
+                <span>Open in Admin</span>
+              </Link>
+            )}
             <a
               href="https://docs.google.com/document/d/1DDoJZz93_n8_YqXCgZoAydPaOi3MQMpKxg0cAqaX-_8/edit?usp=sharing"
               target="_blank"
