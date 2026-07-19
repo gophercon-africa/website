@@ -69,18 +69,13 @@ export default function Header({ mounted = true }: HeaderProps) {
               </Link>
             )}
             {session && (
-              <div className="relative group">
-                <button
-                  onClick={() => signOut({ callbackUrl: '/' })}
-                  className={navLink}
-                >
-                  Sign out
-                </button>
-                <div className="absolute right-0 top-full mt-2 w-56 bg-gray-900 text-white rounded-lg px-3 py-2.5 text-xs opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 shadow-lg">
-                  <p className="font-medium truncate">{session.user?.email}</p>
-                  {roles && <p className="text-gray-400 mt-0.5">{roles}</p>}
-                </div>
-              </div>
+              <button
+                onClick={() => signOut({ callbackUrl: '/' })}
+                title={session.user?.email ?? undefined}
+                className={navLink}
+              >
+                Sign out
+              </button>
             )}
             {isInternal && themeMounted && (
               <button
