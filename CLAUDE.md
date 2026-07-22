@@ -16,7 +16,7 @@ Guidance for working in this repo. Keep it short; update it when a convention ch
 
 ## Auth & route protection
 - Sign-in is **OTP over email**: `src/actions/auth/otp.ts` emails a code (from `hello@gophercon.africa`), verified in `src/lib/auth.ts` (`authorize`). JWT sessions.
-- Route gating is in **`src/proxy.ts`** (Next middleware): public routes are allowlisted; `/reviews` requires `role === 'reviewer'` or `token.isReviewer`; `/admin` requires `role === 'admin'`.
+- Route gating is in **`src/middleware.ts`** (Next middleware — kept as `middleware.ts`, not `proxy.ts`, because Next 16 forces proxy files onto the Node runtime, which the Cloudflare OpenNext adapter can't run): public routes are allowlisted; `/reviews` requires `role === 'reviewer'` or `token.isReviewer`; `/admin` requires `role === 'admin'`.
 - Roles/authorized users: `AuthorizedUser` table + `src/lib/config.ts` env fallbacks (`REVIEWER_EMAILS`, `ADMIN_EMAILS`).
 - To exercise gated pages locally without email, mint a `next-auth.session-token` JWT with `NEXTAUTH_SECRET` (see the "Local testing" note below).
 
