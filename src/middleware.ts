@@ -46,7 +46,20 @@ function isAdminPath(pathname: string) {
 // Kept as middleware.ts (not Next 16's proxy.ts): proxy files are forced onto
 // the Node.js runtime, which @opennextjs/cloudflare does not support yet.
 // middleware.ts still compiles for the edge runtime, which Workers requires.
+// Legacy/alias hostnames served by this Worker; 301 everything to the apex.
+const redirectHosts = new Set([
+  'gophers.africa',
+  'www.gophers.africa',
+  'www.gophercon.africa',
+])
+
 export async function middleware(request: NextRequest) {
+  const host = request.headers.get('host') ?? ''
+  if (redirectHosts.has(host)) {
+    const { pathname, search } = request.nextUrl
+    return NextResponse.redirect(new URL(`https://gophercon.africa${pathname}${search}`), 301)
+  }
+
   const token = await getToken({ req: request })
   const { pathname } = request.nextUrl
 

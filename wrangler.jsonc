@@ -8,6 +8,14 @@
     "directory": ".open-next/assets",
     "binding": "ASSETS"
   },
+  // gophers.africa + www hostnames are served here too; middleware 301s them
+  // (and www.gophercon.africa) to the apex.
+  "routes": [
+    { "pattern": "gophercon.africa", "custom_domain": true },
+    { "pattern": "www.gophercon.africa", "custom_domain": true },
+    { "pattern": "gophers.africa", "custom_domain": true },
+    { "pattern": "www.gophers.africa", "custom_domain": true }
+  ],
   "observability": {
     "enabled": true
   },
