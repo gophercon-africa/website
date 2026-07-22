@@ -43,7 +43,10 @@ function isAdminPath(pathname: string) {
   return adminPrefixes.some((prefix) => pathname === prefix || pathname.startsWith(prefix + '/'))
 }
 
-export async function proxy(request: NextRequest) {
+// Kept as middleware.ts (not Next 16's proxy.ts): proxy files are forced onto
+// the Node.js runtime, which @opennextjs/cloudflare does not support yet.
+// middleware.ts still compiles for the edge runtime, which Workers requires.
+export async function middleware(request: NextRequest) {
   const token = await getToken({ req: request })
   const { pathname } = request.nextUrl
 

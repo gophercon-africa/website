@@ -3,8 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "prisma generate",
     "dev": "next dev",
     "build": "prisma generate && ESLINT_USE_FLAT_CONFIG=true ESLINT_CONFIG_FILE=.eslintrc.build.json next build --webpack",
+    "build:worker": "prisma generate --no-engine && ESLINT_USE_FLAT_CONFIG=true ESLINT_CONFIG_FILE=.eslintrc.build.json next build --webpack",
+    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
     "start": "next start",
     "prod": "next build --webpack && next start",
     "lint": "next lint",
@@ -17,7 +22,9 @@
     "@auth/prisma-adapter": "^2.11.1",
     "@heroui/react": "^2.8.7",
     "@hookform/resolvers": "^5.2.2",
+    "@opennextjs/cloudflare": "^1.20.2",
     "@prisma/client": "^5.22.0",
+    "@prisma/extension-accelerate": "^3.0.1",
     "@react-email/components": "^1.0.6",
     "@react-email/render": "^2.0.4",
     "axios": "^1.13.2",
@@ -57,6 +64,7 @@
     "postcss": "^8.5.6",
     "prisma": "^5.22.0",
     "tailwindcss": "^4.1.18",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "wrangler": "^4.113.0"
   }
 }
