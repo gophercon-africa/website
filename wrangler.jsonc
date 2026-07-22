@@ -22,6 +22,6 @@
     "NEXTAUTH_URL": "https://gophercon.africa",
     "OTP_EXPIRY_MINUTES": "10",
     "SESSION_EXPIRY_DAYS": "3",
-    "CALL_FOR_SPEAKERS_OPEN": "true"
+    "CALL_FOR_SPEAKERS_OPEN": "false"
   }
 }
