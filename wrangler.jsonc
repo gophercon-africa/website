@@ -30,6 +30,9 @@
     "NEXTAUTH_URL": "https://gophercon.africa",
     "OTP_EXPIRY_MINUTES": "10",
     "SESSION_EXPIRY_DAYS": "3",
-    "CALL_FOR_SPEAKERS_OPEN": "false"
+    "CALL_FOR_SPEAKERS_OPEN": "false",
+    // EOD 24 Jul 2026, Africa/Nairobi. The +03:00 offset is required — a bare
+    // timestamp would parse as UTC on the Worker (3 hours late).
+    "REVIEW_DEADLINE": "2026-07-25T00:00:00+03:00"
   }
 }

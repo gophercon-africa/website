@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 import { z } from 'zod';
 import db from '@/src/db';
+import { isReviewPeriodOpen } from '@/src/lib/config';
 
 const reviewSchema = z.object({
   talkId: z.string().cuid(),
@@ -24,6 +25,10 @@ export async function GET(request: NextRequest) {
   const userRole = token.role as string | undefined;
   if (userRole !== 'reviewer' && !token.isReviewer) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+  }
+
+  if (!isReviewPeriodOpen() && userRole !== 'admin') {
+    return NextResponse.json({ error: 'Review period closed' }, { status: 403 });
   }
 
   try {
@@ -100,6 +105,11 @@ export async function POST(request: NextRequest) {
   const userRole = token.role as string | undefined;
   if (userRole !== 'reviewer' && !token.isReviewer) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+  }
+
+  // No review writes after the deadline, for anyone (admins included).
+  if (!isReviewPeriodOpen()) {
+    return NextResponse.json({ error: 'Review period closed' }, { status: 403 });
   }
 
   try {

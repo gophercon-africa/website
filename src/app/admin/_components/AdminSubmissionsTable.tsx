@@ -5,21 +5,11 @@ import { useRouter } from 'next/navigation';
 import { Download } from 'lucide-react';
 import Modal from '@/src/components/common/Modal';
 import { toCsv, downloadCsv } from '@/src/lib/csv';
+import { STATUS_LABELS, STATUS_BADGE_CLASSES } from './statusBadges';
+import { TALK_STATUSES, type TalkStatus } from '@/src/lib/talkStatus';
 import type { AdminSubmission } from '@/src/types/admin';
 
-type StatusFilter = 'all' | 'pending' | 'accepted' | 'rejected';
-
-const STATUS_LABELS: Record<AdminSubmission['status'], string> = {
-  pending: 'Pending',
-  accepted: 'Accepted',
-  rejected: 'Rejected',
-};
-
-const STATUS_BADGE_CLASSES: Record<AdminSubmission['status'], string> = {
-  pending: 'bg-yellow-50 text-yellow-700 border-yellow-200 dark:bg-yellow-950/40 dark:text-yellow-400 dark:border-yellow-900/50',
-  accepted: 'bg-green-50 text-green-700 border-green-200 dark:bg-green-950/40 dark:text-green-400 dark:border-green-900/50',
-  rejected: 'bg-red-50 text-red-700 border-red-200 dark:bg-red-950/40 dark:text-red-400 dark:border-red-900/50',
-};
+type StatusFilter = 'all' | TalkStatus;
 
 const EXPORT_COLUMNS: { key: string; label: string }[] = [
   { key: 'email', label: 'Email' },
@@ -108,9 +98,8 @@ export function AdminSubmissionsTable({ submissions }: { submissions: AdminSubmi
   const selectedSubmissions = submissions.filter((s) => selectedIds.has(s.id));
 
   return (
-    <div className="bg-white dark:bg-gray-900 rounded-lg shadow dark:shadow-black/40 overflow-hidden mt-8 border border-transparent dark:border-gray-800">
-      <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-800 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Submissions Overview</h2>
+    <div>
+      <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-800 flex flex-col sm:flex-row sm:items-center sm:justify-end gap-3">
         <div className="flex flex-wrap items-center gap-2">
           <input
             type="text"
@@ -125,9 +114,9 @@ export function AdminSubmissionsTable({ submissions }: { submissions: AdminSubmi
             className="text-sm rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-3 py-1.5 focus:border-[#006B3F] focus:ring-2 focus:ring-[#006B3F]/20 focus:outline-none"
           >
             <option value="all">All statuses</option>
-            <option value="pending">Pending</option>
-            <option value="accepted">Accepted</option>
-            <option value="rejected">Rejected</option>
+            {TALK_STATUSES.map((status) => (
+              <option key={status} value={status}>{STATUS_LABELS[status]}</option>
+            ))}
           </select>
         </div>
       </div>

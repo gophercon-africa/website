@@ -1,0 +1,27 @@
+name: PR CI
+on:
+  pull_request:
+    branches: [main]
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Lint
+        run: npm run lint
+      - name: Typecheck
+        run: npx tsc --noEmit
+      - name: Build
+        run: npm run build
+        env:
+          # prisma generate and next build don't touch the database; the
+          # client constructor just requires the variable to be present.
+          DATABASE_URL: postgresql://placeholder:placeholder@localhost:5432/placeholder

@@ -19,18 +19,17 @@ export async function GET(request: NextRequest) {
   try {
     const currentYear = new Date().getFullYear().toString();
 
-    // Count total submissions
-    const total = await db.talk.count({
+    // One count per status in a single query
+    const byStatus = await db.talk.groupBy({
+      by: ['status'],
       where: { eventYear: currentYear },
+      _count: { _all: true },
     });
 
-    // Count pending (IsPendingReview = true)
-    const pending = await db.talk.count({
-      where: {
-        eventYear: currentYear,
-        IsPendingReview: true,
-      },
-    });
+    const statusCount = (status: string) =>
+      byStatus.find((g) => g.status === status)?._count._all ?? 0;
+
+    const total = byStatus.reduce((sum, g) => sum + g._count._all, 0);
 
     // Count reviewed (has at least one non-skipped review) — done directly in the DB
     const reviewed = await db.talk.count({
@@ -40,29 +39,14 @@ export async function GET(request: NextRequest) {
       },
     });
 
-    // Count accepted
-    const accepted = await db.talk.count({
-      where: {
-        eventYear: currentYear,
-        IsAccepted: true,
-      },
-    });
-
-    // Count rejected (not accepted and not pending)
-    const rejected = await db.talk.count({
-      where: {
-        eventYear: currentYear,
-        IsAccepted: false,
-        IsPendingReview: false,
-      },
-    });
-
     const stats: AdminStats = {
       total,
-      pending,
+      pending: statusCount('pending'),
+      shortlisted: statusCount('shortlisted'),
+      waitlisted: statusCount('waitlisted'),
       reviewed,
-      accepted,
-      rejected,
+      accepted: statusCount('accepted'),
+      rejected: statusCount('rejected'),
     };
 
     return NextResponse.json(stats);
