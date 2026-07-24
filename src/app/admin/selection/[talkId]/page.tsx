@@ -128,6 +128,8 @@ export default function SelectionWorkspacePage() {
       setDetail(cached);
       setStatus(cached.status);
       setDecisionNotes(cached.decisionNotes ?? '');
+      // A cancelled in-flight fetch skips its finally, so clear here too.
+      setDetailLoading(false);
     } else {
       setDetailLoading(true);
       (async () => {
@@ -166,7 +168,10 @@ export default function SelectionWorkspacePage() {
   );
 
   const saveDecision = useCallback(async () => {
-    if (!currentTalkId || !detail) return;
+    // detail.id must match the route: right after save-&-next the previous
+    // talk's state lingers while the new talk's fetch is in flight, and a
+    // quick second Enter would write it onto the new talk.
+    if (!currentTalkId || !detail || detail.id !== currentTalkId) return;
 
     // Compute "next" from the pre-save order: the talk may leave the active
     // filter once its status changes.
@@ -204,6 +209,9 @@ export default function SelectionWorkspacePage() {
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
+      // Leave browser shortcuts alone — Cmd+A must select text, not accept.
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+
       const activeTag = document.activeElement?.tagName;
       const isInputFocused = activeTag === 'TEXTAREA' || activeTag === 'INPUT';
 
