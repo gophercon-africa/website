@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { toast } from 'sonner';
 import { AdminSubmissionsTable } from '@/src/app/admin/_components/AdminSubmissionsTable';
+import { CollapsibleSection } from '@/src/app/admin/_components/CollapsibleSection';
 import type { AdminStats, ReviewerProgress, AdminSubmission } from '@/src/types/admin';
 
 export default function AdminDashboardPage() {
@@ -76,12 +77,20 @@ export default function AdminDashboardPage() {
             <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Admin Dashboard</h1>
             <p className="text-gray-600 dark:text-gray-400 mt-2">Review system statistics and progress</p>
           </div>
-          <Link href="/admin/users" className="text-sm font-medium text-[#006B3F] dark:text-emerald-400 hover:underline">
-            Manage Users
-          </Link>
+          <div className="flex items-center gap-4">
+            <Link
+              href="/admin/selection"
+              className="text-sm font-semibold text-white bg-[#006B3F] hover:bg-[#00552f] dark:bg-emerald-600 dark:hover:bg-emerald-500 rounded-lg px-4 py-2 transition-colors"
+            >
+              Selection Mode
+            </Link>
+            <Link href="/admin/users" className="text-sm font-medium text-[#006B3F] dark:text-emerald-400 hover:underline">
+              Manage Users
+            </Link>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-7 gap-4 mb-8">
           <StatCard
             title="Total Submissions"
             value={stats?.total || 0}
@@ -98,6 +107,16 @@ export default function AdminDashboardPage() {
             color="purple"
           />
           <StatCard
+            title="Shortlisted"
+            value={stats?.shortlisted || 0}
+            color="sky"
+          />
+          <StatCard
+            title="Waitlisted"
+            value={stats?.waitlisted || 0}
+            color="violet"
+          />
+          <StatCard
             title="Accepted"
             value={stats?.accepted || 0}
             color="green"
@@ -109,11 +128,7 @@ export default function AdminDashboardPage() {
           />
         </div>
 
-        <div className="bg-white dark:bg-gray-900 rounded-lg shadow dark:shadow-black/40 overflow-hidden border border-transparent dark:border-gray-800">
-          <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-800">
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Reviewer Progress</h2>
-          </div>
-
+        <CollapsibleSection title="Reviewer Progress" storageKey="admin-section-reviewer-progress">
           {progress.length === 0 ? (
             <div className="p-8 text-center text-gray-500 dark:text-gray-400">
               No reviewer data available
@@ -156,9 +171,11 @@ export default function AdminDashboardPage() {
               </table>
             </div>
           )}
-        </div>
+        </CollapsibleSection>
 
-        <AdminSubmissionsTable submissions={submissions} />
+        <CollapsibleSection title="Submissions Overview" storageKey="admin-section-submissions">
+          <AdminSubmissionsTable submissions={submissions} />
+        </CollapsibleSection>
       </div>
     </div>
   );
@@ -169,6 +186,8 @@ function StatCard({ title, value, color }: { title: string; value: number; color
     blue: 'bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400',
     yellow: 'bg-yellow-50 text-yellow-700 dark:bg-yellow-950/40 dark:text-yellow-400',
     purple: 'bg-purple-50 text-purple-700 dark:bg-purple-950/40 dark:text-purple-400',
+    sky: 'bg-sky-50 text-sky-700 dark:bg-sky-950/40 dark:text-sky-400',
+    violet: 'bg-violet-50 text-violet-700 dark:bg-violet-950/40 dark:text-violet-400',
     green: 'bg-green-50 text-green-700 dark:bg-green-950/40 dark:text-green-400',
     red: 'bg-red-50 text-red-700 dark:bg-red-950/40 dark:text-red-400',
   };

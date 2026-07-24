@@ -3,6 +3,8 @@ import type { TalkStatus } from '@/src/lib/talkStatus';
 export interface AdminStats {
   total: number;
   pending: number;
+  shortlisted: number;
+  waitlisted: number;
   reviewed: number;
   accepted: number;
   rejected: number;

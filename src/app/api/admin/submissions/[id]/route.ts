@@ -2,12 +2,12 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 import { z } from 'zod';
 import { db } from '@/src/db';
-import { getTalkStatus, statusToBooleans } from '@/src/lib/talkStatus';
+import { TALK_STATUSES, getTalkStatus, statusToBooleans } from '@/src/lib/talkStatus';
 import { computeReviewStats } from '@/src/lib/reviewStats';
 import type { AdminSubmissionDetail } from '@/src/types/admin';
 
 const patchSchema = z.object({
-  status: z.enum(['pending', 'accepted', 'rejected']),
+  status: z.enum(TALK_STATUSES),
   decisionNotes: z.string().max(5000).optional().nullable(),
 });
 
@@ -54,6 +54,7 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
         additionalNotes: true,
         IsAccepted: true,
         IsPendingReview: true,
+        status: true,
         decisionNotes: true,
         reviews: {
           select: {
@@ -139,6 +140,7 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
     const talk = await db.talk.update({
       where: { id },
       data: {
+        status,
         ...statusToBooleans(status),
         decisionNotes: decisionNotes ?? null,
       },

@@ -32,6 +32,7 @@ export async function GET(request: NextRequest) {
         talkCategory: true,
         IsAccepted: true,
         IsPendingReview: true,
+        status: true,
         reviews: { select: { rating: true, skipped: true } },
       },
     });

@@ -3,17 +3,12 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { toast } from 'sonner';
-import { StarRating } from '@/src/components/common/StarRating';
-import { ArrowLeft, BookOpen, Award, Clock, List, Ban } from 'lucide-react';
-import type { AdminSubmissionDetail, AdminReview } from '@/src/types/admin';
+import { ArrowLeft, BookOpen, Award, Clock, List } from 'lucide-react';
+import { ReviewsPanel } from '@/src/app/admin/_components/ReviewsPanel';
+import { DecisionPanel } from '@/src/app/admin/_components/DecisionPanel';
+import type { AdminSubmissionDetail } from '@/src/types/admin';
 
 type Status = AdminSubmissionDetail['status'];
-
-const STATUS_LABELS: Record<Status, string> = {
-  pending: 'Pending',
-  accepted: 'Accepted',
-  rejected: 'Rejected',
-};
 
 export default function AdminSubmissionDetailPage() {
   const params = useParams<{ id: string }>();
@@ -173,70 +168,22 @@ export default function AdminSubmissionDetailPage() {
         </div>
 
         <div className="w-full md:w-96 shrink-0 flex flex-col gap-6">
-          <div className="bg-white dark:bg-gray-900 rounded-lg shadow-sm border border-gray-200 dark:border-gray-800 p-5">
-            <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-3">
-              Reviews ({submission.reviewCount}
-              {submission.averageRating !== null ? `, avg ${submission.averageRating.toFixed(1)}` : ''})
-            </h3>
-            {submission.reviews.length === 0 ? (
-              <p className="text-sm text-gray-500 dark:text-gray-400">No reviews yet.</p>
-            ) : (
-              <ul className="space-y-4">
-                {submission.reviews.map((review: AdminReview) => (
-                  <li key={review.id} className="border-b border-gray-100 dark:border-gray-800 pb-3 last:border-0 last:pb-0">
-                    <p className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-1">{review.reviewerEmail}</p>
-                    {review.skipped ? (
-                      <div className="flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400">
-                        <Ban className="w-3.5 h-3.5" />
-                        Skipped{review.skipReason ? `: ${review.skipReason}` : ''}
-                      </div>
-                    ) : (
-                      <StarRating value={review.rating ?? 0} name={`rating-${review.id}`} onChange={() => {}} readonly />
-                    )}
-                    {review.notes && (
-                      <p className="text-sm text-gray-600 dark:text-gray-400 mt-2 whitespace-pre-wrap">{review.notes}</p>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
+          <ReviewsPanel
+            reviews={submission.reviews}
+            reviewCount={submission.reviewCount}
+            averageRating={submission.averageRating}
+          />
 
           <div className="bg-white dark:bg-gray-900 rounded-lg shadow-sm border border-gray-200 dark:border-gray-800 p-5">
             <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-3">Decision</h3>
-            <div className="flex gap-2 mb-4">
-              {(['pending', 'accepted', 'rejected'] as Status[]).map((s) => (
-                <button
-                  key={s}
-                  onClick={() => setStatus(s)}
-                  className={`flex-1 px-3 py-2 text-sm font-medium rounded-lg border transition-colors ${
-                    status === s
-                      ? 'bg-[#006B3F] text-white border-[#006B3F]'
-                      : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700'
-                  }`}
-                >
-                  {STATUS_LABELS[s]}
-                </button>
-              ))}
-            </div>
-            <label htmlFor="decision-notes" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              Decision Notes
-            </label>
-            <textarea
-              id="decision-notes"
-              value={decisionNotes}
-              onChange={(e) => setDecisionNotes(e.target.value)}
-              rows={4}
-              placeholder="Optional notes about this decision..."
-              className="w-full rounded-lg border border-gray-300 dark:border-gray-700 px-4 py-3 text-sm text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:border-[#006B3F] focus:ring-2 focus:ring-[#006B3F]/20 focus:outline-none transition-shadow bg-white dark:bg-gray-800 resize-y mb-4"
+            <DecisionPanel
+              status={status}
+              onStatusChange={setStatus}
+              decisionNotes={decisionNotes}
+              onNotesChange={setDecisionNotes}
+              onSave={saveDecision}
+              saving={saving}
             />
-            <button
-              onClick={saveDecision}
-              disabled={saving}
-              className="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium text-white bg-[#006B3F] hover:bg-[#008751] rounded-lg disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
-            >
-              {saving ? 'Saving...' : 'Save Decision'}
-            </button>
           </div>
         </div>
       </div>

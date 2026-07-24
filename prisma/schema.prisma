@@ -42,6 +42,11 @@ model Talk {
   eventYear                  String
   IsAccepted                 Boolean
   IsPendingReview            Boolean
+  // Authoritative selection status: pending | shortlisted | waitlisted |
+  // accepted | rejected. The booleans above are kept in sync (see
+  // src/lib/talkStatus.ts); PATCH /api/admin/submissions/[id] is the only
+  // sanctioned write path.
+  status                     String   @default("pending")
   decisionNotes              String?
   createdAt                  DateTime @default(now())
   updatedAt                  DateTime @updatedAt
