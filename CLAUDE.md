@@ -31,5 +31,5 @@ Guidance for working in this repo. Keep it short; update it when a convention ch
 - **Workspace scroll** (`src/app/reviews/[talkId]/ReviewWorkspaceClient.tsx` and `src/app/admin/selection/[talkId]/page.tsx`): the page adds `.review-workspace-lock` to `<body>` on mount (rule in `globals.css`) to cap the body to viewport height so the main column and sidebar list scroll independently. **Do not** replace this with a `calc(100dvh - <header>)` — the header height isn't constant (the logo renders anywhere from ~82px to ~208px depending on load state). Talk navigation resets the main column to the top; the sidebar scroll position is preserved on purpose.
 
 ## Gotchas
-- The Tawk.to chat script keeps a socket open, so headless-browser `waitUntil: 'networkidle0'` never settles — use `'domcontentloaded'`.
+- The Tawk.to chat widget (`src/components/TawkController.tsx`) only loads on the landing page at the production host (`gophercon.africa`) — never locally. Where it does load, its open socket means headless-browser `waitUntil: 'networkidle0'` never settles — use `'domcontentloaded'`.
 - `src/lib/email.ts` is a placeholder; real sends go through Resend in the server actions.
