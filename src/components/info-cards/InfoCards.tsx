@@ -54,7 +54,7 @@ export default function InfoCards({ cfsOpen = false }: { cfsOpen?: boolean }) {
                   <div className="text-[#006B3F] mb-4">✅ Open Now</div>
                   <h2 className="text-4xl font-bold text-gray-900 mb-6">Call for Speakers is Open!</h2>
                   <p className="text-gray-600 mb-8 text-lg">
-                    Share your expertise and passion for Go with the GopherCon Africa community. We're looking for engaging talks that cover a wide range of Go topics.
+                    Share your expertise and passion for Go with the GopherCon Africa community. We&apos;re looking for engaging talks that cover a wide range of Go topics.
                   </p>
                   <Link href="/call-for-speakers" className="inline-flex items-center text-gray-900 font-semibold hover:text-[#006B3F] transition-colors">
                     Submit your proposal

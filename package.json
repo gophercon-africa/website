@@ -5,14 +5,14 @@
   "scripts": {
     "predev": "prisma generate",
     "dev": "next dev",
-    "build": "prisma generate && ESLINT_USE_FLAT_CONFIG=true ESLINT_CONFIG_FILE=.eslintrc.build.json next build --webpack",
-    "build:worker": "prisma generate --no-engine && ESLINT_USE_FLAT_CONFIG=true ESLINT_CONFIG_FILE=.eslintrc.build.json next build --webpack",
+    "build": "prisma generate && next build --webpack",
+    "build:worker": "prisma generate --no-engine && next build --webpack",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
     "start": "next start",
     "prod": "next build --webpack && next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "postinstall": "prisma generate"
   },
   "prisma": {

@@ -4,6 +4,18 @@ import { useEffect } from 'react';
 
 const HIDE_ON = ['/reviews', '/admin'];
 
+interface TawkApi {
+  hideWidget?: () => void;
+  showWidget?: () => void;
+  onLoad?: () => void;
+}
+
+declare global {
+  interface Window {
+    Tawk_API?: TawkApi;
+  }
+}
+
 export default function TawkController() {
   const pathname = usePathname();
 
@@ -11,19 +23,22 @@ export default function TawkController() {
     const shouldHide = HIDE_ON.some((p) => pathname?.startsWith(p));
 
     function apply() {
-      const api = (window as any).Tawk_API;
+      const api = window.Tawk_API;
       if (!api) return;
-      shouldHide ? api.hideWidget?.() : api.showWidget?.();
+      if (shouldHide) {
+        api.hideWidget?.();
+      } else {
+        api.showWidget?.();
+      }
     }
 
-    const api = (window as any).Tawk_API;
-    if (api?.hideWidget) {
+    if (window.Tawk_API?.hideWidget) {
       apply();
     } else {
       // Tawk not loaded yet — queue via onLoad
-      (window as any).Tawk_API = (window as any).Tawk_API || {};
-      const prev = (window as any).Tawk_API.onLoad;
-      (window as any).Tawk_API.onLoad = function () {
+      window.Tawk_API = window.Tawk_API || {};
+      const prev = window.Tawk_API.onLoad;
+      window.Tawk_API.onLoad = function () {
         prev?.();
         apply();
       };

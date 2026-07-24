@@ -10,7 +10,6 @@ const createPrisma = () =>
   new PrismaClient().$extends(withAccelerate()) as unknown as PrismaClient;
 
 declare global {
-  // eslint-disable-next-line no-var
   var prisma: PrismaClient | undefined;
 }
 
