@@ -174,7 +174,7 @@ export default function AdminDashboardPage() {
         </CollapsibleSection>
 
         <CollapsibleSection title="Submissions Overview" storageKey="admin-section-submissions">
-          <AdminSubmissionsTable submissions={submissions} />
+          <AdminSubmissionsTable submissions={submissions} onChanged={loadData} />
         </CollapsibleSection>
       </div>
     </div>
