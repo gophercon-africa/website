@@ -4,6 +4,7 @@ import React, { useActionState, useState, startTransition } from 'react';
 import '@styles/globals.css';
 import * as actions from "@actions/index";
 import { TalkFormState } from '@actions/call-for-speakers/create';
+import { TALK_CATEGORIES } from '@lib/talkCategories';
 import { toast } from 'sonner';
 import { redirect } from 'next/navigation';
 import paths from '@path'; 
@@ -276,13 +277,9 @@ export default function CallForSpeakersForm() {
                                         className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[#006B3F] focus:ring-[#006B3F] h-12 px-4 text-base transition-all duration-200 ease-in-out"
                                     >
                                         <option value="">Select a category</option>
-                                        <option value="AI">AI</option>
-                                        <option value="DevOps/Infrastructure">DevOps/Infrastructure</option>
-                                        <option value="Compiler/Interpreter">Compiler/Interpreter</option>
-                                        <option value="Security">Security</option>
-                                        <option value="API">API</option>
-                                        <option value="Observability">Observability</option>
-                                        <option value="Others">Others</option>
+                                        {TALK_CATEGORIES.map((category) => (
+                                            <option key={category} value={category}>{category}</option>
+                                        ))}
                                     </select>
                                     <p className="text-red-500 text-sm">{formState?.errors?.talkCategory}</p>
                                 </div>
