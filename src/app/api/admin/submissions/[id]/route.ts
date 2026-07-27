@@ -3,13 +3,19 @@ import { getToken } from 'next-auth/jwt';
 import { z } from 'zod';
 import { db } from '@/src/db';
 import { TALK_STATUSES, getTalkStatus, statusToBooleans } from '@/src/lib/talkStatus';
+import { TALK_CATEGORIES } from '@/src/lib/talkCategories';
 import { computeReviewStats } from '@/src/lib/reviewStats';
 import type { AdminSubmissionDetail } from '@/src/types/admin';
 
-const patchSchema = z.object({
-  status: z.enum(TALK_STATUSES),
-  decisionNotes: z.string().max(5000).optional().nullable(),
-});
+const patchSchema = z
+  .object({
+    status: z.enum(TALK_STATUSES).optional(),
+    decisionNotes: z.string().max(5000).optional().nullable(),
+    talkCategory: z.enum(TALK_CATEGORIES).optional(),
+  })
+  .refine((data) => data.status !== undefined || data.talkCategory !== undefined, {
+    message: 'Provide a status or a talkCategory to update',
+  });
 
 async function requireAdmin(request: NextRequest) {
   const token = await getToken({ req: request });
@@ -125,7 +131,7 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
       );
     }
 
-    const { status, decisionNotes } = result.data;
+    const { status, decisionNotes, talkCategory } = result.data;
     const currentYear = new Date().getFullYear().toString();
 
     const existing = await db.talk.findFirst({
@@ -137,13 +143,21 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
       return NextResponse.json({ error: 'Submission not found' }, { status: 404 });
     }
 
+    // A decision save (status) always rewrites the notes; a category change
+    // must not touch the decision fields.
+    const data: Record<string, unknown> = {};
+    if (status !== undefined) {
+      data.status = status;
+      Object.assign(data, statusToBooleans(status));
+      data.decisionNotes = decisionNotes ?? null;
+    }
+    if (talkCategory !== undefined) {
+      data.talkCategory = talkCategory;
+    }
+
     const talk = await db.talk.update({
       where: { id },
-      data: {
-        status,
-        ...statusToBooleans(status),
-        decisionNotes: decisionNotes ?? null,
-      },
+      data,
     });
 
     return NextResponse.json({ success: true, talk });

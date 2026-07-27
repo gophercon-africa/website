@@ -6,6 +6,7 @@ import { toast } from 'sonner';
 import { ArrowLeft, BookOpen, Award, Clock, List } from 'lucide-react';
 import { ReviewsPanel } from '@/src/app/admin/_components/ReviewsPanel';
 import { DecisionPanel } from '@/src/app/admin/_components/DecisionPanel';
+import { TALK_CATEGORIES } from '@/src/lib/talkCategories';
 import type { AdminSubmissionDetail } from '@/src/types/admin';
 
 type Status = AdminSubmissionDetail['status'];
@@ -18,6 +19,7 @@ export default function AdminSubmissionDetailPage() {
   const [status, setStatus] = useState<Status>('pending');
   const [decisionNotes, setDecisionNotes] = useState('');
   const [saving, setSaving] = useState(false);
+  const [changingCategory, setChangingCategory] = useState(false);
 
   const id = params?.id;
 
@@ -42,6 +44,26 @@ export default function AdminSubmissionDetailPage() {
   useEffect(() => {
     load();
   }, [load]);
+
+  async function changeCategory(talkCategory: string) {
+    if (!id || !submission || talkCategory === submission.talkCategory) return;
+    setChangingCategory(true);
+    try {
+      const res = await fetch(`/api/admin/submissions/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ talkCategory }),
+      });
+      if (!res.ok) throw new Error('Failed to change category');
+      setSubmission({ ...submission, talkCategory });
+      toast.success(`Category changed to ${talkCategory}`);
+    } catch (error) {
+      toast.error('Failed to change category');
+      console.error(error);
+    } finally {
+      setChangingCategory(false);
+    }
+  }
 
   async function saveDecision() {
     if (!id) return;
@@ -117,8 +139,28 @@ export default function AdminSubmissionDetailPage() {
             <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-3 border border-gray-100 dark:border-gray-700 flex items-start gap-3">
               <BookOpen className="w-5 h-5 text-[#006B3F] shrink-0 mt-0.5" />
               <div>
-                <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-0.5">Category</p>
-                <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{submission.talkCategory}</p>
+                <label
+                  htmlFor="talk-category"
+                  className="block text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-0.5"
+                >
+                  Category
+                </label>
+                <select
+                  id="talk-category"
+                  value={submission.talkCategory}
+                  onChange={(e) => changeCategory(e.target.value)}
+                  disabled={changingCategory}
+                  className="w-full text-sm font-medium text-gray-900 dark:text-gray-100 bg-transparent border-0 p-0 pr-6 focus:ring-0 focus:outline-none cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                  {!(TALK_CATEGORIES as readonly string[]).includes(submission.talkCategory) && (
+                    <option value={submission.talkCategory}>{submission.talkCategory || 'Uncategorized'}</option>
+                  )}
+                  {TALK_CATEGORIES.map((category) => (
+                    <option key={category} value={category}>
+                      {category}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
             <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-3 border border-gray-100 dark:border-gray-700 flex items-start gap-3">
