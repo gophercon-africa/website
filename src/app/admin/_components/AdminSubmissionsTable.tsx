@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { Fragment, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { Download } from 'lucide-react';
@@ -24,6 +24,8 @@ const EXPORT_COLUMNS: { key: string; label: string }[] = [
 
 const DEFAULT_EXPORT_COLUMNS = new Set(['email']);
 
+const UNCATEGORIZED = 'Uncategorized';
+
 export function AdminSubmissionsTable({
   submissions,
   onChanged,
@@ -34,6 +36,8 @@ export function AdminSubmissionsTable({
   const router = useRouter();
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState<StatusFilter>('all');
+  const [categoryFilter, setCategoryFilter] = useState('all');
+  const [groupByCategory, setGroupByCategory] = useState(false);
   const [ratingMin, setRatingMin] = useState('');
   const [ratingMax, setRatingMax] = useState('');
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
@@ -43,6 +47,11 @@ export function AdminSubmissionsTable({
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [isApplying, setIsApplying] = useState(false);
 
+  const categories = useMemo(() => {
+    const names = new Set(submissions.map((s) => s.talkCategory.trim() || UNCATEGORIZED));
+    return [...names].sort((a, b) => a.localeCompare(b));
+  }, [submissions]);
+
   const filteredSubmissions = useMemo(() => {
     const query = search.trim().toLowerCase();
     const min = ratingMin.trim() === '' ? null : Number(ratingMin);
@@ -51,6 +60,7 @@ export function AdminSubmissionsTable({
     const maxValid = max !== null && !Number.isNaN(max);
     return submissions.filter((s) => {
       if (statusFilter !== 'all' && s.status !== statusFilter) return false;
+      if (categoryFilter !== 'all' && (s.talkCategory.trim() || UNCATEGORIZED) !== categoryFilter) return false;
       if (minValid || maxValid) {
         // Any rating bound excludes talks with no average rating yet.
         if (s.averageRating === null) return false;
@@ -64,7 +74,21 @@ export function AdminSubmissionsTable({
         s.talkTitle.toLowerCase().includes(query)
       );
     });
-  }, [submissions, search, statusFilter, ratingMin, ratingMax]);
+  }, [submissions, search, statusFilter, categoryFilter, ratingMin, ratingMax]);
+
+  const groupedSubmissions = useMemo(() => {
+    if (!groupByCategory) return [{ category: null, rows: filteredSubmissions }];
+    const groups = new Map<string, AdminSubmission[]>();
+    for (const s of filteredSubmissions) {
+      const category = s.talkCategory.trim() || UNCATEGORIZED;
+      const rows = groups.get(category);
+      if (rows) rows.push(s);
+      else groups.set(category, [s]);
+    }
+    return [...groups.entries()]
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([category, rows]) => ({ category, rows }));
+  }, [filteredSubmissions, groupByCategory]);
 
   function updateSearch(value: string) {
     setSearch(value);
@@ -73,6 +97,11 @@ export function AdminSubmissionsTable({
 
   function updateStatusFilter(value: StatusFilter) {
     setStatusFilter(value);
+    setSelectedIds(new Set());
+  }
+
+  function updateCategoryFilter(value: string) {
+    setCategoryFilter(value);
     setSelectedIds(new Set());
   }
 
@@ -174,6 +203,26 @@ export function AdminSubmissionsTable({
               <option key={status} value={status}>{STATUS_LABELS[status]}</option>
             ))}
           </select>
+          <select
+            value={categoryFilter}
+            onChange={(e) => updateCategoryFilter(e.target.value)}
+            aria-label="Filter by category"
+            className="text-sm rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-3 py-1.5 focus:border-[#006B3F] focus:ring-2 focus:ring-[#006B3F]/20 focus:outline-none max-w-52"
+          >
+            <option value="all">All categories</option>
+            {categories.map((category) => (
+              <option key={category} value={category}>{category}</option>
+            ))}
+          </select>
+          <label className="flex items-center gap-1.5 text-sm text-gray-600 dark:text-gray-400 whitespace-nowrap">
+            <input
+              type="checkbox"
+              checked={groupByCategory}
+              onChange={(e) => setGroupByCategory(e.target.checked)}
+              className="rounded border-gray-300 dark:border-gray-600 text-[#006B3F] focus:ring-[#006B3F]"
+            />
+            Group by category
+          </label>
           <div className="flex items-center gap-1.5 text-sm text-gray-600 dark:text-gray-400">
             <span>Rating</span>
             <input
@@ -284,54 +333,68 @@ export function AdminSubmissionsTable({
               </tr>
             </thead>
             <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800">
-              {filteredSubmissions.map((submission) => (
-                <tr
-                  key={submission.id}
-                  className="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors cursor-pointer"
-                  onClick={() => router.push(`/admin/submissions/${submission.id}`)}
-                >
-                  <td className="px-4 py-4 w-10" onClick={(e) => e.stopPropagation()}>
-                    <input
-                      type="checkbox"
-                      checked={selectedIds.has(submission.id)}
-                      onChange={() => toggleRow(submission.id)}
-                      className="rounded border-gray-300 dark:border-gray-600 text-[#006B3F] focus:ring-[#006B3F]"
-                      aria-label={`Select ${submission.talkTitle}`}
-                    />
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{submission.talkTitle}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">
-                    <div className="flex items-center gap-2">
-                      <span>{submission.fullName}</span>
-                      {submission.duplicateCount > 1 && (
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            if (submission.duplicateTalks.length === 1) {
-                              router.push(`/admin/submissions/${submission.duplicateTalks[0].id}`);
-                            } else {
-                              setDuplicateModalSubmission(submission);
-                            }
-                          }}
-                          title={`Also submitted: ${submission.duplicateTalks.map((t) => t.talkTitle).join(', ')}`}
-                          className="px-1.5 py-0.5 rounded text-xs font-bold border bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/40 dark:text-amber-400 dark:border-amber-900/50 hover:bg-amber-100 dark:hover:bg-amber-950/60 transition-colors"
-                        >
-                          ×{submission.duplicateCount}
-                        </button>
-                      )}
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">{submission.talkCategory}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`inline-block px-2 py-0.5 rounded text-xs font-medium border ${STATUS_BADGE_CLASSES[submission.status]}`}>
-                      {STATUS_LABELS[submission.status]}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">
-                    {submission.averageRating !== null ? submission.averageRating.toFixed(1) : '—'}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">{submission.reviewCount}</td>
-                </tr>
+              {groupedSubmissions.map((group) => (
+                <Fragment key={group.category ?? 'all'}>
+                  {group.category !== null && (
+                    <tr className="bg-gray-50 dark:bg-gray-800/50">
+                      <td colSpan={7} className="px-6 py-2 text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
+                        {group.category}
+                        <span className="ml-2 font-normal normal-case tracking-normal text-gray-400 dark:text-gray-500">
+                          {group.rows.length} submission{group.rows.length === 1 ? '' : 's'}
+                        </span>
+                      </td>
+                    </tr>
+                  )}
+                  {group.rows.map((submission) => (
+                    <tr
+                      key={submission.id}
+                      className="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors cursor-pointer"
+                      onClick={() => router.push(`/admin/submissions/${submission.id}`)}
+                    >
+                      <td className="px-4 py-4 w-10" onClick={(e) => e.stopPropagation()}>
+                        <input
+                          type="checkbox"
+                          checked={selectedIds.has(submission.id)}
+                          onChange={() => toggleRow(submission.id)}
+                          className="rounded border-gray-300 dark:border-gray-600 text-[#006B3F] focus:ring-[#006B3F]"
+                          aria-label={`Select ${submission.talkTitle}`}
+                        />
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{submission.talkTitle}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">
+                        <div className="flex items-center gap-2">
+                          <span>{submission.fullName}</span>
+                          {submission.duplicateCount > 1 && (
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                if (submission.duplicateTalks.length === 1) {
+                                  router.push(`/admin/submissions/${submission.duplicateTalks[0].id}`);
+                                } else {
+                                  setDuplicateModalSubmission(submission);
+                                }
+                              }}
+                              title={`Also submitted: ${submission.duplicateTalks.map((t) => t.talkTitle).join(', ')}`}
+                              className="px-1.5 py-0.5 rounded text-xs font-bold border bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/40 dark:text-amber-400 dark:border-amber-900/50 hover:bg-amber-100 dark:hover:bg-amber-950/60 transition-colors"
+                            >
+                              ×{submission.duplicateCount}
+                            </button>
+                          )}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">{submission.talkCategory}</td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <span className={`inline-block px-2 py-0.5 rounded text-xs font-medium border ${STATUS_BADGE_CLASSES[submission.status]}`}>
+                          {STATUS_LABELS[submission.status]}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">
+                        {submission.averageRating !== null ? submission.averageRating.toFixed(1) : '—'}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">{submission.reviewCount}</td>
+                    </tr>
+                  ))}
+                </Fragment>
               ))}
             </tbody>
           </table>
