@@ -1,9 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getToken } from 'next-auth/jwt';
+import { z } from 'zod';
 import { db } from '@/src/db';
-import { getTalkStatus } from '@/src/lib/talkStatus';
+import { TALK_STATUSES, getTalkStatus, statusToBooleans } from '@/src/lib/talkStatus';
 import { computeReviewStats } from '@/src/lib/reviewStats';
 import type { AdminSubmission } from '@/src/types/admin';
+
+const bulkPatchSchema = z.object({
+  ids: z.array(z.string()).min(1),
+  status: z.enum(TALK_STATUSES),
+});
 
 // GET /api/admin/submissions - Fetch all submissions with review aggregation
 export async function GET(request: NextRequest) {
@@ -74,5 +80,45 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error('GET /api/admin/submissions error:', error);
     return NextResponse.json({ error: 'Failed to fetch submissions' }, { status: 500 });
+  }
+}
+
+// PATCH /api/admin/submissions - Bulk-update the decision status of many submissions
+export async function PATCH(request: NextRequest) {
+  const token = await getToken({ req: request });
+
+  if (!token?.email) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  const userRole = token.role as string | undefined;
+  if (userRole !== 'admin') {
+    return NextResponse.json({ error: 'Forbidden - Admin only' }, { status: 403 });
+  }
+
+  try {
+    const body = await request.json();
+    const result = bulkPatchSchema.safeParse(body);
+
+    if (!result.success) {
+      return NextResponse.json(
+        { error: 'Validation failed', details: result.error.flatten().fieldErrors },
+        { status: 400 }
+      );
+    }
+
+    const { ids, status } = result.data;
+    const currentYear = new Date().getFullYear().toString();
+
+    // Only status + synced booleans — never decisionNotes, so per-talk notes survive.
+    const updated = await db.talk.updateMany({
+      where: { id: { in: ids }, eventYear: currentYear },
+      data: { status, ...statusToBooleans(status) },
+    });
+
+    return NextResponse.json({ success: true, count: updated.count });
+  } catch (error) {
+    console.error('PATCH /api/admin/submissions error:', error);
+    return NextResponse.json({ error: 'Failed to update submissions' }, { status: 500 });
   }
 }
