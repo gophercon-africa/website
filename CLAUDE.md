@@ -12,6 +12,7 @@ Guidance for working in this repo. Keep it short; update it when a convention ch
 - `npm run dev` — dev server on :3000.
 - `npm run build` — runs `prisma generate` then `next build` (webpack). Next 16 does **not** lint during builds.
 - `npm run lint` — runs `eslint .` directly (`next lint` was removed in Next 16); flat config in `eslint.config.mjs` uses `eslint-config-next`'s native flat exports (no FlatCompat). `npx tsc --noEmit` for type-checking.
+- `npm run test` — vitest (pinned to v3: v4's rolldown needs `util.styleText`, missing on the Node 21.1 dev box). Route tests live next to the route as `route.test.ts`; mock `next-auth/jwt` and `@/src/db`.
 - Commit **both** `package-lock.json` **and** `yarn.lock` — the repo maintains both lockfiles in tandem (prior commits touch them together). There's no `packageManager` field; dev has used npm.
 
 ## Auth & route protection
