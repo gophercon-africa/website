@@ -80,16 +80,56 @@ describe('PATCH /api/admin/submissions/[id] — change category', () => {
     });
   });
 
-  it('rejects a category outside the canonical list', async () => {
+  it('updates only the level, leaving decision fields untouched', async () => {
     asAdmin();
 
-    const res = await patchRequest({ talkCategory: 'Blockchain' });
+    const res = await patchRequest({ talkLevel: 'advanced' });
+
+    expect(res.status).toBe(200);
+    expect(mockedUpdate).toHaveBeenCalledWith({
+      where: { id: TALK_ID },
+      data: { talkLevel: 'advanced' },
+    });
+  });
+
+  it('updates only the duration, leaving decision fields untouched', async () => {
+    asAdmin();
+
+    const res = await patchRequest({ talkDuration: '30' });
+
+    expect(res.status).toBe(200);
+    expect(mockedUpdate).toHaveBeenCalledWith({
+      where: { id: TALK_ID },
+      data: { talkDuration: '30' },
+    });
+  });
+
+  it('changes category, level, and duration together in one request', async () => {
+    asAdmin();
+
+    const res = await patchRequest({ talkCategory: 'AI', talkLevel: 'beginner', talkDuration: '20' });
+
+    expect(res.status).toBe(200);
+    expect(mockedUpdate).toHaveBeenCalledWith({
+      where: { id: TALK_ID },
+      data: { talkCategory: 'AI', talkLevel: 'beginner', talkDuration: '20' },
+    });
+  });
+
+  it.each([
+    ['category', { talkCategory: 'Blockchain' }],
+    ['level', { talkLevel: 'expert' }],
+    ['duration', { talkDuration: '45' }],
+  ])('rejects a %s outside the canonical list', async (_field, body) => {
+    asAdmin();
+
+    const res = await patchRequest(body);
 
     expect(res.status).toBe(400);
     expect(mockedUpdate).not.toHaveBeenCalled();
   });
 
-  it('rejects a body with neither status nor talkCategory', async () => {
+  it('rejects a body with no updatable field', async () => {
     asAdmin();
 
     const res = await patchRequest({ decisionNotes: 'just notes' });

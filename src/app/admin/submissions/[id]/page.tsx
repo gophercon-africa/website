@@ -6,10 +6,70 @@ import { toast } from 'sonner';
 import { ArrowLeft, BookOpen, Award, Clock, List } from 'lucide-react';
 import { ReviewsPanel } from '@/src/app/admin/_components/ReviewsPanel';
 import { DecisionPanel } from '@/src/app/admin/_components/DecisionPanel';
-import { TALK_CATEGORIES } from '@/src/lib/talkCategories';
+import {
+  TALK_CATEGORIES,
+  TALK_LEVELS,
+  TALK_LEVEL_LABELS,
+  TALK_DURATIONS,
+  TALK_DURATION_LABELS,
+} from '@/src/lib/talkOptions';
 import type { AdminSubmissionDetail } from '@/src/types/admin';
 
 type Status = AdminSubmissionDetail['status'];
+type TalkField = 'talkCategory' | 'talkLevel' | 'talkDuration';
+
+const TALK_FIELD_LABELS: Record<TalkField, string> = {
+  talkCategory: 'Category',
+  talkLevel: 'Level',
+  talkDuration: 'Duration',
+};
+
+function TalkFieldCard({
+  icon: Icon,
+  field,
+  value,
+  options,
+  optionLabels,
+  disabled,
+  onChange,
+}: {
+  icon: typeof BookOpen;
+  field: TalkField;
+  value: string;
+  options: readonly string[];
+  optionLabels?: Record<string, string>;
+  disabled: boolean;
+  onChange: (value: string) => void;
+}) {
+  const label = TALK_FIELD_LABELS[field];
+  return (
+    <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-3 border border-gray-100 dark:border-gray-700 flex items-start gap-3">
+      <Icon className="w-5 h-5 text-[#006B3F] shrink-0 mt-0.5" />
+      <div className="min-w-0 flex-1">
+        <label
+          htmlFor={field}
+          className="block text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-0.5"
+        >
+          {label}
+        </label>
+        <select
+          id={field}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          disabled={disabled}
+          className="w-full text-sm font-medium text-gray-900 dark:text-gray-100 bg-transparent border-0 p-0 pr-6 focus:ring-0 focus:outline-none cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+        >
+          {!options.includes(value) && <option value={value}>{value || 'Not set'}</option>}
+          {options.map((option) => (
+            <option key={option} value={option}>
+              {optionLabels?.[option] ?? option}
+            </option>
+          ))}
+        </select>
+      </div>
+    </div>
+  );
+}
 
 export default function AdminSubmissionDetailPage() {
   const params = useParams<{ id: string }>();
@@ -19,7 +79,7 @@ export default function AdminSubmissionDetailPage() {
   const [status, setStatus] = useState<Status>('pending');
   const [decisionNotes, setDecisionNotes] = useState('');
   const [saving, setSaving] = useState(false);
-  const [changingCategory, setChangingCategory] = useState(false);
+  const [savingField, setSavingField] = useState<TalkField | null>(null);
 
   const id = params?.id;
 
@@ -45,23 +105,24 @@ export default function AdminSubmissionDetailPage() {
     load();
   }, [load]);
 
-  async function changeCategory(talkCategory: string) {
-    if (!id || !submission || talkCategory === submission.talkCategory) return;
-    setChangingCategory(true);
+  async function changeTalkField(field: TalkField, value: string) {
+    if (!id || !submission || value === submission[field]) return;
+    const label = TALK_FIELD_LABELS[field];
+    setSavingField(field);
     try {
       const res = await fetch(`/api/admin/submissions/${id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ talkCategory }),
+        body: JSON.stringify({ [field]: value }),
       });
-      if (!res.ok) throw new Error('Failed to change category');
-      setSubmission({ ...submission, talkCategory });
-      toast.success(`Category changed to ${talkCategory}`);
+      if (!res.ok) throw new Error(`Failed to change ${label.toLowerCase()}`);
+      setSubmission({ ...submission, [field]: value });
+      toast.success(`${label} updated`);
     } catch (error) {
-      toast.error('Failed to change category');
+      toast.error(`Failed to change ${label.toLowerCase()}`);
       console.error(error);
     } finally {
-      setChangingCategory(false);
+      setSavingField(null);
     }
   }
 
@@ -136,47 +197,32 @@ export default function AdminSubmissionDetailPage() {
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-            <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-3 border border-gray-100 dark:border-gray-700 flex items-start gap-3">
-              <BookOpen className="w-5 h-5 text-[#006B3F] shrink-0 mt-0.5" />
-              <div>
-                <label
-                  htmlFor="talk-category"
-                  className="block text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-0.5"
-                >
-                  Category
-                </label>
-                <select
-                  id="talk-category"
-                  value={submission.talkCategory}
-                  onChange={(e) => changeCategory(e.target.value)}
-                  disabled={changingCategory}
-                  className="w-full text-sm font-medium text-gray-900 dark:text-gray-100 bg-transparent border-0 p-0 pr-6 focus:ring-0 focus:outline-none cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
-                >
-                  {!(TALK_CATEGORIES as readonly string[]).includes(submission.talkCategory) && (
-                    <option value={submission.talkCategory}>{submission.talkCategory || 'Uncategorized'}</option>
-                  )}
-                  {TALK_CATEGORIES.map((category) => (
-                    <option key={category} value={category}>
-                      {category}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-            <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-3 border border-gray-100 dark:border-gray-700 flex items-start gap-3">
-              <Award className="w-5 h-5 text-[#006B3F] shrink-0 mt-0.5" />
-              <div>
-                <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-0.5">Level</p>
-                <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{submission.talkLevel}</p>
-              </div>
-            </div>
-            <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-3 border border-gray-100 dark:border-gray-700 flex items-start gap-3">
-              <Clock className="w-5 h-5 text-[#006B3F] shrink-0 mt-0.5" />
-              <div>
-                <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-0.5">Duration</p>
-                <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{submission.talkDuration}</p>
-              </div>
-            </div>
+            <TalkFieldCard
+              icon={BookOpen}
+              field="talkCategory"
+              value={submission.talkCategory}
+              options={TALK_CATEGORIES}
+              disabled={savingField === 'talkCategory'}
+              onChange={(value) => changeTalkField('talkCategory', value)}
+            />
+            <TalkFieldCard
+              icon={Award}
+              field="talkLevel"
+              value={submission.talkLevel}
+              options={TALK_LEVELS}
+              optionLabels={TALK_LEVEL_LABELS}
+              disabled={savingField === 'talkLevel'}
+              onChange={(value) => changeTalkField('talkLevel', value)}
+            />
+            <TalkFieldCard
+              icon={Clock}
+              field="talkDuration"
+              value={submission.talkDuration}
+              options={TALK_DURATIONS}
+              optionLabels={TALK_DURATION_LABELS}
+              disabled={savingField === 'talkDuration'}
+              onChange={(value) => changeTalkField('talkDuration', value)}
+            />
           </div>
 
           <div className="prose prose-sm sm:prose-base max-w-none text-gray-700 dark:text-gray-300 space-y-6">

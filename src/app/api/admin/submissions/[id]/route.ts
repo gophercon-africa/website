@@ -3,7 +3,7 @@ import { getToken } from 'next-auth/jwt';
 import { z } from 'zod';
 import { db } from '@/src/db';
 import { TALK_STATUSES, getTalkStatus, statusToBooleans } from '@/src/lib/talkStatus';
-import { TALK_CATEGORIES } from '@/src/lib/talkCategories';
+import { TALK_CATEGORIES, TALK_LEVELS, TALK_DURATIONS } from '@/src/lib/talkOptions';
 import { computeReviewStats } from '@/src/lib/reviewStats';
 import type { AdminSubmissionDetail } from '@/src/types/admin';
 
@@ -12,10 +12,17 @@ const patchSchema = z
     status: z.enum(TALK_STATUSES).optional(),
     decisionNotes: z.string().max(5000).optional().nullable(),
     talkCategory: z.enum(TALK_CATEGORIES).optional(),
+    talkLevel: z.enum(TALK_LEVELS).optional(),
+    talkDuration: z.enum(TALK_DURATIONS).optional(),
   })
-  .refine((data) => data.status !== undefined || data.talkCategory !== undefined, {
-    message: 'Provide a status or a talkCategory to update',
-  });
+  .refine(
+    (data) =>
+      data.status !== undefined ||
+      data.talkCategory !== undefined ||
+      data.talkLevel !== undefined ||
+      data.talkDuration !== undefined,
+    { message: 'Provide a status, talkCategory, talkLevel, or talkDuration to update' }
+  );
 
 async function requireAdmin(request: NextRequest) {
   const token = await getToken({ req: request });
@@ -131,7 +138,7 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
       );
     }
 
-    const { status, decisionNotes, talkCategory } = result.data;
+    const { status, decisionNotes, talkCategory, talkLevel, talkDuration } = result.data;
     const currentYear = new Date().getFullYear().toString();
 
     const existing = await db.talk.findFirst({
@@ -143,8 +150,8 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
       return NextResponse.json({ error: 'Submission not found' }, { status: 404 });
     }
 
-    // A decision save (status) always rewrites the notes; a category change
-    // must not touch the decision fields.
+    // A decision save (status) always rewrites the notes; talk-field changes
+    // (category/level/duration) must not touch the decision fields.
     const data: Record<string, unknown> = {};
     if (status !== undefined) {
       data.status = status;
@@ -153,6 +160,12 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
     }
     if (talkCategory !== undefined) {
       data.talkCategory = talkCategory;
+    }
+    if (talkLevel !== undefined) {
+      data.talkLevel = talkLevel;
+    }
+    if (talkDuration !== undefined) {
+      data.talkDuration = talkDuration;
     }
 
     const talk = await db.talk.update({

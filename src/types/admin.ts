@@ -16,6 +16,7 @@ export interface AdminSubmission {
   fullName: string;
   email: string;
   talkCategory: string;
+  talkDuration: string;
   status: TalkStatus;
   averageRating: number | null;
   reviewCount: number;

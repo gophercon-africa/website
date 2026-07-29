@@ -4,7 +4,13 @@ import React, { useActionState, useState, startTransition } from 'react';
 import '@styles/globals.css';
 import * as actions from "@actions/index";
 import { TalkFormState } from '@actions/call-for-speakers/create';
-import { TALK_CATEGORIES } from '@lib/talkCategories';
+import {
+    TALK_CATEGORIES,
+    TALK_LEVELS,
+    TALK_LEVEL_LABELS,
+    TALK_DURATIONS,
+    TALK_DURATION_LABELS,
+} from '@lib/talkOptions';
 import { toast } from 'sonner';
 import { redirect } from 'next/navigation';
 import paths from '@path'; 
@@ -297,8 +303,9 @@ export default function CallForSpeakersForm() {
                                             className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[#006B3F] focus:ring-[#006B3F] h-12 px-4 text-base transition-all duration-200 ease-in-out"
                                         >
                                             <option value="">Select duration</option>
-                                            <option value="20">20 minutes</option>
-                                            <option value="30">30 minutes</option>
+                                            {TALK_DURATIONS.map((duration) => (
+                                                <option key={duration} value={duration}>{TALK_DURATION_LABELS[duration]}</option>
+                                            ))}
                                         </select>
                                         <p className="text-red-500 text-sm">{formState?.errors?.talkDuration}</p>
                                     </div>
@@ -315,9 +322,9 @@ export default function CallForSpeakersForm() {
                                             className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[#006B3F] focus:ring-[#006B3F] h-12 px-4 text-base transition-all duration-200 ease-in-out"
                                         >
                                             <option value="">Select level</option>
-                                            <option value="beginner">Beginner</option>
-                                            <option value="intermediate">Intermediate</option>
-                                            <option value="advanced">Advanced</option>
+                                            {TALK_LEVELS.map((level) => (
+                                                <option key={level} value={level}>{TALK_LEVEL_LABELS[level]}</option>
+                                            ))}
                                         </select>
                                         <p className="text-red-500 text-sm">{formState?.errors?.talkLevel}</p>
                                     </div>
