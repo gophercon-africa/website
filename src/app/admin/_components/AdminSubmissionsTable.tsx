@@ -13,18 +13,20 @@ import type { AdminSubmission } from '@/src/types/admin';
 
 type StatusFilter = 'all' | TalkStatus;
 
-const EXPORT_COLUMNS: { key: string; label: string }[] = [
+// Single registry for the column checkboxes, the table, and the CSV export —
+// all three follow this order.
+const COLUMNS: { key: string; label: string }[] = [
+  { key: 'talkTitle', label: 'Title' },
+  { key: 'fullName', label: 'Speaker' },
   { key: 'email', label: 'Email' },
-  { key: 'talkTitle', label: 'Talk Title' },
-  { key: 'fullName', label: 'Speaker Name' },
   { key: 'talkCategory', label: 'Category' },
   { key: 'talkDuration', label: 'Duration' },
   { key: 'status', label: 'Status' },
-  { key: 'averageRating', label: 'Average Rating' },
-  { key: 'reviewCount', label: 'Review Count' },
+  { key: 'averageRating', label: 'Avg Rating' },
+  { key: 'reviewCount', label: 'Reviews' },
 ];
 
-const DEFAULT_EXPORT_COLUMNS = new Set(['email']);
+const DEFAULT_COLUMNS = new Set(COLUMNS.map((c) => c.key).filter((key) => key !== 'email'));
 
 const UNCATEGORIZED = 'Uncategorized';
 
@@ -48,7 +50,7 @@ export function AdminSubmissionsTable({
   const [ratingMin, setRatingMin] = useState('');
   const [ratingMax, setRatingMax] = useState('');
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
-  const [exportColumns, setExportColumns] = useState<Set<string>>(new Set(DEFAULT_EXPORT_COLUMNS));
+  const [enabledColumns, setEnabledColumns] = useState<Set<string>>(new Set(DEFAULT_COLUMNS));
   const [duplicateModalSubmission, setDuplicateModalSubmission] = useState<AdminSubmission | null>(null);
   const [bulkStatus, setBulkStatus] = useState<TalkStatus>('shortlisted');
   const [confirmOpen, setConfirmOpen] = useState(false);
@@ -137,8 +139,8 @@ export function AdminSubmissionsTable({
     setSelectedIds(allSelected ? new Set() : new Set(filteredIds));
   }
 
-  function toggleExportColumn(key: string) {
-    setExportColumns((prev) => {
+  function toggleColumn(key: string) {
+    setEnabledColumns((prev) => {
       const next = new Set(prev);
       if (next.has(key)) next.delete(key);
       else next.add(key);
@@ -146,8 +148,9 @@ export function AdminSubmissionsTable({
     });
   }
 
+  const visibleColumns = COLUMNS.filter((c) => enabledColumns.has(c.key));
+
   function exportRows(rows: AdminSubmission[], filename: string) {
-    const columns = EXPORT_COLUMNS.filter((c) => exportColumns.has(c.key));
     const csvRows = rows.map((s) => ({
       talkTitle: s.talkTitle,
       fullName: s.fullName,
@@ -158,7 +161,7 @@ export function AdminSubmissionsTable({
       averageRating: s.averageRating !== null ? s.averageRating.toFixed(1) : '',
       reviewCount: s.reviewCount,
     }));
-    const csv = toCsv(csvRows, columns.map((c) => c.key));
+    const csv = toCsv(csvRows, visibleColumns.map((c) => c.key));
     downloadCsv(filename, csv);
   }
 
@@ -189,6 +192,73 @@ export function AdminSubmissionsTable({
   const allFilteredSelected =
     filteredSubmissions.length > 0 && filteredSubmissions.every((s) => selectedIds.has(s.id));
   const selectedSubmissions = submissions.filter((s) => selectedIds.has(s.id));
+
+  function renderCell(key: string, submission: AdminSubmission) {
+    switch (key) {
+      case 'talkTitle':
+        return (
+          <td key={key} className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{submission.talkTitle}</td>
+        );
+      case 'fullName':
+        return (
+          <td key={key} className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">
+            <div className="flex items-center gap-2">
+              <span>{submission.fullName}</span>
+              {submission.duplicateCount > 1 && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (submission.duplicateTalks.length === 1) {
+                      router.push(`/admin/submissions/${submission.duplicateTalks[0].id}`);
+                    } else {
+                      setDuplicateModalSubmission(submission);
+                    }
+                  }}
+                  title={`Also submitted: ${submission.duplicateTalks.map((t) => t.talkTitle).join(', ')}`}
+                  className="px-1.5 py-0.5 rounded text-xs font-bold border bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/40 dark:text-amber-400 dark:border-amber-900/50 hover:bg-amber-100 dark:hover:bg-amber-950/60 transition-colors"
+                >
+                  ×{submission.duplicateCount}
+                </button>
+              )}
+            </div>
+          </td>
+        );
+      case 'email':
+        return (
+          <td key={key} className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">{submission.email}</td>
+        );
+      case 'talkCategory':
+        return (
+          <td key={key} className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">{submission.talkCategory}</td>
+        );
+      case 'talkDuration':
+        return (
+          <td key={key} className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">
+            {durationLabel(submission.talkDuration) || '—'}
+          </td>
+        );
+      case 'status':
+        return (
+          <td key={key} className="px-6 py-4 whitespace-nowrap">
+            <span className={`inline-block px-2 py-0.5 rounded text-xs font-medium border ${STATUS_BADGE_CLASSES[submission.status]}`}>
+              {STATUS_LABELS[submission.status]}
+            </span>
+          </td>
+        );
+      case 'averageRating':
+        return (
+          <td key={key} className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">
+            {submission.averageRating !== null ? submission.averageRating.toFixed(1) : '—'}
+          </td>
+        );
+      case 'reviewCount':
+        return (
+          <td key={key} className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">{submission.reviewCount}</td>
+        );
+      default:
+        return null;
+    }
+  }
 
   return (
     <div>
@@ -262,14 +332,14 @@ export function AdminSubmissionsTable({
 
       <div className="px-6 py-3 border-b border-gray-200 dark:border-gray-800 flex flex-wrap items-center gap-4">
         <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-          Export columns:
+          Columns:
         </span>
-        {EXPORT_COLUMNS.map((col) => (
+        {COLUMNS.map((col) => (
           <label key={col.key} className="flex items-center gap-1.5 text-sm text-gray-700 dark:text-gray-300">
             <input
               type="checkbox"
-              checked={exportColumns.has(col.key)}
-              onChange={() => toggleExportColumn(col.key)}
+              checked={enabledColumns.has(col.key)}
+              onChange={() => toggleColumn(col.key)}
               className="rounded border-gray-300 dark:border-gray-600 text-[#006B3F] focus:ring-[#006B3F]"
             />
             {col.label}
@@ -332,13 +402,9 @@ export function AdminSubmissionsTable({
                     aria-label="Select all filtered submissions"
                   />
                 </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Title</th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Speaker</th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Category</th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Duration</th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Status</th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Avg Rating</th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Reviews</th>
+                {visibleColumns.map((col) => (
+                  <th key={col.key} scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">{col.label}</th>
+                ))}
               </tr>
             </thead>
             <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800">
@@ -346,7 +412,7 @@ export function AdminSubmissionsTable({
                 <Fragment key={group.category ?? 'all'}>
                   {group.category !== null && (
                     <tr className="bg-gray-50 dark:bg-gray-800/50">
-                      <td colSpan={8} className="px-6 py-2 text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
+                      <td colSpan={visibleColumns.length + 1} className="px-6 py-2 text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
                         {group.category}
                         <span className="ml-2 font-normal normal-case tracking-normal text-gray-400 dark:text-gray-500">
                           {group.rows.length} submission{group.rows.length === 1 ? '' : 's'}
@@ -369,41 +435,7 @@ export function AdminSubmissionsTable({
                           aria-label={`Select ${submission.talkTitle}`}
                         />
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{submission.talkTitle}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">
-                        <div className="flex items-center gap-2">
-                          <span>{submission.fullName}</span>
-                          {submission.duplicateCount > 1 && (
-                            <button
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                if (submission.duplicateTalks.length === 1) {
-                                  router.push(`/admin/submissions/${submission.duplicateTalks[0].id}`);
-                                } else {
-                                  setDuplicateModalSubmission(submission);
-                                }
-                              }}
-                              title={`Also submitted: ${submission.duplicateTalks.map((t) => t.talkTitle).join(', ')}`}
-                              className="px-1.5 py-0.5 rounded text-xs font-bold border bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/40 dark:text-amber-400 dark:border-amber-900/50 hover:bg-amber-100 dark:hover:bg-amber-950/60 transition-colors"
-                            >
-                              ×{submission.duplicateCount}
-                            </button>
-                          )}
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">{submission.talkCategory}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">
-                        {durationLabel(submission.talkDuration) || '—'}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <span className={`inline-block px-2 py-0.5 rounded text-xs font-medium border ${STATUS_BADGE_CLASSES[submission.status]}`}>
-                          {STATUS_LABELS[submission.status]}
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">
-                        {submission.averageRating !== null ? submission.averageRating.toFixed(1) : '—'}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">{submission.reviewCount}</td>
+                      {visibleColumns.map((col) => renderCell(col.key, submission))}
                     </tr>
                   ))}
                 </Fragment>
