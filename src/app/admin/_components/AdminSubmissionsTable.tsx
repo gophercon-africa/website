@@ -8,6 +8,7 @@ import Modal from '@/src/components/common/Modal';
 import { toCsv, downloadCsv } from '@/src/lib/csv';
 import { STATUS_LABELS, STATUS_BADGE_CLASSES } from './statusBadges';
 import { TALK_STATUSES, type TalkStatus } from '@/src/lib/talkStatus';
+import { TALK_DURATION_LABELS } from '@/src/lib/talkOptions';
 import type { AdminSubmission } from '@/src/types/admin';
 
 type StatusFilter = 'all' | TalkStatus;
@@ -17,6 +18,7 @@ const EXPORT_COLUMNS: { key: string; label: string }[] = [
   { key: 'talkTitle', label: 'Talk Title' },
   { key: 'fullName', label: 'Speaker Name' },
   { key: 'talkCategory', label: 'Category' },
+  { key: 'talkDuration', label: 'Duration' },
   { key: 'status', label: 'Status' },
   { key: 'averageRating', label: 'Average Rating' },
   { key: 'reviewCount', label: 'Review Count' },
@@ -25,6 +27,11 @@ const EXPORT_COLUMNS: { key: string; label: string }[] = [
 const DEFAULT_EXPORT_COLUMNS = new Set(['email']);
 
 const UNCATEGORIZED = 'Uncategorized';
+
+// Stored as raw minutes; show the friendly label when we have one.
+function durationLabel(value: string) {
+  return (TALK_DURATION_LABELS as Record<string, string>)[value] ?? value;
+}
 
 export function AdminSubmissionsTable({
   submissions,
@@ -146,6 +153,7 @@ export function AdminSubmissionsTable({
       fullName: s.fullName,
       email: s.email,
       talkCategory: s.talkCategory,
+      talkDuration: durationLabel(s.talkDuration),
       status: STATUS_LABELS[s.status],
       averageRating: s.averageRating !== null ? s.averageRating.toFixed(1) : '',
       reviewCount: s.reviewCount,
@@ -327,6 +335,7 @@ export function AdminSubmissionsTable({
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Title</th>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Speaker</th>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Category</th>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Duration</th>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Status</th>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Avg Rating</th>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Reviews</th>
@@ -337,7 +346,7 @@ export function AdminSubmissionsTable({
                 <Fragment key={group.category ?? 'all'}>
                   {group.category !== null && (
                     <tr className="bg-gray-50 dark:bg-gray-800/50">
-                      <td colSpan={7} className="px-6 py-2 text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
+                      <td colSpan={8} className="px-6 py-2 text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
                         {group.category}
                         <span className="ml-2 font-normal normal-case tracking-normal text-gray-400 dark:text-gray-500">
                           {group.rows.length} submission{group.rows.length === 1 ? '' : 's'}
@@ -383,6 +392,9 @@ export function AdminSubmissionsTable({
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">{submission.talkCategory}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">
+                        {durationLabel(submission.talkDuration) || '—'}
+                      </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <span className={`inline-block px-2 py-0.5 rounded text-xs font-medium border ${STATUS_BADGE_CLASSES[submission.status]}`}>
                           {STATUS_LABELS[submission.status]}
