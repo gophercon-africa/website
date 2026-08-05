@@ -112,6 +112,7 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/((?!_next/static|_next/image|favicon.ico|public).*)',
+    // Skip Next internals and any static file (paths with a file extension).
+    '/((?!_next/static|_next/image|favicon.ico|public|.*\\..*).*)',
   ],
 }

@@ -204,8 +204,8 @@ export default function Tickets() {
           <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
             We are happy to offer diversity scholarships to support members of
             underrepresented groups who may not otherwise have the opportunity
-            to attend the conference. Please apply using this form. Applications
-            close on [ To be announced ] (end-of-day WAT).
+            to attend the conference. Please apply using the form below — the
+            application deadline will be announced soon.
           </p>
           <ToastWrapper message="To be announced soon!" className="ml-4">
             <span className="text-xl font-medium">
@@ -221,9 +221,9 @@ export default function Tickets() {
         <div className="mt-12 text-center">
           <h3 className="text-2xl font-medium mb-4">Refund policy</h3>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            We offer refunds for all requests made before [ To be announced ]
-            (end-of-day WAT). There will be a 10% fee for all refunds to cover
-            ticketing and payment processing costs.
+            We offer refunds for all requests made before the refund deadline,
+            which will be announced soon. There will be a 10% fee for all
+            refunds to cover ticketing and payment processing costs.
           </p>
         </div>
       </div>
