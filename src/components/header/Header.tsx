@@ -34,7 +34,7 @@ export default function Header({ mounted = true }: HeaderProps) {
     pathname?.startsWith('/admin') || pathname?.startsWith('/reviews');
 
   const isDark = resolvedTheme === 'dark';
-  const navLink = `text-gray-600 hover:text-[#006B3F] transition-colors font-medium${
+  const navLink = `text-gray-600 hover:text-brand transition-colors font-medium${
     isInternal ? ' dark:text-gray-300 dark:hover:text-emerald-400' : ''
   }`;
 
@@ -61,6 +61,7 @@ export default function Header({ mounted = true }: HeaderProps) {
           </div>
           <div className="hidden md:flex items-center space-x-8">
             <Link href="/#about" className={navLink}>About</Link>
+            <Link href="/schedule" className={navLink}>Schedule</Link>
             <Link href="/workshops" className={navLink}>Workshops</Link>
             <Link href="/#sponsors" className={navLink}>Sponsors</Link>
             {isAdmin && (
@@ -82,14 +83,14 @@ export default function Header({ mounted = true }: HeaderProps) {
                 onClick={() => setTheme(isDark ? 'light' : 'dark')}
                 aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
                 title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-                className="text-gray-600 hover:text-[#006B3F] dark:text-gray-300 dark:hover:text-emerald-400 transition-colors"
+                className="text-gray-600 hover:text-brand dark:text-gray-300 dark:hover:text-emerald-400 transition-colors"
               >
                 {isDark ? <Sun size={20} /> : <Moon size={20} />}
               </button>
             )}
           </div>
           <button
-            className={`md:hidden text-gray-600 hover:text-[#006B3F] transition-colors${
+            className={`md:hidden text-gray-600 hover:text-brand transition-colors${
               isInternal ? ' dark:text-gray-300 dark:hover:text-emerald-400' : ''
             }`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -106,6 +107,13 @@ export default function Header({ mounted = true }: HeaderProps) {
               onClick={() => setIsMobileMenuOpen(false)}
             >
               About
+            </Link>
+            <Link
+              href="/schedule"
+              className={`block ${navLink}`}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Schedule
             </Link>
             <Link
               href="/workshops"

@@ -105,7 +105,7 @@ function AccordionItem({
     <details className="group rounded-xl border border-gray-200 bg-white">
       <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4">
         <div className="flex min-w-0 items-start gap-3">
-          <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xs font-bold text-blue-700">
+          <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand/10 text-xs font-bold text-brand">
             {index}
           </span>
           <div className="min-w-0">
@@ -130,19 +130,19 @@ export default function WorkshopsPage() {
   return (
     <div className="min-h-screen bg-gray-50 py-12 sm:py-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="rounded-2xl border border-blue-200 bg-white shadow-sm overflow-hidden">
+        <div className="rounded-2xl border border-brand/20 bg-white shadow-sm overflow-hidden">
           <div className="px-6 py-7 sm:px-10 sm:py-10">
             <div className="flex flex-col gap-6">
               <div className="flex flex-col gap-4">
                 <div className="flex flex-wrap items-center justify-between gap-3">
-                  <p className="text-xs tracking-[0.28em] uppercase text-blue-700 font-semibold">
+                  <p className="text-xs tracking-[0.28em] uppercase text-brand font-semibold">
                     {workshop.eyebrow}
                   </p>
                   <a
                     href={TICKETS_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center rounded-lg bg-blue-700 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-700"
+                    className="inline-flex items-center justify-center rounded-lg bg-brand px-4 py-2 text-sm font-semibold text-white hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand"
                   >
                     Buy Tickets
                   </a>
@@ -151,6 +151,16 @@ export default function WorkshopsPage() {
                 <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">
                   {workshop.title}
                 </h1>
+
+                <p className="text-sm text-gray-600">
+                  Part of Day 1 — Thursday, October 15.{' '}
+                  <Link
+                    href="/schedule"
+                    className="font-semibold text-brand hover:text-brand-dark hover:underline"
+                  >
+                    See the full schedule
+                  </Link>
+                </p>
 
                 <div className="flex flex-wrap items-center gap-3">
                   <div className="flex items-center gap-3">
@@ -178,7 +188,7 @@ export default function WorkshopsPage() {
                 ))}
               </div>
 
-              <div className="rounded-xl border border-blue-100 bg-blue-50 p-6">
+              <div className="rounded-xl border border-brand/20 bg-brand/10 p-6">
                 <p className="text-gray-900 text-xs font-bold tracking-[0.18em] uppercase">
                   What you&apos;ll learn
                 </p>
@@ -200,7 +210,7 @@ export default function WorkshopsPage() {
 
               <div>
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="h-10 w-10 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center border border-blue-100">
+                  <div className="h-10 w-10 rounded-lg bg-brand/10 text-brand flex items-center justify-center border border-brand/20">
                     <BookOpen className="w-5 h-5" />
                   </div>
                   <div>
@@ -227,7 +237,7 @@ export default function WorkshopsPage() {
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 pt-2">
-                <div className="rounded-xl border border-gray-200 bg-blue-50/40 p-6">
+                <div className="rounded-xl border border-gray-200 bg-brand/5 p-6">
                   <h3 className="text-xs font-bold tracking-[0.18em] uppercase text-gray-900 mb-3">
                     Prerequisites
                   </h3>
