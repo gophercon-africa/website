@@ -117,9 +117,9 @@ export default function Tickets() {
                   className={[
                     "min-h-[44px] inline-flex items-center rounded-full border px-3 py-1 text-sm transition-colors",
                     activeDayKey === filter.key
-                      ? "border-[#006B3F] bg-[#E8F5E9] text-[#006B3F]"
+                      ? "border-brand bg-[#E8F5E9] text-brand"
                       : "border-gray-200 bg-gray-50 text-gray-700 hover:bg-gray-100",
-                    "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#006B3F]",
+                    "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand",
                   ].join(" ")}
                 >
                   {filter.label}
@@ -177,7 +177,7 @@ export default function Tickets() {
                   </div>
 
                   <div className="shrink-0 flex sm:flex-col items-start sm:items-end gap-3">
-                    <span className="inline-flex items-center rounded-full bg-[#E8F5E9] px-3 py-1 text-xs font-semibold text-[#006B3F]">
+                    <span className="inline-flex items-center rounded-full bg-[#E8F5E9] px-3 py-1 text-xs font-semibold text-brand">
                       {ticket.price}
                     </span>
                   </div>
@@ -192,7 +192,7 @@ export default function Tickets() {
             href={TICKETS_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-[#006B3F] text-white px-6 py-3 rounded-md hover:bg-[#005A35] transition-colors duration-200 font-semibold min-h-[44px] inline-flex items-center justify-center focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#006B3F]"
+            className="bg-brand text-white px-6 py-3 rounded-md hover:bg-brand-dark transition-colors duration-200 font-semibold min-h-[44px] inline-flex items-center justify-center focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand"
           >
             Get Ticket
           </a>
@@ -210,7 +210,7 @@ export default function Tickets() {
           <ToastWrapper message="To be announced soon!" className="ml-4">
             <span className="text-xl font-medium">
               {" "}
-              <button className="bg-[#006B3F] text-white px-4 py-2 rounded-md hover:bg-[#005A35] transition-colors duration-200">
+              <button className="bg-brand text-white px-4 py-2 rounded-md hover:bg-brand-dark transition-colors duration-200">
                 Apply using this form
               </button>
             </span>

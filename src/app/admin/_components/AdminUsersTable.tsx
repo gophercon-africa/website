@@ -92,7 +92,7 @@ export function AdminUsersTable({
                   checked={user.isAdmin}
                   disabled={pendingIds.has(user.id)}
                   onChange={() => toggleRole(user, 'isAdmin')}
-                  className="rounded border-gray-300 dark:border-gray-600 text-[#006B3F] focus:ring-[#006B3F]"
+                  className="rounded border-gray-300 dark:border-gray-600 text-brand focus:ring-brand"
                   aria-label={`${user.email} is admin`}
                 />
               </td>
@@ -102,7 +102,7 @@ export function AdminUsersTable({
                   checked={user.isReviewer}
                   disabled={pendingIds.has(user.id)}
                   onChange={() => toggleRole(user, 'isReviewer')}
-                  className="rounded border-gray-300 dark:border-gray-600 text-[#006B3F] focus:ring-[#006B3F]"
+                  className="rounded border-gray-300 dark:border-gray-600 text-brand focus:ring-brand"
                   aria-label={`${user.email} is reviewer`}
                 />
               </td>

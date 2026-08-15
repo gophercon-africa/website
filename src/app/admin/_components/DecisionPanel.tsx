@@ -10,7 +10,7 @@ const SELECTED_CLASSES: Record<TalkStatus, string> = {
   pending: 'bg-yellow-500 text-white border-yellow-500',
   shortlisted: 'bg-blue-600 text-white border-blue-600',
   waitlisted: 'bg-purple-600 text-white border-purple-600',
-  accepted: 'bg-[#006B3F] text-white border-[#006B3F]',
+  accepted: 'bg-brand text-white border-brand',
   rejected: 'bg-red-600 text-white border-red-600',
 };
 
@@ -60,12 +60,12 @@ export function DecisionPanel({
         onChange={(e) => onNotesChange(e.target.value)}
         rows={3}
         placeholder="Optional notes about this decision..."
-        className="w-full rounded-lg border border-gray-300 dark:border-gray-700 px-4 py-3 text-sm text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:border-[#006B3F] focus:ring-2 focus:ring-[#006B3F]/20 focus:outline-none transition-shadow bg-white dark:bg-gray-800 resize-y mb-4"
+        className="w-full rounded-lg border border-gray-300 dark:border-gray-700 px-4 py-3 text-sm text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:border-brand focus:ring-2 focus:ring-brand/20 focus:outline-none transition-shadow bg-white dark:bg-gray-800 resize-y mb-4"
       />
       <button
         onClick={onSave}
         disabled={saving}
-        className="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium text-white bg-[#006B3F] hover:bg-[#008751] rounded-lg disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+        className="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium text-white bg-brand hover:bg-brand-light rounded-lg disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
       >
         {saving ? 'Saving...' : saveLabel}
       </button>

@@ -80,11 +80,11 @@ export default function AdminDashboardPage() {
           <div className="flex items-center gap-4">
             <Link
               href="/admin/selection"
-              className="text-sm font-semibold text-white bg-[#006B3F] hover:bg-[#00552f] dark:bg-emerald-600 dark:hover:bg-emerald-500 rounded-lg px-4 py-2 transition-colors"
+              className="text-sm font-semibold text-white bg-brand hover:bg-brand-dark dark:bg-emerald-600 dark:hover:bg-emerald-500 rounded-lg px-4 py-2 transition-colors"
             >
               Selection Mode
             </Link>
-            <Link href="/admin/users" className="text-sm font-medium text-[#006B3F] dark:text-emerald-400 hover:underline">
+            <Link href="/admin/users" className="text-sm font-medium text-brand dark:text-emerald-400 hover:underline">
               Manage Users
             </Link>
           </div>
@@ -156,7 +156,7 @@ export default function AdminDashboardPage() {
                         <div className="flex items-center gap-3">
                           <div className="flex-1 w-full bg-gray-200 dark:bg-gray-800 rounded-full h-2 min-w-[100px]">
                             <div
-                              className="bg-[#006B3F] h-2 rounded-full transition-all duration-500"
+                              className="bg-brand h-2 rounded-full transition-all duration-500"
                               style={{ width: `${reviewer.percentageComplete}%` }}
                             />
                           </div>

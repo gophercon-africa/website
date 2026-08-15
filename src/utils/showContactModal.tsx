@@ -13,7 +13,7 @@ export function showContactModal() {
             <h3 className="text-2xl font-bold text-gray-900 mb-6">Contact Information</h3>
             <div className="space-y-4">
                 <div className="flex items-center p-4 bg-gray-50 rounded-lg">
-                    <div className="w-12 h-12 rounded-full bg-[#006B3F] flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-full bg-brand flex items-center justify-center">
                         <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                         </svg>

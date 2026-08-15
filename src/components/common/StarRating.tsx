@@ -92,7 +92,7 @@ export function StarRating({
                 onMouseEnter={() => setHoverRating(star - 0.5)}
                 onFocus={() => setHoverRating(star - 0.5)}
                 onBlur={() => setHoverRating(0)}
-                className="absolute left-0 top-0 h-6 w-3 focus:outline-none focus:ring-2 focus:ring-[#006B3F] focus:ring-offset-2 rounded-l"
+                className="absolute left-0 top-0 h-6 w-3 focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2 rounded-l"
                 aria-label={`${star - 0.5} stars`}
                 aria-checked={value === star - 0.5}
               />
@@ -105,7 +105,7 @@ export function StarRating({
                 onMouseEnter={() => setHoverRating(star)}
                 onFocus={() => setHoverRating(star)}
                 onBlur={() => setHoverRating(0)}
-                className="absolute right-0 top-0 h-6 w-3 focus:outline-none focus:ring-2 focus:ring-[#006B3F] focus:ring-offset-2 rounded-r"
+                className="absolute right-0 top-0 h-6 w-3 focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2 rounded-r"
                 aria-label={`${star} star${star !== 1 ? 's' : ''}`}
                 aria-checked={value === star}
               />

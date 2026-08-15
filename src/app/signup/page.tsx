@@ -15,7 +15,7 @@ export default function SignUpPage() {
             <Link className="text-gray-600 hover:text-gray-900" href="/">
               Back to home
             </Link>
-            <Link className="text-[#006B3F] hover:text-[#008751] font-medium" href="/signin">
+            <Link className="text-brand hover:text-brand-light font-medium" href="/signin">
               Go to sign in
             </Link>
           </div>

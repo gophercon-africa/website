@@ -44,7 +44,7 @@ function TalkFieldCard({
   const label = TALK_FIELD_LABELS[field];
   return (
     <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-3 border border-gray-100 dark:border-gray-700 flex items-start gap-3">
-      <Icon className="w-5 h-5 text-[#006B3F] shrink-0 mt-0.5" />
+      <Icon className="w-5 h-5 text-brand shrink-0 mt-0.5" />
       <div className="min-w-0 flex-1">
         <label
           htmlFor={field}
@@ -150,7 +150,7 @@ export default function AdminSubmissionDetailPage() {
     return (
       <div className="min-h-[calc(100vh-80px)] flex items-center justify-center bg-gray-50 dark:bg-gray-950">
         <div className="flex flex-col items-center gap-3">
-          <div className="w-8 h-8 border-4 border-[#006B3F]/20 border-t-[#006B3F] rounded-full animate-spin" />
+          <div className="w-8 h-8 border-4 border-brand/20 border-t-brand rounded-full animate-spin" />
           <p className="text-gray-500 dark:text-gray-400 font-medium">Loading submission...</p>
         </div>
       </div>
@@ -165,7 +165,7 @@ export default function AdminSubmissionDetailPage() {
           <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">Submission Not Found</h2>
           <button
             onClick={() => router.push('/admin')}
-            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-[#006B3F] dark:text-emerald-400 hover:bg-[#006B3F]/5 dark:hover:bg-emerald-500/10 rounded-lg transition-colors"
+            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-brand dark:text-emerald-400 hover:bg-brand/5 dark:hover:bg-emerald-500/10 rounded-lg transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to dashboard

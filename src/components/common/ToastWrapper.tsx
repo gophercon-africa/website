@@ -19,7 +19,7 @@ const ToastWrapper: React.FC<ToastWrapperProps> = ({
       position: 'top-right',
       style: {
         background: '#fff',
-        color: '#006B3F',
+        color: 'var(--color-brand)',
         padding: '16px 24px',
         borderRadius: '12px',
         boxShadow: '0 8px 16px rgba(0, 0, 0, 0.08)',

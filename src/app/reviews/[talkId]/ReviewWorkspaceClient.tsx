@@ -316,7 +316,7 @@ export default function ReviewWorkspacePage() {
     return (
       <div className="min-h-[calc(100vh-80px)] flex items-center justify-center bg-gray-50 dark:bg-gray-950">
         <div className="flex flex-col items-center gap-3">
-          <div className="w-8 h-8 border-4 border-[#006B3F]/20 border-t-[#006B3F] rounded-full animate-spin" />
+          <div className="w-8 h-8 border-4 border-brand/20 border-t-brand rounded-full animate-spin" />
           <p className="text-gray-500 dark:text-gray-400 font-medium">Loading workspace...</p>
         </div>
       </div>
@@ -338,7 +338,7 @@ export default function ReviewWorkspacePage() {
           </p>
           <button
             onClick={() => router.push('/reviews')}
-            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-[#006B3F] hover:bg-[#006B3F]/5 rounded-lg transition-colors"
+            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-brand hover:bg-brand/5 rounded-lg transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to submissions
@@ -371,7 +371,7 @@ export default function ReviewWorkspacePage() {
               </div>
               <div className="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-2 overflow-hidden">
                 <div
-                  className="bg-[#006B3F] h-2 rounded-full transition-all duration-500 ease-out"
+                  className="bg-brand h-2 rounded-full transition-all duration-500 ease-out"
                   style={{ width: `${progressPercentage}%` }}
                 />
               </div>
@@ -382,7 +382,7 @@ export default function ReviewWorkspacePage() {
             {isAdmin && (
               <Link
                 href={`/admin/submissions/${currentTalk.id}`}
-                className="inline-flex items-center gap-1.5 text-xs font-medium text-[#006B3F] dark:text-emerald-400 hover:underline"
+                className="inline-flex items-center gap-1.5 text-xs font-medium text-brand dark:text-emerald-400 hover:underline"
               >
                 <ShieldCheck className="w-3.5 h-3.5" />
                 <span>Open in Admin</span>
@@ -392,7 +392,7 @@ export default function ReviewWorkspacePage() {
               href="https://docs.google.com/document/d/1DDoJZz93_n8_YqXCgZoAydPaOi3MQMpKxg0cAqaX-_8/edit?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs font-medium text-[#006B3F] dark:text-emerald-400 hover:underline"
+              className="inline-flex items-center gap-1.5 text-xs font-medium text-brand dark:text-emerald-400 hover:underline"
             >
               <ExternalLink className="w-3.5 h-3.5" />
               <span>Review Guidelines</span>
@@ -441,7 +441,7 @@ export default function ReviewWorkspacePage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
                 <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-3 border border-gray-100 dark:border-gray-700 flex items-start gap-3">
-                  <BookOpen className="w-5 h-5 text-[#006B3F] shrink-0 mt-0.5" />
+                  <BookOpen className="w-5 h-5 text-brand shrink-0 mt-0.5" />
                   <div>
                     <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-0.5">
                       Category
@@ -452,7 +452,7 @@ export default function ReviewWorkspacePage() {
                   </div>
                 </div>
                 <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-3 border border-gray-100 dark:border-gray-700 flex items-start gap-3">
-                  <Award className="w-5 h-5 text-[#006B3F] shrink-0 mt-0.5" />
+                  <Award className="w-5 h-5 text-brand shrink-0 mt-0.5" />
                   <div>
                     <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-0.5">
                       Level
@@ -463,7 +463,7 @@ export default function ReviewWorkspacePage() {
                   </div>
                 </div>
                 <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-3 border border-gray-100 dark:border-gray-700 flex items-start gap-3">
-                  <Clock className="w-5 h-5 text-[#006B3F] shrink-0 mt-0.5" />
+                  <Clock className="w-5 h-5 text-brand shrink-0 mt-0.5" />
                   <div>
                     <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-0.5">
                       Duration
@@ -513,7 +513,7 @@ export default function ReviewWorkspacePage() {
                 {currentTalk.otherSubmissionsByAuthor.length > 0 && (
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2 flex items-center gap-2">
-                      <Users className="w-4 h-4 text-[#006B3F] dark:text-emerald-400" />
+                      <Users className="w-4 h-4 text-brand dark:text-emerald-400" />
                       Other Submissions by This Author
                     </h3>
                     <div className="bg-blue-50 dark:bg-blue-950/40 rounded-lg p-4 border border-blue-100 dark:border-blue-900/50 text-gray-700 dark:text-gray-300">
@@ -529,7 +529,7 @@ export default function ReviewWorkspacePage() {
                               {isNavigable ? (
                                 <button
                                   onClick={() => navigateToTalk(t.id)}
-                                  className="text-[#006B3F] dark:text-emerald-400 hover:underline text-left"
+                                  className="text-brand dark:text-emerald-400 hover:underline text-left"
                                 >
                                   {t.talkTitle}
                                 </button>
@@ -586,7 +586,7 @@ export default function ReviewWorkspacePage() {
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
                   rows={3}
-                  className="w-full rounded-lg border border-gray-300 dark:border-gray-700 px-4 py-3 text-sm text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:border-[#006B3F] focus:ring-2 focus:ring-[#006B3F]/20 focus:outline-none transition-shadow bg-white dark:bg-gray-900 resize-y"
+                  className="w-full rounded-lg border border-gray-300 dark:border-gray-700 px-4 py-3 text-sm text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:border-brand focus:ring-2 focus:ring-brand/20 focus:outline-none transition-shadow bg-white dark:bg-gray-900 resize-y"
                   placeholder="Add your thoughts here... (Press 's' to focus)"
                 />
               </div>
@@ -595,7 +595,7 @@ export default function ReviewWorkspacePage() {
                 <div className="flex gap-2 w-full sm:w-auto">
                   <button
                     onClick={handleSkip}
-                    className="flex-1 sm:flex-none px-4 py-2.5 text-sm font-medium text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-100 rounded-lg transition-colors focus:ring-2 focus:ring-[#006B3F] focus:outline-none"
+                    className="flex-1 sm:flex-none px-4 py-2.5 text-sm font-medium text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-100 rounded-lg transition-colors focus:ring-2 focus:ring-brand focus:outline-none"
                   >
                     Skip for now
                   </button>
@@ -613,7 +613,7 @@ export default function ReviewWorkspacePage() {
                 <button
                   onClick={saveReview}
                   disabled={saving || rating === 0}
-                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-2.5 text-sm font-medium text-white bg-[#006B3F] hover:bg-[#008751] rounded-lg disabled:opacity-60 disabled:cursor-not-allowed transition-colors focus:ring-2 focus:ring-[#006B3F] focus:ring-offset-2 focus:outline-none shadow-sm"
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-2.5 text-sm font-medium text-white bg-brand hover:bg-brand-light rounded-lg disabled:opacity-60 disabled:cursor-not-allowed transition-colors focus:ring-2 focus:ring-brand focus:ring-offset-2 focus:outline-none shadow-sm"
                 >
                   {saving ? 'Saving...' : isCurrentTalkSkipped ? 'Save Rating & Undo Skip' : 'Save & Next'}
                   {!saving && <ChevronRight className="w-4 h-4" />}
@@ -691,14 +691,14 @@ export default function ReviewWorkspacePage() {
                       onClick={() => navigateToTalk(talk.id)}
                       className={`w-full text-left p-3 rounded-lg border transition-all ${
                         isSelected
-                          ? 'bg-[#006B3F]/5 dark:bg-emerald-500/10 border-[#006B3F]/20 dark:border-emerald-500/30 ring-1 ring-[#006B3F]/20 dark:ring-emerald-500/30'
+                          ? 'bg-brand/5 dark:bg-emerald-500/10 border-brand/20 dark:border-emerald-500/30 ring-1 ring-brand/20 dark:ring-emerald-500/30'
                           : 'bg-white dark:bg-gray-900 border-transparent hover:border-gray-200 dark:hover:border-gray-700 hover:shadow-sm'
                       }`}
                     >
                       <div className="flex items-start justify-between gap-3 mb-1">
                         <h4
                           className={`text-sm font-semibold line-clamp-2 leading-snug ${
-                            isSelected ? 'text-[#006B3F] dark:text-emerald-400' : 'text-gray-900 dark:text-gray-100'
+                            isSelected ? 'text-brand dark:text-emerald-400' : 'text-gray-900 dark:text-gray-100'
                           }`}
                         >
                           {talk.talkTitle}
@@ -718,7 +718,7 @@ export default function ReviewWorkspacePage() {
                         )}
                       </div>
                       {isSelected && (
-                        <span className="text-[10px] font-bold uppercase text-[#006B3F] dark:text-emerald-400 tracking-wider">
+                        <span className="text-[10px] font-bold uppercase text-brand dark:text-emerald-400 tracking-wider">
                           Selected
                         </span>
                       )}
@@ -756,7 +756,7 @@ export default function ReviewWorkspacePage() {
           rows={3}
           maxLength={1000}
           placeholder="Optional: why are you skipping this talk?"
-          className="w-full rounded-lg border border-gray-300 dark:border-gray-700 px-4 py-3 text-sm text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:border-[#006B3F] focus:ring-2 focus:ring-[#006B3F]/20 focus:outline-none transition-shadow bg-white dark:bg-gray-900 resize-y mb-4"
+          className="w-full rounded-lg border border-gray-300 dark:border-gray-700 px-4 py-3 text-sm text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:border-brand focus:ring-2 focus:ring-brand/20 focus:outline-none transition-shadow bg-white dark:bg-gray-900 resize-y mb-4"
         />
         <div className="flex justify-end gap-3">
           <button

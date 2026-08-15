@@ -269,7 +269,7 @@ export default function SelectionWorkspacePage() {
     return (
       <div className="min-h-[calc(100vh-80px)] flex items-center justify-center bg-gray-50 dark:bg-gray-950">
         <div className="flex flex-col items-center gap-3">
-          <div className="w-8 h-8 border-4 border-[#006B3F]/20 border-t-[#006B3F] rounded-full animate-spin" />
+          <div className="w-8 h-8 border-4 border-brand/20 border-t-brand rounded-full animate-spin" />
           <p className="text-gray-500 dark:text-gray-400 font-medium">Loading selection workspace...</p>
         </div>
       </div>
@@ -293,7 +293,7 @@ export default function SelectionWorkspacePage() {
           </p>
           <button
             onClick={() => router.push('/admin')}
-            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-[#006B3F] dark:text-emerald-400 hover:bg-[#006B3F]/5 dark:hover:bg-emerald-500/10 rounded-lg transition-colors"
+            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-brand dark:text-emerald-400 hover:bg-brand/5 dark:hover:bg-emerald-500/10 rounded-lg transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to dashboard
@@ -325,7 +325,7 @@ export default function SelectionWorkspacePage() {
               </div>
               <div className="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-2 overflow-hidden">
                 <div
-                  className="bg-[#006B3F] h-2 rounded-full transition-all duration-500 ease-out"
+                  className="bg-brand h-2 rounded-full transition-all duration-500 ease-out"
                   style={{ width: `${triagedPercentage}%` }}
                 />
               </div>
@@ -335,7 +335,7 @@ export default function SelectionWorkspacePage() {
           <div className="flex items-center gap-3 shrink-0">
             <Link
               href={`/admin/submissions/${currentInList.id}`}
-              className="inline-flex items-center gap-1.5 text-xs font-medium text-[#006B3F] dark:text-emerald-400 hover:underline"
+              className="inline-flex items-center gap-1.5 text-xs font-medium text-brand dark:text-emerald-400 hover:underline"
             >
               <ExternalLink className="w-3.5 h-3.5" />
               <span>Full submission</span>
@@ -370,7 +370,7 @@ export default function SelectionWorkspacePage() {
         <div ref={mainScrollRef} className="flex-1 overflow-y-auto bg-white dark:bg-gray-900 flex flex-col relative min-w-0">
           {detailLoading || !detail ? (
             <div className="flex-1 flex items-center justify-center">
-              <div className="w-8 h-8 border-4 border-[#006B3F]/20 border-t-[#006B3F] rounded-full animate-spin" />
+              <div className="w-8 h-8 border-4 border-brand/20 border-t-brand rounded-full animate-spin" />
             </div>
           ) : (
             <div className={`flex-1 flex flex-col mx-auto w-full ${sidebarCollapsed ? 'max-w-5xl' : 'max-w-4xl'}`}>
@@ -391,21 +391,21 @@ export default function SelectionWorkspacePage() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
                   <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-3 border border-gray-100 dark:border-gray-700 flex items-start gap-3">
-                    <BookOpen className="w-5 h-5 text-[#006B3F] shrink-0 mt-0.5" />
+                    <BookOpen className="w-5 h-5 text-brand shrink-0 mt-0.5" />
                     <div>
                       <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-0.5">Category</p>
                       <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{detail.talkCategory}</p>
                     </div>
                   </div>
                   <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-3 border border-gray-100 dark:border-gray-700 flex items-start gap-3">
-                    <Award className="w-5 h-5 text-[#006B3F] shrink-0 mt-0.5" />
+                    <Award className="w-5 h-5 text-brand shrink-0 mt-0.5" />
                     <div>
                       <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-0.5">Level</p>
                       <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{detail.talkLevel}</p>
                     </div>
                   </div>
                   <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-3 border border-gray-100 dark:border-gray-700 flex items-start gap-3">
-                    <Clock className="w-5 h-5 text-[#006B3F] shrink-0 mt-0.5" />
+                    <Clock className="w-5 h-5 text-brand shrink-0 mt-0.5" />
                     <div>
                       <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-0.5">Duration</p>
                       <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{detail.talkDuration}</p>
