@@ -123,6 +123,13 @@ export default function Year2025Page() {
                 <ArrowRight className="w-4 h-4" aria-hidden />
               </Link>
               <Link
+                href="/2024"
+                className="inline-flex items-center justify-center gap-2 rounded-lg border border-brand px-5 py-2.5 text-sm font-semibold text-brand hover:bg-brand/5 transition-colors"
+              >
+                GopherCon Africa 2024 in Nairobi
+                <ArrowRight className="w-4 h-4" aria-hidden />
+              </Link>
+              <Link
                 href="/schedule"
                 className="inline-flex items-center justify-center gap-2 rounded-lg bg-brand px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-dark transition-colors"
               >
