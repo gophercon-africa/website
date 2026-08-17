@@ -136,12 +136,13 @@ export const scheduleData: ScheduleDay[] = [
         speaker: { name: 'Bala Grivine Ochieng' },
       },
       {
-        id: 'd2-1020-talk-tba',
-        title: 'Talk — to be announced',
+        id: 'd2-1020-omolana',
+        title:
+          "The Gopher's Trident: Conquering the Saga Pattern in Distributed Systems",
         type: 'talk',
         startTime: '10:20',
         endTime: '10:50',
-        tba: true,
+        speaker: { name: 'Timilehin Omolana' },
       },
       {
         id: 'd2-1050-tea',
