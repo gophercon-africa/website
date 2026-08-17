@@ -73,19 +73,19 @@ export default function ReviewsPage() {
             {nextPendingTalk ? (
               <button
                 onClick={() => router.push(`/reviews/${nextPendingTalk.id}`)}
-                className="flex items-center gap-2 bg-[#006B3F] hover:bg-[#005a34] text-white text-sm font-semibold px-4 py-2.5 rounded-lg transition-colors shrink-0"
+                className="flex items-center gap-2 bg-brand hover:bg-brand-dark text-white text-sm font-semibold px-4 py-2.5 rounded-lg transition-colors shrink-0"
               >
                 Continue reviewing
                 <ArrowRight className="w-4 h-4" />
               </button>
             ) : completedCount > 0 ? (
-              <span className="text-sm font-medium text-[#006B3F]">All done ✓</span>
+              <span className="text-sm font-medium text-brand">All done ✓</span>
             ) : null}
           </div>
           <div className="mt-4 flex items-center gap-3">
             <div className="flex-1 bg-gray-200 dark:bg-gray-800 rounded-full h-2">
               <div
-                className="bg-[#006B3F] h-2 rounded-full transition-all duration-500"
+                className="bg-brand h-2 rounded-full transition-all duration-500"
                 style={{ width: `${progressPercentage}%` }}
               />
             </div>

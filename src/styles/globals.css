@@ -4,6 +4,13 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
+  /* Brand greens. `brand` is the site accent; `brand-dark` is its hover shade.
+     Email templates keep literal hex — Tailwind classes don't reach email HTML. */
+  --color-brand: #006b3f;
+  --color-brand-dark: #00552f;
+  --color-brand-light: #008751;
+  --color-brand-bright: #00a86b;
+
   --color-primary-50: #fff7ed;
   --color-primary-100: #ffedd5;
   --color-primary-200: #fed7aa;

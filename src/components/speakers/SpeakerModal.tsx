@@ -2,10 +2,8 @@
 
 import React from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { Speaker } from '@/src/types/speaker';
 import { FaTwitter, FaLinkedin, FaGithub, FaGlobe } from 'react-icons/fa';
-import { Calendar } from 'lucide-react';
 import Modal from '@components/common/Modal';
 
 interface SpeakerModalProps {
@@ -40,7 +38,7 @@ const SpeakerModal: React.FC<SpeakerModalProps> = ({ speaker, isOpen, onClose })
                 href={speaker.twitter}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-600 hover:text-[#006B3F] transition-colors"
+                className="text-gray-600 hover:text-brand transition-colors"
               >
                 <FaTwitter className="h-5 w-5" />
               </a>
@@ -50,7 +48,7 @@ const SpeakerModal: React.FC<SpeakerModalProps> = ({ speaker, isOpen, onClose })
                 href={speaker.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-600 hover:text-[#006B3F] transition-colors"
+                className="text-gray-600 hover:text-brand transition-colors"
               >
                 <FaLinkedin className="h-5 w-5" />
               </a>
@@ -60,7 +58,7 @@ const SpeakerModal: React.FC<SpeakerModalProps> = ({ speaker, isOpen, onClose })
                 href={speaker.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-600 hover:text-[#006B3F] transition-colors"
+                className="text-gray-600 hover:text-brand transition-colors"
               >
                 <FaGithub className="h-5 w-5" />
               </a>
@@ -70,7 +68,7 @@ const SpeakerModal: React.FC<SpeakerModalProps> = ({ speaker, isOpen, onClose })
                 href={speaker.website}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-600 hover:text-[#006B3F] transition-colors"
+                className="text-gray-600 hover:text-brand transition-colors"
               >
                 <FaGlobe className="h-5 w-5" />
               </a>
@@ -79,7 +77,7 @@ const SpeakerModal: React.FC<SpeakerModalProps> = ({ speaker, isOpen, onClose })
         </div>
 
         <div className="flex-1">
-          <p className="text-lg text-[#006B3F] font-semibold mb-1">{speaker.title}</p>
+          <p className="text-lg text-brand font-semibold mb-1">{speaker.title}</p>
           <p className="text-md text-gray-600 mb-4">{speaker.company}</p>
 
           <div className="space-y-4">
@@ -91,22 +89,12 @@ const SpeakerModal: React.FC<SpeakerModalProps> = ({ speaker, isOpen, onClose })
             {speaker.talkTitle && (
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Talk</h3>
-                <p className="text-[#006B3F] font-semibold mb-1">{speaker.talkTitle}</p>
+                <p className="text-brand font-semibold mb-1">{speaker.talkTitle}</p>
                 {speaker.talkDescription && (
                   <p className="text-gray-700 leading-relaxed mb-3">{speaker.talkDescription}</p>
                 )}
               </div>
             )}
-
-            <div>
-              <Link
-                href={`/schedule?speaker=${encodeURIComponent(speaker.name)}`}
-                className="inline-flex items-center gap-2 text-sm text-blue-600 hover:text-blue-700 font-medium hover:underline"
-              >
-                <Calendar className="w-4 h-4" />
-                View in Schedule
-              </Link>
-            </div>
           </div>
         </div>
       </div>

@@ -21,7 +21,7 @@ function ErrorContent() {
         <div className="mt-8">
           <a
             href="/signin"
-            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#006B3F] hover:bg-[#008751] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#006B3F]"
+            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-brand hover:bg-brand-light focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand"
           >
             Return to Sign In
           </a>

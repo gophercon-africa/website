@@ -47,7 +47,7 @@ function OtpLoginForm() {
                  placeholder="you@example.com"
                  value={email}
                  onChange={(e) => setEmail(e.target.value)}
-                 className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-[#006B3F] focus:ring-2 focus:ring-[#006B3F] focus:outline-none"
+                 className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-brand focus:ring-2 focus:ring-brand focus:outline-none"
                />
               {state.errors?.email && (
                 <p className="mt-1 text-sm text-red-600">{state.errors.email[0]}</p>
@@ -57,7 +57,7 @@ function OtpLoginForm() {
             <button
               type="submit"
               disabled={isPending}
-              className="w-full rounded-lg bg-[#006B3F] px-4 py-3 text-sm font-semibold text-white hover:bg-[#008751] disabled:opacity-60 transition-colors focus:ring-2 focus:ring-[#006B3F] focus:ring-offset-2"
+              className="w-full rounded-lg bg-brand px-4 py-3 text-sm font-semibold text-white hover:bg-brand-light disabled:opacity-60 transition-colors focus:ring-2 focus:ring-brand focus:ring-offset-2"
             >
               {isPending ? 'Sending...' : 'Send sign-in code'}
             </button>

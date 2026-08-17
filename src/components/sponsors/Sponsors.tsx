@@ -9,7 +9,7 @@ export default function Sponsors() {
     <section className="py-24 bg-linear-to-br from-white via-[#E8F5E9] to-[#F1F8E9] relative overflow-hidden" id="sponsors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-20">
-          <span className="text-[#006B3F] font-medium mb-4 block">Sponsors</span>
+          <span className="text-brand font-medium mb-4 block">Sponsors</span>
           <h2 className="text-4xl font-medium text-gray-900 mb-6">Our Partners</h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Thank you to these amazing organizations supporting GopherCon Africa.
@@ -48,9 +48,9 @@ export default function Sponsors() {
         {/* Community Sponsors */}
         <div className="mb-20">
           <div className="flex items-center justify-center mb-12">
-            <div className="h-px bg-linear-to-r from-transparent via-[#006B3F] to-transparent w-24"></div>
-            <h3 className="text-lg font-medium text-[#006B3F] px-4">Community Partners</h3>
-            <div className="h-px bg-linear-to-r from-[#006B3F] via-[#006B3F] to-transparent w-24"></div>
+            <div className="h-px bg-linear-to-r from-transparent via-brand to-transparent w-24"></div>
+            <h3 className="text-lg font-medium text-brand px-4">Community Partners</h3>
+            <div className="h-px bg-linear-to-r from-brand via-brand to-transparent w-24"></div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center max-w-3xl mx-auto">
             <a
@@ -94,7 +94,7 @@ export default function Sponsors() {
 
         {/* Become a Sponsor */}
         <div className="relative mt-20">
-          <div className="absolute inset-0 bg-linear-to-r from-[#006B3F] via-[#008751] to-[#006B3F] rounded-3xl transform -rotate-1 shadow-2xl"></div>
+          <div className="absolute inset-0 bg-linear-to-r from-brand via-brand-light to-brand rounded-3xl transform -rotate-1 shadow-2xl"></div>
           {/* Decorative Gophers */}
           <div className="absolute -left-16 -top-16 w-32 h-32 opacity-80">
             <Image
@@ -130,7 +130,7 @@ export default function Sponsors() {
           </div>
           <div className="relative bg-white/95 backdrop-blur-xs rounded-3xl p-12 text-center border border-white/20 shadow-xl">
             <div className="max-w-2xl mx-auto">
-              <h3 className="text-3xl font-bold text-[#006B3F] mb-6">Become a Partner</h3>
+              <h3 className="text-3xl font-bold text-brand mb-6">Become a Partner</h3>
               <p className="text-gray-700 text-lg mb-8 leading-relaxed">
                 Support the Go community in Africa and showcase your brand to hundreds of passionate developers.
                 Download our sponsorship prospectus to learn more about partnership opportunities.
@@ -141,7 +141,7 @@ export default function Sponsors() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <button className="bg-[#006B3F] hover:bg-[#008751] text-white px-8 py-4 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg inline-flex items-center group mt-4">
+                  <button className="bg-brand hover:bg-brand-light text-white px-8 py-4 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg inline-flex items-center group mt-4">
                     Download Partnership Prospectus
                     <ChevronRight className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" />
                   </button>
@@ -150,7 +150,7 @@ export default function Sponsors() {
                 <div className="mt-4">
                   <button
                     onClick={showContactModal}
-                    className="bg-white hover:bg-gray-50 text-[#006B3F] border-2 border-[#006B3F] px-8 py-4 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg inline-flex items-center group"
+                    className="bg-white hover:bg-gray-50 text-brand border-2 border-brand px-8 py-4 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg inline-flex items-center group"
                   >
                     Contact Us
                     <ChevronRight className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" />

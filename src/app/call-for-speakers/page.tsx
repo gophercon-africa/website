@@ -8,7 +8,7 @@ export default function CallForSpeakersPage() {
     return (
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-[#006B3F] mb-6">
+          <h1 className="text-4xl font-bold text-brand mb-6">
             Call for Speakers is Now Closed
           </h1>
           <p className="text-xl text-gray-600 mb-4">
@@ -21,13 +21,13 @@ export default function CallForSpeakersPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/"
-              className="inline-flex justify-center py-3 px-6 rounded-lg text-white font-medium bg-[#006B3F] hover:bg-[#008751] transition-colors"
+              className="inline-flex justify-center py-3 px-6 rounded-lg text-white font-medium bg-brand hover:bg-brand-light transition-colors"
             >
               Back to Home
             </Link>
             <a
               href="mailto:hello@gophers.africa"
-              className="inline-flex justify-center py-3 px-6 rounded-lg font-medium text-[#006B3F] border border-[#006B3F] hover:bg-[#006B3F]/5 transition-colors"
+              className="inline-flex justify-center py-3 px-6 rounded-lg font-medium text-brand border border-brand hover:bg-brand/5 transition-colors"
             >
               Contact the Content Committee
             </a>
@@ -40,7 +40,7 @@ export default function CallForSpeakersPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <div className="prose prose-lg max-w-none">
-        <h1 className="text-4xl font-bold text-[#006B3F] mb-8">
+        <h1 className="text-4xl font-bold text-brand mb-8">
           Call for Speakers for GopherCon Africa 2026 is Now Open! 🚀
         </h1>
         <p className="text-xl mb-8">
@@ -53,7 +53,7 @@ export default function CallForSpeakersPage() {
           participants from across Africa and the rest of the world for mutual understanding of contexts, challenges, and opportunities.
         </p>
 
-        <div className="bg-[#006B3F]/10 p-6 rounded-lg mb-8">
+        <div className="bg-brand/10 p-6 rounded-lg mb-8">
           <p className="font-medium">
             Our Call for Speakers is now open!
           </p>
@@ -63,14 +63,14 @@ export default function CallForSpeakersPage() {
           </p>
         </div>
 
-        <h2 className="text-2xl font-bold text-[#006B3F] mt-12 mb-6">Session Types</h2>
+        <h2 className="text-2xl font-bold text-brand mt-12 mb-6">Session Types</h2>
         <ul className="list-disc pl-6 space-y-2">
           <li>Short talk (30 mins)</li>
           <li>Long talk (45 mins)</li>
           <li>Keynote (1hr)</li>
         </ul>
 
-        <h2 className="text-2xl font-bold text-[#006B3F] mt-12 mb-6">Session Tracks</h2>
+        <h2 className="text-2xl font-bold text-brand mt-12 mb-6">Session Tracks</h2>
         <ul className="list-disc pl-6 space-y-2">
           <li>Go Core Track</li>
           <li>Cloud Native Go</li>
@@ -80,7 +80,7 @@ export default function CallForSpeakersPage() {
           <li>AI and Go</li>
         </ul>
 
-        <h2 className="text-2xl font-bold text-[#006B3F] mt-12 mb-6">Topics We&apos;re Looking For</h2>
+        <h2 className="text-2xl font-bold text-brand mt-12 mb-6">Topics We&apos;re Looking For</h2>
         <ul className="list-disc pl-6 space-y-2">
           <li>Go internals and challenges in modern software development</li>
           <li>Wild ideas, clever hacks, surprising or cool use cases</li>
@@ -92,7 +92,7 @@ export default function CallForSpeakersPage() {
           <li>Whatever you deem appropriate – it&apos;s your conference after all!</li>
         </ul>
 
-        <h2 className="text-2xl font-bold text-[#006B3F] mt-12 mb-6">Submission Guidelines</h2>
+        <h2 className="text-2xl font-bold text-brand mt-12 mb-6">Submission Guidelines</h2>
 
         <h3 className="text-xl font-semibold mt-8 mb-4">Abstract</h3>
         <p className="mb-4">
@@ -116,7 +116,7 @@ export default function CallForSpeakersPage() {
           <li>Advanced: Deep understanding of the topic required</li>
         </ul>
 
-        <h2 className="text-2xl font-bold text-[#006B3F] mt-12 mb-6">Helpful Resources</h2>
+        <h2 className="text-2xl font-bold text-brand mt-12 mb-6">Helpful Resources</h2>
         <div className="bg-white rounded-lg shadow-md p-6 mb-8">
           <p className="mb-4">
             To help you craft a compelling proposal, we recommend checking out these excellent resources:
@@ -127,7 +127,7 @@ export default function CallForSpeakersPage() {
                 href="https://blog.gopheracademy.com/gophercon-2017/writing-a-successful-gophercon-proposal/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#006B3F] hover:text-[#008751] font-medium flex items-center"
+                className="text-brand hover:text-brand-light font-medium flex items-center"
               >
                 <span className="mr-2">📝</span>
                 Writing a Successful GopherCon Proposal
@@ -141,7 +141,7 @@ export default function CallForSpeakersPage() {
                 href="https://dave.cheney.net/2017/02/12/how-to-write-a-successful-conference-proposal"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#006B3F] hover:text-[#008751] font-medium flex items-center"
+                className="text-brand hover:text-brand-light font-medium flex items-center"
               >
                 <span className="mr-2">📚</span>
                 How to Write a Successful Conference Proposal
@@ -153,8 +153,8 @@ export default function CallForSpeakersPage() {
           </ul>
         </div>
 
-        <div className="bg-[#006B3F]/10 p-6 rounded-lg mt-12 mb-8">
-          <h2 className="text-2xl font-bold text-[#006B3F] mb-4">We Encourage Submissions From:</h2>
+        <div className="bg-brand/10 p-6 rounded-lg mt-12 mb-8">
+          <h2 className="text-2xl font-bold text-brand mb-4">We Encourage Submissions From:</h2>
           <ul className="list-disc pl-6 space-y-2">
             <li><strong>First-time speakers:</strong> Don&apos;t worry if this is your first time—your ideas matter!</li>
             <li><strong>Speakers from all backgrounds:</strong> Share your unique perspective, no matter where you&apos;re from</li>
@@ -172,7 +172,7 @@ export default function CallForSpeakersPage() {
 
           <p>
             If you would like to ask a question, you are always welcome to write to the Content Committee:
-            <a href="mailto:hello@gophers.africa" className="ml-2 text-[#006B3F] hover:text-[#008751] font-medium">
+            <a href="mailto:hello@gophers.africa" className="ml-2 text-brand hover:text-brand-light font-medium">
               hello@gophers.africa
             </a>
           </p>

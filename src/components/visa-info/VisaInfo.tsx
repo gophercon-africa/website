@@ -13,7 +13,7 @@ export default function VisaInfo() {
 
                 {/* Main Content Card */}
                 <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden mb-12">
-                    <div className="bg-linear-to-r from-[#006B3F] to-[#00A86B] p-6">
+                    <div className="bg-linear-to-r from-brand to-brand-bright p-6">
                         <h3 className="text-2xl font-bold text-white mb-2">🌍 Traveling to Kenya</h3>
                         <p className="text-green-100">Everything you need to know about obtaining a Kenyan visa or eTA</p>
                     </div>
@@ -33,7 +33,7 @@ export default function VisaInfo() {
                             <div className="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow duration-300">
                                 <div className="flex items-start space-x-4">
                                     <div className="shrink-0">
-                                        <div className="w-12 h-12 bg-[#006B3F] rounded-lg flex items-center justify-center">
+                                        <div className="w-12 h-12 bg-brand rounded-lg flex items-center justify-center">
                                             <span className="text-white text-xl">🏛️</span>
                                         </div>
                                     </div>
@@ -43,7 +43,7 @@ export default function VisaInfo() {
                                             Visit the official Kenyan eTA portal for detailed visa information and country-specific requirements.
                                         </p>
                                         <Link href="https://etakenya.go.ke/general-information" target="_blank" rel="noopener noreferrer">
-                                            <button className="bg-[#006B3F] text-white px-4 py-2 rounded-lg hover:bg-[#005A35] transition-colors duration-200 text-sm font-medium">
+                                            <button className="bg-brand text-white px-4 py-2 rounded-lg hover:bg-brand-dark transition-colors duration-200 text-sm font-medium">
                                                 Visit eTA Portal →
                                             </button>
                                         </Link>
@@ -55,7 +55,7 @@ export default function VisaInfo() {
                             <div className="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow duration-300">
                                 <div className="flex items-start space-x-4">
                                     <div className="shrink-0">
-                                        <div className="w-12 h-12 bg-[#00A86B] rounded-lg flex items-center justify-center">
+                                        <div className="w-12 h-12 bg-brand-bright rounded-lg flex items-center justify-center">
                                             <span className="text-white text-xl">💻</span>
                                         </div>
                                     </div>
@@ -65,7 +65,7 @@ export default function VisaInfo() {
                                             Apply for your Kenyan Electronic Travel Authorization online through the official portal.
                                         </p>
                                         <Link href="https://etakenya.go.ke/" target="_blank" rel="noopener noreferrer">
-                                            <button className="bg-[#00A86B] text-white px-4 py-2 rounded-lg hover:bg-[#008A5A] transition-colors duration-200 text-sm font-medium">
+                                            <button className="bg-brand-bright text-white px-4 py-2 rounded-lg hover:bg-brand-light transition-colors duration-200 text-sm font-medium">
                                                 Apply Online →
                                             </button>
                                         </Link>

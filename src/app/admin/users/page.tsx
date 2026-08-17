@@ -88,7 +88,7 @@ export default function AdminUsersPage() {
             <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Manage Users</h1>
             <p className="text-gray-600 dark:text-gray-400 mt-2">Configure who has reviewer and admin access</p>
           </div>
-          <Link href="/admin" className="text-sm font-medium text-[#006B3F] dark:text-emerald-400 hover:underline">
+          <Link href="/admin" className="text-sm font-medium text-brand dark:text-emerald-400 hover:underline">
             Back to dashboard
           </Link>
         </div>
@@ -108,7 +108,7 @@ export default function AdminUsersPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="name@example.com"
-                className="w-full text-sm rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 px-3 py-2 focus:border-[#006B3F] focus:ring-2 focus:ring-[#006B3F]/20 focus:outline-none"
+                className="w-full text-sm rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 px-3 py-2 focus:border-brand focus:ring-2 focus:ring-brand/20 focus:outline-none"
               />
             </div>
             <label className="flex items-center gap-1.5 text-sm text-gray-700 dark:text-gray-300 pb-2">
@@ -116,7 +116,7 @@ export default function AdminUsersPage() {
                 type="checkbox"
                 checked={isAdmin}
                 onChange={(e) => setIsAdmin(e.target.checked)}
-                className="rounded border-gray-300 dark:border-gray-600 text-[#006B3F] focus:ring-[#006B3F]"
+                className="rounded border-gray-300 dark:border-gray-600 text-brand focus:ring-brand"
               />
               Admin
             </label>
@@ -125,14 +125,14 @@ export default function AdminUsersPage() {
                 type="checkbox"
                 checked={isReviewer}
                 onChange={(e) => setIsReviewer(e.target.checked)}
-                className="rounded border-gray-300 dark:border-gray-600 text-[#006B3F] focus:ring-[#006B3F]"
+                className="rounded border-gray-300 dark:border-gray-600 text-brand focus:ring-brand"
               />
               Reviewer
             </label>
             <button
               type="submit"
               disabled={submitting}
-              className="px-4 py-2 text-sm font-medium text-white bg-[#006B3F] hover:bg-[#005a34] rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="px-4 py-2 text-sm font-medium text-white bg-brand hover:bg-brand-dark rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               Add user
             </button>

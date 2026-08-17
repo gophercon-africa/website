@@ -23,7 +23,7 @@ export default function About() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-20">
-          <span className="text-[#006B3F] font-medium mb-4 block">
+          <span className="text-brand font-medium mb-4 block">
             About GopherCon Africa
           </span>
           <h2 className="text-4xl font-medium text-gray-900 mb-6">
@@ -140,7 +140,7 @@ export default function About() {
                 Africa 2025
               </h3>
               <div className="flex items-center">
-                <div className="w-8 h-8 rounded-full bg-[#006B3F] flex items-center justify-center mr-3">
+                <div className="w-8 h-8 rounded-full bg-brand flex items-center justify-center mr-3">
                   <span className="text-sm font-medium text-white">UI</span>
                 </div>
                 <span className="text-gray-600">Sammy Oina</span>
@@ -164,7 +164,7 @@ export default function About() {
                 Criteria with GoDog
               </h3>
               <div className="flex items-center">
-                <div className="w-8 h-8 rounded-full bg-[#006B3F] flex items-center justify-center mr-3">
+                <div className="w-8 h-8 rounded-full bg-brand flex items-center justify-center mr-3">
                   <span className="text-sm font-medium text-white">UI</span>
                 </div>
                 <span className="text-gray-600">David Aniebo</span>
@@ -173,7 +173,7 @@ export default function About() {
           </div>
 
           {/* Video Card 3 */}
-          <div className="relative rounded-2xl bg-[#006B3F] p-8 flex flex-col justify-between h-full">
+          <div className="relative rounded-2xl bg-brand p-8 flex flex-col justify-between h-full">
             <div>
               <h3 className="text-2xl font-medium text-white mb-4">
                 Discover More Content

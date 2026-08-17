@@ -19,12 +19,12 @@ export default function InfoCards({ cfsOpen = false }: { cfsOpen?: boolean }) {
             className="bg-[#F3E8FF] rounded-3xl p-12 relative overflow-hidden"
           >
             <div className="max-w-lg">
-              <div className="text-[#006B3F] mb-4 font-medium">About GopherCon</div>
+              <div className="text-brand mb-4 font-medium">About GopherCon</div>
               <h2 className="text-4xl font-medium text-gray-900 mb-6">Returning for our 3rd year</h2>
               <p className="text-gray-600 mb-8 text-lg font-normal">
                 We are pleased to announce the third annual GopherCon Africa conference. Two days of amazing talks, plentiful networking opportunities and great socials. GopherCon Africa offers the most up-to-date Go programming information and training.
               </p>
-              <Link href="#about" className="inline-flex items-center text-gray-900 font-medium hover:text-[#006B3F] transition-colors">
+              <Link href="#about" className="inline-flex items-center text-gray-900 font-medium hover:text-brand transition-colors">
                 Read about the event
                 <ChevronRight className="w-5 h-5 ml-1" />
               </Link>
@@ -51,12 +51,12 @@ export default function InfoCards({ cfsOpen = false }: { cfsOpen?: boolean }) {
             <div className="max-w-lg">
               {cfsOpen ? (
                 <>
-                  <div className="text-[#006B3F] mb-4">✅ Open Now</div>
+                  <div className="text-brand mb-4">✅ Open Now</div>
                   <h2 className="text-4xl font-bold text-gray-900 mb-6">Call for Speakers is Open!</h2>
                   <p className="text-gray-600 mb-8 text-lg">
                     Share your expertise and passion for Go with the GopherCon Africa community. We&apos;re looking for engaging talks that cover a wide range of Go topics.
                   </p>
-                  <Link href="/call-for-speakers" className="inline-flex items-center text-gray-900 font-semibold hover:text-[#006B3F] transition-colors">
+                  <Link href="/call-for-speakers" className="inline-flex items-center text-gray-900 font-semibold hover:text-brand transition-colors">
                     Submit your proposal
                     <ChevronRight className="w-5 h-5 ml-1" />
                   </Link>
@@ -124,7 +124,7 @@ export default function InfoCards({ cfsOpen = false }: { cfsOpen?: boolean }) {
               </blockquote>
               <div className="flex items-center">
                 <div className="shrink-0">
-                  <div className="w-12 h-12 rounded-full bg-[#006B3F] flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-full bg-brand flex items-center justify-center">
                     <span className="text-xl font-semibold">A</span>
                   </div>
                 </div>
@@ -152,7 +152,7 @@ Go sounds pretty 💅🏼💅🏼
               </blockquote>
               <div className="flex items-center">
                 <div className="shrink-0">
-                  <div className="w-12 h-12 rounded-full bg-[#006B3F] flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-full bg-brand flex items-center justify-center">
                     <span className="text-xl font-semibold">A</span>
                   </div>
                 </div>

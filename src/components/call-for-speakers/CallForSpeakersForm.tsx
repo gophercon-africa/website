@@ -107,7 +107,7 @@ export default function CallForSpeakersForm() {
     };  
 
     return (
-        <div className="min-h-screen bg-linear-to-b from-[#006B3F]/5 via-white to-[#B91C1C]/5 font-sans">
+        <div className="min-h-screen bg-linear-to-b from-brand/5 via-white to-[#B91C1C]/5 font-sans">
             <div className="mt-12">
                 <div className="py-16 px-4 sm:px-6 lg:px-8">
                     <div className="max-w-5xl mx-auto">
@@ -136,7 +136,7 @@ export default function CallForSpeakersForm() {
                         <form onSubmit={handleSubmit} className="space-y-8 bg-white rounded-2xl shadow-lg p-8">
                             {/* Personal Information */}
                             <div className="space-y-6">
-                                <h3 className="text-2xl font-semibold text-[#006B3F]">Personal Information</h3>
+                                <h3 className="text-2xl font-semibold text-brand">Personal Information</h3>
                                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                                     <div>
                                         <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">
@@ -149,7 +149,7 @@ export default function CallForSpeakersForm() {
                                             required
                                             value={formData.fullName}
                                             onChange={handleChange}
-                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[#006B3F] focus:ring-[#006B3F] h-12 px-4 text-base transition-all duration-200 ease-in-out"
+                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand focus:ring-brand h-12 px-4 text-base transition-all duration-200 ease-in-out"
                                         />
                                         <p className="text-red-500 text-sm">{formState?.errors?.fullName?.join(", ")}</p>
                                     </div>
@@ -164,7 +164,7 @@ export default function CallForSpeakersForm() {
                                             required
                                             value={formData.email}
                                             onChange={handleChange}
-                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[#006B3F] focus:ring-[#006B3F] h-12 px-4 text-base transition-all duration-200 ease-in-out"
+                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand focus:ring-brand h-12 px-4 text-base transition-all duration-200 ease-in-out"
                                         />
                                         <p className="text-red-500 text-sm">{formState?.errors?.email?.join(", ")}</p>
                                     </div>
@@ -179,7 +179,7 @@ export default function CallForSpeakersForm() {
                                             id="phone"
                                             value={formData.phone}
                                             onChange={handleChange}
-                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[#006B3F] focus:ring-[#006B3F] h-12 px-4 text-base transition-all duration-200 ease-in-out"
+                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand focus:ring-brand h-12 px-4 text-base transition-all duration-200 ease-in-out"
                                         />
                                         <p className="text-red-500 text-sm">{formState?.errors?.phone}</p>
                                     </div>
@@ -194,7 +194,7 @@ export default function CallForSpeakersForm() {
                                             id="company"
                                             value={formData.company}
                                             onChange={handleChange}
-                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[#006B3F] focus:ring-[#006B3F] h-12 px-4 text-base transition-all duration-200 ease-in-out"
+                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand focus:ring-brand h-12 px-4 text-base transition-all duration-200 ease-in-out"
                                         />
                                         <p className="text-red-500 text-sm">{formState?.errors?.company}</p>
                                     </div>
@@ -209,7 +209,7 @@ export default function CallForSpeakersForm() {
                                             id="title"
                                             value={formData.title}
                                             onChange={handleChange}
-                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[#006B3F] focus:ring-[#006B3F] h-12 px-4 text-base transition-all duration-200 ease-in-out"
+                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand focus:ring-brand h-12 px-4 text-base transition-all duration-200 ease-in-out"
                                         />
                                         <p className="text-red-500 text-sm">{formState?.errors?.title}</p>
                                     </div>
@@ -228,7 +228,7 @@ export default function CallForSpeakersForm() {
                                     required
                                     value={formData.bio}
                                     onChange={handleChange}
-                                    className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[#006B3F] focus:ring-[#006B3F] px-4 py-3 text-base transition-all duration-200 ease-in-out min-h-[120px]"
+                                    className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand focus:ring-brand px-4 py-3 text-base transition-all duration-200 ease-in-out min-h-[120px]"
                                     placeholder="Tell us about yourself and your experience with Go"
                                 />
                                 <p className="text-red-500 text-sm">{formState?.errors?.bio}</p>
@@ -236,7 +236,7 @@ export default function CallForSpeakersForm() {
 
                             {/* Talk Information */}
                             <div className="space-y-6">
-                                <h3 className="text-2xl font-semibold text-[#006B3F]">Talk Information</h3>
+                                <h3 className="text-2xl font-semibold text-brand">Talk Information</h3>
                                 <div>
                                     <label htmlFor="talkTitle" className="block text-sm font-medium text-gray-700">
                                         Talk Title
@@ -248,7 +248,7 @@ export default function CallForSpeakersForm() {
                                         required
                                         value={formData.talkTitle}
                                         onChange={handleChange}
-                                        className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[#006B3F] focus:ring-[#006B3F] h-12 px-4 text-base transition-all duration-200 ease-in-out"
+                                        className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand focus:ring-brand h-12 px-4 text-base transition-all duration-200 ease-in-out"
                                     />
                                     <p className="text-red-500 text-sm">{formState?.errors?.talkTitle}</p>
                                 </div>
@@ -264,7 +264,7 @@ export default function CallForSpeakersForm() {
                                         required
                                         value={formData.talkDescription}
                                         onChange={handleChange}
-                                        className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[#006B3F] focus:ring-[#006B3F] px-4 py-3 text-base transition-all duration-200 ease-in-out min-h-[180px]"
+                                        className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand focus:ring-brand px-4 py-3 text-base transition-all duration-200 ease-in-out min-h-[180px]"
                                         placeholder="Provide a detailed description of your talk"
                                     />
                                     <p className="text-red-500 text-sm">{formState?.errors?.talkDescription}</p>
@@ -280,7 +280,7 @@ export default function CallForSpeakersForm() {
                                         required
                                         value={formData.talkCategory}
                                         onChange={handleChange}
-                                        className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[#006B3F] focus:ring-[#006B3F] h-12 px-4 text-base transition-all duration-200 ease-in-out"
+                                        className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand focus:ring-brand h-12 px-4 text-base transition-all duration-200 ease-in-out"
                                     >
                                         <option value="">Select a category</option>
                                         {TALK_CATEGORIES.map((category) => (
@@ -300,7 +300,7 @@ export default function CallForSpeakersForm() {
                                             required
                                             value={formData.talkDuration}
                                             onChange={handleChange}
-                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[#006B3F] focus:ring-[#006B3F] h-12 px-4 text-base transition-all duration-200 ease-in-out"
+                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand focus:ring-brand h-12 px-4 text-base transition-all duration-200 ease-in-out"
                                         >
                                             <option value="">Select duration</option>
                                             {TALK_DURATIONS.map((duration) => (
@@ -319,7 +319,7 @@ export default function CallForSpeakersForm() {
                                             required
                                             value={formData.talkLevel}
                                             onChange={handleChange}
-                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[#006B3F] focus:ring-[#006B3F] h-12 px-4 text-base transition-all duration-200 ease-in-out"
+                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand focus:ring-brand h-12 px-4 text-base transition-all duration-200 ease-in-out"
                                         >
                                             <option value="">Select level</option>
                                             {TALK_LEVELS.map((level) => (
@@ -342,7 +342,7 @@ export default function CallForSpeakersForm() {
                                     rows={4}
                                     value={formData.previousSpeakingExperience}
                                     onChange={handleChange}
-                                    className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[#006B3F] focus:ring-[#006B3F] px-4 py-3 text-base transition-all duration-200 ease-in-out min-h-[120px]"
+                                    className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand focus:ring-brand px-4 py-3 text-base transition-all duration-200 ease-in-out min-h-[120px]"
                                     placeholder="List any previous speaking engagements or relevant experience"
                                 />
                                 <p className="text-red-500 text-sm">{formState?.errors?.previousSpeakingExperience}</p>
@@ -359,7 +359,7 @@ export default function CallForSpeakersForm() {
                                     rows={4}
                                     value={formData.additionalNotes}
                                     onChange={handleChange}
-                                    className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[#006B3F] focus:ring-[#006B3F] px-4 py-3 text-base transition-all duration-200 ease-in-out min-h-[120px]"
+                                    className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand focus:ring-brand px-4 py-3 text-base transition-all duration-200 ease-in-out min-h-[120px]"
                                     placeholder="Any additional information you'd like to share"
                                 />
                                 <p className="text-red-500 text-sm">{formState?.errors?.additionalNotes}</p>
@@ -369,7 +369,7 @@ export default function CallForSpeakersForm() {
                                 <button
                                     type="submit"
                                     disabled={isSubmitting}
-                                    className="inline-flex justify-center py-3 px-6 border border-transparent shadow-2xs text-base font-medium rounded-lg text-white bg-linear-to-r from-[#006B3F] via-[#000000] to-[#B91C1C] hover:opacity-90 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-[#006B3F] transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="inline-flex justify-center py-3 px-6 border border-transparent shadow-2xs text-base font-medium rounded-lg text-white bg-linear-to-r from-brand via-[#000000] to-[#B91C1C] hover:opacity-90 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-brand transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                     {isSubmitting ? 'Submitting...' : 'Submit Proposal'}
                                 </button>

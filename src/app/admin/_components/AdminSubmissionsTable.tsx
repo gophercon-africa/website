@@ -269,12 +269,12 @@ export function AdminSubmissionsTable({
             value={search}
             onChange={(e) => updateSearch(e.target.value)}
             placeholder="Search by name, email, or title..."
-            className="text-sm rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 px-3 py-1.5 focus:border-[#006B3F] focus:ring-2 focus:ring-[#006B3F]/20 focus:outline-none w-full sm:w-64"
+            className="text-sm rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 px-3 py-1.5 focus:border-brand focus:ring-2 focus:ring-brand/20 focus:outline-none w-full sm:w-64"
           />
           <select
             value={statusFilter}
             onChange={(e) => updateStatusFilter(e.target.value as StatusFilter)}
-            className="text-sm rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-3 py-1.5 focus:border-[#006B3F] focus:ring-2 focus:ring-[#006B3F]/20 focus:outline-none"
+            className="text-sm rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-3 py-1.5 focus:border-brand focus:ring-2 focus:ring-brand/20 focus:outline-none"
           >
             <option value="all">All statuses</option>
             {TALK_STATUSES.map((status) => (
@@ -285,7 +285,7 @@ export function AdminSubmissionsTable({
             value={categoryFilter}
             onChange={(e) => updateCategoryFilter(e.target.value)}
             aria-label="Filter by category"
-            className="text-sm rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-3 py-1.5 focus:border-[#006B3F] focus:ring-2 focus:ring-[#006B3F]/20 focus:outline-none max-w-52"
+            className="text-sm rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-3 py-1.5 focus:border-brand focus:ring-2 focus:ring-brand/20 focus:outline-none max-w-52"
           >
             <option value="all">All categories</option>
             {categories.map((category) => (
@@ -297,7 +297,7 @@ export function AdminSubmissionsTable({
               type="checkbox"
               checked={groupByCategory}
               onChange={(e) => setGroupByCategory(e.target.checked)}
-              className="rounded border-gray-300 dark:border-gray-600 text-[#006B3F] focus:ring-[#006B3F]"
+              className="rounded border-gray-300 dark:border-gray-600 text-brand focus:ring-brand"
             />
             Group by category
           </label>
@@ -312,7 +312,7 @@ export function AdminSubmissionsTable({
               onChange={(e) => updateRatingMin(e.target.value)}
               placeholder="min"
               aria-label="Minimum average rating"
-              className="text-sm rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 px-2 py-1.5 w-20 focus:border-[#006B3F] focus:ring-2 focus:ring-[#006B3F]/20 focus:outline-none"
+              className="text-sm rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 px-2 py-1.5 w-20 focus:border-brand focus:ring-2 focus:ring-brand/20 focus:outline-none"
             />
             <span>–</span>
             <input
@@ -324,7 +324,7 @@ export function AdminSubmissionsTable({
               onChange={(e) => updateRatingMax(e.target.value)}
               placeholder="max"
               aria-label="Maximum average rating"
-              className="text-sm rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 px-2 py-1.5 w-20 focus:border-[#006B3F] focus:ring-2 focus:ring-[#006B3F]/20 focus:outline-none"
+              className="text-sm rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 px-2 py-1.5 w-20 focus:border-brand focus:ring-2 focus:ring-brand/20 focus:outline-none"
             />
           </div>
         </div>
@@ -340,7 +340,7 @@ export function AdminSubmissionsTable({
               type="checkbox"
               checked={enabledColumns.has(col.key)}
               onChange={() => toggleColumn(col.key)}
-              className="rounded border-gray-300 dark:border-gray-600 text-[#006B3F] focus:ring-[#006B3F]"
+              className="rounded border-gray-300 dark:border-gray-600 text-brand focus:ring-brand"
             />
             {col.label}
           </label>
@@ -354,7 +354,7 @@ export function AdminSubmissionsTable({
             value={bulkStatus}
             onChange={(e) => setBulkStatus(e.target.value as TalkStatus)}
             disabled={selectedSubmissions.length === 0}
-            className="text-sm rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-3 py-1.5 focus:border-[#006B3F] focus:ring-2 focus:ring-[#006B3F]/20 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
+            className="text-sm rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-3 py-1.5 focus:border-brand focus:ring-2 focus:ring-brand/20 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {TALK_STATUSES.map((status) => (
               <option key={status} value={status}>{STATUS_LABELS[status]}</option>
@@ -363,7 +363,7 @@ export function AdminSubmissionsTable({
           <button
             onClick={() => setConfirmOpen(true)}
             disabled={selectedSubmissions.length === 0}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-white bg-[#006B3F] hover:bg-[#00552f] dark:bg-emerald-600 dark:hover:bg-emerald-500 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-white bg-brand hover:bg-brand-dark dark:bg-emerald-600 dark:hover:bg-emerald-500 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             Apply ({selectedSubmissions.length})
           </button>
@@ -371,7 +371,7 @@ export function AdminSubmissionsTable({
         <button
           onClick={() => exportRows(filteredSubmissions, 'submissions-filtered.csv')}
           disabled={filteredSubmissions.length === 0}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-[#006B3F] dark:text-emerald-400 bg-[#006B3F]/5 dark:bg-emerald-500/10 hover:bg-[#006B3F]/10 dark:hover:bg-emerald-500/20 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-brand dark:text-emerald-400 bg-brand/5 dark:bg-emerald-500/10 hover:bg-brand/10 dark:hover:bg-emerald-500/20 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           <Download className="w-4 h-4" />
           Export filtered ({filteredSubmissions.length})
@@ -379,7 +379,7 @@ export function AdminSubmissionsTable({
         <button
           onClick={() => exportRows(selectedSubmissions, 'submissions-selected.csv')}
           disabled={selectedSubmissions.length === 0}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-[#006B3F] dark:text-emerald-400 bg-[#006B3F]/5 dark:bg-emerald-500/10 hover:bg-[#006B3F]/10 dark:hover:bg-emerald-500/20 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-brand dark:text-emerald-400 bg-brand/5 dark:bg-emerald-500/10 hover:bg-brand/10 dark:hover:bg-emerald-500/20 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           <Download className="w-4 h-4" />
           Export selected ({selectedSubmissions.length})
@@ -398,7 +398,7 @@ export function AdminSubmissionsTable({
                     type="checkbox"
                     checked={allFilteredSelected}
                     onChange={toggleSelectAllFiltered}
-                    className="rounded border-gray-300 dark:border-gray-600 text-[#006B3F] focus:ring-[#006B3F]"
+                    className="rounded border-gray-300 dark:border-gray-600 text-brand focus:ring-brand"
                     aria-label="Select all filtered submissions"
                   />
                 </th>
@@ -431,7 +431,7 @@ export function AdminSubmissionsTable({
                           type="checkbox"
                           checked={selectedIds.has(submission.id)}
                           onChange={() => toggleRow(submission.id)}
-                          className="rounded border-gray-300 dark:border-gray-600 text-[#006B3F] focus:ring-[#006B3F]"
+                          className="rounded border-gray-300 dark:border-gray-600 text-brand focus:ring-brand"
                           aria-label={`Select ${submission.talkTitle}`}
                         />
                       </td>
@@ -473,7 +473,7 @@ export function AdminSubmissionsTable({
           <button
             onClick={applyBulkStatus}
             disabled={isApplying}
-            className="px-3 py-1.5 text-sm font-medium text-white bg-[#006B3F] hover:bg-[#00552f] dark:bg-emerald-600 dark:hover:bg-emerald-500 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="px-3 py-1.5 text-sm font-medium text-white bg-brand hover:bg-brand-dark dark:bg-emerald-600 dark:hover:bg-emerald-500 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             {isApplying ? 'Applying…' : 'Confirm'}
           </button>
@@ -494,7 +494,7 @@ export function AdminSubmissionsTable({
                   setDuplicateModalSubmission(null);
                   router.push(`/admin/submissions/${t.id}`);
                 }}
-                className="text-sm text-[#006B3F] dark:text-emerald-400 hover:underline text-left"
+                className="text-sm text-brand dark:text-emerald-400 hover:underline text-left"
               >
                 {t.talkTitle}
               </button>

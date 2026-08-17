@@ -79,7 +79,7 @@ export function SelectionSidebar({
               value={search}
               onChange={(e) => onSearchChange(e.target.value)}
               placeholder="Search speaker or title... ( / )"
-              className="w-full text-sm rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 px-3 py-1.5 focus:border-[#006B3F] focus:ring-2 focus:ring-[#006B3F]/20 focus:outline-none"
+              className="w-full text-sm rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 px-3 py-1.5 focus:border-brand focus:ring-2 focus:ring-brand/20 focus:outline-none"
             />
           </div>
 
@@ -97,14 +97,14 @@ export function SelectionSidebar({
                     onClick={() => onNavigate(talk.id)}
                     className={`w-full text-left p-3 rounded-lg border transition-all ${
                       isSelected
-                        ? 'bg-[#006B3F]/5 dark:bg-emerald-500/10 border-[#006B3F]/20 dark:border-emerald-500/30 ring-1 ring-[#006B3F]/20 dark:ring-emerald-500/30'
+                        ? 'bg-brand/5 dark:bg-emerald-500/10 border-brand/20 dark:border-emerald-500/30 ring-1 ring-brand/20 dark:ring-emerald-500/30'
                         : 'bg-white dark:bg-gray-900 border-transparent hover:border-gray-200 dark:hover:border-gray-700 hover:shadow-sm'
                     }`}
                   >
                     <div className="flex items-start justify-between gap-3 mb-1">
                       <h4
                         className={`text-sm font-semibold line-clamp-2 leading-snug ${
-                          isSelected ? 'text-[#006B3F] dark:text-emerald-400' : 'text-gray-900 dark:text-gray-100'
+                          isSelected ? 'text-brand dark:text-emerald-400' : 'text-gray-900 dark:text-gray-100'
                         }`}
                       >
                         {talk.talkTitle}

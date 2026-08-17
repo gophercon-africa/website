@@ -87,7 +87,7 @@ function OtpVerifyForm() {
                 autoComplete="one-time-code"
                 placeholder="000000"
                 ref={otpRef}
-                className="w-full rounded-lg border border-gray-300 px-4 py-3 text-center text-2xl font-mono tracking-widest focus:border-[#006B3F] focus:ring-2 focus:ring-[#006B3F] focus:outline-none"
+                className="w-full rounded-lg border border-gray-300 px-4 py-3 text-center text-2xl font-mono tracking-widest focus:border-brand focus:ring-2 focus:ring-brand focus:outline-none"
               />
               {otpError && (
                 <p className="mt-1 text-sm text-red-600">{otpError}</p>
@@ -97,14 +97,14 @@ function OtpVerifyForm() {
             <button
               type="submit"
               disabled={isPending}
-              className="w-full rounded-lg bg-[#006B3F] px-4 py-3 text-sm font-semibold text-white hover:bg-[#008751] disabled:opacity-60 transition-colors focus:ring-2 focus:ring-[#006B3F] focus:ring-offset-2"
+              className="w-full rounded-lg bg-brand px-4 py-3 text-sm font-semibold text-white hover:bg-brand-light disabled:opacity-60 transition-colors focus:ring-2 focus:ring-brand focus:ring-offset-2"
             >
               {isPending ? 'Verifying...' : 'Verify code'}
             </button>
 
             <p className="text-center text-sm text-gray-500">
               Didn&apos;t receive a code?{' '}
-              <a href="/otp-login" className="text-[#006B3F] hover:underline font-medium">
+              <a href="/otp-login" className="text-brand hover:underline font-medium">
                 Try again
               </a>
             </p>

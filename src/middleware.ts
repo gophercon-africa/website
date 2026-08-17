@@ -5,6 +5,8 @@ import { getToken } from 'next-auth/jwt'
 // Public routes — never require authentication
 const publicExact = new Set([
   '/',
+  '/2024',
+  '/2025',
   '/workshops',
   '/schedule',
   '/speakers',
