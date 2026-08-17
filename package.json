@@ -19,6 +19,9 @@
   "prisma": {
     "schema": "./prisma/schema.prisma"
   },
+  "overrides": {
+    "@auth/core": "0.41.1"
+  },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.1",
     "@heroui/react": "^2.8.7",
@@ -67,6 +70,7 @@
     "tailwindcss": "^4.1.18",
     "typescript": "^5.9.3",
     "vitest": "^3.2.7",
+    "webpack": "^5.109.2",
     "wrangler": "^4.113.0"
   }
 }

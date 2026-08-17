@@ -17,7 +17,20 @@
       "Bash(grep -n -iE \"oct|date|2026|2025|[0-9]{1,2}\\(st|nd|rd|th\\)|nairobi|venue\" src/components/footer/Footer.tsx)",
       "Bash(grep -rn -iE \"oct[a-z]*|[0-9]{1,2}\\\\s*[-–—to]+\\\\s*[0-9]{1,2}\\\\s*\\(oct|october\\)\" --include=\"*.tsx\" --include=\"*.ts\" --include=\"*.md\" --include=\"*.json\" .)",
       "Bash(npx tsc *)",
-      "Bash(npx next *)"
+      "Bash(npx next *)",
+      "Bash(npm -v)",
+      "Bash(npm ci *)",
+      "Bash(git fetch *)",
+      "Bash(gh pr *)",
+      "Bash(gh run *)",
+      "Bash(node *)",
+      "Bash(python3 *)",
+      "Bash(npm why *)",
+      "Bash(yarn --version)",
+      "Bash(yarn install *)",
+      "Bash(DATABASE_URL=\"postgresql://placeholder:placeholder@localhost:5432/placeholder\" npm run build)",
+      "Bash(npm view *)",
+      "Bash(npm ls *)"
     ]
   }
 }

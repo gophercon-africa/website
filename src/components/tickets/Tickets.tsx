@@ -20,7 +20,7 @@ const ticketOptions: TicketOption[] = [
   {
     title: "Student Conference Tickets",
     type: "Single",
-    price: "KSh 1,500",
+    price: "KSh 750",
     description: "Access to conference for students with a valid student ID.",
     perks: ["Access to the conference days, valid with a student ID."],
     days: ["conference"],
@@ -28,7 +28,7 @@ const ticketOptions: TicketOption[] = [
   {
     title: "Conference Days Standard",
     type: "Single",
-    price: "KSh 3,000",
+    price: "KSh 1,500",
     description: "Access to conference days.",
     perks: ["Access to conference days only."],
     days: ["conference"],
@@ -36,7 +36,7 @@ const ticketOptions: TicketOption[] = [
   {
     title: "Student Workshop Ticket",
     type: "Single",
-    price: "KSh 4,000",
+    price: "KSh 2,000",
     description: "Access to the workshop, valid with a student ID.",
     perks: ["Access to the workshop, valid with a student ID."],
     days: ["workshop"],
@@ -44,7 +44,7 @@ const ticketOptions: TicketOption[] = [
   {
     title: "Workshop Ticket",
     type: "Single",
-    price: "KSh 5,000",
+    price: "KSh 2,500",
     description: "Gives you access to workshop with Bill Kennedy.",
     perks: ["Access to only the workshop day."],
     days: ["workshop"],
@@ -52,7 +52,7 @@ const ticketOptions: TicketOption[] = [
   {
     title: "Student Workshop And Conference Days Ticket",
     type: "Single",
-    price: "KSh 5,000",
+    price: "KSh 2,500",
     description:
       "Access to the workshop and conference days (valid with a student ID).",
     perks: [
@@ -63,7 +63,7 @@ const ticketOptions: TicketOption[] = [
   {
     title: "Workshop And Conference Days",
     type: "Single",
-    price: "KSh 7,000",
+    price: "KSh 3,500",
     description: "Gives you access to workshop and conference days.",
     perks: ["Access to the workshop and conference days."],
     days: ["workshop", "conference"],
