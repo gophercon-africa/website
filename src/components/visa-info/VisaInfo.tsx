@@ -65,7 +65,7 @@ export default function VisaInfo() {
                                             Apply for your Kenyan Electronic Travel Authorization online through the official portal.
                                         </p>
                                         <Link href="https://etakenya.go.ke/" target="_blank" rel="noopener noreferrer">
-                                            <button className="bg-brand-bright text-white px-4 py-2 rounded-lg hover:bg-brand-bright transition-colors duration-200 text-sm font-medium">
+                                            <button className="bg-brand-bright text-white px-4 py-2 rounded-lg hover:bg-brand-light transition-colors duration-200 text-sm font-medium">
                                                 Apply Online →
                                             </button>
                                         </Link>

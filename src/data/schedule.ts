@@ -33,8 +33,8 @@ export const scheduleData: ScheduleDay[] = [
         speakerLabel: 'Speaker to be announced',
       },
       {
-        id: 'd1-0930-ultimate-go-1',
-        title: 'Ultimate Go: Foundations — Part 1',
+        id: 'd1-0930-workshop-part-1',
+        title: 'Ultimate Software Design and Engineering — Part 1',
         type: 'workshop',
         startTime: '09:30',
         endTime: '11:30',
@@ -49,8 +49,8 @@ export const scheduleData: ScheduleDay[] = [
         endTime: '12:00',
       },
       {
-        id: 'd1-1200-ultimate-go-2',
-        title: 'Ultimate Go: Foundations — Part 2',
+        id: 'd1-1200-workshop-part-2',
+        title: 'Ultimate Software Design and Engineering — Part 2',
         type: 'workshop',
         startTime: '12:00',
         endTime: '13:00',
