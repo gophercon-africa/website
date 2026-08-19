@@ -1,7 +1,6 @@
 'use client';
 
-import React from 'react';
-import '../app/hero.css';
+import '../../app/hero.css';
 import Hero from '@components/hero/Hero';
 import About from '@components/about/About';
 import InfoCards from '@components/info-cards/InfoCards';

@@ -5,11 +5,30 @@
 
 @theme {
   /* Brand greens. `brand` is the site accent; `brand-dark` is its hover shade.
-     Email templates keep literal hex — Tailwind classes don't reach email HTML. */
+     Email templates keep literal hex — Tailwind classes don't reach email HTML.
+     These four values are immutable brand identity — see DESIGN.md. */
   --color-brand: #006b3f;
   --color-brand-dark: #00552f;
   --color-brand-light: #008751;
   --color-brand-bright: #00a86b;
+
+  /* The one tinted background allowed on marketing surfaces (badges, avatar
+     placeholders, soft callouts). Everything else is white/sunken/neutral. */
+  --color-brand-tint: #e9f5ef;
+
+  /* Semantic neutrals — marketing UI uses these instead of raw gray-*. */
+  --color-ink: #111827;
+  --color-body: #374151;
+  --color-muted: #6b7280;
+  --color-faint: #9ca3af;
+  --color-line: #e5e7eb;
+  --color-surface: #ffffff;
+  --color-surface-sunken: #f9fafb;
+
+  /* Two-step radius scale: controls (buttons, inputs, badges, tabs) and
+     surfaces (cards, panels, modals). Nothing else — see DESIGN.md. */
+  --radius-control: 8px;
+  --radius-surface: 16px;
 
   --color-primary-50: #fff7ed;
   --color-primary-100: #ffedd5;
@@ -22,7 +41,7 @@
   --color-primary-800: #9a3412;
   --color-primary-900: #7c2d12;
 
-  --font-sans: Plus Jakarta Sans, sans-serif;
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
 }
 
 /*
