@@ -116,13 +116,6 @@ export default function Year2025Page() {
           <section className="border-t border-gray-200 pt-8">
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
-                href="/speakers"
-                className="inline-flex items-center justify-center gap-2 rounded-lg border border-brand px-5 py-2.5 text-sm font-semibold text-brand hover:bg-brand/5 transition-colors"
-              >
-                Meet the 2025 speakers
-                <ArrowRight className="w-4 h-4" aria-hidden />
-              </Link>
-              <Link
                 href="/2024"
                 className="inline-flex items-center justify-center gap-2 rounded-lg border border-brand px-5 py-2.5 text-sm font-semibold text-brand hover:bg-brand/5 transition-colors"
               >
