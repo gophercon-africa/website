@@ -2,6 +2,13 @@ name: PR CI
 on:
   pull_request:
     branches: [main]
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
 jobs:
   checks:
     runs-on: ubuntu-latest
@@ -25,3 +32,115 @@ jobs:
           # prisma generate and next build don't touch the database; the
           # client constructor just requires the variable to be present.
           DATABASE_URL: postgresql://placeholder:placeholder@localhost:5432/placeholder
+
+  preview:
+    name: Cloudflare preview
+    runs-on: ubuntu-latest
+    needs: checks
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    concurrency:
+      group: cloudflare-preview-${{ github.event.pull_request.number }}
+      cancel-in-progress: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Build and upload preview
+        id: upload
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: a01b760e5af733b8d91d6ec48514aaa3
+          DATABASE_URL: postgresql://placeholder:placeholder@localhost:5432/placeholder
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          set -euo pipefail
+
+          preview_alias="pr-${PR_NUMBER}"
+          message="PR #${PR_NUMBER} preview: ${PR_TITLE}"
+
+          npx opennextjs-cloudflare build
+          npx opennextjs-cloudflare upload -- --preview-alias "$preview_alias" --tag "$preview_alias" --message "$message" --json | tee wrangler-upload.log
+
+          node <<'NODE'
+          const fs = require('node:fs');
+
+          const text = fs.readFileSync('wrangler-upload.log', 'utf8');
+          const markerIndex = text.indexOf('"type": "version-upload"');
+          if (markerIndex === -1) {
+            throw new Error('Could not find Wrangler version upload JSON output.');
+          }
+
+          const start = text.lastIndexOf('{', markerIndex);
+          let depth = 0;
+          let end = -1;
+
+          for (let index = start; index < text.length; index += 1) {
+            if (text[index] === '{') depth += 1;
+            if (text[index] === '}') depth -= 1;
+            if (depth === 0) {
+              end = index + 1;
+              break;
+            }
+          }
+
+          if (start < 0 || end < 0) {
+            throw new Error('Could not parse Wrangler version upload JSON output.');
+          }
+
+          const upload = JSON.parse(text.slice(start, end));
+          const previewUrl = upload.preview_alias_url || upload.preview_url;
+          if (!previewUrl) {
+            throw new Error('Wrangler did not return a preview URL.');
+          }
+
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `url=${previewUrl}\n`);
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `Cloudflare preview: ${previewUrl}\n`);
+          NODE
+      - name: Comment preview URL
+        uses: actions/github-script@v7
+        env:
+          PREVIEW_URL: ${{ steps.upload.outputs.url }}
+        with:
+          script: |
+            const marker = '<!-- cloudflare-preview-url -->';
+            const body = [
+              marker,
+              `Cloudflare deploy preview: ${process.env.PREVIEW_URL}`,
+              '',
+              `Updated for commit ${context.sha}.`,
+            ].join('\n');
+
+            const { owner, repo } = context.repo;
+            const issue_number = context.payload.pull_request.number;
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner,
+              repo,
+              issue_number,
+            });
+            const existing = comments.find((comment) =>
+              comment.user.type === 'Bot' && comment.body.includes(marker)
+            );
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner,
+                repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number,
+                body,
+              });
+            }
