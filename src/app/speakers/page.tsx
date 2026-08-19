@@ -1,12 +1,11 @@
 'use client';
 
-import { Suspense, useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Container from '@components/ui/Container';
 import SpeakerCard from '@components/speakers/SpeakerCard';
 import SpeakerModal from '@components/speakers/SpeakerModal';
 import { speakers2026 } from '@data/speakers-2026';
-import { Speaker } from '@/src/types/speaker';
 import { EVENT_DATES, CITY } from '@/src/lib/event';
 
 function PageHeader() {
@@ -26,32 +25,18 @@ function PageHeader() {
 }
 
 function SpeakersContent() {
-  const [selectedSpeaker, setSelectedSpeaker] = useState<Speaker | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const router = useRouter();
   const searchParams = useSearchParams();
+  const selectedSpeaker = speakers2026.find(
+    (speaker) => speaker.slug === searchParams?.get('speaker'),
+  ) ?? null;
 
-  // Deep link: /speakers?speaker=<slug> opens that speaker's modal (the
-  // schedule's speaker rows link here).
-  useEffect(() => {
-    const slug = searchParams?.get('speaker');
-    if (!slug) return;
-    const speaker = speakers2026.find((s) => s.slug === slug);
-    if (speaker) {
-      setSelectedSpeaker(speaker);
-      setIsModalOpen(true);
-    }
-  }, [searchParams]);
-
-  const openSpeaker = (speaker: Speaker) => {
-    setSelectedSpeaker(speaker);
-    setIsModalOpen(true);
-    window.history.replaceState(null, '', `?speaker=${speaker.slug}`);
+  const openSpeaker = (slug: string) => {
+    router.replace(`/speakers?speaker=${slug}`, { scroll: false });
   };
 
   const closeModal = () => {
-    setIsModalOpen(false);
-    window.history.replaceState(null, '', window.location.pathname);
-    setTimeout(() => setSelectedSpeaker(null), 300);
+    router.replace('/speakers', { scroll: false });
   };
 
   return (
@@ -64,7 +49,7 @@ function SpeakersContent() {
               <SpeakerCard
                 key={speaker.slug}
                 speaker={speaker}
-                onClick={() => openSpeaker(speaker)}
+                onClick={() => openSpeaker(speaker.slug)}
               />
             ))}
           </div>
@@ -72,7 +57,7 @@ function SpeakersContent() {
       </div>
       <SpeakerModal
         speaker={selectedSpeaker}
-        isOpen={isModalOpen}
+        isOpen={selectedSpeaker !== null}
         onClose={closeModal}
       />
     </>

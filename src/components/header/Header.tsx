@@ -23,10 +23,10 @@ export default function Header() {
   const { resolvedTheme, setTheme } = useTheme();
   const [themeMounted, setThemeMounted] = useState(false);
 
-  useEffect(() => setThemeMounted(true), []);
-
-  // Close the mobile menu whenever navigation happens.
-  useEffect(() => setIsMobileMenuOpen(false), [pathname]);
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => setThemeMounted(true));
+    return () => cancelAnimationFrame(frame);
+  }, []);
 
   // Lock body scroll while the mobile menu is open. Inline style so it
   // composes with (and restores cleanly around) `review-workspace-lock`.
