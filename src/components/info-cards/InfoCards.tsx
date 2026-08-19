@@ -1,169 +1,96 @@
-import React from 'react';
-import { ChevronRight} from 'lucide-react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
+import Button from '@components/ui/Button';
+import Card from '@components/ui/Card';
+import Container from '@components/ui/Container';
+import Section from '@components/ui/Section';
+
 export default function InfoCards({ cfsOpen = false }: { cfsOpen?: boolean }) {
-
-
   return (
-    <section className="py-24 bg-linear-to-t from-[#F1F8E9] to-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* About Card */}
-          <motion.div 
-            initial={{ x: -100, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            viewport={{ once: true }}
-            className="bg-[#F3E8FF] rounded-3xl p-12 relative overflow-hidden"
-          >
-            <div className="max-w-lg">
-              <div className="text-brand mb-4 font-medium">About GopherCon</div>
-              <h2 className="text-4xl font-medium text-gray-900 mb-6">Returning for our 3rd year</h2>
-              <p className="text-gray-600 mb-8 text-lg font-normal">
-                We are pleased to announce the third annual GopherCon Africa conference. Two days of amazing talks, plentiful networking opportunities and great socials. GopherCon Africa offers the most up-to-date Go programming information and training.
+    <Section>
+      <Container>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <Card className="flex items-end justify-between gap-4 p-8">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wide text-brand">
+                Third edition
               </p>
-              <Link href="#about" className="inline-flex items-center text-gray-900 font-medium hover:text-brand transition-colors">
-                Read about the event
-                <ChevronRight className="w-5 h-5 ml-1" />
-              </Link>
+              <h2 className="mt-2 text-2xl font-bold tracking-tight text-ink">
+                Returning for our 3rd year
+              </h2>
+              <p className="mt-3 text-body">
+                After Nairobi 2024 and Lagos 2025, GopherCon Africa returns to
+                Nairobi — bigger, with a full workshop day and two conference
+                days.
+              </p>
+              <div className="mt-5 flex flex-wrap gap-4">
+                <Button href="/2025" variant="ghost">
+                  GopherCon Africa 2025 →
+                </Button>
+                <Button href="/2024" variant="ghost">
+                  2024 →
+                </Button>
+              </div>
             </div>
-            <div className="absolute bottom-0 right-0 w-48 h-48">
-              <Image
-                src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744802566/mascot-kenya_pxfwhg.png"
-                alt="Waving Gopher"
-                width={192}
-                height={192}
-                className="object-contain"
-              />
-            </div>
-          </motion.div>
+            <Image
+              src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744802566/mascot-kenya_pxfwhg.png"
+              alt=""
+              aria-hidden
+              width={128}
+              height={128}
+              className="hidden shrink-0 object-contain sm:block"
+            />
+          </Card>
 
-          {/* Call for Speakers Card */}
-          <motion.div 
-            initial={{ x: -100, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            viewport={{ once: true }}
-            className="bg-[#FFF5F5] rounded-3xl p-12 relative overflow-hidden"
-          >
-            <div className="max-w-lg">
-              {cfsOpen ? (
-                <>
-                  <div className="text-brand mb-4">✅ Open Now</div>
-                  <h2 className="text-4xl font-bold text-gray-900 mb-6">Call for Speakers is Open!</h2>
-                  <p className="text-gray-600 mb-8 text-lg">
-                    Share your expertise and passion for Go with the GopherCon Africa community. We&apos;re looking for engaging talks that cover a wide range of Go topics.
-                  </p>
-                  <Link href="/call-for-speakers" className="inline-flex items-center text-gray-900 font-semibold hover:text-brand transition-colors">
+          <Card className="p-8">
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted">
+              Call for Speakers
+            </p>
+            {cfsOpen ? (
+              <>
+                <h2 className="mt-2 text-2xl font-bold tracking-tight text-ink">
+                  Call for Speakers is open
+                </h2>
+                <p className="mt-3 text-body">
+                  Share your expertise and passion for Go with the GopherCon
+                  Africa community — we&apos;re looking for talks across the
+                  whole Go spectrum.
+                </p>
+                <div className="mt-5">
+                  <Button href="/call-for-speakers" variant="secondary">
                     Submit your proposal
-                    <ChevronRight className="w-5 h-5 ml-1" />
-                  </Link>
-                </>
-              ) : (
-                <>
-                  <div className="text-gray-500 mb-4">🔒 Submissions Closed</div>
-                  <h2 className="text-4xl font-bold text-gray-900 mb-6">Call for Speakers is Closed</h2>
-                  <p className="text-gray-600 mb-8 text-lg">
-                    Thank you to everyone who submitted a talk! Submissions are now closed. Selected speakers will be notified soon — stay tuned for the lineup announcement.
-                  </p>
-                </>
-              )}
-            </div>
-            <div className="absolute bottom-0 right-0 w-48 h-48">
-              <Image
-                src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744802566/mascot-kenya_pxfwhg.png"
-                alt="Gopher with Book"
-                width={192}
-                height={192}
-                className="object-contain"
-              />
-            </div>
-          </motion.div>
+                  </Button>
+                </div>
+              </>
+            ) : (
+              <>
+                <h2 className="mt-2 text-2xl font-bold tracking-tight text-ink">
+                  Submissions are closed
+                </h2>
+                <p className="mt-3 text-body">
+                  Thank you to everyone who submitted a talk. The first accepted
+                  speakers are live — more announcements to come.
+                </p>
+                <div className="mt-5">
+                  <Button href="/speakers" variant="secondary">
+                    Meet the speakers
+                  </Button>
+                </div>
+              </>
+            )}
+          </Card>
         </div>
 
-        {/* Testimonials */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16">
-          {/* Testimonial 1 */}
-          <motion.div 
-            initial={{ x: -100, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-            viewport={{ once: true }}
-            className="bg-[#1E1E1E] rounded-3xl p-8 text-white"
-          >
-            <div className="mb-6">
-              <blockquote className="text-lg italic mb-4">
-                The talks were truly inspiring, with deep insights into efficiency and performance in solutions, the importance of testing, and the value of clean coding. We also explored the power of interfaces and how they drive better software design
-              </blockquote>
-              <div className="flex items-center">
-                <div className="shrink-0">
-                  <div className="w-12 h-12 rounded-full bg-[#6B46C1] flex items-center justify-center">
-                    <span className="text-xl font-semibold">P</span>
-                  </div>
-                </div>
-                <div className="ml-4">
-                  <div className="font-semibold">Blessed Rafael</div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Testimonial 2 */}
-          <motion.div 
-            initial={{ x: -100, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-            viewport={{ once: true }}
-            className="bg-[#1E1E1E] rounded-3xl p-8 text-white"
-          >
-            <div className="mb-6">
-              <blockquote className="text-lg italic mb-4">
-                I enjoyed the #Gc24 with @nairobi_gophers with @gophers_africa. Made friends in it, its the first of many
-              </blockquote>
-              <div className="flex items-center">
-                <div className="shrink-0">
-                  <div className="w-12 h-12 rounded-full bg-brand flex items-center justify-center">
-                    <span className="text-xl font-semibold">A</span>
-                  </div>
-                </div>
-                <div className="ml-4">
-                  <div className="font-semibold">Dr nutCase</div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Testimonial 3 */}
-          <motion.div 
-            initial={{ x: -100, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
-            viewport={{ once: true }}
-            className="bg-[#1E1E1E] rounded-3xl p-8 text-white"
-          >
-            <div className="mb-6">
-              <blockquote className="text-lg italic mb-4">
-                It&apos;s been my absolute honor to attend the first 
-@gophers_africa
- conference in Nairobi. There&apos;s so much knowledge and learning. Backend devs are hella too ✨
-Go sounds pretty 💅🏼💅🏼
-              </blockquote>
-              <div className="flex items-center">
-                <div className="shrink-0">
-                  <div className="w-12 h-12 rounded-full bg-brand flex items-center justify-center">
-                    <span className="text-xl font-semibold">A</span>
-                  </div>
-                </div>
-                <div className="ml-4">
-                  <div className="font-semibold">KendiJ💙</div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </div>
-    </section>
+        <figure className="mx-auto mt-16 max-w-3xl text-center">
+          <blockquote className="text-xl leading-relaxed text-body sm:text-2xl">
+            &ldquo;The talks were truly inspiring, with deep insights into
+            efficiency and performance, the importance of testing, and the value
+            of clean coding.&rdquo;
+          </blockquote>
+          <figcaption className="mt-4 text-sm font-semibold text-muted">
+            Blessed Rafael · GopherCon Africa attendee
+          </figcaption>
+        </figure>
+      </Container>
+    </Section>
   );
-} 
+}

@@ -1,200 +1,78 @@
-import React from "react";
-import { Lightbulb, Users, Coffee, ChevronRight } from "lucide-react";
-import YouTubePlayer from "react-youtube";
+import YouTubePlayer from 'react-youtube';
+import Button from '@components/ui/Button';
+import Container from '@components/ui/Container';
+import Section from '@components/ui/Section';
+import SectionHeading from '@components/ui/SectionHeading';
+
+const FEATURES = [
+  {
+    title: 'Expert-led sessions',
+    body: 'Keynotes, technical talks, and hands-on workshops from Go practitioners across Africa and beyond.',
+  },
+  {
+    title: 'Networking',
+    body: 'Hundreds of Go developers in one place — meet maintainers, hiring teams, and your next collaborators.',
+  },
+  {
+    title: 'Social events',
+    body: 'Lightning talks, socials, and cultural experiences unique to the host city.',
+  },
+];
 
 export default function About() {
-  const videoOpts = {
-    height: "100%",
-    width: "100%",
-    playerVars: {
-      modestbranding: 1,
-      rel: 0,
-      controls: 1,
-      showinfo: 1,
-      mute: 0,
-      playsinline: 1,
-    },
-  };
-
   return (
-    <section
-      id="about"
-      className="py-24 bg-linear-to-br from-white via-[#E8F5E9] to-[#F1F8E9] relative overflow-hidden"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-20">
-          <span className="text-brand font-medium mb-4 block">
-            About GopherCon Africa
-          </span>
-          <h2 className="text-4xl font-medium text-gray-900 mb-6">
-            Africa&apos;s Premier Go Conference
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            We are pleased to announce the third annual GopherCon Africa
-            conference. Two days of amazing talks, plentiful networking
-            opportunities, and great socials. GopherCon Africa offers the most
-            up-to-date Go programming information and training.
-          </p>
+    <Section id="about" tone="sunken">
+      <Container>
+        <SectionHeading
+          overline="About GopherCon Africa"
+          title="Africa's Premier Go Conference"
+          description="The third annual GopherCon Africa: three days of talks, workshops, networking, and socials, with the most up-to-date Go programming information and training."
+        />
+
+        <div className="mt-10 grid grid-cols-1 gap-10 md:grid-cols-3">
+          {FEATURES.map(({ title, body }) => (
+            <div key={title}>
+              <h3 className="text-lg font-semibold text-ink">{title}</h3>
+              <p className="mt-2 text-body">{body}</p>
+            </div>
+          ))}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
-          {/* Left Column - Conference Highlights */}
-          <div className="space-y-8">
-            <div className="bg-white rounded-2xl p-8 shadow-2xs hover:shadow-lg transition-all duration-300">
-              <div className="flex items-start mb-4">
-                <div className="w-12 h-12 rounded-xl bg-[#F3E8FF] flex items-center justify-center shrink-0">
-                  <Lightbulb className="w-6 h-6 text-[#6B46C1]" />
-                </div>
-                <div className="ml-4">
-                  <h3 className="text-xl font-medium text-gray-900 mb-2">
-                    Expert-Led Sessions
-                  </h3>
-                  <p className="text-gray-600">
-                    Learn from industry leaders and Go experts through keynotes,
-                    technical talks, and workshops.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-2xl p-8 shadow-2xs hover:shadow-lg transition-all duration-300">
-              <div className="flex items-start mb-4">
-                <div className="w-12 h-12 rounded-xl bg-[#F3E8FF] flex items-center justify-center shrink-0">
-                  <Users className="w-6 h-6 text-[#6B46C1]" />
-                </div>
-                <div className="ml-4">
-                  <h3 className="text-xl font-medium text-gray-900 mb-2">
-                    Networking
-                  </h3>
-                  <p className="text-gray-600">
-                    Connect with hundreds of Go developers, share experiences,
-                    and build lasting relationships.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-2xl p-8 shadow-2xs hover:shadow-lg transition-all duration-300">
-              <div className="flex items-start mb-4">
-                <div className="w-12 h-12 rounded-xl bg-[#F3E8FF] flex items-center justify-center shrink-0">
-                  <Coffee className="w-6 h-6 text-[#6B46C1]" />
-                </div>
-                <div className="ml-4">
-                  <h3 className="text-xl font-medium text-gray-900 mb-2">
-                    Social Events
-                  </h3>
-                  <p className="text-gray-600">
-                    Enjoy social gatherings, lightning talks, and cultural
-                    experiences unique to Africa.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Column - Featured Video */}
-          <div className="group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-xl transition-all duration-300">
-            <div className="aspect-video relative overflow-hidden">
+        <div className="mx-auto mt-14 max-w-3xl">
+          <div className="overflow-hidden rounded-surface border border-line bg-surface">
+            <div className="relative aspect-video">
               <YouTubePlayer
                 videoId="zwkomnt--Lg"
-                opts={videoOpts}
-                className="w-full h-full absolute inset-0"
+                opts={{
+                  height: '100%',
+                  width: '100%',
+                  playerVars: { modestbranding: 1, rel: 0, playsinline: 1 },
+                }}
+                className="absolute inset-0 h-full w-full"
                 iframeClassName="w-full h-full"
               />
             </div>
-            <div className="p-6 bg-white">
-              <div className="text-[#6B46C1] font-medium mb-2">
-                Featured Talk
+            <div className="flex flex-wrap items-center justify-between gap-3 p-6">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wide text-muted">
+                  From GopherCon Africa 2025
+                </p>
+                <h3 className="mt-1 text-lg font-semibold text-ink">
+                  Querying the Wire: Building a Postgres Protocol Sniffer in Go
+                </h3>
+                <p className="mt-1 text-sm text-muted">Chukwuemeka Chukwurah</p>
               </div>
-              <h3 className="text-xl font-medium text-gray-900 mb-2">
-                Postgres Protocol Sniffer in Go
-              </h3>
-              <div className="flex items-center">
-                <div className="w-10 h-10 rounded-full bg-[#6B46C1] flex items-center justify-center mr-3">
-                  <span className="text-sm font-medium text-white">AA</span>
-                </div>
-                <div>
-                  <div className="font-medium">Chukwuemeka Chukwurah</div>
-                  <div className="text-gray-600 text-sm">Software Engineer</div>
-                </div>
-              </div>
+              <Button
+                href="https://www.youtube.com/playlist?list=PLQGlpekanU1NJyfMpWOM2NgMKtibmi86V"
+                external
+                variant="ghost"
+              >
+                Watch all talks →
+              </Button>
             </div>
           </div>
         </div>
-
-        {/* More Videos Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          {/* Video Card 1 */}
-          <div className="group relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition-all duration-300">
-            <div className="aspect-video relative overflow-hidden">
-              <YouTubePlayer
-                videoId="v2tdBNLx6R0"
-                opts={videoOpts}
-                className="w-full h-full absolute inset-0"
-                iframeClassName="w-full h-full"
-              />
-            </div>
-            <div className="p-6 bg-white">
-              <h3 className="text-lg font-medium text-gray-900 mb-2">
-                How Go Compiles Itself and What That Means for You - Gophercon
-                Africa 2025
-              </h3>
-              <div className="flex items-center">
-                <div className="w-8 h-8 rounded-full bg-brand flex items-center justify-center mr-3">
-                  <span className="text-sm font-medium text-white">UI</span>
-                </div>
-                <span className="text-gray-600">Sammy Oina</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Video Card 2 */}
-          <div className="group relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition-all duration-300">
-            <div className="aspect-video relative overflow-hidden">
-              <YouTubePlayer
-                videoId="T4QhWoyI4x8"
-                opts={videoOpts}
-                className="w-full h-full absolute inset-0"
-                iframeClassName="w-full h-full"
-              />
-            </div>
-            <div className="p-6 bg-white">
-              <h3 className="text-lg font-medium text-gray-900 mb-2">
-                Behavior-Driven Development in Go: Automating Acceptance
-                Criteria with GoDog
-              </h3>
-              <div className="flex items-center">
-                <div className="w-8 h-8 rounded-full bg-brand flex items-center justify-center mr-3">
-                  <span className="text-sm font-medium text-white">UI</span>
-                </div>
-                <span className="text-gray-600">David Aniebo</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Video Card 3 */}
-          <div className="relative rounded-2xl bg-brand p-8 flex flex-col justify-between h-full">
-            <div>
-              <h3 className="text-2xl font-medium text-white mb-4">
-                Discover More Content
-              </h3>
-              <p className="text-white/90 mb-8">
-                Watch all our previous talks and get excited for what&apos;s
-                coming at GopherCon Africa 2026.
-              </p>
-            </div>
-            <a
-              href="https://www.youtube.com/playlist?list=PLQGlpekanU1NJyfMpWOM2NgMKtibmi86V"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center text-white group"
-            >
-              <span className="font-medium">Watch all videos</span>
-              <ChevronRight className="w-5 h-5 ml-1 transform group-hover:translate-x-1 transition-transform" />
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
+      </Container>
+    </Section>
   );
 }

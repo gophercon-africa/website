@@ -30,17 +30,6 @@
   --radius-control: 8px;
   --radius-surface: 16px;
 
-  --color-primary-50: #fff7ed;
-  --color-primary-100: #ffedd5;
-  --color-primary-200: #fed7aa;
-  --color-primary-300: #fdba74;
-  --color-primary-400: #fb923c;
-  --color-primary-500: #f97316;
-  --color-primary-600: #ea580c;
-  --color-primary-700: #c2410c;
-  --color-primary-800: #9a3412;
-  --color-primary-900: #7c2d12;
-
   --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
 }
 
@@ -74,22 +63,6 @@ body.review-workspace-lock {
   height: 100dvh;
   min-height: 0;
   overflow: hidden;
-}
-
-.bg-grid-pattern {
-  background-image: linear-gradient(to right, #f0f0f0 1px, transparent 1px),
-    linear-gradient(to bottom, #f0f0f0 1px, transparent 1px);
-  background-size: 24px 24px;
-}
-
-.text-gradient {
-  @apply bg-clip-text text-transparent bg-linear-to-r from-orange-500 to-orange-600;
-}
-
-.hero-pattern {
-  background-color: #ffffff;
-  background-image: radial-gradient(#ff6b2c15 1px, transparent 1px);
-  background-size: 24px 24px;
 }
 
 @keyframes slideDown {
