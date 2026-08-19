@@ -5,6 +5,7 @@ import Providers from './providers';
 import Header from '@components/header/Header';
 import ConditionalFooter from '@components/footer/ConditionalFooter';
 import TawkController from '@components/TawkController';
+import { CHAT_WIDGET_ENABLED } from '@/src/lib/config';
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -40,10 +41,10 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning className={jakarta.variable}>
       <body className="font-sans flex flex-col min-h-screen">
         <Providers>
-          <Header mounted={true} />
+          <Header />
           {children}
           <ConditionalFooter />
-          <TawkController />
+          <TawkController enabled={CHAT_WIDGET_ENABLED} />
         </Providers>
       </body>
     </html>
