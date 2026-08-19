@@ -39,6 +39,8 @@ export const scheduleData: ScheduleDay[] = [
         startTime: '09:30',
         endTime: '11:30',
         speaker: { name: 'Bill Kennedy' },
+        description:
+          'Structuring and architecting Go software for long-term maintenance — design philosophy, project layers, and AI tooling with a deploy-first mentality.',
         link: WORKSHOP_LINK,
       },
       {
@@ -126,6 +128,8 @@ export const scheduleData: ScheduleDay[] = [
         startTime: '09:20',
         endTime: '09:50',
         speaker: { name: 'Kennedy Karoko' },
+        description:
+          'Pushing a Go transaction pipeline to a million transactions per second — worker pools, GC pressure, sync.Pool, and reading flame graphs before guessing.',
       },
       {
         id: 'd2-0950-ochieng',
@@ -134,6 +138,8 @@ export const scheduleData: ScheduleDay[] = [
         startTime: '09:50',
         endTime: '10:20',
         speaker: { name: 'Bala Grivine Ochieng' },
+        description:
+          'The WAL failure modes that corrupt databases — partial writes, interrupted syscalls, zero-filled holes — and how to design recovery that survives them.',
       },
       {
         id: 'd2-1020-omolana',
@@ -143,6 +149,8 @@ export const scheduleData: ScheduleDay[] = [
         startTime: '10:20',
         endTime: '10:50',
         speaker: { name: 'Timilehin Omolana' },
+        description:
+          'Distributed transactions without two-phase commit: orchestrating the Saga pattern in Go with Temporal and deterministic design.',
       },
       {
         id: 'd2-1050-tea',
@@ -166,6 +174,8 @@ export const scheduleData: ScheduleDay[] = [
         startTime: '11:20',
         endTime: '11:50',
         speaker: { name: 'Alex Rios' },
+        description:
+          'The trade-off between spinning and parking, the hidden spin inside a Mutex, and why the runtime lets only one goroutine spin at a time.',
       },
       {
         id: 'd2-1150-talk-tba',
@@ -206,6 +216,8 @@ export const scheduleData: ScheduleDay[] = [
         startTime: '14:20',
         endTime: '14:50',
         speaker: { name: 'Utibeabasi Umanah' },
+        description:
+          'Running AI-agent code safely: ephemeral Firecracker microVMs orchestrated from Go for hardware-level isolation with sub-second boots.',
       },
       {
         id: 'd2-1450-obisi',
@@ -214,6 +226,8 @@ export const scheduleData: ScheduleDay[] = [
         startTime: '14:50',
         endTime: '15:20',
         speaker: { name: 'Desmond Obisi' },
+        description:
+          'Lessons from production multi-tenant systems: team-scoped, request-context-aware authorization in Go, beyond simple role checks.',
       },
       {
         id: 'd2-1520-wwg-panel',
@@ -268,6 +282,8 @@ export const scheduleData: ScheduleDay[] = [
         startTime: '09:00',
         endTime: '09:30',
         speaker: { name: 'Ajitem Sahasrabuddhe' },
+        description:
+          'Building a minimal container runtime in Go — namespaces, cgroups, and filesystem isolation — to demystify what happens when a container starts.',
       },
       {
         id: 'd3-0930-talk-tba',
@@ -284,6 +300,8 @@ export const scheduleData: ScheduleDay[] = [
         startTime: '10:00',
         endTime: '10:30',
         speaker: { name: 'Ainsley Clark' },
+        description:
+          'How //go:embed really works — from directive to binary through the linker — with the tradeoffs and production patterns for embedded assets.',
       },
       {
         id: 'd3-1030-tea',
@@ -308,6 +326,8 @@ export const scheduleData: ScheduleDay[] = [
         startTime: '11:00',
         endTime: '11:30',
         speaker: { name: 'Mugirase Emmanuel' },
+        description:
+          'A third path between framework lock-in and rewriting primitives: scaffolding idiomatic Go with opt-out defaults you can delete piece by piece.',
       },
       {
         id: 'd3-1130-alaribe',
@@ -316,6 +336,8 @@ export const scheduleData: ScheduleDay[] = [
         startTime: '11:30',
         endTime: '12:00',
         speaker: { name: 'Anthony Alaribe' },
+        description:
+          'Runbooks as executable checklists: deterministic programs with LLM judgment at each step, shown with a working on-call agent.',
       },
       {
         id: 'd3-1200-lunch',
@@ -348,6 +370,8 @@ export const scheduleData: ScheduleDay[] = [
         startTime: '14:00',
         endTime: '14:30',
         speaker: { name: 'Ige Oluwasegun Oluwajubelo' },
+        description:
+          'Instrumenting Go LLM backends with OpenTelemetry — tracing, token counts, real-time cost, and budget guardrails against runaway AI spend.',
       },
       {
         id: 'd3-1430-panel-tba',
