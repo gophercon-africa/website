@@ -2,6 +2,10 @@ import { ScheduleDay } from '@/src/types/schedule';
 
 const WORKSHOP_LINK = { href: '/workshops', label: 'View workshop details' };
 
+// Same asset as the Sponsors section (logos are drawn for light backgrounds).
+const MONIEPOINT_LOGO =
+  'https://res.cloudinary.com/dlmqe0two/image/upload/v1744802584/moniepoint_tgy3ii.jpg';
+
 export const scheduleData: ScheduleDay[] = [
   {
     day: 1,
@@ -33,45 +37,28 @@ export const scheduleData: ScheduleDay[] = [
         speakerLabel: 'Speaker to be announced',
       },
       {
-        id: 'd1-0930-workshop-part-1',
-        title: 'Ultimate Software Design and Engineering — Part 1',
+        id: 'd1-workshop-fullday',
+        title: 'Ultimate Software Design and Engineering',
         type: 'workshop',
         startTime: '09:30',
-        endTime: '11:30',
-        speaker: { name: 'Bill Kennedy' },
-        link: WORKSHOP_LINK,
-      },
-      {
-        id: 'd1-1130-tea',
-        title: 'Tea Break',
-        type: 'break',
-        startTime: '11:30',
-        endTime: '12:00',
-      },
-      {
-        id: 'd1-1200-workshop-part-2',
-        title: 'Ultimate Software Design and Engineering — Part 2',
-        type: 'workshop',
-        startTime: '12:00',
-        endTime: '13:00',
-        speaker: { name: 'Bill Kennedy' },
-        link: WORKSHOP_LINK,
-      },
-      {
-        id: 'd1-1300-lunch',
-        title: 'Lunch Break',
-        type: 'break',
-        startTime: '13:00',
-        endTime: '14:30',
-      },
-      {
-        id: 'd1-1430-workshop-interactive',
-        title: 'Interactive Workshop Session',
-        type: 'workshop',
-        startTime: '14:30',
         endTime: '16:00',
+        fullDay: true,
         speaker: { name: 'Bill Kennedy' },
+        description:
+          'Structuring and architecting Go software for long-term maintenance — design philosophy, project layers, and AI tooling with a deploy-first mentality.',
         link: WORKSHOP_LINK,
+        segments: [
+          { startTime: '09:30', endTime: '11:30', title: 'Part 1', type: 'workshop' },
+          { startTime: '11:30', endTime: '12:00', title: 'Tea Break', type: 'break' },
+          { startTime: '12:00', endTime: '13:00', title: 'Part 2', type: 'workshop' },
+          { startTime: '13:00', endTime: '14:30', title: 'Lunch Break', type: 'break' },
+          {
+            startTime: '14:30',
+            endTime: '16:00',
+            title: 'Interactive Session',
+            type: 'workshop',
+          },
+        ],
       },
       {
         id: 'd1-1600-closing',
@@ -126,6 +113,8 @@ export const scheduleData: ScheduleDay[] = [
         startTime: '09:20',
         endTime: '09:50',
         speaker: { name: 'Kennedy Karoko' },
+        description:
+          'Pushing a Go transaction pipeline to a million transactions per second — worker pools, GC pressure, sync.Pool, and reading flame graphs before guessing.',
       },
       {
         id: 'd2-0950-ochieng',
@@ -134,6 +123,8 @@ export const scheduleData: ScheduleDay[] = [
         startTime: '09:50',
         endTime: '10:20',
         speaker: { name: 'Bala Grivine Ochieng' },
+        description:
+          'The WAL failure modes that corrupt databases — partial writes, interrupted syscalls, zero-filled holes — and how to design recovery that survives them.',
       },
       {
         id: 'd2-1020-omolana',
@@ -143,6 +134,8 @@ export const scheduleData: ScheduleDay[] = [
         startTime: '10:20',
         endTime: '10:50',
         speaker: { name: 'Timilehin Omolana' },
+        description:
+          'Distributed transactions without two-phase commit: orchestrating the Saga pattern in Go with Temporal and deterministic design.',
       },
       {
         id: 'd2-1050-tea',
@@ -166,14 +159,16 @@ export const scheduleData: ScheduleDay[] = [
         startTime: '11:20',
         endTime: '11:50',
         speaker: { name: 'Alex Rios' },
+        description:
+          'The trade-off between spinning and parking, the hidden spin inside a Mutex, and why the runtime lets only one goroutine spin at a time.',
       },
       {
-        id: 'd2-1150-talk-tba',
-        title: 'Talk — to be announced',
+        id: 'd2-1150-thomas',
+        title: 'Deterministic Concurrency with synctest',
         type: 'talk',
         startTime: '11:50',
         endTime: '12:20',
-        tba: true,
+        speaker: { name: 'Toluwase Thomas' },
       },
       {
         id: 'd2-1220-lunch',
@@ -191,12 +186,20 @@ export const scheduleData: ScheduleDay[] = [
         tba: true,
       },
       {
-        id: 'd2-1350-sponsor-tba',
-        title: 'Sponsor Session — to be announced',
+        id: 'd2-1350-sponsor-moniepoint',
+        title: 'ESHU — Building an Internal Development Platform in Go',
         type: 'sponsor',
         startTime: '13:50',
         endTime: '14:20',
-        tba: true,
+        // Placeholder co-presenters (first name + company) until full speaker
+        // details arrive; then add them to speakers-2026 for photos + profiles.
+        speakers: [
+          { name: 'Sergio', company: 'Moniepoint' },
+          { name: 'Abdulrahman', company: 'Moniepoint' },
+        ],
+        description:
+          "Eshu is Moniepoint's internal developer platform, consisting of an ephemeral-environment Kubernetes operator and Platform-as-a-Service. Leveraging Crossplane, Tekton, and Dagger, Eshu can launch ephemeral environments with over 10 dedicated dependencies (including Postgres, Spanner Omni, Redis, and Kafka), allowing teams to build and launch services from development to production without needing infrastructure support.",
+        sponsor: { name: 'Moniepoint', logo: MONIEPOINT_LOGO },
       },
       {
         id: 'd2-1420-umanah',
@@ -206,6 +209,8 @@ export const scheduleData: ScheduleDay[] = [
         startTime: '14:20',
         endTime: '14:50',
         speaker: { name: 'Utibeabasi Umanah' },
+        description:
+          'Running AI-agent code safely: ephemeral Firecracker microVMs orchestrated from Go for hardware-level isolation with sub-second boots.',
       },
       {
         id: 'd2-1450-obisi',
@@ -214,6 +219,8 @@ export const scheduleData: ScheduleDay[] = [
         startTime: '14:50',
         endTime: '15:20',
         speaker: { name: 'Desmond Obisi' },
+        description:
+          'Lessons from production multi-tenant systems: team-scoped, request-context-aware authorization in Go, beyond simple role checks.',
       },
       {
         id: 'd2-1520-wwg-panel',
@@ -268,14 +275,16 @@ export const scheduleData: ScheduleDay[] = [
         startTime: '09:00',
         endTime: '09:30',
         speaker: { name: 'Ajitem Sahasrabuddhe' },
+        description:
+          'Building a minimal container runtime in Go — namespaces, cgroups, and filesystem isolation — to demystify what happens when a container starts.',
       },
       {
-        id: 'd3-0930-talk-tba',
-        title: 'Talk — to be announced',
+        id: 'd3-0930-atieno',
+        title: 'Hidden Behaviors of Go Structs in Production',
         type: 'talk',
         startTime: '09:30',
         endTime: '10:00',
-        tba: true,
+        speaker: { name: 'Beryl Christine Atieno' },
       },
       {
         id: 'd3-1000-clark',
@@ -284,6 +293,8 @@ export const scheduleData: ScheduleDay[] = [
         startTime: '10:00',
         endTime: '10:30',
         speaker: { name: 'Ainsley Clark' },
+        description:
+          'How //go:embed really works — from directive to binary through the linker — with the tradeoffs and production patterns for embedded assets.',
       },
       {
         id: 'd3-1030-tea',
@@ -308,6 +319,8 @@ export const scheduleData: ScheduleDay[] = [
         startTime: '11:00',
         endTime: '11:30',
         speaker: { name: 'Mugirase Emmanuel' },
+        description:
+          'A third path between framework lock-in and rewriting primitives: scaffolding idiomatic Go with opt-out defaults you can delete piece by piece.',
       },
       {
         id: 'd3-1130-alaribe',
@@ -316,6 +329,8 @@ export const scheduleData: ScheduleDay[] = [
         startTime: '11:30',
         endTime: '12:00',
         speaker: { name: 'Anthony Alaribe' },
+        description:
+          'Runbooks as executable checklists: deterministic programs with LLM judgment at each step, shown with a working on-call agent.',
       },
       {
         id: 'd3-1200-lunch',
@@ -333,12 +348,12 @@ export const scheduleData: ScheduleDay[] = [
         tba: true,
       },
       {
-        id: 'd3-1330-sponsor-tba',
-        title: 'Sponsor Session — to be announced',
+        id: 'd3-1330-sponsor-moniepoint',
+        title: 'Sponsor Session',
         type: 'sponsor',
         startTime: '13:30',
         endTime: '14:00',
-        tba: true,
+        sponsor: { name: 'Moniepoint', logo: MONIEPOINT_LOGO },
       },
       {
         id: 'd3-1400-oluwajubelo',
@@ -348,6 +363,8 @@ export const scheduleData: ScheduleDay[] = [
         startTime: '14:00',
         endTime: '14:30',
         speaker: { name: 'Ige Oluwasegun Oluwajubelo' },
+        description:
+          'Instrumenting Go LLM backends with OpenTelemetry — tracing, token counts, real-time cost, and budget guardrails against runaway AI spend.',
       },
       {
         id: 'd3-1430-panel-tba',

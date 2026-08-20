@@ -1,25 +1,22 @@
 import { SessionType } from '@/src/types/schedule';
 
+/** Label + badge tone per session type. Tones map to the Badge primitive:
+ *  keynote is the only brand-tinted badge; other content is neutral; the
+ *  logistical rows (breaks etc.) are outline. No per-type color rainbow. */
 export const SESSION_TYPE_META: Record<
   SessionType,
-  { label: string; className: string }
+  { label: string; tone: 'brand' | 'neutral' | 'outline' }
 > = {
-  keynote: { label: 'Keynote', className: 'bg-amber-100 text-amber-800' },
-  talk: { label: 'Talk', className: 'bg-emerald-100 text-emerald-800' },
-  lightning: {
-    label: 'Lightning Talk',
-    className: 'bg-yellow-100 text-yellow-800',
-  },
-  workshop: { label: 'Workshop', className: 'bg-purple-100 text-purple-800' },
-  panel: { label: 'Panel', className: 'bg-pink-100 text-pink-800' },
-  sponsor: { label: 'Sponsor', className: 'bg-indigo-100 text-indigo-800' },
-  break: { label: 'Break', className: 'bg-gray-100 text-gray-600' },
-  networking: { label: 'Networking', className: 'bg-teal-100 text-teal-800' },
-  registration: {
-    label: 'Registration',
-    className: 'bg-gray-100 text-gray-600',
-  },
-  remarks: { label: 'Remarks', className: 'bg-gray-100 text-gray-600' },
+  keynote: { label: 'Keynote', tone: 'brand' },
+  talk: { label: 'Talk', tone: 'neutral' },
+  lightning: { label: 'Lightning Talk', tone: 'neutral' },
+  workshop: { label: 'Workshop', tone: 'neutral' },
+  panel: { label: 'Panel', tone: 'neutral' },
+  sponsor: { label: 'Sponsor', tone: 'neutral' },
+  break: { label: 'Break', tone: 'outline' },
+  networking: { label: 'Networking', tone: 'outline' },
+  registration: { label: 'Registration', tone: 'outline' },
+  remarks: { label: 'Remarks', tone: 'outline' },
 };
 
 /** Session types rendered as full cards; the rest render as slim rows. */

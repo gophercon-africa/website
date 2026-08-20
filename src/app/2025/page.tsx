@@ -10,16 +10,16 @@ export const metadata: Metadata = {
 
 export default function Year2025Page() {
   return (
-    <div className="min-h-screen bg-gray-50 py-16">
+    <div className="min-h-screen bg-surface-sunken py-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <p className="text-xs tracking-[0.28em] uppercase text-brand font-semibold mb-3">
+          <p className="text-xs font-semibold uppercase tracking-wide text-brand mb-3">
             Looking back
           </p>
-          <h1 className="text-5xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-ink mb-4">
             GopherCon Africa 2025
           </h1>
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-gray-600">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-muted">
             <span className="inline-flex items-center gap-2">
               <MapPin className="w-5 h-5 text-brand" aria-hidden />
               Lagos, Nigeria
@@ -33,8 +33,8 @@ export default function Year2025Page() {
 
         <div className="max-w-3xl mx-auto space-y-10">
           <section>
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">The event</h2>
-            <div className="space-y-4 text-gray-700 leading-relaxed">
+            <h2 className="text-2xl font-bold text-ink mb-3">The event</h2>
+            <div className="space-y-4 text-body leading-relaxed">
               <p>
                 In November 2025, GopherCon Africa brought the Go community to
                 Lagos, Nigeria — two packed days of hands-on workshops,
@@ -50,8 +50,8 @@ export default function Year2025Page() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">Day one</h2>
-            <div className="space-y-4 text-gray-700 leading-relaxed">
+            <h2 className="text-2xl font-bold text-ink mb-3">Day one</h2>
+            <div className="space-y-4 text-body leading-relaxed">
               <p>
                 The first day kicked off with Paul Arah&apos;s workshop{' '}
                 <em>Unlocking eBPF Superpowers for Go Developers</em>, followed
@@ -80,8 +80,8 @@ export default function Year2025Page() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">Day two</h2>
-            <div className="space-y-4 text-gray-700 leading-relaxed">
+            <h2 className="text-2xl font-bold text-ink mb-3">Day two</h2>
+            <div className="space-y-4 text-body leading-relaxed">
               <p>
                 Day two opened with Alex Rios&apos;s workshop{' '}
                 <em>
@@ -113,25 +113,18 @@ export default function Year2025Page() {
             </div>
           </section>
 
-          <section className="border-t border-gray-200 pt-8">
+          <section className="border-t border-line pt-8">
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
-                href="/speakers"
-                className="inline-flex items-center justify-center gap-2 rounded-lg border border-brand px-5 py-2.5 text-sm font-semibold text-brand hover:bg-brand/5 transition-colors"
-              >
-                Meet the 2025 speakers
-                <ArrowRight className="w-4 h-4" aria-hidden />
-              </Link>
-              <Link
                 href="/2024"
-                className="inline-flex items-center justify-center gap-2 rounded-lg border border-brand px-5 py-2.5 text-sm font-semibold text-brand hover:bg-brand/5 transition-colors"
+                className="inline-flex items-center justify-center gap-2 rounded-control border border-brand px-5 py-2.5 text-sm font-semibold text-brand hover:bg-brand/5 transition-colors"
               >
                 GopherCon Africa 2024 in Nairobi
                 <ArrowRight className="w-4 h-4" aria-hidden />
               </Link>
               <Link
                 href="/schedule"
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-brand px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-dark transition-colors"
+                className="inline-flex items-center justify-center gap-2 rounded-control bg-brand px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-dark transition-colors"
               >
                 See the 2026 schedule
                 <ArrowRight className="w-4 h-4" aria-hidden />

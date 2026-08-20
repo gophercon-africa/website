@@ -1,98 +1,87 @@
-'use client';
-
-import React from 'react';
-import Image from 'next/image';
 import { Speaker } from '@/src/types/speaker';
 import { FaTwitter, FaLinkedin, FaGithub, FaGlobe } from 'react-icons/fa';
 import Modal from '@components/common/Modal';
+import SpeakerAvatar from './SpeakerAvatar';
 
-interface SpeakerModalProps {
+const SOCIALS = [
+  { key: 'twitter', Icon: FaTwitter, label: 'Twitter' },
+  { key: 'linkedin', Icon: FaLinkedin, label: 'LinkedIn' },
+  { key: 'github', Icon: FaGithub, label: 'GitHub' },
+  { key: 'website', Icon: FaGlobe, label: 'Website' },
+] as const;
+
+export default function SpeakerModal({
+  speaker,
+  isOpen,
+  onClose,
+}: {
   speaker: Speaker | null;
   isOpen: boolean;
   onClose: () => void;
-}
-
-const SpeakerModal: React.FC<SpeakerModalProps> = ({ speaker, isOpen, onClose }) => {
+}) {
   if (!speaker) return null;
 
+  const socials = SOCIALS.filter(({ key }) => speaker[key]);
+
   return (
-    <Modal
-      isOpen={isOpen}
-      onClose={onClose}
-      title={speaker.name}
-      size="xl"
-    >
-      <div className="flex flex-col md:flex-row gap-6">
-        <div className="shrink-0 flex flex-col">
-          <Image
-            src={speaker.imageUrl}
-            alt={speaker.name}
-            width={200}
-            height={200}
-            className="rounded-lg object-cover w-48 h-48 mb-4"
+    <Modal isOpen={isOpen} onClose={onClose} title={speaker.name} size="xl">
+      <div className="flex flex-col gap-6 md:flex-row">
+        <div className="flex shrink-0 flex-col items-center gap-4 md:items-start">
+          <SpeakerAvatar
+            name={speaker.name}
+            imageUrl={speaker.imageUrl}
+            size={144}
           />
-          
-          <div className="flex gap-3">
-            {speaker.twitter && (
-              <a
-                href={speaker.twitter}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-600 hover:text-brand transition-colors"
-              >
-                <FaTwitter className="h-5 w-5" />
-              </a>
-            )}
-            {speaker.linkedin && (
-              <a
-                href={speaker.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-600 hover:text-brand transition-colors"
-              >
-                <FaLinkedin className="h-5 w-5" />
-              </a>
-            )}
-            {speaker.github && (
-              <a
-                href={speaker.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-600 hover:text-brand transition-colors"
-              >
-                <FaGithub className="h-5 w-5" />
-              </a>
-            )}
-            {speaker.website && (
-              <a
-                href={speaker.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-600 hover:text-brand transition-colors"
-              >
-                <FaGlobe className="h-5 w-5" />
-              </a>
-            )}
-          </div>
+          {socials.length > 0 && (
+            <div className="flex gap-3">
+              {socials.map(({ key, Icon, label }) => (
+                <a
+                  key={key}
+                  href={speaker[key]}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${speaker.name} on ${label}`}
+                  className="text-muted transition-colors hover:text-brand"
+                >
+                  <Icon className="h-5 w-5" aria-hidden />
+                </a>
+              ))}
+            </div>
+          )}
         </div>
 
-        <div className="flex-1">
-          <p className="text-lg text-brand font-semibold mb-1">{speaker.title}</p>
-          <p className="text-md text-gray-600 mb-4">{speaker.company}</p>
+        <div className="min-w-0 flex-1">
+          {(speaker.title || speaker.company) && (
+            <p className="text-sm text-muted">
+              {[speaker.title, speaker.company].filter(Boolean).join(' · ')}
+            </p>
+          )}
 
-          <div className="space-y-4">
-            <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Bio</h3>
-              <p className="text-gray-700 leading-relaxed">{speaker.bio}</p>
-            </div>
-
+          <div className="mt-4 space-y-6">
             {speaker.talkTitle && (
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Talk</h3>
-                <p className="text-brand font-semibold mb-1">{speaker.talkTitle}</p>
+                <h3 className="text-xs font-semibold uppercase tracking-wide text-muted">
+                  Talk
+                </h3>
+                <p className="mt-1 text-lg font-semibold text-ink">
+                  {speaker.talkTitle}
+                </p>
                 {speaker.talkDescription && (
-                  <p className="text-gray-700 leading-relaxed mb-3">{speaker.talkDescription}</p>
+                  <p className="mt-2 whitespace-pre-line text-sm leading-relaxed text-body">
+                    {speaker.talkDescription}
+                  </p>
                 )}
+              </div>
+            )}
+
+            {speaker.bio && (
+              <div>
+                <h3 className="text-xs font-semibold uppercase tracking-wide text-muted">
+                  About
+                </h3>
+                <p className="mt-2 whitespace-pre-line text-sm leading-relaxed text-body">
+                  {speaker.bio}
+                </p>
               </div>
             )}
           </div>
@@ -100,6 +89,4 @@ const SpeakerModal: React.FC<SpeakerModalProps> = ({ speaker, isOpen, onClose })
       </div>
     </Modal>
   );
-};
-
-export default SpeakerModal;
+}

@@ -5,6 +5,8 @@ import { useEffect } from 'react';
 // Tawk.to is prod-landing-page only: the script is injected the first time a
 // visitor is on / at gophercon.africa (aliases 301 there), and never on
 // localhost/previews. After that, SPA navigation just toggles visibility.
+// The whole thing sits behind CHAT_WIDGET_ENABLED (default off) — layout.tsx
+// reads the env server-side and passes it down as `enabled`.
 const PROD_HOST = 'gophercon.africa';
 const TAWK_SRC = 'https://embed.tawk.to/6a1172b6e9e7d11c32e0d0d0/1jpa2g6bf';
 
@@ -23,10 +25,11 @@ declare global {
 
 let injected = false;
 
-export default function TawkController() {
+export default function TawkController({ enabled }: { enabled: boolean }) {
   const pathname = usePathname();
 
   useEffect(() => {
+    if (!enabled) return;
     if (window.location.hostname !== PROD_HOST) return;
 
     const onLanding = pathname === '/';
@@ -66,7 +69,7 @@ export default function TawkController() {
         apply();
       };
     }
-  }, [pathname]);
+  }, [enabled, pathname]);
 
   return null;
 }

@@ -1,56 +1,46 @@
-import React, { useState } from 'react';
-import { toast, Toaster } from 'sonner';
-import { ExternalToast } from 'sonner';
-import Image from 'next/image';
-const Newsletter = () => {
+'use client';
+
+import { useState } from 'react';
+import { toast } from 'sonner';
+import Button from '@components/ui/Button';
+import Container from '@components/ui/Container';
+import Section from '@components/ui/Section';
+
+export default function Newsletter() {
   const [email, setEmail] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement newsletter subscription logic
-    toast.success('Subscribing email:', email as ExternalToast);
+    // TODO: wire up a real subscription backend.
+    toast.success('Thanks — you’re on the list!');
     setEmail('');
   };
 
   return (
-    <section className="container mx-auto px-4 py-16">
-      <Toaster position="top-center" richColors />
-      <div className="bg-linear-to-r from-brand/10 via-white to-[#B91C1C]/10 p-8 rounded-lg flex items-center justify-between max-w-6xl mx-auto">
-        <div className="flex-1 pr-8">
-          <h2 className="text-3xl font-bold mb-2">Stay up-to-date with GopherCon Africa</h2>
-          <p className="text-gray-600 mb-4">
-            Enter your email address to join the GopherCon Africa mailing list and be the first to hear our
-            latest news and announcements.
-          </p>
-          <form onSubmit={handleSubmit} className="flex gap-4">
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Your email address"
-              className="flex-1 px-4 py-2 rounded-md border border-gray-300 focus:outline-hidden focus:ring-2 focus:ring-brand"
-              required
-            />
-            <button
-              type="submit"
-              className="bg-linear-to-r from-brand to-[#000000] text-white px-6 py-2 rounded-md hover:opacity-90 transition-all"
-            >
-              Subscribe
-            </button>
-          </form>
-        </div>
-        <div className="hidden md:block">
-          <Image    
-            src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744802566/mascot-kenya_pxfwhg.png"
-            alt="Gopher mascot"
-            width={192}
-            height={192}
-            className="w-48 h-auto"
+    <Section>
+      <Container size="narrow" className="text-center">
+        <h2 className="text-3xl font-bold tracking-tight text-ink">
+          Stay up to date
+        </h2>
+        <p className="mx-auto mt-3 max-w-xl text-body">
+          Occasional emails about tickets, speakers, and the program. No spam.
+        </p>
+        <form
+          onSubmit={handleSubmit}
+          className="mx-auto mt-6 flex max-w-md flex-col gap-3 sm:flex-row"
+        >
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Your email address"
+            aria-label="Email address"
+            required
+            className="flex-1 rounded-control border border-line bg-surface px-4 py-2.5 text-sm text-ink placeholder:text-faint focus:border-brand focus:ring-2 focus:ring-brand/20 focus:outline-none"
           />
-        </div>
-      </div>
-    </section>
+          <Button type="submit">Subscribe</Button>
+        </form>
+      </Container>
+    </Section>
   );
-};
-
-export default Newsletter; 
+}

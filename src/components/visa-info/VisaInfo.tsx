@@ -1,137 +1,76 @@
-import React from 'react';
-import Link from 'next/link';
-import { showContactModal } from '@utils/showContactModal';
+import { Check } from 'lucide-react';
+import Button from '@components/ui/Button';
+import Container from '@components/ui/Container';
+import Section from '@components/ui/Section';
+import SectionHeading from '@components/ui/SectionHeading';
+import { CONTACT_EMAIL } from '@/src/lib/links';
+
+const TIPS = [
+  'Check if your country is exempt from the eTA',
+  'Prepare your passport and travel documents',
+  'Apply at least 72 hours before travel',
+  'Keep digital copies of your eTA approval',
+];
 
 export default function VisaInfo() {
-    return (
-        <section id="visa-info" className="py-24 bg-linear-to-b from-white via-[#E8F5E9] to-white relative overflow-hidden">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="text-center mb-16">
-                    <h2 className="text-4xl font-bold text-gray-900 mb-4">Visa Information</h2>
-                    <p className="text-xl text-gray-600">Essential information for international attendees</p>
-                </div>
+  return (
+    <Section id="visa-info" tone="sunken">
+      <Container size="narrow">
+        <SectionHeading
+          title="Visa Information"
+          description="Essential information for international attendees traveling to Kenya."
+          align="left"
+        />
 
-                {/* Main Content Card */}
-                <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden mb-12">
-                    <div className="bg-linear-to-r from-brand to-brand-bright p-6">
-                        <h3 className="text-2xl font-bold text-white mb-2">🌍 Traveling to Kenya</h3>
-                        <p className="text-green-100">Everything you need to know about obtaining a Kenyan visa or eTA</p>
-                    </div>
-                    
-                    <div className="p-8">
-                        <div className="prose prose-lg max-w-none">
-                            <p className="text-gray-700 leading-relaxed mb-6">
-                                International attendees planning to visit Kenya for GopherCon Africa 2026 will need to obtain an Electronic Travel Authorization (eTA) 
-                                or visa depending on their nationality. The official Kenyan government website provides comprehensive information about eTA requirements, 
-                                visa types, application procedures, and lists countries exempt from eTA requirements.
-                            </p>
-                        </div>
+        <div className="mt-8 space-y-8">
+          <p className="text-body">
+            Depending on your nationality, you&apos;ll need an Electronic Travel
+            Authorization (eTA) or visa to enter Kenya. The official government
+            portal covers requirements, application steps, and the list of
+            exempt countries.
+          </p>
 
-                        {/* Key Resources */}
-                        <div className="grid md:grid-cols-2 gap-6 mt-8">
-                            {/* Official eTA Website Card */}
-                            <div className="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow duration-300">
-                                <div className="flex items-start space-x-4">
-                                    <div className="shrink-0">
-                                        <div className="w-12 h-12 bg-brand rounded-lg flex items-center justify-center">
-                                            <span className="text-white text-xl">🏛️</span>
-                                        </div>
-                                    </div>
-                                    <div className="flex-1">
-                                        <h4 className="text-lg font-semibold text-gray-900 mb-2">Official eTA Portal</h4>
-                                        <p className="text-gray-600 mb-4">
-                                            Visit the official Kenyan eTA portal for detailed visa information and country-specific requirements.
-                                        </p>
-                                        <Link href="https://etakenya.go.ke/general-information" target="_blank" rel="noopener noreferrer">
-                                            <button className="bg-brand text-white px-4 py-2 rounded-lg hover:bg-brand-dark transition-colors duration-200 text-sm font-medium">
-                                                Visit eTA Portal →
-                                            </button>
-                                        </Link>
-                                    </div>
-                                </div>
-                            </div>
+          <div className="flex flex-col gap-4 sm:flex-row">
+            <Button
+              href="https://etakenya.go.ke/general-information"
+              external
+              variant="secondary"
+            >
+              eTA requirements
+            </Button>
+            <Button href="https://etakenya.go.ke/" external variant="secondary">
+              Apply for an eTA
+            </Button>
+          </div>
 
-                            {/* eTA Application Card */}
-                            <div className="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow duration-300">
-                                <div className="flex items-start space-x-4">
-                                    <div className="shrink-0">
-                                        <div className="w-12 h-12 bg-brand-bright rounded-lg flex items-center justify-center">
-                                            <span className="text-white text-xl">💻</span>
-                                        </div>
-                                    </div>
-                                    <div className="flex-1">
-                                        <h4 className="text-lg font-semibold text-gray-900 mb-2">Apply for eTA</h4>
-                                        <p className="text-gray-600 mb-4">
-                                            Apply for your Kenyan Electronic Travel Authorization online through the official portal.
-                                        </p>
-                                        <Link href="https://etakenya.go.ke/" target="_blank" rel="noopener noreferrer">
-                                            <button className="bg-brand-bright text-white px-4 py-2 rounded-lg hover:bg-brand-light transition-colors duration-200 text-sm font-medium">
-                                                Apply Online →
-                                            </button>
-                                        </Link>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+          <div className="border-l-2 border-brand pl-4">
+            <p className="text-sm leading-relaxed text-body">
+              Start your application well in advance of the conference —
+              processing times vary and some countries need additional
+              documentation.
+            </p>
+          </div>
 
-                        {/* Important Notice */}
-                        <div className="mt-8 bg-amber-50 border border-amber-200 rounded-xl p-6">
-                            <div className="flex items-start space-x-3">
-                                <div className="shrink-0">
-                                    <span className="text-2xl">⚠️</span>
-                                </div>
-                                <div>
-                                    <h4 className="text-lg font-semibold text-amber-800 mb-2">Important Notice</h4>
-                                    <p className="text-amber-700 leading-relaxed">
-                                        We strongly recommend starting your eTA application process well in advance of the conference date. 
-                                        Processing times may vary, and some countries may require additional documentation. 
-                                        Check the official website for the most up-to-date requirements and exempt countries list.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+          <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            {TIPS.map((tip) => (
+              <li key={tip} className="flex items-start gap-2 text-sm text-body">
+                <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand" aria-hidden />
+                {tip}
+              </li>
+            ))}
+          </ul>
 
-                        {/* Quick Tips */}
-                        <div className="mt-8">
-                            <h4 className="text-lg font-semibold text-gray-900 mb-4">📋 eTA Application Tips</h4>
-                            <div className="grid sm:grid-cols-2 gap-4">
-                                <div className="flex items-center space-x-3 p-3 bg-green-50 rounded-lg">
-                                    <span className="text-green-600">✓</span>
-                                    <span className="text-green-800 text-sm">Check if your country is exempt from eTA</span>
-                                </div>
-                                <div className="flex items-center space-x-3 p-3 bg-green-50 rounded-lg">
-                                    <span className="text-green-600">✓</span>
-                                    <span className="text-green-800 text-sm">Prepare passport and travel documents</span>
-                                </div>
-                                <div className="flex items-center space-x-3 p-3 bg-green-50 rounded-lg">
-                                    <span className="text-green-600">✓</span>
-                                    <span className="text-green-800 text-sm">Apply at least 72 hours before travel</span>
-                                </div>
-                                <div className="flex items-center space-x-3 p-3 bg-green-50 rounded-lg">
-                                    <span className="text-green-600">✓</span>
-                                    <span className="text-green-800 text-sm">Keep digital copies of your eTA approval</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Contact Support */}
-                <div className="text-center">
-                    <div className="bg-gray-50 rounded-xl p-6 border border-gray-200 inline-block">
-                        <h4 className="text-lg font-semibold text-gray-900 mb-2">Need Help?</h4>
-                        <p className="text-gray-600 mb-4">
-                            If you have questions about the eTA process or visa requirements, feel free to reach out to our team.
-                        </p>
-                        <button
-                            onClick={showContactModal}
-                            className="bg-gray-900 text-white px-6 py-2 rounded-lg hover:bg-gray-800 transition-colors duration-200"
-                        >
-                            Contact Support
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
+          <p className="text-sm text-muted">
+            Questions about the process?{' '}
+            <a
+              href={`mailto:${CONTACT_EMAIL}`}
+              className="font-semibold text-brand transition-colors hover:text-brand-dark dark:text-brand-bright dark:hover:text-brand-light"
+            >
+              {CONTACT_EMAIL}
+            </a>
+          </p>
+        </div>
+      </Container>
+    </Section>
+  );
 }

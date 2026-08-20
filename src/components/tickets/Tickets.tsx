@@ -1,126 +1,105 @@
 'use client';
 
-import React from "react";
-import ToastWrapper from "@components/common/ToastWrapper";
+import { useState } from 'react';
+import Badge from '@components/ui/Badge';
+import Button from '@components/ui/Button';
+import Container from '@components/ui/Container';
+import Section from '@components/ui/Section';
+import SectionHeading from '@components/ui/SectionHeading';
+import ToastWrapper from '@components/common/ToastWrapper';
+import { TICKETS_URL } from '@/src/lib/links';
 
-const TICKETS_URL = "https://www.clooza.com/en/events/GCA2026";
-
-type TicketDay = "workshop" | "conference";
+type TicketDay = 'workshop' | 'conference';
 
 type TicketOption = {
   title: string;
-  type: string;
   price: string;
   description: string;
-  perks: string[];
   days: TicketDay[];
 };
 
 const ticketOptions: TicketOption[] = [
   {
-    title: "Student Conference Tickets",
-    type: "Single",
-    price: "KSh 750",
-    description: "Access to conference for students with a valid student ID.",
-    perks: ["Access to the conference days, valid with a student ID."],
-    days: ["conference"],
+    title: 'Student Conference Ticket',
+    price: 'KSh 750',
+    description: 'Both conference days, valid with a student ID.',
+    days: ['conference'],
   },
   {
-    title: "Conference Days Standard",
-    type: "Single",
-    price: "KSh 1,500",
-    description: "Access to conference days.",
-    perks: ["Access to conference days only."],
-    days: ["conference"],
+    title: 'Conference Days Standard',
+    price: 'KSh 1,500',
+    description: 'Both conference days.',
+    days: ['conference'],
   },
   {
-    title: "Student Workshop Ticket",
-    type: "Single",
-    price: "KSh 2,000",
-    description: "Access to the workshop, valid with a student ID.",
-    perks: ["Access to the workshop, valid with a student ID."],
-    days: ["workshop"],
+    title: 'Student Workshop Ticket',
+    price: 'KSh 2,000',
+    description: 'The workshop day, valid with a student ID.',
+    days: ['workshop'],
   },
   {
-    title: "Workshop Ticket",
-    type: "Single",
-    price: "KSh 2,500",
-    description: "Gives you access to workshop with Bill Kennedy.",
-    perks: ["Access to only the workshop day."],
-    days: ["workshop"],
+    title: 'Workshop Ticket',
+    price: 'KSh 2,500',
+    description: "Bill Kennedy's full workshop day.",
+    days: ['workshop'],
   },
   {
-    title: "Student Workshop And Conference Days Ticket",
-    type: "Single",
-    price: "KSh 2,500",
-    description:
-      "Access to the workshop and conference days (valid with a student ID).",
-    perks: [
-      "Access to the workshop and conference days, valid with a student ID.",
-    ],
-    days: ["workshop", "conference"],
+    title: 'Student Workshop + Conference',
+    price: 'KSh 2,500',
+    description: 'All three days, valid with a student ID.',
+    days: ['workshop', 'conference'],
   },
   {
-    title: "Workshop And Conference Days",
-    type: "Single",
-    price: "KSh 3,500",
-    description: "Gives you access to workshop and conference days.",
-    perks: ["Access to the workshop and conference days."],
-    days: ["workshop", "conference"],
+    title: 'Workshop + Conference Days',
+    price: 'KSh 3,500',
+    description: 'All three days.',
+    days: ['workshop', 'conference'],
   },
 ];
 
-const dayFilters: Array<{ key: string; label: string; includes: TicketDay | "all" }> =
-  [
-    { key: "all", label: "All days", includes: "all" },
-    { key: "thu", label: "Thu, 15 Oct", includes: "workshop" },
-    { key: "fri", label: "Fri, 16 Oct", includes: "conference" },
-    { key: "sat", label: "Sat, 17 Oct", includes: "conference" },
-  ];
+const DAY_FILTERS = [
+  { key: 'all', label: 'All days', includes: 'all' },
+  { key: 'thu', label: 'Thu 15 · Workshop', includes: 'workshop' },
+  { key: 'fri-sat', label: 'Fri–Sat · Conference', includes: 'conference' },
+] as const;
+
 export default function Tickets() {
-  const [activeDayKey, setActiveDayKey] = React.useState<
-    (typeof dayFilters)[number]["key"]
-  >("all");
-  const activeFilter = dayFilters.find((f) => f.key === activeDayKey) ?? dayFilters[0];
-  const activeIncludes = activeFilter.includes;
-  const filteredTickets =
-    activeIncludes === "all"
+  const [activeKey, setActiveKey] =
+    useState<(typeof DAY_FILTERS)[number]['key']>('all');
+  const active = DAY_FILTERS.find((f) => f.key === activeKey) ?? DAY_FILTERS[0];
+  const filtered =
+    active.includes === 'all'
       ? ticketOptions
-      : ticketOptions.filter((ticket) => ticket.days.includes(activeIncludes));
+      : ticketOptions.filter((t) =>
+          t.days.includes(active.includes as TicketDay)
+        );
 
   return (
-    <section
-      id="tickets"
-      className="py-24 bg-linear-to-b from-white via-[#E8F5E9] to-white relative overflow-hidden"
-    >
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-medium text-gray-900">Tickets</h2>
-          <p className="text-gray-600 mt-3 max-w-2xl mx-auto">
-            Choose your ticket option. Workshop: Thu, 15 Oct. Conference: Fri,
-            16 Oct and Sat, 17 Oct.
-          </p>
-        </div>
+    <Section id="tickets" tone="sunken">
+      <Container>
+        <SectionHeading
+          title="Tickets"
+          description="Workshop: Thursday, October 15. Conference: Friday and Saturday, October 16–17."
+        />
 
-        <div className="bg-white rounded-xl shadow-2xs border border-gray-200 overflow-hidden">
-          <div className="border-b border-gray-200 p-6">
-            <p className="text-sm font-medium text-gray-700 mb-3">
-              Filter tickets by date
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {dayFilters.map((filter) => (
+        <div className="mx-auto mt-10 max-w-3xl">
+          <div className="mb-4 flex justify-center">
+            <div
+              role="tablist"
+              aria-label="Filter tickets by day"
+              className="inline-flex overflow-hidden rounded-control border border-line divide-x divide-line"
+            >
+              {DAY_FILTERS.map((filter) => (
                 <button
                   key={filter.key}
-                  type="button"
-                  onClick={() => setActiveDayKey(filter.key)}
-                  aria-pressed={activeDayKey === filter.key}
-                  className={[
-                    "min-h-[44px] inline-flex items-center rounded-full border px-3 py-1 text-sm transition-colors",
-                    activeDayKey === filter.key
-                      ? "border-brand bg-[#E8F5E9] text-brand"
-                      : "border-gray-200 bg-gray-50 text-gray-700 hover:bg-gray-100",
-                    "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand",
-                  ].join(" ")}
+                  role="tab"
+                  aria-selected={activeKey === filter.key}
+                  onClick={() => setActiveKey(filter.key)}
+                  className={`px-4 py-2 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 ${
+                    activeKey === filter.key
+                      ? 'bg-brand text-white'
+                      : 'bg-surface text-body hover:bg-surface-sunken'
+                  }`}
                 >
                   {filter.label}
                 </button>
@@ -128,105 +107,69 @@ export default function Tickets() {
             </div>
           </div>
 
-          {filteredTickets.map((ticket, index) => (
-            <div
-              key={ticket.title}
-              className={
-                index === filteredTickets.length - 1
-                  ? ""
-                  : "border-b border-gray-200"
-              }
-            >
-              <div className="p-6">
-                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
-                  <div className="min-w-0">
-                    <h3 className="text-xl font-medium text-gray-900">
+          <div className="divide-y divide-line overflow-hidden rounded-surface border border-line bg-surface">
+            {filtered.map((ticket) => (
+              <div
+                key={ticket.title}
+                className="flex flex-col gap-3 p-6 sm:flex-row sm:items-center sm:justify-between"
+              >
+                <div className="min-w-0">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <h3 className="text-lg font-semibold text-ink">
                       {ticket.title}
                     </h3>
-                    <div className="mt-1 flex items-center gap-3">
-                      <span className="text-sm text-gray-600">
-                        {ticket.type}
-                      </span>
-                      <span className="text-sm font-semibold text-gray-900">
-                        {ticket.price}
-                      </span>
-                    </div>
-                    <div className="mt-3 flex flex-wrap gap-2">
-                      {ticket.days.includes("workshop") && (
-                        <span className="inline-flex items-center rounded-full border border-gray-200 bg-white px-2.5 py-1 text-xs font-semibold text-gray-700">
-                          Workshop
-                        </span>
-                      )}
-                      {ticket.days.includes("conference") && (
-                        <span className="inline-flex items-center rounded-full border border-gray-200 bg-white px-2.5 py-1 text-xs font-semibold text-gray-700">
-                          Conference
-                        </span>
-                      )}
-                    </div>
-                    <p className="text-gray-600 mt-2">{ticket.description}</p>
-                    <div className="mt-4">
-                      <p className="text-sm font-semibold text-gray-900">
-                        Perks
-                      </p>
-                      <ul className="mt-2 space-y-1 text-sm text-gray-600">
-                        {ticket.perks.map((perk) => (
-                          <li key={perk}>{perk}</li>
-                        ))}
-                      </ul>
-                    </div>
+                    {ticket.days.includes('workshop') && (
+                      <Badge tone="outline">Workshop</Badge>
+                    )}
+                    {ticket.days.includes('conference') && (
+                      <Badge tone="outline">Conference</Badge>
+                    )}
                   </div>
-
-                  <div className="shrink-0 flex sm:flex-col items-start sm:items-end gap-3">
-                    <span className="inline-flex items-center rounded-full bg-[#E8F5E9] px-3 py-1 text-xs font-semibold text-brand">
-                      {ticket.price}
-                    </span>
-                  </div>
+                  <p className="mt-1 text-sm text-muted">{ticket.description}</p>
+                </div>
+                <div className="flex shrink-0 items-center gap-4">
+                  <span className="text-lg font-semibold tabular-nums text-ink">
+                    {ticket.price}
+                  </span>
+                  <Button href={TICKETS_URL} external variant="secondary">
+                    Buy
+                  </Button>
                 </div>
               </div>
+            ))}
+          </div>
+
+          <div className="mt-8 flex justify-center">
+            <Button href={TICKETS_URL} external size="lg">
+              Get Tickets
+            </Button>
+          </div>
+        </div>
+
+        <div className="mx-auto mt-16 max-w-2xl space-y-10 text-center">
+          <div>
+            <h3 className="text-xl font-semibold text-ink">Scholarships</h3>
+            <p className="mt-2 text-body">
+              We offer diversity scholarships to support members of
+              underrepresented groups who may not otherwise be able to attend.
+              The application deadline will be announced soon.
+            </p>
+            <div className="mt-4 flex justify-center">
+              <ToastWrapper message="To be announced soon!">
+                <Button variant="secondary">Apply for a scholarship</Button>
+              </ToastWrapper>
             </div>
-          ))}
+          </div>
+          <div>
+            <h3 className="text-xl font-semibold text-ink">Refund policy</h3>
+            <p className="mt-2 text-body">
+              Refunds are available for all requests made before the refund
+              deadline (to be announced), minus a 10% fee covering ticketing and
+              payment processing.
+            </p>
+          </div>
         </div>
-
-        <div className="mt-8 flex justify-center">
-          <a
-            href={TICKETS_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-brand text-white px-6 py-3 rounded-md hover:bg-brand-dark transition-colors duration-200 font-semibold min-h-[44px] inline-flex items-center justify-center focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand"
-          >
-            Get Ticket
-          </a>
-        </div>
-
-        {/* Scholarships */}
-        <div className="mt-16 text-center">
-          <h3 className="text-2xl font-medium mb-4">Scholarships</h3>
-          <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-            We are happy to offer diversity scholarships to support members of
-            underrepresented groups who may not otherwise have the opportunity
-            to attend the conference. Please apply using the form below — the
-            application deadline will be announced soon.
-          </p>
-          <ToastWrapper message="To be announced soon!" className="ml-4">
-            <span className="text-xl font-medium">
-              {" "}
-              <button className="bg-brand text-white px-4 py-2 rounded-md hover:bg-brand-dark transition-colors duration-200">
-                Apply using this form
-              </button>
-            </span>
-          </ToastWrapper>
-        </div>
-
-        {/* Refund Policy */}
-        <div className="mt-12 text-center">
-          <h3 className="text-2xl font-medium mb-4">Refund policy</h3>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            We offer refunds for all requests made before the refund deadline,
-            which will be announced soon. There will be a 10% fee for all
-            refunds to cover ticketing and payment processing costs.
-          </p>
-        </div>
-      </div>
-    </section>
+      </Container>
+    </Section>
   );
 }
