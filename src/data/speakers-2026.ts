@@ -110,6 +110,8 @@ export const speakers2026: Speaker[] = [
 {
   "slug": "beryl-christine-atieno",
   "name": "Beryl Christine Atieno",
+  "title": "Backend Software Developer",
+  "bio": "I am a self-taught backend developer with around two years of experience working primarily with Go. I am interested in backend systems design, developer experience, and the internals of how programming languages like Go behave under the hood. I have worked projects focused on system design, APIs, and developer tools, with a growing interest in how backend systems behave in production environments. I enjoy learning through hands-on building and exploring the tradeoffs behind software design decisions.",
   "talkTitle": "Hidden Behaviors of Go Structs in Production",
   "talkDescription": "TBA"}
 ];
