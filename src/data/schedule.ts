@@ -191,9 +191,14 @@ export const scheduleData: ScheduleDay[] = [
         type: 'sponsor',
         startTime: '13:50',
         endTime: '14:20',
-        speakerLabel: 'Sergio & Abdulrahman',
+        // Placeholder co-presenters (first name + company) until full speaker
+        // details arrive; then add them to speakers-2026 for photos + profiles.
+        speakers: [
+          { name: 'Sergio', company: 'Moniepoint' },
+          { name: 'Abdulrahman', company: 'Moniepoint' },
+        ],
         description:
-          "Eshu is Moniepoint's internal developer platform, consisting of an ephemeral-environment Kubernetes operator and Platform-as-a-Service. Leveraging Crossplane, Tekton, and Dagger, Eshu can launch ephemeral environments with over 10 dedicated dependencies (including Postgres, Spanner Omni, Redis, Reddit, and Kafka), allowing teams to build and launch services from development to production without needing infrastructure support.",
+          "Eshu is Moniepoint's internal developer platform, consisting of an ephemeral-environment Kubernetes operator and Platform-as-a-Service. Leveraging Crossplane, Tekton, and Dagger, Eshu can launch ephemeral environments with over 10 dedicated dependencies (including Postgres, Spanner Omni, Redis, and Kafka), allowing teams to build and launch services from development to production without needing infrastructure support.",
         sponsor: { name: 'Moniepoint', logo: MONIEPOINT_LOGO },
       },
       {

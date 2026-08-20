@@ -4,11 +4,56 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, ChevronDown } from 'lucide-react';
-import { Session } from '@/src/types/schedule';
+import { Session, SessionSpeaker } from '@/src/types/schedule';
 import { slugify } from '@/src/lib/slug';
-import { getSpeakerProfile } from '@/src/lib/speakerLookup';
+import { getSpeakerProfile, speakerExists } from '@/src/lib/speakerLookup';
 import SpeakerAvatar from '@components/speakers/SpeakerAvatar';
 import { formatDuration, formatTime } from './sessionMeta';
+
+/** One presenter. Inline session-speaker fields win over the lineup lookup;
+ *  links to the /speakers modal only when the name resolves to a real profile
+ *  (placeholder co-presenters render un-linked). */
+function SpeakerBlock({ speaker, role }: { speaker: SessionSpeaker; role: string }) {
+  const profile = getSpeakerProfile(speaker.name);
+  const imageUrl = speaker.imageUrl ?? profile.imageUrl;
+  const title = speaker.title ?? profile.title;
+  const company = speaker.company ?? profile.company;
+  const linked = speakerExists(speaker.name);
+
+  const inner = (
+    <>
+      <SpeakerAvatar
+        name={speaker.name}
+        imageUrl={imageUrl}
+        size={48}
+        rounded="control"
+      />
+      <div className="min-w-0 text-sm leading-tight">
+        <p
+          className={`font-semibold text-ink ${
+            linked ? 'transition-colors group-hover:text-brand' : ''
+          }`}
+        >
+          {speaker.name}
+        </p>
+        {title && <p className="mt-0.5 text-muted">{title}</p>}
+        {company && <p className="text-muted">{company}</p>}
+        <p className="mt-0.5 text-brand dark:text-brand-bright">{role}</p>
+      </div>
+    </>
+  );
+
+  return linked ? (
+    <Link
+      href={`/speakers?speaker=${slugify(speaker.name)}`}
+      className="group flex w-fit items-center gap-3"
+    >
+      {inner}
+    </Link>
+  ) : (
+    <div className="flex w-fit items-center gap-3">{inner}</div>
+  );
+}
 
 function roleLabel(session: Session): string {
   if (session.type === 'workshop') return 'Instructor';
@@ -37,6 +82,7 @@ export default function SessionCard({ session }: { session: Session }) {
     ? null
     : formatDuration(session.startTime, session.endTime);
   const label = eyebrow(session);
+  const speakerList = session.speakers ?? (session.speaker ? [session.speaker] : []);
 
   const header = (
     <>
@@ -124,35 +170,15 @@ export default function SessionCard({ session }: { session: Session }) {
           </ol>
         )}
 
-        {session.speaker &&
-          (() => {
-            const profile = getSpeakerProfile(session.speaker!.name);
-            return (
-              <Link
-                href={`/speakers?speaker=${slugify(session.speaker!.name)}`}
-                className="group mt-4 flex w-fit items-center gap-3"
-              >
-                <SpeakerAvatar
-                  name={session.speaker!.name}
-                  imageUrl={profile.imageUrl}
-                  size={48}
-                  rounded="control"
-                />
-                <div className="min-w-0 text-sm leading-tight">
-                  <p className="font-semibold text-ink transition-colors group-hover:text-brand">
-                    {session.speaker!.name}
-                  </p>
-                  {profile.title && <p className="mt-0.5 text-muted">{profile.title}</p>}
-                  {profile.company && <p className="text-muted">{profile.company}</p>}
-                  <p className="mt-0.5 text-brand dark:text-brand-bright">
-                    {roleLabel(session)}
-                  </p>
-                </div>
-              </Link>
-            );
-          })()}
+        {speakerList.length > 0 && (
+          <div className="mt-4 space-y-3">
+            {speakerList.map((s) => (
+              <SpeakerBlock key={s.name} speaker={s} role={roleLabel(session)} />
+            ))}
+          </div>
+        )}
 
-        {!session.speaker && session.speakerLabel && (
+        {speakerList.length === 0 && session.speakerLabel && (
           <p className="mt-4 text-sm text-muted">{session.speakerLabel}</p>
         )}
 

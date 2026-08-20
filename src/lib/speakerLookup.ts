@@ -25,3 +25,9 @@ export function getSpeakerProfile(name: string): SpeakerProfile {
     company: speaker.company,
   };
 }
+
+/** Whether this name resolves to a real profile in the lineup (so the schedule
+ *  can link to its /speakers modal; placeholders render un-linked). */
+export function speakerExists(name: string): boolean {
+  return bySlug.has(slugify(name));
+}

@@ -13,6 +13,11 @@ export type SessionType =
 export interface SessionSpeaker {
   name: string;
   bio?: string;
+  /** Inline overrides for speakers not (yet) in the `speakers2026` lineup —
+      e.g. placeholder co-presenters. When present these win over the lookup. */
+  title?: string;
+  company?: string;
+  imageUrl?: string;
 }
 
 /** A slice inside a full-day session (workshop parts + the breaks between). */
@@ -36,6 +41,8 @@ export interface Session {
   /** Slot not yet filled — rendered as a muted placeholder card. */
   tba?: boolean;
   speaker?: SessionSpeaker;
+  /** Multiple presenters (co-stage sessions). Rendered in place of `speaker`. */
+  speakers?: SessionSpeaker[];
   /** Shown in the speaker position when no one can be named yet,
       e.g. 'Event MC' or 'Speaker to be announced'. */
   speakerLabel?: string;

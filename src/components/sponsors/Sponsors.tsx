@@ -3,9 +3,20 @@ import Button from '@components/ui/Button';
 import Container from '@components/ui/Container';
 import Section from '@components/ui/Section';
 import SectionHeading from '@components/ui/SectionHeading';
+import SponsorBlurb from './SponsorBlurb';
 import { CONTACT_EMAIL, SPONSORSHIP_PROSPECTUS_URL } from '@/src/lib/links';
 
-const TIERS = [
+interface Sponsor {
+  name: string;
+  href: string;
+  logo: string;
+  height: string;
+  tagline?: string;
+  blurb?: string[];
+  careersUrl?: string;
+}
+
+const TIERS: { label: string; sponsors: Sponsor[] }[] = [
   {
     label: 'Platinum Partner',
     sponsors: [
@@ -31,10 +42,21 @@ const TIERS = [
         href: 'https://moniepoint.com',
         logo: 'https://res.cloudinary.com/dlmqe0two/image/upload/v1744802584/moniepoint_tgy3ii.jpg',
         height: 'h-12',
+        tagline: "Africa's all-in-one financial platform",
+        blurb: [
+          "Over the last decade, we've built financial infrastructure that's powering the dreams of more than 20 million businesses and individuals by giving them access to seamless payments, banking, credit, and business management solutions.",
+          "As Nigeria's largest merchant acquirer, we power most of the country's point-of-sale (POS) transactions. Through our subsidiaries, Moniepoint processes more than $250 billion in digital payment transaction value annually.",
+          "As we work towards creating financial happiness for every African, everywhere, we're looking for engineers who want to solve complex problems at massive scale.",
+        ],
+        careersUrl: 'https://moniepoint.com/careers',
       },
     ],
   },
 ];
+
+const SPONSOR_BLURBS = TIERS.flatMap((tier) => tier.sponsors).filter(
+  (sponsor) => sponsor.blurb && sponsor.blurb.length > 0
+);
 
 export default function Sponsors() {
   return (
@@ -77,6 +99,20 @@ export default function Sponsors() {
             </div>
           ))}
         </div>
+
+        {SPONSOR_BLURBS.length > 0 && (
+          <div className="mx-auto mt-12 max-w-2xl space-y-3">
+            {SPONSOR_BLURBS.map((sponsor) => (
+              <SponsorBlurb
+                key={sponsor.name}
+                name={sponsor.name}
+                tagline={sponsor.tagline}
+                blurb={sponsor.blurb!}
+                careersUrl={sponsor.careersUrl}
+              />
+            ))}
+          </div>
+        )}
 
         <div className="mx-auto mt-20 max-w-2xl border-t border-line pt-12 text-center">
           <h3 className="text-2xl font-bold tracking-tight text-ink">
