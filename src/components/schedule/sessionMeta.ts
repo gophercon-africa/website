@@ -29,16 +29,6 @@ export const CARD_TYPES: ReadonlySet<SessionType> = new Set<SessionType>([
   'sponsor',
 ]);
 
-/** Filterable content types, in display order for the type chips. */
-export const CONTENT_TYPES: readonly SessionType[] = [
-  'keynote',
-  'talk',
-  'lightning',
-  'workshop',
-  'panel',
-  'sponsor',
-];
-
 function toMinutes(time: string): number {
   const [hours, minutes] = time.split(':').map(Number);
   return hours * 60 + minutes;

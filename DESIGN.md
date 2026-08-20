@@ -39,6 +39,13 @@ with this file, this file wins.
 tabs, pills) and `rounded-surface` (16px: cards, panels, modals).
 `rounded-full` is allowed **only** for circular avatars.
 
+**Schedule** follows the GopherCon-US card pattern: a left-rail time pill, a
+card with a fade-truncated abstract that expands on click, and a speaker block
+(photo + name + title + company + role). Deliberate deviations: speaker thumbs
+there are **squared** (`SpeakerAvatar rounded="control"`), there are **no
+per-card type chips** (day tabs + search only), and sponsored sessions show a
+**"Sponsored By:" logo** on a white tile (`SessionCard`, `src/data/schedule.ts`).
+
 **Spacing rhythm:** sections `py-16 sm:py-24`; heading→content gap `mt-10`;
 card padding `p-6` (`p-8` max for feature cards — never `p-12`).
 

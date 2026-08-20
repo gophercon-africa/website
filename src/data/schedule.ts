@@ -2,6 +2,10 @@ import { ScheduleDay } from '@/src/types/schedule';
 
 const WORKSHOP_LINK = { href: '/workshops', label: 'View workshop details' };
 
+// Same asset as the Sponsors section (logos are drawn for light backgrounds).
+const MONIEPOINT_LOGO =
+  'https://res.cloudinary.com/dlmqe0two/image/upload/v1744802584/moniepoint_tgy3ii.jpg';
+
 export const scheduleData: ScheduleDay[] = [
   {
     day: 1,
@@ -33,47 +37,28 @@ export const scheduleData: ScheduleDay[] = [
         speakerLabel: 'Speaker to be announced',
       },
       {
-        id: 'd1-0930-workshop-part-1',
-        title: 'Ultimate Software Design and Engineering — Part 1',
+        id: 'd1-workshop-fullday',
+        title: 'Ultimate Software Design and Engineering',
         type: 'workshop',
         startTime: '09:30',
-        endTime: '11:30',
+        endTime: '16:00',
+        fullDay: true,
         speaker: { name: 'Bill Kennedy' },
         description:
           'Structuring and architecting Go software for long-term maintenance — design philosophy, project layers, and AI tooling with a deploy-first mentality.',
         link: WORKSHOP_LINK,
-      },
-      {
-        id: 'd1-1130-tea',
-        title: 'Tea Break',
-        type: 'break',
-        startTime: '11:30',
-        endTime: '12:00',
-      },
-      {
-        id: 'd1-1200-workshop-part-2',
-        title: 'Ultimate Software Design and Engineering — Part 2',
-        type: 'workshop',
-        startTime: '12:00',
-        endTime: '13:00',
-        speaker: { name: 'Bill Kennedy' },
-        link: WORKSHOP_LINK,
-      },
-      {
-        id: 'd1-1300-lunch',
-        title: 'Lunch Break',
-        type: 'break',
-        startTime: '13:00',
-        endTime: '14:30',
-      },
-      {
-        id: 'd1-1430-workshop-interactive',
-        title: 'Interactive Workshop Session',
-        type: 'workshop',
-        startTime: '14:30',
-        endTime: '16:00',
-        speaker: { name: 'Bill Kennedy' },
-        link: WORKSHOP_LINK,
+        segments: [
+          { startTime: '09:30', endTime: '11:30', title: 'Part 1', type: 'workshop' },
+          { startTime: '11:30', endTime: '12:00', title: 'Tea Break', type: 'break' },
+          { startTime: '12:00', endTime: '13:00', title: 'Part 2', type: 'workshop' },
+          { startTime: '13:00', endTime: '14:30', title: 'Lunch Break', type: 'break' },
+          {
+            startTime: '14:30',
+            endTime: '16:00',
+            title: 'Interactive Session',
+            type: 'workshop',
+          },
+        ],
       },
       {
         id: 'd1-1600-closing',
@@ -206,7 +191,7 @@ export const scheduleData: ScheduleDay[] = [
         type: 'sponsor',
         startTime: '13:50',
         endTime: '14:20',
-        speakerLabel: 'Sponsored by Moniepoint',
+        sponsor: { name: 'Moniepoint', logo: MONIEPOINT_LOGO },
       },
       {
         id: 'd2-1420-umanah',
@@ -360,7 +345,7 @@ export const scheduleData: ScheduleDay[] = [
         type: 'sponsor',
         startTime: '13:30',
         endTime: '14:00',
-        speakerLabel: 'Sponsored by Moniepoint',
+        sponsor: { name: 'Moniepoint', logo: MONIEPOINT_LOGO },
       },
       {
         id: 'd3-1400-oluwajubelo',

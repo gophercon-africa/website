@@ -1,6 +1,14 @@
 import { ScheduleDay } from '@/src/types/schedule';
 
-/** Segmented control: All Days + one segment per day. */
+/** 'Thursday, October 15' → 'Thu Oct 15' for compact day tabs. */
+function shortDate(date: string): string {
+  const [weekday, rest] = date.split(', ');
+  if (!rest) return date;
+  const [month, dayNum] = rest.split(' ');
+  return `${weekday.slice(0, 3)} ${month.slice(0, 3)} ${dayNum}`;
+}
+
+/** GopherCon-US style underline tabs: All Days + one tab per day. */
 export default function DayTabs({
   days,
   selected,
@@ -10,22 +18,24 @@ export default function DayTabs({
   selected: number | null;
   onSelect: (day: number | null) => void;
 }) {
-  const segment = (active: boolean) =>
-    `px-4 py-2 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 ${
-      active ? 'bg-brand text-white' : 'bg-surface text-body hover:bg-surface-sunken'
+  const tab = (active: boolean) =>
+    `-mb-px border-b-2 px-1 py-3 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 ${
+      active
+        ? 'border-brand text-brand dark:text-brand-bright'
+        : 'border-transparent text-muted hover:text-ink'
     }`;
 
   return (
     <div
       role="tablist"
       aria-label="Filter by day"
-      className="inline-flex overflow-hidden rounded-control border border-line divide-x divide-line"
+      className="flex flex-wrap gap-x-6 border-b border-line"
     >
       <button
         role="tab"
         aria-selected={selected === null}
         onClick={() => onSelect(null)}
-        className={segment(selected === null)}
+        className={tab(selected === null)}
       >
         All Days
       </button>
@@ -35,9 +45,9 @@ export default function DayTabs({
           role="tab"
           aria-selected={selected === day.day}
           onClick={() => onSelect(day.day)}
-          className={segment(selected === day.day)}
+          className={tab(selected === day.day)}
         >
-          {day.dayLabel}
+          {shortDate(day.date)}
         </button>
       ))}
     </div>
