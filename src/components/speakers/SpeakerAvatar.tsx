@@ -35,7 +35,7 @@ export default function SpeakerAvatar({
   return (
     <span
       aria-hidden
-      className={`inline-flex shrink-0 select-none items-center justify-center rounded-full bg-brand-tint font-semibold text-brand-dark ${className}`}
+      className={`inline-flex shrink-0 select-none items-center justify-center rounded-full bg-brand-tint font-semibold text-brand-dark dark:text-brand-bright ${className}`}
       style={{ width: size, height: size, fontSize: Math.round(size * 0.38) }}
     >
       {initials(name)}

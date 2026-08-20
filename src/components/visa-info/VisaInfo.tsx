@@ -64,7 +64,7 @@ export default function VisaInfo() {
             Questions about the process?{' '}
             <a
               href={`mailto:${CONTACT_EMAIL}`}
-              className="font-semibold text-brand transition-colors hover:text-brand-dark"
+              className="font-semibold text-brand transition-colors hover:text-brand-dark dark:text-brand-bright dark:hover:text-brand-light"
             >
               {CONTACT_EMAIL}
             </a>

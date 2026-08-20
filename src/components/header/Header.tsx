@@ -1,12 +1,12 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { Menu, X, Sun, Moon } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useSession, signOut } from 'next-auth/react';
-import { useTheme } from 'next-themes';
 import Button from '@components/ui/Button';
+import ThemeToggle from '@components/theme/ThemeToggle';
 import { TICKETS_URL } from '@/src/lib/links';
 
 const NAV_LINKS = [
@@ -20,13 +20,6 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { data: session } = useSession();
   const pathname = usePathname();
-  const { resolvedTheme, setTheme } = useTheme();
-  const [themeMounted, setThemeMounted] = useState(false);
-
-  useEffect(() => {
-    const frame = requestAnimationFrame(() => setThemeMounted(true));
-    return () => cancelAnimationFrame(frame);
-  }, []);
 
   // Lock body scroll while the mobile menu is open. Inline style so it
   // composes with (and restores cleanly around) `review-workspace-lock`.
@@ -45,14 +38,12 @@ export default function Header() {
     session?.user?.isReviewer && 'reviewer',
   ].filter(Boolean).join(' · ');
 
-  // Dark mode is scoped to the internal tools (admin + reviews). The `.dark`
-  // class lives on <html> globally, so we only apply the header's dark styles on
-  // internal routes — that keeps the marketing pages light even when the stored
-  // preference is dark.
+  // The header chrome is token-based (`bg-surface`, `text-muted`, …), so it
+  // themes for light/dark automatically via the `.dark` block in globals.css —
+  // no route gating needed. `isInternal` now only gates *content* (the
+  // marketing "Get Tickets" CTA is hidden inside the tools).
   const isInternal =
     pathname?.startsWith('/admin') || pathname?.startsWith('/reviews');
-
-  const isDark = resolvedTheme === 'dark';
 
   const isActive = (href: string) =>
     !href.startsWith('/#') &&
@@ -63,16 +54,10 @@ export default function Header() {
       href && isActive(href)
         ? 'text-brand font-semibold'
         : 'text-muted hover:text-brand font-medium'
-    } transition-colors${
-      isInternal ? ' dark:text-gray-300 dark:hover:text-emerald-400' : ''
-    }`;
+    } transition-colors`;
 
   return (
-    <header
-      className={`sticky top-0 z-40 border-b border-line bg-white/95${
-        isInternal ? ' dark:border-gray-800 dark:bg-gray-900/95' : ''
-      }`}
-    >
+    <header className="sticky top-0 z-40 border-b border-line bg-surface">
       <nav className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-3">
           <Link href="/" className="flex items-center no-underline">
@@ -105,32 +90,24 @@ export default function Header() {
                 Sign out
               </button>
             )}
-            {isInternal && themeMounted && (
-              <button
-                onClick={() => setTheme(isDark ? 'light' : 'dark')}
-                aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-                title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-                className="text-gray-600 hover:text-brand dark:text-gray-300 dark:hover:text-emerald-400 transition-colors"
-              >
-                {isDark ? <Sun size={20} /> : <Moon size={20} />}
-              </button>
-            )}
+            <ThemeToggle />
             {!isInternal && (
               <Button href={TICKETS_URL} external>
                 Get Tickets
               </Button>
             )}
           </div>
-          <button
-            className={`md:hidden text-gray-600 hover:text-brand transition-colors${
-              isInternal ? ' dark:text-gray-300 dark:hover:text-emerald-400' : ''
-            }`}
-            aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={isMobileMenuOpen}
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <div className="flex items-center gap-4 md:hidden">
+            <ThemeToggle />
+            <button
+              className="text-muted hover:text-brand transition-colors"
+              aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={isMobileMenuOpen}
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
@@ -154,23 +131,11 @@ export default function Header() {
                 Admin
               </Link>
             )}
-            {isInternal && themeMounted && (
-              <button
-                onClick={() => {
-                  setTheme(isDark ? 'light' : 'dark');
-                  setIsMobileMenuOpen(false);
-                }}
-                className={`flex items-center gap-2 ${navLink()}`}
-              >
-                {isDark ? <Sun size={18} /> : <Moon size={18} />}
-                {isDark ? 'Light mode' : 'Dark mode'}
-              </button>
-            )}
             {session && (
               <>
-                <div className="pt-1 border-t border-gray-100 dark:border-gray-800">
-                  <p className="text-xs text-gray-500 truncate">{session.user?.email}</p>
-                  {roles && <p className="text-xs text-gray-400 mt-0.5">{roles}</p>}
+                <div className="pt-1 border-t border-line">
+                  <p className="text-xs text-muted truncate">{session.user?.email}</p>
+                  {roles && <p className="text-xs text-faint mt-0.5">{roles}</p>}
                 </div>
                 <button
                   onClick={() => {

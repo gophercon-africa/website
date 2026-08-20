@@ -16,6 +16,12 @@
      placeholders, soft callouts). Everything else is white/sunken/neutral. */
   --color-brand-tint: #e9f5ef;
 
+  /* Warm "earth" band — the identity backdrop for the hero mascot. Deliberate
+     exception to the sober palette (see DESIGN.md); kept constant across light
+     and dark because the band is dark-toned in both. */
+  --color-earth-deep: #5a3417;
+  --color-earth: #a5642e;
+
   /* Semantic neutrals — marketing UI uses these instead of raw gray-*. */
   --color-ink: #111827;
   --color-body: #374151;
@@ -34,6 +40,24 @@
 }
 
 /*
+  Dark theme. next-themes toggles `.dark` on <html> (defaultTheme="system").
+  We only redefine the *semantic neutrals* here — the four brand greens are
+  immutable identity and stay constant. Because marketing UI is built on these
+  tokens, this single block flips the whole content surface to dark; a handful
+  of raw-`bg-white` pages (auth/CFP) are handled per-component.
+*/
+.dark {
+  --color-surface: #14181e;
+  --color-surface-sunken: #0b0e12;
+  --color-ink: #f3f4f6;
+  --color-body: #d1d5db;
+  --color-muted: #9ca3af;
+  --color-faint: #6b7280;
+  --color-line: #262b33;
+  --color-brand-tint: #0e2a1c;
+}
+
+/*
   The default border color has changed to `currentcolor` in Tailwind CSS v4,
   so we've added these compatibility styles to make sure everything still
   looks the same as it did with Tailwind CSS v3.
@@ -47,7 +71,16 @@
   ::before,
   ::backdrop,
   ::file-selector-button {
-    border-color: var(--color-gray-200, currentcolor);
+    /* Theme-aware default border. `--color-line` ≈ gray-200 in light, so this
+       is a no-op there but lets every default border flip in dark mode. */
+    border-color: var(--color-line, currentcolor);
+  }
+
+  /* Dark backstop behind every page — page wrappers may set their own bg, but
+     this keeps gutters/overscroll and any untinted surface coherent in dark. */
+  body {
+    background-color: var(--color-surface-sunken);
+    color: var(--color-body);
   }
 }
 

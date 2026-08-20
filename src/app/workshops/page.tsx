@@ -147,7 +147,7 @@ export default function WorkshopsPage() {
                   Part of Day 1 — Thursday, October 15.{' '}
                   <Link
                     href="/schedule"
-                    className="font-semibold text-brand hover:text-brand-dark hover:underline"
+                    className="font-semibold text-brand hover:text-brand-dark dark:text-brand-bright dark:hover:text-brand-light hover:underline"
                   >
                     See the full schedule
                   </Link>
@@ -178,7 +178,7 @@ export default function WorkshopsPage() {
               </div>
 
               <div className="rounded-control bg-brand-tint p-6">
-                <p className="text-xs font-semibold uppercase tracking-wide text-brand-dark">
+                <p className="text-xs font-semibold uppercase tracking-wide text-brand-dark dark:text-brand-bright">
                   What you&apos;ll learn
                 </p>
                 <p className="mt-2 text-sm text-body leading-relaxed">

@@ -2,7 +2,6 @@
 
 import React, { useEffect, useRef } from 'react';
 import { X } from 'lucide-react';
-import { usePathname } from 'next/navigation';
 
 interface ModalProps {
   isOpen: boolean;
@@ -17,11 +16,6 @@ const FOCUSABLE = 'button, [href], input, select, textarea, [tabindex]:not([tabi
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, size = 'md' }) => {
   const panelRef = useRef<HTMLDivElement>(null);
   const onCloseRef = useRef(onClose);
-  // Dark mode is scoped to internal tools; only style the modal dark on those
-  // routes so marketing modals (speakers/schedule) stay light.
-  const pathname = usePathname();
-  const isInternal =
-    pathname?.startsWith('/admin') || pathname?.startsWith('/reviews');
   useEffect(() => { onCloseRef.current = onClose; });
 
   useEffect(() => {
@@ -84,13 +78,13 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, size = 
           ref={panelRef}
           role="dialog"
           aria-modal="true"
-          className={`relative w-full ${sizeClasses[size]} transform rounded-2xl bg-white ${isInternal ? 'dark:bg-gray-900' : ''} p-6 shadow-xl transition-all text-left max-h-[calc(100vh-8rem)] flex flex-col`}
+          className={`relative w-full ${sizeClasses[size]} transform rounded-surface bg-surface p-6 shadow-xl transition-all text-left max-h-[calc(100vh-8rem)] flex flex-col`}
         >
           <div className="flex items-center justify-between mb-4">
-            <h3 className={`text-xl font-semibold text-gray-900 ${isInternal ? 'dark:text-gray-100' : ''}`}>{title}</h3>
+            <h3 className="text-xl font-semibold text-ink">{title}</h3>
             <button
               onClick={onClose}
-              className={`rounded-lg p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-500 ${isInternal ? 'dark:hover:bg-gray-800 dark:hover:text-gray-300' : ''}`}
+              className="rounded-lg p-1 text-faint hover:bg-surface-sunken hover:text-muted"
             >
               <X className="h-6 w-6" />
             </button>

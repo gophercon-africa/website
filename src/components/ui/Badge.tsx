@@ -1,8 +1,8 @@
 import type { ReactNode } from 'react';
 
 const TONES = {
-  brand: 'bg-brand-tint text-brand-dark',
-  neutral: 'bg-gray-100 text-muted',
+  brand: 'bg-brand-tint text-brand-dark dark:text-brand-bright',
+  neutral: 'bg-line text-body',
   outline: 'border border-line bg-surface text-muted',
 } as const;
 

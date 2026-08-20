@@ -13,7 +13,7 @@ const TIERS = [
         name: 'Google',
         href: 'https://www.google.com',
         logo: 'https://res.cloudinary.com/dlmqe0two/image/upload/v1744802584/google_rcjqn1.png',
-        height: 'h-14',
+        height: 'h-16',
       },
     ],
   },
@@ -24,7 +24,7 @@ const TIERS = [
         name: 'Tailscale',
         href: 'https://tailscale.com',
         logo: '/sponsors/tailscale-logo.svg',
-        height: 'h-10',
+        height: 'h-12',
       },
       {
         name: 'Moniepoint',
@@ -52,7 +52,7 @@ export default function Sponsors() {
               <p className="text-xs font-semibold uppercase tracking-wide text-muted">
                 {label}
               </p>
-              <div className="mt-6 flex flex-wrap items-center justify-center gap-x-16 gap-y-8">
+              <div className="mt-6 flex flex-wrap items-stretch justify-center gap-6">
                 {sponsors.map(({ name, href, logo, height }) => (
                   <a
                     key={name}
@@ -60,13 +60,15 @@ export default function Sponsors() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={name}
-                    className="opacity-70 grayscale transition hover:opacity-100 hover:grayscale-0"
+                    // Tiles stay white in both themes — sponsor logos are drawn
+                    // for light backgrounds and would vanish on a dark surface.
+                    className="flex min-w-56 items-center justify-center rounded-surface border border-line bg-white p-8 shadow-sm transition hover:shadow-md sm:min-w-64 sm:p-10"
                   >
                     <Image
                       src={logo}
                       alt={name}
-                      width={240}
-                      height={80}
+                      width={280}
+                      height={96}
                       className={`w-auto object-contain ${height}`}
                     />
                   </a>

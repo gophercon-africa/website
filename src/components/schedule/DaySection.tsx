@@ -14,7 +14,7 @@ export default function DaySection({ schedule }: { schedule: ScheduleDay }) {
         </h2>
         <p className="text-sm font-medium text-muted mt-0.5">{schedule.theme}</p>
       </div>
-      <div className="space-y-3">
+      <div className="space-y-4">
         {schedule.sessions.map((session) => (
           <SessionRow key={session.id} session={session} />
         ))}

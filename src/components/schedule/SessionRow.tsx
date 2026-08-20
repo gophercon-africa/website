@@ -22,7 +22,7 @@ export default function SessionRow({ session }: { session: Session }) {
 
   if (!CARD_TYPES.has(session.type)) {
     return (
-      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 py-3 px-4 sm:px-5">
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 rounded-control border border-line/70 bg-surface/60 py-2.5 px-4 sm:px-5">
         <span className="w-24 shrink-0 text-sm font-semibold text-muted tabular-nums">
           {formatTime(session.startTime)}
         </span>
@@ -35,7 +35,7 @@ export default function SessionRow({ session }: { session: Session }) {
 
   return (
     <div
-      className={`rounded-surface border p-4 sm:p-5 ${
+      className={`rounded-surface border p-4 shadow-sm transition hover:border-brand/30 hover:shadow sm:p-5 ${
         session.tba
           ? 'border-dashed border-line bg-surface-sunken'
           : 'border-line bg-surface'
@@ -45,7 +45,7 @@ export default function SessionRow({ session }: { session: Session }) {
         <div className="shrink-0 flex sm:flex-col items-center sm:items-start gap-2 sm:gap-1 sm:w-24">
           <span
             className={`inline-block rounded-control px-3 py-1 text-sm font-bold tabular-nums ${
-              session.tba ? 'bg-gray-200 text-muted' : 'bg-brand text-white'
+              session.tba ? 'bg-line text-muted' : 'bg-brand text-white'
             }`}
           >
             {formatTime(session.startTime)}
@@ -67,7 +67,7 @@ export default function SessionRow({ session }: { session: Session }) {
           {session.speaker && (
             <Link
               href={`/speakers?speaker=${slugify(session.speaker.name)}`}
-              className="mt-2 inline-flex items-center gap-2 text-sm text-body transition-colors hover:text-brand"
+              className="mt-2 flex w-fit items-center gap-2 text-sm text-body transition-colors hover:text-brand"
             >
               <SpeakerAvatar name={session.speaker.name} size={24} />
               <span className="font-medium">{session.speaker.name}</span>
@@ -84,7 +84,7 @@ export default function SessionRow({ session }: { session: Session }) {
           {session.link && (
             <Link
               href={session.link.href}
-              className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-brand hover:text-brand-dark transition-colors"
+              className="mt-2 flex w-fit items-center gap-1 text-sm font-semibold text-brand hover:text-brand-dark dark:text-brand-bright dark:hover:text-brand-light transition-colors"
             >
               {session.link.label}
               <ArrowRight className="w-4 h-4" aria-hidden />

@@ -5,7 +5,7 @@ const VARIANTS = {
   primary: 'bg-brand text-white hover:bg-brand-dark',
   secondary:
     'border border-line bg-surface text-ink hover:border-brand hover:text-brand',
-  ghost: 'text-brand hover:text-brand-dark',
+  ghost: 'text-brand hover:text-brand-dark dark:text-brand-bright dark:hover:text-brand-light',
 } as const;
 
 const SIZES = {

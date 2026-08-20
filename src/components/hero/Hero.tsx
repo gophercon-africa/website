@@ -6,18 +6,18 @@ import { CITY, EVENT_DATES, VENUE } from '@/src/lib/event';
 
 export default function Hero({ cfsOpen = false }: { cfsOpen?: boolean }) {
   return (
-    <div className="border-b border-line bg-surface">
+    <div className="border-b border-line bg-linear-to-b from-earth-deep to-earth">
       <Container className="pt-16 pb-12 sm:pt-24 sm:pb-20">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-wide text-brand">
+            <p className="text-sm font-semibold uppercase tracking-wide text-white/70">
               {EVENT_DATES} · {CITY}
             </p>
-            <h1 className="mt-4 text-5xl font-bold tracking-tight text-ink sm:text-6xl">
+            <h1 className="mt-4 text-5xl font-bold tracking-tight text-white sm:text-6xl">
               GopherCon
               <span className="block">Africa 2026</span>
             </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-body sm:text-xl">
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/85 sm:text-xl">
               Africa&apos;s Go conference — three days of talks, workshops, and
               community at {VENUE}.
             </p>

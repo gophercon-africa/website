@@ -66,6 +66,8 @@ chip). Font is Plus Jakarta Sans via `next/font` (`layout.tsx`).
 - Vague headlines, generic CTAs ("Learn more", "Discover")
 - Italic-serif display type; italic titles anywhere
 - Purple/multi-hue gradient washes; glassmorphism / `backdrop-blur` panels
+  (one sanctioned exception: the **hero warm-earth band** — `from-earth-deep`
+  → `earth` behind the mascot — is a deliberate identity element, not a wash)
 - Over-rounding (`rounded-3xl`, `rounded-full` on non-avatars)
 - Ghost cards (borders around nothing), icon-tile stacks (colored squares with icons)
 - Pulsing dots, entrance animations, typewriter effects, floating/rotated layers
@@ -73,8 +75,14 @@ chip). Font is Plus Jakarta Sans via `next/font` (`layout.tsx`).
 
 ## Hard constraints (break these and you break the app)
 
-- **Dark mode is internal-only** (`/admin`, `/reviews`). No `dark:` variants on
-  marketing UI. `Header`/`Modal` route-gate their dark styles — keep that.
+- **Dark mode now covers marketing content pages** via a `.dark { }` token
+  override in `globals.css` (semantic neutrals flip; the four brand greens stay
+  fixed). Prefer semantic tokens so components theme automatically; add explicit
+  `dark:` variants only where a raw color is unavoidable (e.g. sponsor tiles stay
+  `bg-white` in both themes so logos never vanish). `Header`/`Modal` are token-
+  based and no longer route-gate. The global light/dark/system toggle lives in
+  the header (`components/theme/ThemeToggle.tsx`). Still light-only pending a
+  follow-up: the auth (`/signin`, `/otp-*`) and `/call-for-speakers` form pages.
 - **Middleware allowlist** (`src/middleware.ts`): every new public route needs a
   `publicExact`/`publicPrefixes` entry (exact-match — subroutes need their own).
 - **Never hardcode the header height** — the review-workspace body-lock

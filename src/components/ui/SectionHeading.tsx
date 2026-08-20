@@ -14,7 +14,7 @@ export default function SectionHeading({
   return (
     <div className={centered ? 'text-center' : ''}>
       {overline && (
-        <p className="text-xs font-semibold uppercase tracking-wide text-brand">
+        <p className="text-xs font-semibold uppercase tracking-wide text-brand dark:text-brand-bright">
           {overline}
         </p>
       )}
