@@ -187,10 +187,13 @@ export const scheduleData: ScheduleDay[] = [
       },
       {
         id: 'd2-1350-sponsor-moniepoint',
-        title: 'Sponsor Session',
+        title: 'ESHU — Building an Internal Development Platform in Go',
         type: 'sponsor',
         startTime: '13:50',
         endTime: '14:20',
+        speakerLabel: 'Sergio & Abdulrahman',
+        description:
+          "Eshu is Moniepoint's internal developer platform, consisting of an ephemeral-environment Kubernetes operator and Platform-as-a-Service. Leveraging Crossplane, Tekton, and Dagger, Eshu can launch ephemeral environments with over 10 dedicated dependencies (including Postgres, Spanner Omni, Redis, Reddit, and Kafka), allowing teams to build and launch services from development to production without needing infrastructure support.",
         sponsor: { name: 'Moniepoint', logo: MONIEPOINT_LOGO },
       },
       {
