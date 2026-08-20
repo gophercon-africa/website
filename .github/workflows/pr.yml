@@ -57,7 +57,11 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: a01b760e5af733b8d91d6ec48514aaa3
-          DATABASE_URL: postgresql://placeholder:placeholder@localhost:5432/placeholder
+          # opennextjs-cloudflare build runs `prisma generate --no-engine`; that
+          # client rejects a plain postgresql:// URL (P6001) during page-data
+          # collection. Use the real prisma+postgres:// secret like deploy.yml —
+          # safe here because the preview job is gated to same-repo PRs.
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
           PR_TITLE: ${{ github.event.pull_request.title }}
         run: |
