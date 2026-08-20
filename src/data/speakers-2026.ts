@@ -6,8 +6,7 @@ import { Speaker } from '@/src/types/speaker';
  * Sourced from accepted CFP submissions (bios and abstracts are the authors'
  * own words) plus the invited workshop instructor. Photos are initials
  * placeholders until headshots are collected — add imageUrl per speaker as
- * they arrive. Two further accepted talks are held back until they appear on
- * the public schedule.
+ * they arrive.
  */
 export const speakers2026: Speaker[] = [
 {
@@ -113,5 +112,13 @@ export const speakers2026: Speaker[] = [
   "title": "Backend Software Developer",
   "bio": "I am a self-taught backend developer with around two years of experience working primarily with Go. I am interested in backend systems design, developer experience, and the internals of how programming languages like Go behave under the hood. I have worked projects focused on system design, APIs, and developer tools, with a growing interest in how backend systems behave in production environments. I enjoy learning through hands-on building and exploring the tradeoffs behind software design decisions.",
   "talkTitle": "Hidden Behaviors of Go Structs in Production",
+  "talkDescription": "TBA"},
+{
+  "slug": "toluwase-thomas",
+  "name": "Toluwase Thomas",
+  "title": "Software Developer",
+  "company": "Betika",
+  "bio": "I'm Toluwase, a backend software developer from Nigeria with about six years of experience building systems in Go. I've spent most of that time in fintech, working on payment infrastructure, lending platforms, and mobile banking backends where downtime and incorrect state aren't abstract problems, they're real money moving the wrong way. These days I work at a gaming company, still in Go, still thinking about concurrency and correctness more than is probably normal.\n\nMy go-to stack is Go with PostgreSQL, and I've worked across the usual backend spread: REST and gRPC APIs, event-driven architectures, microservices, domain-driven design, containerized deployments. I care a lot about testing. Not in a preachy way, but in the way you start caring after your third production incident that a better test would have caught. That's what brought me to synctest, and it's what I want to talk about.",
+  "talkTitle": "Deterministic Concurrency with synctest",
   "talkDescription": "TBA"}
 ];

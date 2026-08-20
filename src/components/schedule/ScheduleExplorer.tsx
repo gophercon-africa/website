@@ -8,6 +8,7 @@ import Button from '@components/ui/Button';
 import DaySection from './DaySection';
 import DayTabs from './DayTabs';
 import ScheduleSearch from './ScheduleSearch';
+import ScheduleSpeakerModalProvider from './ScheduleSpeakerModal';
 import { SESSION_TYPE_META } from './sessionMeta';
 
 function parseDay(value: string | null): number | null {
@@ -85,7 +86,7 @@ export default function ScheduleExplorer() {
   };
 
   return (
-    <div>
+    <ScheduleSpeakerModalProvider>
       <div className="mb-8 space-y-4">
         <ScheduleSearch value={query} onChange={setQuery} />
         <DayTabs days={scheduleData} selected={day} onSelect={setDay} />
@@ -120,6 +121,6 @@ export default function ScheduleExplorer() {
           ))}
         </div>
       )}
-    </div>
+    </ScheduleSpeakerModalProvider>
   );
 }

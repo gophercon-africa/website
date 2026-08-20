@@ -1,19 +1,34 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, ChevronDown } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Session, SessionSpeaker } from '@/src/types/schedule';
-import { slugify } from '@/src/lib/slug';
-import { getSpeakerProfile, speakerExists } from '@/src/lib/speakerLookup';
 import SpeakerAvatar from '@components/speakers/SpeakerAvatar';
+import { getSpeakerProfile, speakerExists } from '@/src/lib/speakerLookup';
+import { useOpenSpeaker } from './ScheduleSpeakerModal';
 import { formatDuration, formatTime } from './sessionMeta';
 
-/** One presenter. Inline session-speaker fields win over the lineup lookup;
- *  links to the /speakers modal only when the name resolves to a real profile
- *  (placeholder co-presenters render un-linked). */
+/** Collapsed preview height for the abstract (~2 lines). */
+const COLLAPSED_PX = 48;
+
+function roleLabel(session: Session): string {
+  if (session.type === 'workshop') return 'Instructor';
+  if (session.type === 'panel') return 'Panellists';
+  return 'Speaker';
+}
+
+function eyebrow(session: Session): string | null {
+  if (session.fullDay) return 'Full day';
+  if (session.type === 'keynote') return 'Keynote';
+  return null;
+}
+
+/** One presenter. Real lineup speakers open the profile modal in place;
+ *  placeholder co-presenters render un-linked. */
 function SpeakerBlock({ speaker, role }: { speaker: SessionSpeaker; role: string }) {
+  const openSpeaker = useOpenSpeaker();
   const profile = getSpeakerProfile(speaker.name);
   const imageUrl = speaker.imageUrl ?? profile.imageUrl;
   const title = speaker.title ?? profile.title;
@@ -44,38 +59,37 @@ function SpeakerBlock({ speaker, role }: { speaker: SessionSpeaker; role: string
   );
 
   return linked ? (
-    <Link
-      href={`/speakers?speaker=${slugify(speaker.name)}`}
-      className="group flex w-fit items-center gap-3"
+    <button
+      type="button"
+      onClick={() => openSpeaker(speaker.name)}
+      className="group flex w-fit items-center gap-3 text-left"
     >
       {inner}
-    </Link>
+    </button>
   ) : (
     <div className="flex w-fit items-center gap-3">{inner}</div>
   );
 }
 
-function roleLabel(session: Session): string {
-  if (session.type === 'workshop') return 'Instructor';
-  if (session.type === 'panel') return 'Panellists';
-  return 'Speaker';
-}
-
-function eyebrow(session: Session): string | null {
-  if (session.fullDay) return 'Full day';
-  if (session.type === 'keynote') return 'Keynote';
-  return null;
-}
-
-/** GopherCon-US style session card: a brand time pill on the left rail, then a
- *  collapsible card. Collapsed shows the time range, title and speaker; expanding
- *  reveals the abstract, any full-day segments and the details link. */
+/** GopherCon-US style session card: a left-rail time pill, then a card showing
+ *  the time range, title, a 2-line abstract preview that fades and — only when
+ *  the text overflows — expands smoothly on click, plus the speaker(s). */
 export default function SessionCard({ session }: { session: Session }) {
-  const expandable = Boolean(
-    session.description || session.segments || session.link
-  );
-  const [expanded, setExpanded] = useState(Boolean(session.fullDay));
+  const [expanded, setExpanded] = useState(false);
+  const [contentHeight, setContentHeight] = useState(0);
+  const contentRef = useRef<HTMLDivElement>(null);
 
+  // Measure the abstract's natural height so we can (a) decide whether it
+  // overflows the 2-line preview and (b) animate max-height to a real target.
+  useEffect(() => {
+    const el = contentRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(() => setContentHeight(el.scrollHeight));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  const overflowing = contentHeight > COLLAPSED_PX + 2;
   const timeRange = `${formatTime(session.startTime)} – ${formatTime(session.endTime)}`;
   // Full-day is already flagged in the eyebrow, so don't repeat it here.
   const duration = session.fullDay
@@ -84,7 +98,7 @@ export default function SessionCard({ session }: { session: Session }) {
   const label = eyebrow(session);
   const speakerList = session.speakers ?? (session.speaker ? [session.speaker] : []);
 
-  const header = (
+  const head = (
     <>
       {label && (
         <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-brand dark:text-brand-bright">
@@ -102,6 +116,22 @@ export default function SessionCard({ session }: { session: Session }) {
       >
         {session.title}
       </h3>
+      {session.description && (
+        <div
+          className="relative mt-3 overflow-hidden transition-[max-height] duration-300 ease-out"
+          style={{ maxHeight: expanded ? contentHeight : COLLAPSED_PX }}
+        >
+          <div
+            ref={contentRef}
+            className="whitespace-pre-line text-sm leading-relaxed text-body"
+          >
+            {session.description}
+          </div>
+          {overflowing && !expanded && (
+            <span className="pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-linear-to-t from-surface to-transparent" />
+          )}
+        </div>
+      )}
     </>
   );
 
@@ -126,32 +156,20 @@ export default function SessionCard({ session }: { session: Session }) {
               : 'border-line bg-surface hover:border-brand/30 hover:shadow'
         }`}
       >
-        {expandable ? (
+        {overflowing ? (
           <button
             type="button"
             onClick={() => setExpanded((v) => !v)}
             aria-expanded={expanded}
-            className="flex w-full items-start justify-between gap-3 text-left"
+            className="block w-full cursor-pointer text-left"
           >
-            <span className="min-w-0">{header}</span>
-            <ChevronDown
-              className={`mt-1 h-5 w-5 shrink-0 text-muted transition-transform ${
-                expanded ? 'rotate-180' : ''
-              }`}
-              aria-hidden
-            />
+            {head}
           </button>
         ) : (
-          header
+          head
         )}
 
-        {expanded && session.description && (
-          <p className="mt-3 whitespace-pre-line text-sm leading-relaxed text-body">
-            {session.description}
-          </p>
-        )}
-
-        {expanded && session.segments && (
+        {session.segments && (
           <ol className="mt-4 space-y-1.5 border-l-2 border-line pl-4">
             {session.segments.map((seg) => (
               <li key={seg.startTime} className="flex flex-wrap gap-x-3 text-sm">
@@ -199,7 +217,7 @@ export default function SessionCard({ session }: { session: Session }) {
           </div>
         )}
 
-        {expanded && session.link && (
+        {session.link && (
           <Link
             href={session.link.href}
             className="mt-4 flex w-fit items-center gap-1 text-sm font-semibold text-brand transition-colors hover:text-brand-dark dark:text-brand-bright dark:hover:text-brand-light"

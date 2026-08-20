@@ -163,12 +163,12 @@ export const scheduleData: ScheduleDay[] = [
           'The trade-off between spinning and parking, the hidden spin inside a Mutex, and why the runtime lets only one goroutine spin at a time.',
       },
       {
-        id: 'd2-1150-talk-tba',
-        title: 'Talk — to be announced',
+        id: 'd2-1150-thomas',
+        title: 'Deterministic Concurrency with synctest',
         type: 'talk',
         startTime: '11:50',
         endTime: '12:20',
-        tba: true,
+        speaker: { name: 'Toluwase Thomas' },
       },
       {
         id: 'd2-1220-lunch',
