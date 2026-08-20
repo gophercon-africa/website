@@ -201,12 +201,12 @@ export const scheduleData: ScheduleDay[] = [
         tba: true,
       },
       {
-        id: 'd2-1350-sponsor-tba',
-        title: 'Sponsor Session — to be announced',
+        id: 'd2-1350-sponsor-moniepoint',
+        title: 'Sponsor Session',
         type: 'sponsor',
         startTime: '13:50',
         endTime: '14:20',
-        tba: true,
+        speakerLabel: 'Sponsored by Moniepoint',
       },
       {
         id: 'd2-1420-umanah',
@@ -286,12 +286,12 @@ export const scheduleData: ScheduleDay[] = [
           'Building a minimal container runtime in Go — namespaces, cgroups, and filesystem isolation — to demystify what happens when a container starts.',
       },
       {
-        id: 'd3-0930-talk-tba',
-        title: 'Talk — to be announced',
+        id: 'd3-0930-atieno',
+        title: 'Hidden Behaviors of Go Structs in Production',
         type: 'talk',
         startTime: '09:30',
         endTime: '10:00',
-        tba: true,
+        speaker: { name: 'Beryl Christine Atieno' },
       },
       {
         id: 'd3-1000-clark',
@@ -355,12 +355,12 @@ export const scheduleData: ScheduleDay[] = [
         tba: true,
       },
       {
-        id: 'd3-1330-sponsor-tba',
-        title: 'Sponsor Session — to be announced',
+        id: 'd3-1330-sponsor-moniepoint',
+        title: 'Sponsor Session',
         type: 'sponsor',
         startTime: '13:30',
         endTime: '14:00',
-        tba: true,
+        speakerLabel: 'Sponsored by Moniepoint',
       },
       {
         id: 'd3-1400-oluwajubelo',

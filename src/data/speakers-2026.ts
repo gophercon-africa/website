@@ -106,5 +106,10 @@ export const speakers2026: Speaker[] = [
   "company": "Heartstamp",
   "bio": "Utibeabasi Umanah is a software engineer focused on distributed systems and cloud-native infrastructure in Go. His work spans Kubernetes tooling, Terraform providers, and platform engineering systems built at companies like Fleek and Matrica. Lately, he’s been exploring eBPF and Linux internals, with projects ranging from web application firewalls to distributed schedulers and blockchain infrastructure.",
   "talkTitle": "Don't Let Your AI Agents Run Wild: Building Secure Sandboxes with Firecracker and Go",
+  "talkDescription": "TBA"},
+{
+  "slug": "beryl-christine-atieno",
+  "name": "Beryl Christine Atieno",
+  "talkTitle": "Hidden Behaviors of Go Structs in Production",
   "talkDescription": "TBA"}
 ];
