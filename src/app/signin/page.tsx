@@ -39,18 +39,18 @@ function SignInPageInner() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-16">
+    <div className="min-h-screen bg-surface-sunken py-16">
       <div className="max-w-md mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-2xl border border-gray-200 shadow-lg p-8">
-          <h1 className="text-3xl font-bold text-gray-900 text-center">
+        <div className="bg-surface rounded-2xl border border-line shadow-lg p-8">
+          <h1 className="text-3xl font-bold text-ink text-center">
             Sign in
           </h1>
-          <p className="mt-2 text-sm text-gray-600 text-center">
+          <p className="mt-2 text-sm text-muted text-center">
             Use your email and password to continue.
           </p>
 
           {(errorFromQuery || localError) && (
-            <div className="mt-6 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+            <div className="mt-6 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-900/50 dark:bg-red-950/40 dark:text-red-300">
               {localError ?? 'Authentication failed. Please try again.'}
             </div>
           )}
@@ -59,9 +59,9 @@ function SignInPageInner() {
             <label className="block">
               <span className="sr-only">Email</span>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-faint" />
                 <input
-                  className="w-full rounded-lg border border-gray-200 bg-white px-10 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-brand"
+                  className="w-full rounded-lg border border-line bg-surface px-10 py-3 text-sm text-ink placeholder:text-faint focus:outline-none focus:ring-2 focus:ring-brand"
                   type="email"
                   name="email"
                   placeholder="Email"
@@ -76,9 +76,9 @@ function SignInPageInner() {
             <label className="block">
               <span className="sr-only">Password</span>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-faint" />
                 <input
-                  className="w-full rounded-lg border border-gray-200 bg-white px-10 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-brand"
+                  className="w-full rounded-lg border border-line bg-surface px-10 py-3 text-sm text-ink placeholder:text-faint focus:outline-none focus:ring-2 focus:ring-brand"
                   type="password"
                   name="password"
                   placeholder="Password"
@@ -100,10 +100,10 @@ function SignInPageInner() {
           </form>
 
           <div className="mt-6 flex items-center justify-between text-sm">
-            <Link className="text-gray-600 hover:text-gray-900" href="/">
+            <Link className="text-muted hover:text-ink" href="/">
               Back to home
             </Link>
-            <Link className="text-brand hover:text-brand-light font-medium" href="/workshops">
+            <Link className="text-brand dark:text-brand-bright hover:text-brand-light font-medium" href="/workshops">
               View workshops
             </Link>
           </div>
@@ -116,7 +116,7 @@ function SignInPageInner() {
 export default function SignInPage() {
   return (
     <Suspense
-      fallback={<div className="min-h-screen bg-gray-50 py-16 font-sans" />}
+      fallback={<div className="min-h-screen bg-surface-sunken py-16 font-sans" />}
     >
       <SignInPageInner />
     </Suspense>

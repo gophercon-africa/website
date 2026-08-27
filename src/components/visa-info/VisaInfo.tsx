@@ -54,7 +54,7 @@ export default function VisaInfo() {
           <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             {TIPS.map((tip) => (
               <li key={tip} className="flex items-start gap-2 text-sm text-body">
-                <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand" aria-hidden />
+                <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand dark:text-brand-bright" aria-hidden />
                 {tip}
               </li>
             ))}

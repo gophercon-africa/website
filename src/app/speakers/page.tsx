@@ -11,7 +11,7 @@ import { EVENT_DATES, CITY } from '@/src/lib/event';
 function PageHeader() {
   return (
     <div className="mb-12 text-center">
-      <p className="text-xs font-semibold uppercase tracking-wide text-brand">
+      <p className="text-xs font-semibold uppercase tracking-wide text-brand dark:text-brand-bright">
         {EVENT_DATES} · {CITY}
       </p>
       <h1 className="mt-2 text-4xl sm:text-5xl font-bold tracking-tight text-ink">

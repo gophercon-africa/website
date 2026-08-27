@@ -41,7 +41,7 @@ export default function SpeakerModal({
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${speaker.name} on ${label}`}
-                  className="text-muted transition-colors hover:text-brand"
+                  className="text-muted transition-colors hover:text-brand dark:hover:text-brand-bright"
                 >
                   <Icon className="h-5 w-5" aria-hidden />
                 </a>

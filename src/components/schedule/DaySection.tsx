@@ -10,7 +10,7 @@ export default function DaySection({ schedule }: { schedule: ScheduleDay }) {
           className="text-2xl font-bold tracking-tight text-ink"
         >
           {schedule.dayLabel}
-          <span className="text-brand"> — {schedule.date}</span>
+          <span className="text-brand dark:text-brand-bright"> — {schedule.date}</span>
         </h2>
         <p className="text-sm font-medium text-muted mt-0.5">{schedule.theme}</p>
       </div>

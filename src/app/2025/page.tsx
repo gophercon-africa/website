@@ -13,7 +13,7 @@ export default function Year2025Page() {
     <div className="min-h-screen bg-surface-sunken py-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <p className="text-xs font-semibold uppercase tracking-wide text-brand mb-3">
+          <p className="text-xs font-semibold uppercase tracking-wide text-brand dark:text-brand-bright mb-3">
             Looking back
           </p>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-ink mb-4">
@@ -21,11 +21,11 @@ export default function Year2025Page() {
           </h1>
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-muted">
             <span className="inline-flex items-center gap-2">
-              <MapPin className="w-5 h-5 text-brand" aria-hidden />
+              <MapPin className="w-5 h-5 text-brand dark:text-brand-bright" aria-hidden />
               Lagos, Nigeria
             </span>
             <span className="inline-flex items-center gap-2">
-              <Calendar className="w-5 h-5 text-brand" aria-hidden />
+              <Calendar className="w-5 h-5 text-brand dark:text-brand-bright" aria-hidden />
               November 2025
             </span>
           </div>
@@ -117,7 +117,7 @@ export default function Year2025Page() {
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
                 href="/2024"
-                className="inline-flex items-center justify-center gap-2 rounded-control border border-brand px-5 py-2.5 text-sm font-semibold text-brand hover:bg-brand/5 transition-colors"
+                className="inline-flex items-center justify-center gap-2 rounded-control border border-brand px-5 py-2.5 text-sm font-semibold text-brand hover:bg-brand/5 dark:text-brand-bright dark:hover:bg-brand/15 transition-colors"
               >
                 GopherCon Africa 2024 in Nairobi
                 <ArrowRight className="w-4 h-4" aria-hidden />

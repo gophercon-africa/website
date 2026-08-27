@@ -1,22 +1,11 @@
-import Image from 'next/image';
 import Button from '@components/ui/Button';
 import Container from '@components/ui/Container';
 import Section from '@components/ui/Section';
 import SectionHeading from '@components/ui/SectionHeading';
-import SponsorBlurb from './SponsorBlurb';
+import SponsorShowcase, { SponsorTier } from './SponsorShowcase';
 import { CONTACT_EMAIL, SPONSORSHIP_PROSPECTUS_URL } from '@/src/lib/links';
 
-interface Sponsor {
-  name: string;
-  href: string;
-  logo: string;
-  height: string;
-  tagline?: string;
-  blurb?: string[];
-  careersUrl?: string;
-}
-
-const TIERS: { label: string; sponsors: Sponsor[] }[] = [
+const TIERS: SponsorTier[] = [
   {
     label: 'Platinum Partner',
     sponsors: [
@@ -36,6 +25,14 @@ const TIERS: { label: string; sponsors: Sponsor[] }[] = [
         href: 'https://tailscale.com',
         logo: '/sponsors/tailscale-logo.svg',
         height: 'h-12',
+        // DRAFT copy written by us from public info — NOT Tailscale-approved.
+        // Replace with official sponsor copy before merge.
+        tagline: 'Zero-config networking, built on WireGuard',
+        blurb: [
+          'Tailscale builds a secure, encrypted network between your servers, laptops, and cloud instances — across firewalls and NAT, with no central chokepoint.',
+          'Built on the open-source WireGuard protocol, devices connect directly and safely, so teams can replace legacy VPNs and reach internal services with zero configuration.',
+        ],
+        careersUrl: 'https://tailscale.com/careers',
       },
       {
         name: 'Moniepoint',
@@ -54,10 +51,6 @@ const TIERS: { label: string; sponsors: Sponsor[] }[] = [
   },
 ];
 
-const SPONSOR_BLURBS = TIERS.flatMap((tier) => tier.sponsors).filter(
-  (sponsor) => sponsor.blurb && sponsor.blurb.length > 0
-);
-
 export default function Sponsors() {
   return (
     <Section id="sponsors">
@@ -68,51 +61,7 @@ export default function Sponsors() {
           description="Thank you to the organizations supporting GopherCon Africa."
         />
 
-        <div className="mt-12 space-y-12">
-          {TIERS.map(({ label, sponsors }) => (
-            <div key={label} className="text-center">
-              <p className="text-xs font-semibold uppercase tracking-wide text-muted">
-                {label}
-              </p>
-              <div className="mt-6 flex flex-wrap items-stretch justify-center gap-6">
-                {sponsors.map(({ name, href, logo, height }) => (
-                  <a
-                    key={name}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={name}
-                    // Tiles stay white in both themes — sponsor logos are drawn
-                    // for light backgrounds and would vanish on a dark surface.
-                    className="flex min-w-56 items-center justify-center rounded-surface border border-line bg-white p-8 shadow-sm transition hover:shadow-md sm:min-w-64 sm:p-10"
-                  >
-                    <Image
-                      src={logo}
-                      alt={name}
-                      width={280}
-                      height={96}
-                      className={`w-auto object-contain ${height}`}
-                    />
-                  </a>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {SPONSOR_BLURBS.length > 0 && (
-          <div className="mx-auto mt-12 max-w-2xl space-y-3">
-            {SPONSOR_BLURBS.map((sponsor) => (
-              <SponsorBlurb
-                key={sponsor.name}
-                name={sponsor.name}
-                tagline={sponsor.tagline}
-                blurb={sponsor.blurb!}
-                careersUrl={sponsor.careersUrl}
-              />
-            ))}
-          </div>
-        )}
+        <SponsorShowcase tiers={TIERS} />
 
         <div className="mx-auto mt-20 max-w-2xl border-t border-line pt-12 text-center">
           <h3 className="text-2xl font-bold tracking-tight text-ink">

@@ -107,12 +107,12 @@ export default function CallForSpeakersForm() {
     };  
 
     return (
-        <div className="min-h-screen bg-linear-to-b from-brand/5 via-white to-[#B91C1C]/5 font-sans">
+        <div className="min-h-screen bg-surface-sunken font-sans">
             <div className="mt-12">
                 <div className="py-16 px-4 sm:px-6 lg:px-8">
                     <div className="max-w-5xl mx-auto">
                         <div className="text-center mb-12">
-                            <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+                            <p className="mt-4 text-lg text-muted max-w-2xl mx-auto">
                                 Share your expertise and passion for Go with the GopherCon Africa community.
                                 We&apos;re looking for engaging talks that cover a wide range of Go topics.
                             </p>
@@ -133,13 +133,13 @@ export default function CallForSpeakersForm() {
                             </div>
                         )}  
 
-                        <form onSubmit={handleSubmit} className="space-y-8 bg-white rounded-2xl shadow-lg p-8">
+                        <form onSubmit={handleSubmit} className="space-y-8 bg-surface rounded-2xl shadow-lg p-8">
                             {/* Personal Information */}
                             <div className="space-y-6">
-                                <h3 className="text-2xl font-semibold text-brand">Personal Information</h3>
+                                <h3 className="text-2xl font-semibold text-brand dark:text-brand-bright">Personal Information</h3>
                                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                                     <div>
-                                        <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">
+                                        <label htmlFor="fullName" className="block text-sm font-medium text-body">
                                             Full Name
                                         </label>
                                         <input
@@ -149,12 +149,12 @@ export default function CallForSpeakersForm() {
                                             required
                                             value={formData.fullName}
                                             onChange={handleChange}
-                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand focus:ring-brand h-12 px-4 text-base transition-all duration-200 ease-in-out"
+                                            className="mt-1 block w-full rounded-lg border-line shadow-sm focus:border-brand focus:ring-brand h-12 px-4 text-base transition-all duration-200 ease-in-out"
                                         />
-                                        <p className="text-red-500 text-sm">{formState?.errors?.fullName?.join(", ")}</p>
+                                        <p className="text-red-500 dark:text-red-400 text-sm">{formState?.errors?.fullName?.join(", ")}</p>
                                     </div>
                                     <div>
-                                        <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                                        <label htmlFor="email" className="block text-sm font-medium text-body">
                                             Email
                                         </label>
                                         <input
@@ -164,13 +164,13 @@ export default function CallForSpeakersForm() {
                                             required
                                             value={formData.email}
                                             onChange={handleChange}
-                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand focus:ring-brand h-12 px-4 text-base transition-all duration-200 ease-in-out"
+                                            className="mt-1 block w-full rounded-lg border-line shadow-sm focus:border-brand focus:ring-brand h-12 px-4 text-base transition-all duration-200 ease-in-out"
                                         />
-                                        <p className="text-red-500 text-sm">{formState?.errors?.email?.join(", ")}</p>
+                                        <p className="text-red-500 dark:text-red-400 text-sm">{formState?.errors?.email?.join(", ")}</p>
                                     </div>
                                     
                                     <div>
-                                        <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
+                                        <label htmlFor="phone" className="block text-sm font-medium text-body">
                                             Phone
                                         </label>
                                         <input
@@ -179,13 +179,13 @@ export default function CallForSpeakersForm() {
                                             id="phone"
                                             value={formData.phone}
                                             onChange={handleChange}
-                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand focus:ring-brand h-12 px-4 text-base transition-all duration-200 ease-in-out"
+                                            className="mt-1 block w-full rounded-lg border-line shadow-sm focus:border-brand focus:ring-brand h-12 px-4 text-base transition-all duration-200 ease-in-out"
                                         />
-                                        <p className="text-red-500 text-sm">{formState?.errors?.phone}</p>
+                                        <p className="text-red-500 dark:text-red-400 text-sm">{formState?.errors?.phone}</p>
                                     </div>
                                     
                                     <div>
-                                        <label htmlFor="company" className="block text-sm font-medium text-gray-700">
+                                        <label htmlFor="company" className="block text-sm font-medium text-body">
                                             Company/Organization
                                         </label>
                                         <input
@@ -194,13 +194,13 @@ export default function CallForSpeakersForm() {
                                             id="company"
                                             value={formData.company}
                                             onChange={handleChange}
-                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand focus:ring-brand h-12 px-4 text-base transition-all duration-200 ease-in-out"
+                                            className="mt-1 block w-full rounded-lg border-line shadow-sm focus:border-brand focus:ring-brand h-12 px-4 text-base transition-all duration-200 ease-in-out"
                                         />
-                                        <p className="text-red-500 text-sm">{formState?.errors?.company}</p>
+                                        <p className="text-red-500 dark:text-red-400 text-sm">{formState?.errors?.company}</p>
                                     </div>
                                     
                                     <div>
-                                        <label htmlFor="title" className="block text-sm font-medium text-gray-700">
+                                        <label htmlFor="title" className="block text-sm font-medium text-body">
                                             Job Title
                                         </label>
                                         <input
@@ -209,16 +209,16 @@ export default function CallForSpeakersForm() {
                                             id="title"
                                             value={formData.title}
                                             onChange={handleChange}
-                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand focus:ring-brand h-12 px-4 text-base transition-all duration-200 ease-in-out"
+                                            className="mt-1 block w-full rounded-lg border-line shadow-sm focus:border-brand focus:ring-brand h-12 px-4 text-base transition-all duration-200 ease-in-out"
                                         />
-                                        <p className="text-red-500 text-sm">{formState?.errors?.title}</p>
+                                        <p className="text-red-500 dark:text-red-400 text-sm">{formState?.errors?.title}</p>
                                     </div>
                                 </div>
                             </div>
 
                             {/* Speaker Bio */}
                             <div>
-                                <label htmlFor="bio" className="block text-sm font-medium text-gray-700">
+                                <label htmlFor="bio" className="block text-sm font-medium text-body">
                                     Speaker Bio
                                 </label>
                                 <textarea
@@ -228,17 +228,17 @@ export default function CallForSpeakersForm() {
                                     required
                                     value={formData.bio}
                                     onChange={handleChange}
-                                    className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand focus:ring-brand px-4 py-3 text-base transition-all duration-200 ease-in-out min-h-[120px]"
+                                    className="mt-1 block w-full rounded-lg border-line shadow-sm focus:border-brand focus:ring-brand px-4 py-3 text-base transition-all duration-200 ease-in-out min-h-[120px]"
                                     placeholder="Tell us about yourself and your experience with Go"
                                 />
-                                <p className="text-red-500 text-sm">{formState?.errors?.bio}</p>
+                                <p className="text-red-500 dark:text-red-400 text-sm">{formState?.errors?.bio}</p>
                             </div>
 
                             {/* Talk Information */}
                             <div className="space-y-6">
-                                <h3 className="text-2xl font-semibold text-brand">Talk Information</h3>
+                                <h3 className="text-2xl font-semibold text-brand dark:text-brand-bright">Talk Information</h3>
                                 <div>
-                                    <label htmlFor="talkTitle" className="block text-sm font-medium text-gray-700">
+                                    <label htmlFor="talkTitle" className="block text-sm font-medium text-body">
                                         Talk Title
                                     </label>
                                     <input
@@ -248,13 +248,13 @@ export default function CallForSpeakersForm() {
                                         required
                                         value={formData.talkTitle}
                                         onChange={handleChange}
-                                        className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand focus:ring-brand h-12 px-4 text-base transition-all duration-200 ease-in-out"
+                                        className="mt-1 block w-full rounded-lg border-line shadow-sm focus:border-brand focus:ring-brand h-12 px-4 text-base transition-all duration-200 ease-in-out"
                                     />
-                                    <p className="text-red-500 text-sm">{formState?.errors?.talkTitle}</p>
+                                    <p className="text-red-500 dark:text-red-400 text-sm">{formState?.errors?.talkTitle}</p>
                                 </div>
 
                                 <div>
-                                    <label htmlFor="talkDescription" className="block text-sm font-medium text-gray-700">
+                                    <label htmlFor="talkDescription" className="block text-sm font-medium text-body">
                                         Talk Description
                                     </label>
                                     <textarea
@@ -264,14 +264,14 @@ export default function CallForSpeakersForm() {
                                         required
                                         value={formData.talkDescription}
                                         onChange={handleChange}
-                                        className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand focus:ring-brand px-4 py-3 text-base transition-all duration-200 ease-in-out min-h-[180px]"
+                                        className="mt-1 block w-full rounded-lg border-line shadow-sm focus:border-brand focus:ring-brand px-4 py-3 text-base transition-all duration-200 ease-in-out min-h-[180px]"
                                         placeholder="Provide a detailed description of your talk"
                                     />
-                                    <p className="text-red-500 text-sm">{formState?.errors?.talkDescription}</p>
+                                    <p className="text-red-500 dark:text-red-400 text-sm">{formState?.errors?.talkDescription}</p>
                                 </div>
 
                                 <div>
-                                    <label htmlFor="talkCategory" className="block text-sm font-medium text-gray-700">
+                                    <label htmlFor="talkCategory" className="block text-sm font-medium text-body">
                                         Talk Category
                                     </label>
                                     <select
@@ -280,18 +280,18 @@ export default function CallForSpeakersForm() {
                                         required
                                         value={formData.talkCategory}
                                         onChange={handleChange}
-                                        className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand focus:ring-brand h-12 px-4 text-base transition-all duration-200 ease-in-out"
+                                        className="mt-1 block w-full rounded-lg border-line shadow-sm focus:border-brand focus:ring-brand h-12 px-4 text-base transition-all duration-200 ease-in-out"
                                     >
                                         <option value="">Select a category</option>
                                         {TALK_CATEGORIES.map((category) => (
                                             <option key={category} value={category}>{category}</option>
                                         ))}
                                     </select>
-                                    <p className="text-red-500 text-sm">{formState?.errors?.talkCategory}</p>
+                                    <p className="text-red-500 dark:text-red-400 text-sm">{formState?.errors?.talkCategory}</p>
                                 </div>
                                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                                     <div>
-                                        <label htmlFor="talkDuration" className="block text-sm font-medium text-gray-700">
+                                        <label htmlFor="talkDuration" className="block text-sm font-medium text-body">
                                             Talk Duration
                                         </label>
                                         <select
@@ -300,17 +300,17 @@ export default function CallForSpeakersForm() {
                                             required
                                             value={formData.talkDuration}
                                             onChange={handleChange}
-                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand focus:ring-brand h-12 px-4 text-base transition-all duration-200 ease-in-out"
+                                            className="mt-1 block w-full rounded-lg border-line shadow-sm focus:border-brand focus:ring-brand h-12 px-4 text-base transition-all duration-200 ease-in-out"
                                         >
                                             <option value="">Select duration</option>
                                             {TALK_DURATIONS.map((duration) => (
                                                 <option key={duration} value={duration}>{TALK_DURATION_LABELS[duration]}</option>
                                             ))}
                                         </select>
-                                        <p className="text-red-500 text-sm">{formState?.errors?.talkDuration}</p>
+                                        <p className="text-red-500 dark:text-red-400 text-sm">{formState?.errors?.talkDuration}</p>
                                     </div>
                                     <div>
-                                        <label htmlFor="talkLevel" className="block text-sm font-medium text-gray-700">
+                                        <label htmlFor="talkLevel" className="block text-sm font-medium text-body">
                                             Talk Level
                                         </label>
                                         <select
@@ -319,21 +319,21 @@ export default function CallForSpeakersForm() {
                                             required
                                             value={formData.talkLevel}
                                             onChange={handleChange}
-                                            className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand focus:ring-brand h-12 px-4 text-base transition-all duration-200 ease-in-out"
+                                            className="mt-1 block w-full rounded-lg border-line shadow-sm focus:border-brand focus:ring-brand h-12 px-4 text-base transition-all duration-200 ease-in-out"
                                         >
                                             <option value="">Select level</option>
                                             {TALK_LEVELS.map((level) => (
                                                 <option key={level} value={level}>{TALK_LEVEL_LABELS[level]}</option>
                                             ))}
                                         </select>
-                                        <p className="text-red-500 text-sm">{formState?.errors?.talkLevel}</p>
+                                        <p className="text-red-500 dark:text-red-400 text-sm">{formState?.errors?.talkLevel}</p>
                                     </div>
                                 </div>
                             </div>
 
                             {/* Previous Speaking Experience */}
                             <div>
-                                <label htmlFor="previousSpeakingExperience" className="block text-sm font-medium text-gray-700">
+                                <label htmlFor="previousSpeakingExperience" className="block text-sm font-medium text-body">
                                     Previous Speaking Experience
                                 </label>
                                 <textarea
@@ -342,15 +342,15 @@ export default function CallForSpeakersForm() {
                                     rows={4}
                                     value={formData.previousSpeakingExperience}
                                     onChange={handleChange}
-                                    className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand focus:ring-brand px-4 py-3 text-base transition-all duration-200 ease-in-out min-h-[120px]"
+                                    className="mt-1 block w-full rounded-lg border-line shadow-sm focus:border-brand focus:ring-brand px-4 py-3 text-base transition-all duration-200 ease-in-out min-h-[120px]"
                                     placeholder="List any previous speaking engagements or relevant experience"
                                 />
-                                <p className="text-red-500 text-sm">{formState?.errors?.previousSpeakingExperience}</p>
+                                <p className="text-red-500 dark:text-red-400 text-sm">{formState?.errors?.previousSpeakingExperience}</p>
                             </div>
 
                             {/* Additional Notes */}
                             <div>
-                                <label htmlFor="additionalNotes" className="block text-sm font-medium text-gray-700">
+                                <label htmlFor="additionalNotes" className="block text-sm font-medium text-body">
                                     Additional Notes
                                 </label>
                                 <textarea
@@ -359,17 +359,17 @@ export default function CallForSpeakersForm() {
                                     rows={4}
                                     value={formData.additionalNotes}
                                     onChange={handleChange}
-                                    className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand focus:ring-brand px-4 py-3 text-base transition-all duration-200 ease-in-out min-h-[120px]"
+                                    className="mt-1 block w-full rounded-lg border-line shadow-sm focus:border-brand focus:ring-brand px-4 py-3 text-base transition-all duration-200 ease-in-out min-h-[120px]"
                                     placeholder="Any additional information you'd like to share"
                                 />
-                                <p className="text-red-500 text-sm">{formState?.errors?.additionalNotes}</p>
+                                <p className="text-red-500 dark:text-red-400 text-sm">{formState?.errors?.additionalNotes}</p>
                             </div>
 
                             <div className="flex justify-end">
                                 <button
                                     type="submit"
                                     disabled={isSubmitting}
-                                    className="inline-flex justify-center py-3 px-6 border border-transparent shadow-2xs text-base font-medium rounded-lg text-white bg-linear-to-r from-brand via-[#000000] to-[#B91C1C] hover:opacity-90 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-brand transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="inline-flex justify-center py-3 px-6 border border-transparent shadow-2xs text-base font-medium rounded-lg text-white bg-brand hover:bg-brand-dark focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-brand transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                     {isSubmitting ? 'Submitting...' : 'Submit Proposal'}
                                 </button>

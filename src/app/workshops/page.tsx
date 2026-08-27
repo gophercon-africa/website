@@ -100,7 +100,7 @@ function AccordionItem({
     <details className="group rounded-control border border-line bg-surface">
       <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4">
         <div className="flex min-w-0 items-start gap-3">
-          <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand/10 text-xs font-bold text-brand">
+          <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand/10 text-xs font-bold text-brand dark:bg-brand/20 dark:text-brand-bright">
             {index}
           </span>
           <div className="min-w-0">
@@ -131,7 +131,7 @@ export default function WorkshopsPage() {
             <div className="flex flex-col gap-6">
               <div className="flex flex-col gap-4">
                 <div className="flex flex-wrap items-center justify-between gap-3">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-brand">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-brand dark:text-brand-bright">
                     {workshop.eyebrow}
                   </p>
                   <Button href={TICKETS_URL} external>

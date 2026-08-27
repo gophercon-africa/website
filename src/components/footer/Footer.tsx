@@ -14,6 +14,9 @@ const SOCIALS = [
     href: SOCIAL_LINKS.x,
     label: 'X (Twitter)',
     icon: 'https://res.cloudinary.com/dlmqe0two/image/upload/v1744803296/X_logo_2023.svg_s6irtp.png',
+    // Black glyph — invert to white on the dark footer. LinkedIn/Meetup carry
+    // their own brand colors and read fine, so they aren't inverted.
+    invertInDark: true,
   },
   {
     href: SOCIAL_LINKS.meetup,
@@ -63,7 +66,9 @@ export default function Footer() {
             <Image
               src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744891071/GopherCon_Africa_25_vskz7n_obmh5q.png"
               alt="GopherCon Africa"
-              className="h-10 w-auto"
+              // White silhouette in dark (navy wordmark is illegible on the dark
+              // footer) — interim until a reversed/light logo asset exists.
+              className="h-10 w-auto dark:brightness-0 dark:invert"
               width={160}
               height={160}
             />
@@ -72,19 +77,23 @@ export default function Footer() {
               Nairobi.
             </p>
             <div className="mt-4 flex gap-4">
-              {SOCIALS.map(({ href, label, icon }) => (
+              {SOCIALS.map((social) => (
                 <a
-                  key={label}
-                  href={href}
+                  key={social.label}
+                  href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={label}
+                  aria-label={social.label}
                   className="opacity-70 transition-opacity hover:opacity-100"
                 >
                   <Image
-                    src={icon}
-                    alt={label}
-                    className="h-6 w-6 object-contain"
+                    src={social.icon}
+                    alt={social.label}
+                    className={`h-6 w-6 object-contain ${
+                      'invertInDark' in social && social.invertInDark
+                        ? 'dark:invert'
+                        : ''
+                    }`}
                     width={24}
                     height={24}
                   />
@@ -103,7 +112,7 @@ export default function Footer() {
                     {href.startsWith('/') ? (
                       <Link
                         href={href}
-                        className="text-sm text-muted transition-colors hover:text-brand"
+                        className="text-sm text-muted transition-colors hover:text-brand dark:hover:text-brand-bright"
                       >
                         {label}
                       </Link>
@@ -113,7 +122,7 @@ export default function Footer() {
                         {...(href.startsWith('http')
                           ? { target: '_blank', rel: 'noopener noreferrer' }
                           : {})}
-                        className="text-sm text-muted transition-colors hover:text-brand"
+                        className="text-sm text-muted transition-colors hover:text-brand dark:hover:text-brand-bright"
                       >
                         {label}
                       </a>

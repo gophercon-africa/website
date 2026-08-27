@@ -82,14 +82,18 @@ chip). Font is Plus Jakarta Sans via `next/font` (`layout.tsx`).
 
 ## Hard constraints (break these and you break the app)
 
-- **Dark mode now covers marketing content pages** via a `.dark { }` token
-  override in `globals.css` (semantic neutrals flip; the four brand greens stay
-  fixed). Prefer semantic tokens so components theme automatically; add explicit
-  `dark:` variants only where a raw color is unavoidable (e.g. sponsor tiles stay
-  `bg-white` in both themes so logos never vanish). `Header`/`Modal` are token-
-  based and no longer route-gate. The global light/dark/system toggle lives in
-  the header (`components/theme/ThemeToggle.tsx`). Still light-only pending a
-  follow-up: the auth (`/signin`, `/otp-*`) and `/call-for-speakers` form pages.
+- **Dark mode covers all marketing pages** (incl. auth + the `/call-for-speakers`
+  form) via a `.dark { }` token override in `globals.css` (semantic neutrals flip;
+  the four brand greens stay fixed). Prefer semantic tokens so components theme
+  automatically; add explicit `dark:` variants only where a raw color is
+  unavoidable — sponsor tiles stay `bg-white` (logos are light-drawn), and
+  **green *text* on a dark surface needs `dark:text-brand-bright`** (raw `text-brand`
+  #006b3f is illegible on dark). Dark-inked logo/icon *assets* need a dark treatment
+  (interim: `dark:brightness-0 dark:invert` on the header/footer wordmark; `dark:invert`
+  on the black X icon) until reversed assets exist. `Header`/`Modal` are token-based
+  and no longer route-gate; the global light/dark/system toggle lives in the header
+  (`components/theme/ThemeToggle.tsx`). Sponsor "about" details open via a **logo-click
+  modal** (`components/sponsors/SponsorShowcase.tsx`).
 - **Middleware allowlist** (`src/middleware.ts`): every new public route needs a
   `publicExact`/`publicPrefixes` entry (exact-match — subroutes need their own).
 - **Never hardcode the header height** — the review-workspace body-lock

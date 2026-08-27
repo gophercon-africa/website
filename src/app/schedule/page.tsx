@@ -33,7 +33,7 @@ export default function SchedulePage() {
     <div className="min-h-screen bg-surface-sunken py-16">
       <Container>
         <div className="mb-10 text-center">
-          <p className="text-xs font-semibold uppercase tracking-wide text-brand">
+          <p className="text-xs font-semibold uppercase tracking-wide text-brand dark:text-brand-bright">
             {EVENT_DATES} · {CITY}
           </p>
           <h1 className="mt-2 text-4xl sm:text-5xl font-bold tracking-tight text-ink">

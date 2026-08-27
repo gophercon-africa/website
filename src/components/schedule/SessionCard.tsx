@@ -46,7 +46,9 @@ function SpeakerBlock({ speaker, role }: { speaker: SessionSpeaker; role: string
       <div className="min-w-0 text-sm leading-tight">
         <p
           className={`font-semibold text-ink ${
-            linked ? 'transition-colors group-hover:text-brand' : ''
+            linked
+              ? 'transition-colors group-hover:text-brand dark:group-hover:text-brand-bright'
+              : ''
           }`}
         >
           {speaker.name}

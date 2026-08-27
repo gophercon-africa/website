@@ -4,7 +4,7 @@ import type { ButtonHTMLAttributes, ReactNode } from 'react';
 const VARIANTS = {
   primary: 'bg-brand text-white hover:bg-brand-dark',
   secondary:
-    'border border-line bg-surface text-ink hover:border-brand hover:text-brand',
+    'border border-line bg-surface text-ink hover:border-brand hover:text-brand dark:hover:text-brand-bright',
   ghost: 'text-brand hover:text-brand-dark dark:text-brand-bright dark:hover:text-brand-light',
 } as const;
 

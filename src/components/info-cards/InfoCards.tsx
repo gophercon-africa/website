@@ -11,7 +11,7 @@ export default function InfoCards({ cfsOpen = false }: { cfsOpen?: boolean }) {
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <Card className="flex items-end justify-between gap-4 p-8">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-brand">
+              <p className="text-xs font-semibold uppercase tracking-wide text-brand dark:text-brand-bright">
                 Third edition
               </p>
               <h2 className="mt-2 text-2xl font-bold tracking-tight text-ink">

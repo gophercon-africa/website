@@ -59,7 +59,7 @@ export default function ThemeToggle() {
         aria-label="Change theme"
         aria-haspopup="menu"
         aria-expanded={open}
-        className="flex items-center text-muted transition-colors hover:text-brand"
+        className="flex items-center text-muted transition-colors hover:text-brand dark:hover:text-brand-bright"
       >
         <TriggerIcon size={20} />
       </button>

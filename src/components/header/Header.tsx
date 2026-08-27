@@ -52,8 +52,8 @@ export default function Header() {
   const navLink = (href?: string) =>
     `${
       href && isActive(href)
-        ? 'text-brand font-semibold'
-        : 'text-muted hover:text-brand font-medium'
+        ? 'text-brand dark:text-brand-bright font-semibold'
+        : 'text-muted hover:text-brand dark:hover:text-brand-bright font-medium'
     } transition-colors`;
 
   return (
@@ -66,7 +66,10 @@ export default function Header() {
               alt="GopherCon Africa"
               width={160}
               height={160}
-              className="h-10 w-auto sm:h-12"
+              // The navy "GOPHERCON" wordmark is illegible on the dark header;
+              // render the logo as a white silhouette in dark as an interim until
+              // a proper reversed/light logo asset is provided.
+              className="h-10 w-auto sm:h-12 dark:brightness-0 dark:invert"
               priority
             />
           </Link>
@@ -100,7 +103,7 @@ export default function Header() {
           <div className="flex items-center gap-4 md:hidden">
             <ThemeToggle />
             <button
-              className="text-muted hover:text-brand transition-colors"
+              className="text-muted hover:text-brand dark:hover:text-brand-bright transition-colors"
               aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
