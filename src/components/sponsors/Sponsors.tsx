@@ -25,8 +25,8 @@ const TIERS: SponsorTier[] = [
         href: 'https://tailscale.com',
         logo: '/sponsors/tailscale-logo.svg',
         height: 'h-12',
-        // DRAFT copy written by us from public info — NOT Tailscale-approved.
-        // Replace with official sponsor copy before merge.
+        // Interim copy written from public info, approved by the organizers to
+        // ship; swap for official Tailscale copy when it's provided.
         tagline: 'Zero-config networking, built on WireGuard',
         blurb: [
           'Tailscale builds a secure, encrypted network between your servers, laptops, and cloud instances — across firewalls and NAT, with no central chokepoint.',
