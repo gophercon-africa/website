@@ -240,8 +240,26 @@ export function AdminSubmissionsTable({
       case 'status':
         return (
           <td key={key} className="px-6 py-4 whitespace-nowrap">
-            <span className={`inline-block px-2 py-0.5 rounded text-xs font-medium border ${STATUS_BADGE_CLASSES[submission.status]}`}>
-              {STATUS_LABELS[submission.status]}
+            <span className="inline-flex items-center gap-1.5">
+              <span className={`inline-block px-2 py-0.5 rounded text-xs font-medium border ${STATUS_BADGE_CLASSES[submission.status]}`}>
+                {STATUS_LABELS[submission.status]}
+              </span>
+              {submission.notifiedAt && (
+                <span
+                  title={`Notified on ${new Date(submission.notifiedAt).toLocaleDateString()}`}
+                  className="inline-block px-2 py-0.5 rounded text-xs font-medium border bg-gray-50 text-gray-500 border-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-700"
+                >
+                  Notified
+                </span>
+              )}
+              {submission.followUpRequestedAt && (
+                <span
+                  title={`Follow-up requested on ${new Date(submission.followUpRequestedAt).toLocaleDateString()}`}
+                  className="inline-block px-2 py-0.5 rounded text-xs font-medium border bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/40 dark:text-amber-400 dark:border-amber-900/50"
+                >
+                  Follow-up
+                </span>
+              )}
             </span>
           </td>
         );

@@ -78,6 +78,7 @@ export default function AdminSubmissionDetailPage() {
   const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState<Status>('pending');
   const [decisionNotes, setDecisionNotes] = useState('');
+  const [followUpRequested, setFollowUpRequested] = useState(false);
   const [saving, setSaving] = useState(false);
   const [savingField, setSavingField] = useState<TalkField | null>(null);
 
@@ -93,6 +94,7 @@ export default function AdminSubmissionDetailPage() {
       setSubmission(data);
       setStatus(data.status);
       setDecisionNotes(data.decisionNotes ?? '');
+      setFollowUpRequested(data.followUpRequestedAt !== null);
     } catch (error) {
       toast.error('Failed to load submission');
       console.error(error);
@@ -129,11 +131,18 @@ export default function AdminSubmissionDetailPage() {
   async function saveDecision() {
     if (!id) return;
     setSaving(true);
+    // Only send followUpRequested when it changed, so an untouched checkbox
+    // doesn't re-stamp followUpRequestedAt on every decision save.
+    const followUpChanged = followUpRequested !== (submission?.followUpRequestedAt != null);
     try {
       const res = await fetch(`/api/admin/submissions/${id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status, decisionNotes }),
+        body: JSON.stringify({
+          status,
+          decisionNotes,
+          ...(followUpChanged ? { followUpRequested } : {}),
+        }),
       });
       if (!res.ok) throw new Error('Failed to save decision');
       toast.success('Decision saved');
@@ -269,6 +278,9 @@ export default function AdminSubmissionDetailPage() {
               onStatusChange={setStatus}
               decisionNotes={decisionNotes}
               onNotesChange={setDecisionNotes}
+              followUpRequested={followUpRequested}
+              onFollowUpChange={setFollowUpRequested}
+              notifiedAt={submission.notifiedAt}
               onSave={saveDecision}
               saving={saving}
             />

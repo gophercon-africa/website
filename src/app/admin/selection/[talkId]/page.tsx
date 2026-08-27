@@ -44,6 +44,7 @@ export default function SelectionWorkspacePage() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [status, setStatus] = useState<TalkStatus>('pending');
   const [decisionNotes, setDecisionNotes] = useState('');
+  const [followUpRequested, setFollowUpRequested] = useState(false);
   const [saving, setSaving] = useState(false);
 
   const detailCache = useRef(new Map<string, AdminSubmissionDetail>());
@@ -128,6 +129,7 @@ export default function SelectionWorkspacePage() {
       setDetail(cached);
       setStatus(cached.status);
       setDecisionNotes(cached.decisionNotes ?? '');
+      setFollowUpRequested(cached.followUpRequestedAt !== null);
       // A cancelled in-flight fetch skips its finally, so clear here too.
       setDetailLoading(false);
     } else {
@@ -142,6 +144,7 @@ export default function SelectionWorkspacePage() {
           setDetail(data);
           setStatus(data.status);
           setDecisionNotes(data.decisionNotes ?? '');
+          setFollowUpRequested(data.followUpRequestedAt !== null);
         } catch (error) {
           if (!cancelled) {
             toast.error('Failed to load submission');
@@ -178,21 +181,37 @@ export default function SelectionWorkspacePage() {
     const preSaveIndex = filteredTalks.findIndex((t) => t.id === currentTalkId);
     const next = preSaveIndex >= 0 ? filteredTalks[preSaveIndex + 1] : undefined;
 
+    // Only send followUpRequested when it changed, so an untouched checkbox
+    // doesn't re-stamp followUpRequestedAt on every decision save.
+    const followUpChanged = followUpRequested !== (detail.followUpRequestedAt != null);
+
     setSaving(true);
     try {
       const res = await fetch(`/api/admin/submissions/${currentTalkId}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status, decisionNotes }),
+        body: JSON.stringify({
+          status,
+          decisionNotes,
+          ...(followUpChanged ? { followUpRequested } : {}),
+        }),
       });
       if (!res.ok) throw new Error('Failed to save decision');
 
       toast.success(`Saved: ${STATUS_LABELS[status]}`);
 
-      const updatedDetail = { ...detail, status, decisionNotes };
+      // Approximate the server's stamp; the exact time comes back on refetch.
+      const followUpRequestedAt = followUpChanged
+        ? followUpRequested
+          ? new Date().toISOString()
+          : null
+        : detail.followUpRequestedAt;
+      const updatedDetail = { ...detail, status, decisionNotes, followUpRequestedAt };
       detailCache.current.set(currentTalkId, updatedDetail);
       setDetail(updatedDetail);
-      setList((prev) => prev.map((t) => (t.id === currentTalkId ? { ...t, status } : t)));
+      setList((prev) =>
+        prev.map((t) => (t.id === currentTalkId ? { ...t, status, followUpRequestedAt } : t))
+      );
 
       if (next) {
         navigateToTalk(next.id);
@@ -205,7 +224,7 @@ export default function SelectionWorkspacePage() {
     } finally {
       setSaving(false);
     }
-  }, [currentTalkId, detail, status, decisionNotes, filteredTalks, navigateToTalk]);
+  }, [currentTalkId, detail, status, decisionNotes, followUpRequested, filteredTalks, navigateToTalk]);
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
@@ -457,6 +476,9 @@ export default function SelectionWorkspacePage() {
                       onStatusChange={setStatus}
                       decisionNotes={decisionNotes}
                       onNotesChange={setDecisionNotes}
+                      followUpRequested={followUpRequested}
+                      onFollowUpChange={setFollowUpRequested}
+                      notifiedAt={detail.notifiedAt}
                       onSave={saveDecision}
                       saving={saving}
                       saveLabel="Save & Next"

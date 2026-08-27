@@ -19,6 +19,9 @@ export function DecisionPanel({
   onStatusChange,
   decisionNotes,
   onNotesChange,
+  followUpRequested,
+  onFollowUpChange,
+  notifiedAt,
   onSave,
   saving,
   saveLabel = 'Save Decision',
@@ -28,6 +31,9 @@ export function DecisionPanel({
   onStatusChange: (status: TalkStatus) => void;
   decisionNotes: string;
   onNotesChange: (value: string) => void;
+  followUpRequested?: boolean;
+  onFollowUpChange?: (value: boolean) => void;
+  notifiedAt?: string | null;
   onSave: () => void;
   saving: boolean;
   saveLabel?: string;
@@ -62,6 +68,27 @@ export function DecisionPanel({
         placeholder="Optional notes about this decision..."
         className="w-full rounded-lg border border-gray-300 dark:border-gray-700 px-4 py-3 text-sm text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:border-brand focus:ring-2 focus:ring-brand/20 focus:outline-none transition-shadow bg-white dark:bg-gray-800 resize-y mb-4"
       />
+      {onFollowUpChange && (
+        <label className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300 mb-4 cursor-pointer select-none">
+          <input
+            type="checkbox"
+            checked={followUpRequested ?? false}
+            onChange={(e) => onFollowUpChange(e.target.checked)}
+            className="rounded border-gray-300 dark:border-gray-700 text-brand focus:ring-2 focus:ring-brand/20"
+          />
+          Speaker requested follow-up
+        </label>
+      )}
+      {notifiedAt && (
+        <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">
+          Notified on{' '}
+          {new Date(notifiedAt).toLocaleDateString('en-GB', {
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric',
+          })}
+        </p>
+      )}
       <button
         onClick={onSave}
         disabled={saving}
