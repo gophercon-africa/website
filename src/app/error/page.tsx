@@ -8,13 +8,13 @@ function ErrorContent() {
   const error = searchParams?.get('error') || 'An error occurred during authentication';
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow-lg">
+    <div className="min-h-screen flex items-center justify-center bg-surface-sunken">
+      <div className="max-w-md w-full space-y-8 p-8 bg-surface rounded-lg shadow-lg">
         <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-red-600">
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-red-600 dark:text-red-400">
             Authentication Error
           </h2>
-          <p className="mt-2 text-center text-gray-600">
+          <p className="mt-2 text-center text-muted">
             {error}
           </p>
         </div>
@@ -34,10 +34,10 @@ function ErrorContent() {
 export default function ErrorPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow-lg">
+      <div className="min-h-screen flex items-center justify-center bg-surface-sunken">
+        <div className="max-w-md w-full space-y-8 p-8 bg-surface rounded-lg shadow-lg">
           <div>
-            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-600">
+            <h2 className="mt-6 text-center text-3xl font-extrabold text-muted">
               Loading...
             </h2>
           </div>

@@ -1,4 +1,4 @@
-import LandingPage from '../pages/landing-page';
+import LandingPage from '@components/landing/LandingPage';
 import { CALL_FOR_SPEAKERS_OPEN } from '@/src/lib/config';
 
 export default function Home() {

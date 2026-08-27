@@ -61,19 +61,19 @@ function OtpVerifyForm() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-surface-sunken px-4">
       <div className="w-full max-w-md">
-        <div className="bg-white rounded-2xl shadow-lg p-8">
+        <div className="bg-surface rounded-2xl shadow-lg p-8">
           <div className="text-center mb-8">
-            <h1 className="text-2xl font-bold text-gray-900">Enter your code</h1>
-            <p className="text-gray-500 mt-2">
+            <h1 className="text-2xl font-bold text-ink">Enter your code</h1>
+            <p className="text-muted mt-2">
               We sent a 6-digit code to <strong>{email || 'your email'}</strong>
             </p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="otp" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="otp" className="block text-sm font-medium text-body mb-1">
                 Sign-in code
               </label>
               <input
@@ -87,10 +87,10 @@ function OtpVerifyForm() {
                 autoComplete="one-time-code"
                 placeholder="000000"
                 ref={otpRef}
-                className="w-full rounded-lg border border-gray-300 px-4 py-3 text-center text-2xl font-mono tracking-widest focus:border-brand focus:ring-2 focus:ring-brand focus:outline-none"
+                className="w-full rounded-lg border border-line px-4 py-3 text-center text-2xl font-mono tracking-widest focus:border-brand focus:ring-2 focus:ring-brand focus:outline-none"
               />
               {otpError && (
-                <p className="mt-1 text-sm text-red-600">{otpError}</p>
+                <p className="mt-1 text-sm text-red-600 dark:text-red-400">{otpError}</p>
               )}
             </div>
 
@@ -102,9 +102,9 @@ function OtpVerifyForm() {
               {isPending ? 'Verifying...' : 'Verify code'}
             </button>
 
-            <p className="text-center text-sm text-gray-500">
+            <p className="text-center text-sm text-muted">
               Didn&apos;t receive a code?{' '}
-              <a href="/otp-login" className="text-brand hover:underline font-medium">
+              <a href="/otp-login" className="text-brand dark:text-brand-bright hover:underline font-medium">
                 Try again
               </a>
             </p>

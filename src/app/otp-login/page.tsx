@@ -28,12 +28,12 @@ function OtpLoginForm() {
   }, [state, router, email, callbackUrl]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-surface-sunken px-4">
       <div className="w-full max-w-md">
-        <div className="bg-white rounded-2xl shadow-lg p-8">
+        <div className="bg-surface rounded-2xl shadow-lg p-8">
           <div className="text-center mb-8">
-            <h1 className="text-2xl font-bold text-gray-900">Welcome</h1>
-            <p className="text-gray-500 mt-2">Enter your email to receive a sign-in code</p>
+            <h1 className="text-2xl font-bold text-ink">Welcome</h1>
+            <p className="text-muted mt-2">Enter your email to receive a sign-in code</p>
           </div>
 
           <form action={formAction} className="space-y-6">
@@ -47,10 +47,10 @@ function OtpLoginForm() {
                  placeholder="you@example.com"
                  value={email}
                  onChange={(e) => setEmail(e.target.value)}
-                 className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-brand focus:ring-2 focus:ring-brand focus:outline-none"
+                 className="w-full rounded-lg border border-line px-4 py-3 text-sm focus:border-brand focus:ring-2 focus:ring-brand focus:outline-none"
                />
               {state.errors?.email && (
-                <p className="mt-1 text-sm text-red-600">{state.errors.email[0]}</p>
+                <p className="mt-1 text-sm text-red-600 dark:text-red-400">{state.errors.email[0]}</p>
               )}
             </div>
 

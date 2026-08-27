@@ -2,6 +2,13 @@ name: PR CI
 on:
   pull_request:
     branches: [main]
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
 jobs:
   checks:
     runs-on: ubuntu-latest
@@ -25,3 +32,142 @@ jobs:
           # prisma generate and next build don't touch the database; the
           # client constructor just requires the variable to be present.
           DATABASE_URL: postgresql://placeholder:placeholder@localhost:5432/placeholder
+
+  preview:
+    name: Cloudflare preview
+    runs-on: ubuntu-latest
+    needs: checks
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    concurrency:
+      group: cloudflare-preview-${{ github.event.pull_request.number }}
+      cancel-in-progress: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Build and upload preview
+        id: upload
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: a01b760e5af733b8d91d6ec48514aaa3
+          # opennextjs-cloudflare build runs `prisma generate --no-engine`; that
+          # client rejects a plain postgresql:// URL (P6001) during page-data
+          # collection. Use the real prisma+postgres:// secret like deploy.yml —
+          # safe here because the preview job is gated to same-repo PRs.
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          # `wrangler versions upload` does NOT print the preview URL to stdout;
+          # it writes one NDJSON record per line into this directory (the
+          # `version-upload` record carries preview_url / preview_alias_url).
+          WRANGLER_OUTPUT_FILE_DIRECTORY: ${{ runner.temp }}/wrangler-output
+        run: |
+          set -euo pipefail
+
+          preview_alias="pr-${PR_NUMBER}"
+          message="PR #${PR_NUMBER}: ${PR_TITLE}"
+
+          npx opennextjs-cloudflare build
+          # opennext forwards these through to `wrangler versions upload`. The
+          # per-version preview URL is only minted when Preview URLs are enabled
+          # on the Worker's workers.dev subdomain.
+          npx opennextjs-cloudflare upload -- --preview-alias "$preview_alias" --message "$message"
+
+          node <<'NODE'
+          const fs = require('node:fs');
+          const path = require('node:path');
+
+          const dir = process.env.WRANGLER_OUTPUT_FILE_DIRECTORY;
+          let entry;
+          try {
+            for (const file of fs.readdirSync(dir)) {
+              const text = fs.readFileSync(path.join(dir, file), 'utf8');
+              for (const line of text.split('\n')) {
+                const trimmed = line.trim();
+                if (!trimmed) continue;
+                let record;
+                try { record = JSON.parse(trimmed); } catch { continue; }
+                if (record.type === 'version-upload') entry = record;
+              }
+            }
+          } catch (err) {
+            console.log(`Could not read wrangler output dir: ${err.message}`);
+          }
+
+          const out = process.env.GITHUB_OUTPUT;
+          const summary = process.env.GITHUB_STEP_SUMMARY;
+          const previewUrl = entry && (entry.preview_alias_url || entry.preview_url);
+
+          if (previewUrl) {
+            fs.appendFileSync(out, `url=${previewUrl}\n`);
+            fs.appendFileSync(summary, `Cloudflare preview: ${previewUrl}\n`);
+          } else {
+            // Non-blocking: a missing preview URL (e.g. Preview URLs not enabled
+            // on the Worker subdomain) must not fail the PR — `checks` is the gate.
+            const versionId = (entry && entry.version_id) || 'unknown';
+            fs.appendFileSync(out, `version_id=${versionId}\n`);
+            fs.appendFileSync(summary,
+              `Preview version ${versionId} uploaded, but no preview URL was returned. ` +
+              `Enable "Preview URLs" on the gophercon-africa-website Worker to get shareable links.\n`);
+            console.log('No preview URL returned; continuing without failing the job.');
+          }
+          NODE
+      - name: Comment preview URL
+        uses: actions/github-script@v7
+        env:
+          PREVIEW_URL: ${{ steps.upload.outputs.url }}
+          VERSION_ID: ${{ steps.upload.outputs.version_id }}
+        with:
+          script: |
+            const marker = '<!-- cloudflare-preview-url -->';
+            const url = process.env.PREVIEW_URL;
+            const versionId = process.env.VERSION_ID;
+            const lines = [marker];
+            if (url) {
+              lines.push(`🚀 Cloudflare deploy preview: ${url}`);
+            } else {
+              lines.push(
+                `⏳ Preview version \`${versionId}\` uploaded, but no preview URL is available yet ` +
+                `— "Preview URLs" may not be enabled on the Worker.`
+              );
+            }
+            // `context.sha` on pull_request events is the ephemeral
+            // refs/pull/N/merge commit, not the branch head the author pushed —
+            // use the PR head SHA so this matches their latest commit.
+            const headSha = context.payload.pull_request.head.sha;
+            lines.push('', `Updated for commit ${headSha.slice(0, 7)}.`);
+            const body = lines.join('\n');
+
+            const { owner, repo } = context.repo;
+            const issue_number = context.payload.pull_request.number;
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner,
+              repo,
+              issue_number,
+            });
+            const existing = comments.find((comment) =>
+              comment.user.type === 'Bot' && comment.body.includes(marker)
+            );
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner,
+                repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number,
+                body,
+              });
+            }

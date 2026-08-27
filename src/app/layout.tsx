@@ -1,9 +1,17 @@
 import type { Metadata } from 'next';
+import { Plus_Jakarta_Sans } from 'next/font/google';
 import '../styles/globals.css';
 import Providers from './providers';
 import Header from '@components/header/Header';
 import ConditionalFooter from '@components/footer/ConditionalFooter';
 import TawkController from '@components/TawkController';
+import { CHAT_WIDGET_ENABLED } from '@/src/lib/config';
+
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  variable: '--font-jakarta',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'GopherCon Africa 2026 - The Premier Go Conference in Africa',
@@ -30,13 +38,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={jakarta.variable}>
       <body className="font-sans flex flex-col min-h-screen">
         <Providers>
-          <Header mounted={true} />
+          <Header />
           {children}
           <ConditionalFooter />
-          <TawkController />
+          <TawkController enabled={CHAT_WIDGET_ENABLED} />
         </Providers>
       </body>
     </html>

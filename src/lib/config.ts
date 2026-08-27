@@ -26,6 +26,12 @@ export const SESSION_EXPIRY_DAYS = parsePositiveInt(process.env.SESSION_EXPIRY_D
 // set CALL_FOR_SPEAKERS_OPEN=true to reopen.
 export const CALL_FOR_SPEAKERS_OPEN = parseBoolean(process.env.CALL_FOR_SPEAKERS_OPEN, false);
 
+// Whether the Tawk.to support chat loads on the landing page. Defaults to off
+// on every environment; set CHAT_WIDGET_ENABLED=true to re-enable. Read
+// server-side (layout.tsx) and passed to TawkController as a prop — client
+// components can't read non-NEXT_PUBLIC env vars.
+export const CHAT_WIDGET_ENABLED = parseBoolean(process.env.CHAT_WIDGET_ENABLED, false);
+
 const parseDate = (value: string | undefined): Date | null => {
   if (!value || value.trim() === '') {
     return null;

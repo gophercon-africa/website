@@ -1,166 +1,86 @@
-import React from 'react';
-import { ChevronRight } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { showContactModal } from '@utils/showContactModal';
+import Button from '@components/ui/Button';
+import Container from '@components/ui/Container';
+import Section from '@components/ui/Section';
+import SectionHeading from '@components/ui/SectionHeading';
+import SponsorShowcase, { SponsorTier } from './SponsorShowcase';
+import { CONTACT_EMAIL, SPONSORSHIP_PROSPECTUS_URL } from '@/src/lib/links';
+
+const TIERS: SponsorTier[] = [
+  {
+    label: 'Platinum Partner',
+    sponsors: [
+      {
+        name: 'Google',
+        href: 'https://www.google.com',
+        logo: 'https://res.cloudinary.com/dlmqe0two/image/upload/v1744802584/google_rcjqn1.png',
+        height: 'h-16',
+      },
+    ],
+  },
+  {
+    label: 'Community Partners',
+    sponsors: [
+      {
+        name: 'Tailscale',
+        href: 'https://tailscale.com',
+        logo: '/sponsors/tailscale-logo.svg',
+        height: 'h-12',
+        // Interim copy written from public info, approved by the organizers to
+        // ship; swap for official Tailscale copy when it's provided.
+        tagline: 'Zero-config networking, built on WireGuard',
+        blurb: [
+          'Tailscale builds a secure, encrypted network between your servers, laptops, and cloud instances — across firewalls and NAT, with no central chokepoint.',
+          'Built on the open-source WireGuard protocol, devices connect directly and safely, so teams can replace legacy VPNs and reach internal services with zero configuration.',
+        ],
+        careersUrl: 'https://tailscale.com/careers',
+      },
+      {
+        name: 'Moniepoint',
+        href: 'https://moniepoint.com',
+        logo: 'https://res.cloudinary.com/dlmqe0two/image/upload/v1744802584/moniepoint_tgy3ii.jpg',
+        height: 'h-12',
+        tagline: "Africa's all-in-one financial platform",
+        blurb: [
+          "Over the last decade, we've built financial infrastructure that's powering the dreams of more than 20 million businesses and individuals by giving them access to seamless payments, banking, credit, and business management solutions.",
+          "As Nigeria's largest merchant acquirer, we power most of the country's point-of-sale (POS) transactions. Through our subsidiaries, Moniepoint processes more than $250 billion in digital payment transaction value annually.",
+          "As we work towards creating financial happiness for every African, everywhere, we're looking for engineers who want to solve complex problems at massive scale.",
+        ],
+        careersUrl: 'https://moniepoint.com/careers',
+      },
+    ],
+  },
+];
 
 export default function Sponsors() {
   return (
-    <section className="py-24 bg-linear-to-br from-white via-[#E8F5E9] to-[#F1F8E9] relative overflow-hidden" id="sponsors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-20">
-          <span className="text-brand font-medium mb-4 block">Sponsors</span>
-          <h2 className="text-4xl font-medium text-gray-900 mb-6">Our Partners</h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Thank you to these amazing organizations supporting GopherCon Africa.
+    <Section id="sponsors">
+      <Container>
+        <SectionHeading
+          overline="Sponsors"
+          title="Our Partners"
+          description="Thank you to the organizations supporting GopherCon Africa."
+        />
+
+        <SponsorShowcase tiers={TIERS} />
+
+        <div className="mx-auto mt-20 max-w-2xl border-t border-line pt-12 text-center">
+          <h3 className="text-2xl font-bold tracking-tight text-ink">
+            Become a partner
+          </h3>
+          <p className="mt-3 text-body">
+            Showcase your brand to hundreds of Go developers from across the
+            continent.
           </p>
-        </div>
-
-        {/* Platinum Sponsors */}
-        <div className="mb-20">
-          <div className="flex items-center justify-center mb-12">
-            <div className="h-px bg-linear-to-r from-transparent via-[#6B46C1] to-transparent w-24"></div>
-            <h3 className="text-lg font-medium text-[#6B46C1] px-4">Platinum Partners</h3>
-            <div className="h-px bg-linear-to-r from-[#6B46C1] via-[#6B46C1] to-transparent w-24"></div>
-          </div>
-          <div className="flex justify-center">
-            <a
-              href="https://www.google.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group block w-full max-w-md bg-white rounded-2xl p-12 shadow-2xs hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
-            >
-              <div className="relative h-20">
-                <Image
-                  src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744802584/google_rcjqn1.png"
-                  alt="Google"
-                  fill
-                  className="object-contain filter group-hover:brightness-110 transition-all duration-300"
-                />
-              </div>
-              <div className="mt-6 text-center">
-                <p className="text-gray-600 text-sm">Empowering Go developers worldwide</p>
-              </div>
-            </a>
+          <div className="mt-6 flex flex-col justify-center gap-4 sm:flex-row">
+            <Button href={SPONSORSHIP_PROSPECTUS_URL} external variant="secondary">
+              Download the prospectus
+            </Button>
+            <Button href={`mailto:${CONTACT_EMAIL}`} variant="ghost">
+              {CONTACT_EMAIL}
+            </Button>
           </div>
         </div>
-
-        {/* Community Sponsors */}
-        <div className="mb-20">
-          <div className="flex items-center justify-center mb-12">
-            <div className="h-px bg-linear-to-r from-transparent via-brand to-transparent w-24"></div>
-            <h3 className="text-lg font-medium text-brand px-4">Community Partners</h3>
-            <div className="h-px bg-linear-to-r from-brand via-brand to-transparent w-24"></div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center max-w-3xl mx-auto">
-            <a
-              href="https://tailscale.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group block bg-white rounded-2xl p-10 shadow-2xs hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
-            >
-              <div className="relative h-16">
-                <Image
-                  src="/sponsors/tailscale-logo.svg"
-                  alt="Tailscale"
-                  fill
-                  className="object-contain filter group-hover:brightness-110 transition-all duration-300"
-                />
-              </div>
-              <div className="mt-6 text-center">
-                <p className="text-gray-600 text-sm">Secure remote access, made easy</p>
-              </div>
-            </a>
-            <a
-              href="https://moniepoint.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group block bg-white rounded-2xl p-10 shadow-2xs hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
-            >
-              <div className="relative h-16">
-                <Image
-                  src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744802584/moniepoint_tgy3ii.jpg"
-                  alt="Moniepoint"
-                  fill
-                  className="object-contain filter group-hover:brightness-110 transition-all duration-300"
-                />
-              </div>
-              <div className="mt-6 text-center">
-                <p className="text-gray-600 text-sm">Leading fintech innovation in Africa</p>
-              </div>
-            </a>
-          </div>
-        </div>
-
-        {/* Become a Sponsor */}
-        <div className="relative mt-20">
-          <div className="absolute inset-0 bg-linear-to-r from-brand via-brand-light to-brand rounded-3xl transform -rotate-1 shadow-2xl"></div>
-          {/* Decorative Gophers */}
-          <div className="absolute -left-16 -top-16 w-32 h-32 opacity-80">
-            <Image
-              src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744802566/mascot-kenya_pxfwhg.png"
-              alt="Star Gopher"
-              fill
-              className="object-contain floating-gopher"
-            />
-          </div>
-          <div className="absolute -right-16 -top-16 w-32 h-32 opacity-80">
-            <Image
-              src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744802566/mascot-kenya_pxfwhg.png"
-              alt="Loving Gopher"
-              fill
-              className="object-contain floating-gopher delay-200"
-            />
-          </div>
-          <div className="absolute -left-16 -bottom-16 w-32 h-32 opacity-80">
-            <Image
-              src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744802566/mascot-kenya_pxfwhg.png"
-              alt="Waving Gopher"
-              fill
-              className="object-contain floating-gopher delay-400"
-            />
-          </div>
-          <div className="absolute -right-16 -bottom-16 w-32 h-32 opacity-80">
-            <Image
-              src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744802566/mascot-kenya_pxfwhg.png"
-              alt="Dancing Gopher"
-              fill
-              className="object-contain floating-gopher delay-600"
-            />
-          </div>
-          <div className="relative bg-white/95 backdrop-blur-xs rounded-3xl p-12 text-center border border-white/20 shadow-xl">
-            <div className="max-w-2xl mx-auto">
-              <h3 className="text-3xl font-bold text-brand mb-6">Become a Partner</h3>
-              <p className="text-gray-700 text-lg mb-8 leading-relaxed">
-                Support the Go community in Africa and showcase your brand to hundreds of passionate developers.
-                Download our sponsorship prospectus to learn more about partnership opportunities.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link
-                  href="https://drive.google.com/file/d/1ns6v4lcfNOekBcqkT1DhPD3s2Nmc6FD5/view"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <button className="bg-brand hover:bg-brand-light text-white px-8 py-4 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg inline-flex items-center group mt-4">
-                    Download Partnership Prospectus
-                    <ChevronRight className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" />
-                  </button>
-                </Link>
-                {/* Contact Us Button */}
-                <div className="mt-4">
-                  <button
-                    onClick={showContactModal}
-                    className="bg-white hover:bg-gray-50 text-brand border-2 border-brand px-8 py-4 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg inline-flex items-center group"
-                  >
-                    Contact Us
-                    <ChevronRight className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" />
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+      </Container>
+    </Section>
   );
-} 
+}
