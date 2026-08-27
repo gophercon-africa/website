@@ -138,7 +138,11 @@ jobs:
                 `— "Preview URLs" may not be enabled on the Worker.`
               );
             }
-            lines.push('', `Updated for commit ${context.sha}.`);
+            // `context.sha` on pull_request events is the ephemeral
+            // refs/pull/N/merge commit, not the branch head the author pushed —
+            // use the PR head SHA so this matches their latest commit.
+            const headSha = context.payload.pull_request.head.sha;
+            lines.push('', `Updated for commit ${headSha.slice(0, 7)}.`);
             const body = lines.join('\n');
 
             const { owner, repo } = context.repo;
