@@ -14,14 +14,19 @@ const patchSchema = z
     talkCategory: z.enum(TALK_CATEGORIES).optional(),
     talkLevel: z.enum(TALK_LEVELS).optional(),
     talkDuration: z.enum(TALK_DURATIONS).optional(),
+    followUpRequested: z.boolean().optional(),
   })
   .refine(
     (data) =>
       data.status !== undefined ||
       data.talkCategory !== undefined ||
       data.talkLevel !== undefined ||
-      data.talkDuration !== undefined,
-    { message: 'Provide a status, talkCategory, talkLevel, or talkDuration to update' }
+      data.talkDuration !== undefined ||
+      data.followUpRequested !== undefined,
+    {
+      message:
+        'Provide a status, talkCategory, talkLevel, talkDuration, or followUpRequested to update',
+    }
   );
 
 async function requireAdmin(request: NextRequest) {
@@ -69,6 +74,8 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
         IsPendingReview: true,
         status: true,
         decisionNotes: true,
+        notifiedAt: true,
+        followUpRequestedAt: true,
         reviews: {
           select: {
             id: true,
@@ -106,6 +113,8 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
       additionalNotes: talk.additionalNotes,
       status: getTalkStatus(talk),
       decisionNotes: talk.decisionNotes,
+      notifiedAt: talk.notifiedAt?.toISOString() ?? null,
+      followUpRequestedAt: talk.followUpRequestedAt?.toISOString() ?? null,
       averageRating,
       reviewCount,
       reviews: talk.reviews.map((r) => ({
@@ -138,7 +147,8 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
       );
     }
 
-    const { status, decisionNotes, talkCategory, talkLevel, talkDuration } = result.data;
+    const { status, decisionNotes, talkCategory, talkLevel, talkDuration, followUpRequested } =
+      result.data;
     const currentYear = new Date().getFullYear().toString();
 
     const existing = await db.talk.findFirst({
@@ -166,6 +176,12 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
     }
     if (talkDuration !== undefined) {
       data.talkDuration = talkDuration;
+    }
+    // Independent of the status branch: toggling follow-up must never rewrite
+    // decisionNotes. notifiedAt is deliberately not writable here — only the
+    // send tooling knows an email actually went out.
+    if (followUpRequested !== undefined) {
+      data.followUpRequestedAt = followUpRequested ? new Date() : null;
     }
 
     const talk = await db.talk.update({

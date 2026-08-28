@@ -40,6 +40,8 @@ export async function GET(request: NextRequest) {
         IsAccepted: true,
         IsPendingReview: true,
         status: true,
+        notifiedAt: true,
+        followUpRequestedAt: true,
         reviews: { select: { rating: true, skipped: true } },
       },
     });
@@ -65,6 +67,8 @@ export async function GET(request: NextRequest) {
         talkCategory: talk.talkCategory,
         talkDuration: talk.talkDuration,
         status: getTalkStatus(talk),
+        notifiedAt: talk.notifiedAt?.toISOString() ?? null,
+        followUpRequestedAt: talk.followUpRequestedAt?.toISOString() ?? null,
         averageRating,
         reviewCount,
         skippedCount,

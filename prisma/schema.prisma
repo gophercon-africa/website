@@ -48,6 +48,11 @@ model Talk {
   // sanctioned write path.
   status                     String   @default("pending")
   decisionNotes              String?
+  // Set by the local send script when the decision email actually goes out;
+  // read-only in the app (not writable via PATCH).
+  notifiedAt                 DateTime?
+  // Set when the speaker asks for more feedback on their decision.
+  followUpRequestedAt        DateTime?
   createdAt                  DateTime @default(now())
   updatedAt                  DateTime @updatedAt
   reviews                    Review[]

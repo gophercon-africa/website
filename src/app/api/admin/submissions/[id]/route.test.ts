@@ -138,6 +138,61 @@ describe('PATCH /api/admin/submissions/[id] — change category', () => {
     expect(mockedUpdate).not.toHaveBeenCalled();
   });
 
+  it('stamps followUpRequestedAt when followUpRequested is true, touching nothing else', async () => {
+    asAdmin();
+
+    const res = await patchRequest({ followUpRequested: true });
+
+    expect(res.status).toBe(200);
+    expect(mockedUpdate).toHaveBeenCalledWith({
+      where: { id: TALK_ID },
+      data: { followUpRequestedAt: expect.any(Date) },
+    });
+  });
+
+  it('clears followUpRequestedAt when followUpRequested is false', async () => {
+    asAdmin();
+
+    const res = await patchRequest({ followUpRequested: false });
+
+    expect(res.status).toBe(200);
+    expect(mockedUpdate).toHaveBeenCalledWith({
+      where: { id: TALK_ID },
+      data: { followUpRequestedAt: null },
+    });
+  });
+
+  it('applies a decision and follow-up together without changing decision semantics', async () => {
+    asAdmin();
+
+    const res = await patchRequest({
+      status: 'rejected',
+      decisionNotes: 'not this year',
+      followUpRequested: true,
+    });
+
+    expect(res.status).toBe(200);
+    expect(mockedUpdate).toHaveBeenCalledWith({
+      where: { id: TALK_ID },
+      data: {
+        status: 'rejected',
+        IsPendingReview: false,
+        IsAccepted: false,
+        decisionNotes: 'not this year',
+        followUpRequestedAt: expect.any(Date),
+      },
+    });
+  });
+
+  it('does not accept notifiedAt as a writable field', async () => {
+    asAdmin();
+
+    const res = await patchRequest({ notifiedAt: '2026-08-27T00:00:00.000Z' });
+
+    expect(res.status).toBe(400);
+    expect(mockedUpdate).not.toHaveBeenCalled();
+  });
+
   it('returns 404 when the talk is not in the current event year', async () => {
     asAdmin();
     mockedFindFirst.mockResolvedValue(null);

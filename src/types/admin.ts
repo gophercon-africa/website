@@ -18,6 +18,8 @@ export interface AdminSubmission {
   talkCategory: string;
   talkDuration: string;
   status: TalkStatus;
+  notifiedAt: string | null;
+  followUpRequestedAt: string | null;
   averageRating: number | null;
   reviewCount: number;
   skippedCount: number;
@@ -52,6 +54,8 @@ export interface AdminSubmissionDetail {
   additionalNotes: string;
   status: TalkStatus;
   decisionNotes: string | null;
+  notifiedAt: string | null;
+  followUpRequestedAt: string | null;
   averageRating: number | null;
   reviewCount: number;
   reviews: AdminReview[];
