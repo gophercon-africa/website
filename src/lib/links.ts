@@ -9,7 +9,7 @@ export const SOCIAL_LINKS = {
   linkedin: 'https://www.linkedin.com/company/gophercon-africa/',
 } as const;
 
-export const CONTACT_EMAIL = 'hello@gophercon.africa';
+export const CONTACT_EMAIL = 'hello@gophers.africa';
 
 export const CODE_OF_CONDUCT_URL = 'https://go.dev/conduct';
 

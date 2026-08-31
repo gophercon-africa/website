@@ -134,7 +134,7 @@ export async function createTalk(formState: TalkFormState, formData: FormData): 
     const resend = new Resend(process.env.RESEND_API_KEY);
     const { error } = await resend.emails.send({
         from: "hello@gophercon.africa",
-        replyTo: "hello@gophercon.africa",
+        replyTo: "hello@gophers.africa",
         to:  validatedFields.data.email,
         subject: 'Thank you for submitting your talk to Gophers Conference 2026',
         react: EmailTemplate({ firstName: validatedFields.data.fullName })
