@@ -69,8 +69,8 @@ export const speakers2026: Speaker[] = [
 {
   "slug": "ige-oluwasegun-oluwajubelo",
   "name": "Ige Oluwasegun Oluwajubelo",
-  "title": "Software Engineer & Open Source Author (Class54 · BudgIT · Vesicash)",
-  "company": "class54 Educational limited",
+  "title": "Engineering Leader & Open Source Author",
+  "company": "Class54 Education Limited · BudgIT · Vesicash",
   "bio": "Ige Oluwasegun is Engineering Lead at Class54, the only African company selected for Google's inaugural Play Apps Accelerator, and Tech Lead at BudgIT, a civic technology organisation operating across Nigeria, Ghana, Sierra Leone, Senegal, and the USA. He organises the SeGoM conference for software engineers in Nigeria and is currently pursuing an MSc at the University of Lagos. Otellix is his first open-source Go library.",
   "talkTitle": "When Your AI Costs More Than Your Infrastructure: LLM Observability in Go",
   "talkDescription": "TBA"},
@@ -120,5 +120,31 @@ export const speakers2026: Speaker[] = [
   "company": "Betika",
   "bio": "I'm Toluwase, a backend software developer from Nigeria with about six years of experience building systems in Go. I've spent most of that time in fintech, working on payment infrastructure, lending platforms, and mobile banking backends where downtime and incorrect state aren't abstract problems, they're real money moving the wrong way. These days I work at a gaming company, still in Go, still thinking about concurrency and correctness more than is probably normal.\n\nMy go-to stack is Go with PostgreSQL, and I've worked across the usual backend spread: REST and gRPC APIs, event-driven architectures, microservices, domain-driven design, containerized deployments. I care a lot about testing. Not in a preachy way, but in the way you start caring after your third production incident that a better test would have caught. That's what brought me to synctest, and it's what I want to talk about.",
   "talkTitle": "Deterministic Concurrency with synctest",
+  "talkDescription": "TBA"},
+{
+  "slug": "sergio-lourenco",
+  "name": "Sérgio Lourenço",
+  "title": "Principal Engineer",
+  "company": "Moniepoint",
+  "imageUrl": "/speakers-2026/sergio-lourenco.jpg",
+  "bio": "Sérgio Lourenço is a software engineer who's been coding since 2015 and started with Go in 2021. Currently, he works on the R&D team at Moniepoint. In Moniepoint he has been working on performance engineering and building developer tools to streamline the process of getting code from commit to production.",
+  "talkTitle": "ESHU — Building an Internal Development Platform in Go",
+  "talkDescription": "TBA"},
+{
+  "slug": "abdulrahman-jimoh",
+  "name": "Abdulrahman Jimoh",
+  "title": "Senior Cloud Engineer",
+  "company": "Moniepoint",
+  "imageUrl": "/speakers-2026/abdulrahman-jimoh.jpg",
+  "bio": "Abdulrahman Jimoh started his career in Technical support in 2014 before transitioning to DevOps in 2021 and picking up Go in 2024. Currently, he works on the Engineering Excellence team at Moniepoint, where he focuses on building developer tools to improve DevEx and cloud infrastructure.",
+  "talkTitle": "ESHU — Building an Internal Development Platform in Go",
+  "talkDescription": "TBA"},
+{
+  "slug": "richard-ochola-otieno",
+  "name": "Richard Ochola Otieno",
+  "title": "Apprentice Software Developer",
+  "company": "Zone01 Kisumu",
+  "bio": "Richard Ochola Otieno is a software developer at Zone01 Kisumu, specializing in building resilient systems with Go. Through his work in intensive, project-based learning, Richard has developed a deep interest in \"low-infrastructure\" engineering — creating software that remains functional in environments where connectivity is a luxury. He is passionate about Go's minimalist philosophy and its power to build robust, offline-capable tools that empower local communities.",
+  "talkTitle": "Building Offline First Systems in Go: Reliable Architecture for In House AI and Unstable Networks",
   "talkDescription": "TBA"}
 ];

@@ -145,12 +145,16 @@ export const scheduleData: ScheduleDay[] = [
         endTime: '11:10',
       },
       {
-        id: 'd2-1110-lightning-tba',
-        title: 'Lightning Talk — to be announced',
+        id: 'd2-1110-lightning-otieno',
+        // Provisional CFP title — Richard may submit an updated title and
+        // description via the speaker form (deadline 12 September).
+        title: 'Building Offline First Systems in Go',
         type: 'lightning',
         startTime: '11:10',
         endTime: '11:20',
-        tba: true,
+        speaker: { name: 'Richard Ochola Otieno' },
+        description:
+          'Offline-first architecture in Go for unreliable networks — local persistence, durable sync queues, and private on-device AI inference at the edge.',
       },
       {
         id: 'd2-1120-rios',
@@ -191,14 +195,14 @@ export const scheduleData: ScheduleDay[] = [
         type: 'sponsor',
         startTime: '13:50',
         endTime: '14:20',
-        // Placeholder co-presenters (first name + company) until full speaker
-        // details arrive; then add them to speakers-2026 for photos + profiles.
         speakers: [
-          { name: 'Sergio', company: 'Moniepoint' },
-          { name: 'Abdulrahman', company: 'Moniepoint' },
+          { name: 'Sérgio Lourenço' },
+          { name: 'Abdulrahman Jimoh' },
         ],
+        // Abstract is sponsor-supplied copy, published verbatim ("Reddit" and
+        // all) — see the Moniepoint partnership email thread before editing.
         description:
-          "Eshu is Moniepoint's internal developer platform, consisting of an ephemeral-environment Kubernetes operator and Platform-as-a-Service. Leveraging Crossplane, Tekton, and Dagger, Eshu can launch ephemeral environments with over 10 dedicated dependencies (including Postgres, Spanner Omni, Redis, and Kafka), allowing teams to build and launch services from development to production without needing infrastructure support.",
+          "Eshu is Moniepoint's internal developer platform, consisting of an ephemeral-environment Kubernetes operator and Platform-as-a-Service. Leveraging Crossplane, Tekton, and Dagger, Eshu can launch ephemeral environments with over 10 dedicated dependencies (including Postgres, Spanner Omni, Redis, Reddit, and Kafka), allowing teams to build and launch services from development to production without needing infrastructure support.",
         sponsor: { name: 'Moniepoint', logo: MONIEPOINT_LOGO },
       },
       {
