@@ -310,12 +310,14 @@ export const scheduleData: ScheduleDay[] = [
         endTime: '10:50',
       },
       {
-        id: 'd3-1050-lightning-tba',
-        title: 'Lightning Talk — to be announced',
+        id: 'd3-1050-lightning-biney',
+        title: 'P2P Networking with Go',
         type: 'lightning',
         startTime: '10:50',
         endTime: '11:00',
-        tba: true,
+        speaker: { name: 'Kwaku Biney' },
+        description:
+          'Peer-to-peer connectivity with the Go standard library — the networking primitives behind tools like Tailscale, and a walkthrough of a simple Go program that connects two machines directly.',
       },
       {
         id: 'd3-1100-emmanuel',

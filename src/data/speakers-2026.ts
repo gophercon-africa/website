@@ -154,5 +154,13 @@ export const speakers2026: Speaker[] = [
   "company": "Nexus Consulting Hub",
   "bio": "I am a software engineer with a passion for database internals and Go tooling. My first introduction to Go was during my HNG internship in 2020, and I have been working in the backend industry for around five years now.",
   "talkTitle": "Building Pg-Guard: A Postgres Query Linter and Risk Analyzer with Golang",
+  "talkDescription": "TBA"},
+{
+  "slug": "kwaku-biney",
+  "name": "Kwaku Biney",
+  "title": "Software Engineer",
+  "company": "Hubtel",
+  "bio": "Kwaku Biney leads a team at Hubtel. His Go work has been mostly in open source: he is part of the Cilium organisation, contributing to Cilium and its eBPF library, has contributed to Go itself, and works on cloud-native and networking projects — from Kubernetes and Inspektor Gadget to his own VPN and NAT-traversal tools.",
+  "talkTitle": "P2P Networking with Go",
   "talkDescription": "TBA"}
 ];
