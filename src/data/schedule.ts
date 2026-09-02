@@ -210,7 +210,7 @@ export const scheduleData: ScheduleDay[] = [
       {
         id: 'd2-1420-umanah',
         title:
-          "Don't Let Your AI Agents Run Wild: Secure Sandboxes with Firecracker and Go",
+          "Don't Let Your AI Agents Run Wild: Building Secure Sandboxes with Firecracker and Go",
         type: 'talk',
         startTime: '14:20',
         endTime: '14:50',
