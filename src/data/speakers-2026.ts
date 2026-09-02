@@ -146,5 +146,13 @@ export const speakers2026: Speaker[] = [
   "company": "Zone01 Kisumu",
   "bio": "Richard Ochola Otieno is a software developer at Zone01 Kisumu, specializing in building resilient systems with Go. Through his work in intensive, project-based learning, Richard has developed a deep interest in \"low-infrastructure\" engineering — creating software that remains functional in environments where connectivity is a luxury. He is passionate about Go's minimalist philosophy and its power to build robust, offline-capable tools that empower local communities.",
   "talkTitle": "Building Offline First Systems in Go: Reliable Architecture for In House AI and Unstable Networks",
+  "talkDescription": "TBA"},
+{
+  "slug": "fodilulahi-iyiola-akanbi",
+  "name": "Fodilulahi Iyiola Akanbi",
+  "title": "Senior Software Engineer",
+  "company": "Nexus Consulting Hub",
+  "bio": "I am a software engineer with a passion for database internals and Go tooling. My first introduction to Go was during my HNG internship in 2020, and I have been working in the backend industry for around five years now.",
+  "talkTitle": "Building Pg-Guard: A Postgres Query Linter and Risk Analyzer with Golang",
   "talkDescription": "TBA"}
 ];

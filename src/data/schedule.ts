@@ -182,12 +182,14 @@ export const scheduleData: ScheduleDay[] = [
         endTime: '13:40',
       },
       {
-        id: 'd2-1340-lightning-tba',
-        title: 'Lightning Talk — to be announced',
+        id: 'd2-1340-lightning-akanbi',
+        title: 'Building Pg-Guard: A Postgres Query Linter and Risk Analyzer',
         type: 'lightning',
         startTime: '13:40',
         endTime: '13:50',
-        tba: true,
+        speaker: { name: 'Fodilulahi Iyiola Akanbi' },
+        description:
+          'pg-guard statically inspects how Go services talk to Postgres — catching unbounded scans, missing limits, and misused transactions and context timeouts — and surfaces actionable feedback before code is merged.',
       },
       {
         id: 'd2-1350-sponsor-moniepoint',
