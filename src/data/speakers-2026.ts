@@ -48,6 +48,7 @@ export const speakers2026: Speaker[] = [
   "name": "Bala Grivine Ochieng",
   "title": "Software Engineer",
   "company": "Savannah Informatics Limited",
+  "imageUrl": "/speakers-2026/bala-grivine-ochieng.jpg",
   "bio": "I am a backend/systems engineer focused on building scalable systems and exploring the internals of storage and database infrastructure. My work involves designing and debugging low-level components such as write-ahead logs, file I/O pipelines, and distributed cloud infrastructure in Go.\n\nI contribute to TidesDB, an open-source LSM-tree storage engine in C, where I work on WAL recovery, durability semantics, and low-level I/O correctness. I also write publicly about storage systems and Linux internals.",
   "talkTitle": "Write-Ahead Logging in Go: The Subtle Bugs That Corrupt Databases",
   "talkDescription": "Implementing a reliable Write-Ahead Log (WAL) in Go presents severe architectural challenges, as subtle edge cases in storage engine code can lead to silent data corruption during system crashes or power cuts. The session examines the mechanics of data durability beyond basic file operations, detailing how improper buffer reuse, concurrency traps, and naive fsync usage can compromise database integrity and crash recovery."},
@@ -90,6 +91,7 @@ export const speakers2026: Speaker[] = [
   "name": "Mugirase Emmanuel",
   "title": "Head Of Engineering",
   "company": "Ironji Trade Ltd",
+  "imageUrl": "/speakers-2026/mugirase-emmanuel.jpg",
   "bio": "Emmanuel is a software engineer with nine years of software engineering experience. He has been building production Go systems since 2021 and currently serves as Head of Engineering at Ironji Trade Ltd, where he leads system architecture, engineering standards, and team development. He is working on gofasta, an open-source Go backend toolkit. His interests sit at the intersection of developer productivity, idiomatic language design, and the cultural norms that shape how communities adopt (or reject) tooling.",
   "talkTitle": "Opt-Out Defaults: Designing a Go Backend Toolkit Without Becoming a Framework",
   "talkDescription": "Every new Go backend starts with the same week of work: config, auth, migrations, middleware, all written again from scratch. Frameworks solve that, but most Go developers don't want one, and I'm one of them. So, I've been building gofasta, an open-source toolkit that generates plain Go you own. The packages its imports are defaults, and they are not requirements. Don't want its auth package? Delete the import and use something else. Nothing else breaks. In this talk I'll show the design that makes that possible, the mistakes I made getting there, and a simple test for whether a default is really optional."},
@@ -164,6 +166,7 @@ export const speakers2026: Speaker[] = [
   "name": "Kwaku Biney",
   "title": "Software Engineer",
   "company": "Hubtel",
+  "imageUrl": "/speakers-2026/kwaku-biney.jpg",
   "bio": "Kwaku Biney leads a team at Hubtel. His Go work has been mostly in open source: he is part of the Cilium organisation, contributing to Cilium and its eBPF library, has contributed to Go itself, and works on cloud-native and networking projects — from Kubernetes and Inspektor Gadget to his own VPN and NAT-traversal tools.",
   "talkTitle": "P2P Networking with Go",
   "talkDescription": "How do machines behind routers talk to each other directly? Every node on the internet doing meaningful work is behind a router. Your phone, your Mac, anything. Certain Go primitives allows us to explore certain networking tricks to bypass some of the restrictions of some of these routers. We'll explore some of these tricks (just enough) to pique your interest in peer to peer networking."}
