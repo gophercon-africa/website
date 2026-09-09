@@ -15,26 +15,18 @@ export const scheduleData: ScheduleDay[] = [
     sessions: [
       {
         id: 'd1-0800-registration',
-        title: 'Registration & Breakfast',
+        title: 'Registration & Light Refreshments',
         type: 'registration',
         startTime: '08:00',
-        endTime: '09:00',
+        endTime: '09:15',
       },
       {
-        id: 'd1-0900-intro',
+        id: 'd1-0915-intro',
         title: 'Event Introduction & Housekeeping',
         type: 'remarks',
-        startTime: '09:00',
-        endTime: '09:10',
-        speakerLabel: 'Event MC',
-      },
-      {
-        id: 'd1-0910-keynote',
-        title: 'Opening Keynote',
-        type: 'keynote',
-        startTime: '09:10',
+        startTime: '09:15',
         endTime: '09:30',
-        speakerLabel: 'Speaker to be announced',
+        speakerLabel: 'Event MC',
       },
       {
         id: 'd1-workshop-fullday',
@@ -85,7 +77,7 @@ export const scheduleData: ScheduleDay[] = [
     sessions: [
       {
         id: 'd2-0800-registration',
-        title: 'Registration & Breakfast',
+        title: 'Registration & Light Refreshments',
         type: 'registration',
         startTime: '08:00',
         endTime: '08:45',
@@ -146,15 +138,13 @@ export const scheduleData: ScheduleDay[] = [
       },
       {
         id: 'd2-1110-lightning-otieno',
-        // Provisional CFP title — Richard may submit an updated title and
-        // description via the speaker form (deadline 12 September).
-        title: 'Building Offline First Systems in Go',
+        title: 'Designing for Disconnection',
         type: 'lightning',
         startTime: '11:10',
         endTime: '11:20',
         speaker: { name: 'Richard Ochola Otieno' },
         description:
-          'Offline-first architecture in Go for unreliable networks — local persistence, durable sync queues, and private on-device AI inference at the edge.',
+          'An offline-first pattern for intermittent, metered connectivity — embedded storage, disk-backed queues, and idempotent APIs that run off-grid and sync when the network returns.',
       },
       {
         id: 'd2-1120-rios',
@@ -172,7 +162,10 @@ export const scheduleData: ScheduleDay[] = [
         type: 'talk',
         startTime: '11:50',
         endTime: '12:20',
-        speaker: { name: 'Toluwase Thomas' },
+        speakers: [
+          { name: 'Toluwase Thomas' },
+          { name: 'Olusola Enoch Alao' },
+        ],
       },
       {
         id: 'd2-1220-lunch',
@@ -261,7 +254,7 @@ export const scheduleData: ScheduleDay[] = [
     sessions: [
       {
         id: 'd3-0800-registration',
-        title: 'Registration & Breakfast',
+        title: 'Registration & Light Refreshments',
         type: 'registration',
         startTime: '08:00',
         endTime: '08:45',
