@@ -162,7 +162,10 @@ export const scheduleData: ScheduleDay[] = [
         type: 'talk',
         startTime: '11:50',
         endTime: '12:20',
-        speaker: { name: 'Toluwase Thomas' },
+        speakers: [
+          { name: 'Toluwase Thomas' },
+          { name: 'Olusola Enoch Alao' },
+        ],
       },
       {
         id: 'd2-1220-lunch',

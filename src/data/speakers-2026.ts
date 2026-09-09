@@ -128,6 +128,15 @@ export const speakers2026: Speaker[] = [
   "talkTitle": "Deterministic Concurrency with synctest",
   "talkDescription": "TBA"},
 {
+  "slug": "olusola-enoch-alao",
+  "name": "Olusola Enoch Alao",
+  "title": "Senior Software Engineer",
+  "company": "Grey",
+  "bio": "Senior Software Engineer at Grey, building high-stakes production Go in fintech, with five years of Go behind him. He spoke at GopherCon Africa 2025 on \"AI Agents the Go Way\" and returns this year to co-present with Toluwase Thomas.",
+  "talkTitle": "Deterministic Concurrency with synctest",
+  "talkDescription": "TBA",
+  "linkedin": "https://www.linkedin.com/in/alaoolusola/"},
+{
   "slug": "sergio-lourenco",
   "name": "Sérgio Lourenço",
   "title": "Principal Engineer",
