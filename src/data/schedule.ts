@@ -138,15 +138,13 @@ export const scheduleData: ScheduleDay[] = [
       },
       {
         id: 'd2-1110-lightning-otieno',
-        // Provisional CFP title — Richard may submit an updated title and
-        // description via the speaker form (deadline 12 September).
-        title: 'Building Offline First Systems in Go',
+        title: 'Designing for Disconnection',
         type: 'lightning',
         startTime: '11:10',
         endTime: '11:20',
         speaker: { name: 'Richard Ochola Otieno' },
         description:
-          'Offline-first architecture in Go for unreliable networks — local persistence, durable sync queues, and private on-device AI inference at the edge.',
+          'An offline-first pattern for intermittent, metered connectivity — embedded storage, disk-backed queues, and idempotent APIs that run off-grid and sync when the network returns.',
       },
       {
         id: 'd2-1120-rios',
