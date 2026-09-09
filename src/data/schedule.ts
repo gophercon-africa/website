@@ -29,14 +29,6 @@ export const scheduleData: ScheduleDay[] = [
         speakerLabel: 'Event MC',
       },
       {
-        id: 'd1-0910-keynote',
-        title: 'Opening Keynote',
-        type: 'keynote',
-        startTime: '09:10',
-        endTime: '09:30',
-        speakerLabel: 'Speaker to be announced',
-      },
-      {
         id: 'd1-workshop-fullday',
         title: 'Ultimate Software Design and Engineering',
         type: 'workshop',
