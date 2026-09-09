@@ -15,17 +15,17 @@ export const scheduleData: ScheduleDay[] = [
     sessions: [
       {
         id: 'd1-0800-registration',
-        title: 'Registration & Breakfast',
+        title: 'Registration & Light Refreshments',
         type: 'registration',
         startTime: '08:00',
-        endTime: '09:00',
+        endTime: '09:15',
       },
       {
-        id: 'd1-0900-intro',
+        id: 'd1-0915-intro',
         title: 'Event Introduction & Housekeeping',
         type: 'remarks',
-        startTime: '09:00',
-        endTime: '09:10',
+        startTime: '09:15',
+        endTime: '09:30',
         speakerLabel: 'Event MC',
       },
       {
@@ -77,7 +77,7 @@ export const scheduleData: ScheduleDay[] = [
     sessions: [
       {
         id: 'd2-0800-registration',
-        title: 'Registration & Breakfast',
+        title: 'Registration & Light Refreshments',
         type: 'registration',
         startTime: '08:00',
         endTime: '08:45',
@@ -251,7 +251,7 @@ export const scheduleData: ScheduleDay[] = [
     sessions: [
       {
         id: 'd3-0800-registration',
-        title: 'Registration & Breakfast',
+        title: 'Registration & Light Refreshments',
         type: 'registration',
         startTime: '08:00',
         endTime: '08:45',
