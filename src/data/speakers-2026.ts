@@ -150,6 +150,7 @@ export const speakers2026: Speaker[] = [
   "name": "Richard Ochola Otieno",
   "title": "Software Engineer",
   "company": "Zone01 Kisumu",
+  "imageUrl": "/speakers-2026/richard-ochola-otieno.jpg",
   "bio": "Richard Ochola Otieno is a software developer at Zone01 Kisumu, specializing in building resilient systems with Go. Through his work in intensive, project-based learning, Richard has developed a deep interest in \"low-infrastructure\" engineering — creating software that remains functional in environments where connectivity is a luxury. He is passionate about Go's minimalist philosophy and its power to build robust, offline-capable tools that empower local communities.",
   "talkTitle": "Designing for Disconnection",
   "talkDescription": "When connectivity is intermittent and metered, relying on constant cloud availability is a liability. This talk introduces a Go-powered pattern for offline-first architecture. Learn how combining zero-dependency embedded storage, disk-backed queues, and idempotent APIs allows applications to run reliably off-grid and sync seamlessly when networks recover."},
