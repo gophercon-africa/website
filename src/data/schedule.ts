@@ -176,13 +176,13 @@ export const scheduleData: ScheduleDay[] = [
       },
       {
         id: 'd2-1340-lightning-akanbi',
-        title: 'Building Pg-Guard: A Postgres Query Linter and Risk Analyzer',
+        title: 'Building Pg-Guard: Catching Risky PostgreSQL Queries Before Production',
         type: 'lightning',
         startTime: '13:40',
         endTime: '13:50',
         speaker: { name: 'Fodilulahi Iyiola Akanbi' },
         description:
-          'pg-guard statically inspects how Go services talk to Postgres — catching unbounded scans, missing limits, and misused transactions and context timeouts — and surfaces actionable feedback before code is merged.',
+          'Pg-Guard, a PostgreSQL query linter and risk analyzer written in Go, flags dangerous or expensive query patterns before they reach production — how it analyzes SQL, what it catches, and lessons from building it.',
       },
       {
         id: 'd2-1350-sponsor-moniepoint',
@@ -279,11 +279,13 @@ export const scheduleData: ScheduleDay[] = [
       },
       {
         id: 'd3-0930-atieno',
-        title: 'Hidden Behaviors of Go Structs in Production',
+        title: 'One Struct, Four Autopsies',
         type: 'talk',
         startTime: '09:30',
         endTime: '10:00',
         speaker: { name: 'Beryl Christine Atieno' },
+        description:
+          'One ordinary struct, four commits that quietly broke it — each mirroring a real production bug — and the mental model you need to catch them before they catch you.',
       },
       {
         id: 'd3-1000-clark',
