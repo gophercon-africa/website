@@ -42,10 +42,6 @@ export default function SchedulePage() {
           <p className="mx-auto mt-4 max-w-2xl text-lg text-muted">
             One workshop day and two conference days at {VENUE}.
           </p>
-          <p className="mt-3 text-sm text-muted">
-            Draft program — sessions and speakers update as they&apos;re
-            confirmed.
-          </p>
         </div>
 
         <Suspense fallback={<ScheduleSkeleton />}>
