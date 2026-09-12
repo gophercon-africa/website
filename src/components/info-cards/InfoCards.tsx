@@ -32,7 +32,7 @@ export default function InfoCards({ cfsOpen = false }: { cfsOpen?: boolean }) {
               </div>
             </div>
             <Image
-              src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744802566/mascot-kenya_pxfwhg.png"
+              src="/mascot/gopher-kenya.png"
               alt=""
               aria-hidden
               width={128}
