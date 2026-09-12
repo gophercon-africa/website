@@ -64,11 +64,17 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <Image
-              src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744891071/GopherCon_Africa_25_vskz7n_obmh5q.png"
+              src="/mascot/logo-light.png"
               alt="GopherCon Africa"
-              // White silhouette in dark (navy wordmark is illegible on the dark
-              // footer) — interim until a reversed/light logo asset exists.
-              className="h-10 w-auto dark:brightness-0 dark:invert"
+              className="h-10 w-auto dark:hidden"
+              width={160}
+              height={160}
+            />
+            <Image
+              src="/mascot/logo-dark.png"
+              alt=""
+              aria-hidden
+              className="hidden h-10 w-auto dark:block"
               width={160}
               height={160}
             />

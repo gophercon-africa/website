@@ -62,14 +62,20 @@ export default function Header() {
         <div className="flex justify-between items-center py-3">
           <Link href="/" className="flex items-center no-underline">
             <Image
-              src="https://res.cloudinary.com/dlmqe0two/image/upload/v1744891071/GopherCon_Africa_25_vskz7n_obmh5q.png"
+              src="/mascot/logo-light.png"
               alt="GopherCon Africa"
               width={160}
               height={160}
-              // The navy "GOPHERCON" wordmark is illegible on the dark header;
-              // render the logo as a white silhouette in dark as an interim until
-              // a proper reversed/light logo asset is provided.
-              className="h-10 w-auto sm:h-12 dark:brightness-0 dark:invert"
+              className="h-10 w-auto sm:h-12 dark:hidden"
+              priority
+            />
+            <Image
+              src="/mascot/logo-dark.png"
+              alt=""
+              aria-hidden
+              width={160}
+              height={160}
+              className="hidden h-10 w-auto sm:h-12 dark:block"
               priority
             />
           </Link>
