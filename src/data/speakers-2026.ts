@@ -66,9 +66,10 @@ export const speakers2026: Speaker[] = [
   "name": "Desmond Obisi",
   "title": "Product Engineer",
   "company": "Mono",
+  "imageUrl": "/speakers-2026/desmond-obisi.jpg",
   "bio": "I am a Product Engineer, I bridge the gap between complex engineering, developer experience, and user-centric product leadership. Currently working full-time on open banking and financial data infrastructure at Mono and bootstrapping Ritestack(A digital products startup).",
   "talkTitle": "Beyond RBAC: Building Team-Scoped Authorization in Go",
-  "talkDescription": "TBA"},
+  "talkDescription": "Building multi-tenant apps in Go? Learn how to move past basic role checks and build team-scoped authorization that keeps every tenant's data isolated, straight from production experience."},
 {
   "slug": "ige-oluwasegun-oluwajubelo",
   "name": "Ige Oluwasegun Oluwajubelo",
@@ -83,9 +84,10 @@ export const speakers2026: Speaker[] = [
   "name": "Kennedy Karoko",
   "title": "Senior Software Engineer",
   "company": "Safaricom",
+  "imageUrl": "/speakers-2026/kennedy-karoko.jpg",
   "bio": "Kennedy is a Senior Software Engineer with 6+ years of experience building cloud native, distributed systems in Go. His production work spans healthcare, fintech, and adtech infrastructure. He also writes about Go at blog.karoko.dev.",
   "talkTitle": "1 Million Transactions in Under a Second",
-  "talkDescription": "TBA"},
+  "talkDescription": "Processing a million transactions in under a second sounds like a concurrency problem. In practice, the bottlenecks are often hiding elsewhere. This talk explores the journey from a naive Go transaction processor to a high-throughput concurrent pipeline, examining worker pools, buffered channels, batching, GC pressure, contention, and pprof flame graphs along the way. Learn how to measure before optimising, identify the bottlenecks that actually matter, and reason about performance when building high-throughput Go systems."},
 {
   "slug": "mugirase-emmanuel",
   "name": "Mugirase Emmanuel",
