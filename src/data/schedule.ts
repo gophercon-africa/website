@@ -166,6 +166,8 @@ export const scheduleData: ScheduleDay[] = [
           { name: 'Toluwase Thomas' },
           { name: 'Olusola Enoch Alao' },
         ],
+        description:
+          'Stop paying the time.Sleep tax — a practical look at testing/synctest, and a real flaky test rewritten into a deterministic one.',
       },
       {
         id: 'd2-1220-lunch',
