@@ -187,5 +187,18 @@ export const speakers2026: Speaker[] = [
   "imageUrl": "/speakers-2026/kwaku-biney.jpg",
   "bio": "Kwaku Biney leads a team at Hubtel. His Go work has been mostly in open source: he is part of the Cilium organisation, contributing to Cilium and its eBPF library, has contributed to Go itself, and works on cloud-native and networking projects — from Kubernetes and Inspektor Gadget to his own VPN and NAT-traversal tools.",
   "talkTitle": "P2P Networking with Go",
-  "talkDescription": "How do machines behind routers talk to each other directly? Every node on the internet doing meaningful work is behind a router. Your phone, your Mac, anything. Certain Go primitives allows us to explore certain networking tricks to bypass some of the restrictions of some of these routers. We'll explore some of these tricks (just enough) to pique your interest in peer to peer networking."}
+  "talkDescription": "How do machines behind routers talk to each other directly? Every node on the internet doing meaningful work is behind a router. Your phone, your Mac, anything. Certain Go primitives allows us to explore certain networking tricks to bypass some of the restrictions of some of these routers. We'll explore some of these tricks (just enough) to pique your interest in peer to peer networking."},
+{
+  "slug": "david-odohi",
+  "name": "David Odohi",
+  "title": "Senior Software Engineer",
+  "imageUrl": "/speakers-2026/david-odohi.jpg",
+  "talkTitle": "Standing on the Shoulders of Giants",
+  "talkDescription": "TBA"},
+{
+  "slug": "chris-nyaga",
+  "name": "Chris Nyaga",
+  "title": "Organizer, GopherCon Africa",
+  "talkTitle": "Lightning talk (topic to be announced)",
+  "talkDescription": "TBA"}
 ];
