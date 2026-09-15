@@ -199,6 +199,7 @@ export const speakers2026: Speaker[] = [
   "slug": "chris-nyaga",
   "name": "Chris Nyaga",
   "title": "Organizer, GopherCon Africa",
+  "imageUrl": "/speakers-2026/chris-nyaga.jpg",
   "talkTitle": "Lightning talk (topic to be announced)",
   "talkDescription": "TBA"}
 ];
