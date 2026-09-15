@@ -40,7 +40,7 @@ const ticketOptions: TicketOption[] = [
   {
     title: 'Workshop Ticket',
     price: 'KSh 2,500',
-    description: "Bill Kennedy's full workshop day.",
+    description: "Ainsley Clark's full workshop day.",
     days: ['workshop'],
   },
   {

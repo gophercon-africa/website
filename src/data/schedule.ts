@@ -30,14 +30,14 @@ export const scheduleData: ScheduleDay[] = [
       },
       {
         id: 'd1-workshop-fullday',
-        title: 'Ultimate Software Design and Engineering',
+        title: 'Full-Stack Go: Domain-Driven Applications with sqlc and templ',
         type: 'workshop',
         startTime: '09:30',
         endTime: '16:00',
         fullDay: true,
-        speaker: { name: 'Bill Kennedy' },
+        speaker: { name: 'Ainsley Clark' },
         description:
-          'Structuring and architecting Go software for long-term maintenance — design philosophy, project layers, and AI tooling with a deploy-first mentality.',
+          'Build a complete, domain-driven Go application in a day — type-safe data access with sqlc, server-rendered UI with templ, and a working app of your own by the end.',
         link: WORKSHOP_LINK,
         segments: [
           { startTime: '09:30', endTime: '11:30', title: 'Part 1', type: 'workshop' },
