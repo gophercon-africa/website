@@ -53,15 +53,6 @@ export const speakers2026: Speaker[] = [
   "talkTitle": "Write-Ahead Logging in Go: The Subtle Bugs That Corrupt Databases",
   "talkDescription": "Implementing a reliable Write-Ahead Log (WAL) in Go presents severe architectural challenges, as subtle edge cases in storage engine code can lead to silent data corruption during system crashes or power cuts. The session examines the mechanics of data durability beyond basic file operations, detailing how improper buffer reuse, concurrency traps, and naive fsync usage can compromise database integrity and crash recovery."},
 {
-  "slug": "bill-kennedy",
-  "name": "Bill Kennedy",
-  "title": "Managing Partner",
-  "company": "Ardan Labs",
-  "imageUrl": "/speakers-2026/workshops/bill-kenedy.jpg",
-  "bio": "Bill Kennedy is a managing partner at Ardan Labs, a Go training and consulting company. He is the author of the Ultimate Go training series and has taught Go to thousands of engineers around the world.",
-  "talkTitle": "Ultimate Software Design and Engineering (workshop)",
-  "talkDescription": "TBA"},
-{
   "slug": "desmond-obisi",
   "name": "Desmond Obisi",
   "title": "Product Engineer",
