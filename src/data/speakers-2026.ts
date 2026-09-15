@@ -191,7 +191,7 @@ export const speakers2026: Speaker[] = [
 {
   "slug": "david-odohi",
   "name": "David Odohi",
-  "title": "Senior Software Engineer",
+  "title": "Organizer, GopherCon Africa",
   "imageUrl": "/speakers-2026/david-odohi.jpg",
   "talkTitle": "Standing on the Shoulders of Giants",
   "talkDescription": "TBA"},
