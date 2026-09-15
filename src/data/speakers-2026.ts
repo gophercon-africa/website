@@ -127,19 +127,21 @@ export const speakers2026: Speaker[] = [
 {
   "slug": "toluwase-thomas",
   "name": "Toluwase Thomas",
-  "title": "Software Developer",
+  "title": "Software Engineer",
   "company": "Betika",
+  "imageUrl": "/speakers-2026/toluwase-thomas.jpg",
   "bio": "I'm Toluwase, a backend software developer from Nigeria with about six years of experience building systems in Go. I've spent most of that time in fintech, working on payment infrastructure, lending platforms, and mobile banking backends where downtime and incorrect state aren't abstract problems, they're real money moving the wrong way. These days I work at a gaming company, still in Go, still thinking about concurrency and correctness more than is probably normal.\n\nMy go-to stack is Go with PostgreSQL, and I've worked across the usual backend spread: REST and gRPC APIs, event-driven architectures, microservices, domain-driven design, containerized deployments. I care a lot about testing. Not in a preachy way, but in the way you start caring after your third production incident that a better test would have caught. That's what brought me to synctest, and it's what I want to talk about.",
   "talkTitle": "Deterministic Concurrency with synctest",
-  "talkDescription": "TBA"},
+  "talkDescription": "Stop paying the time.Sleep tax. A practical look at testing/synctest, and a real flaky test rewritten into a deterministic one."},
 {
   "slug": "olusola-enoch-alao",
   "name": "Olusola Enoch Alao",
   "title": "Senior Software Engineer",
   "company": "Grey",
+  "imageUrl": "/speakers-2026/olusola-enoch-alao.jpg",
   "bio": "Senior Software Engineer at Grey, building high-stakes production Go in fintech, with five years of Go behind him. He spoke at GopherCon Africa 2025 on \"AI Agents the Go Way\" and returns this year to co-present with Toluwase Thomas.",
   "talkTitle": "Deterministic Concurrency with synctest",
-  "talkDescription": "TBA",
+  "talkDescription": "Stop paying the time.Sleep tax. A practical look at testing/synctest, and a real flaky test rewritten into a deterministic one.",
   "linkedin": "https://www.linkedin.com/in/alaoolusola/"},
 {
   "slug": "sergio-lourenco",
@@ -185,5 +187,19 @@ export const speakers2026: Speaker[] = [
   "imageUrl": "/speakers-2026/kwaku-biney.jpg",
   "bio": "Kwaku Biney leads a team at Hubtel. His Go work has been mostly in open source: he is part of the Cilium organisation, contributing to Cilium and its eBPF library, has contributed to Go itself, and works on cloud-native and networking projects — from Kubernetes and Inspektor Gadget to his own VPN and NAT-traversal tools.",
   "talkTitle": "P2P Networking with Go",
-  "talkDescription": "How do machines behind routers talk to each other directly? Every node on the internet doing meaningful work is behind a router. Your phone, your Mac, anything. Certain Go primitives allows us to explore certain networking tricks to bypass some of the restrictions of some of these routers. We'll explore some of these tricks (just enough) to pique your interest in peer to peer networking."}
+  "talkDescription": "How do machines behind routers talk to each other directly? Every node on the internet doing meaningful work is behind a router. Your phone, your Mac, anything. Certain Go primitives allows us to explore certain networking tricks to bypass some of the restrictions of some of these routers. We'll explore some of these tricks (just enough) to pique your interest in peer to peer networking."},
+{
+  "slug": "david-odohi",
+  "name": "David Odohi",
+  "title": "Senior Software Engineer",
+  "imageUrl": "/speakers-2026/david-odohi.jpg",
+  "talkTitle": "Standing on the Shoulders of Giants",
+  "talkDescription": "TBA"},
+{
+  "slug": "chris-nyaga",
+  "name": "Chris Nyaga",
+  "title": "Organizer, GopherCon Africa",
+  "imageUrl": "/speakers-2026/chris-nyaga.jpg",
+  "talkTitle": "Lightning talk (topic to be announced)",
+  "talkDescription": "TBA"}
 ];

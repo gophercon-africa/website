@@ -92,11 +92,11 @@ export const scheduleData: ScheduleDay[] = [
       },
       {
         id: 'd2-0900-keynote',
-        title: 'Opening Keynote',
+        title: 'Standing on the Shoulders of Giants',
         type: 'keynote',
         startTime: '09:00',
         endTime: '09:20',
-        speakerLabel: 'Speaker to be announced',
+        speaker: { name: 'David Odohi' },
       },
       {
         id: 'd2-0920-karoko',
@@ -166,6 +166,8 @@ export const scheduleData: ScheduleDay[] = [
           { name: 'Toluwase Thomas' },
           { name: 'Olusola Enoch Alao' },
         ],
+        description:
+          'Stop paying the time.Sleep tax — a practical look at testing/synctest, and a real flaky test rewritten into a deterministic one.',
       },
       {
         id: 'd2-1220-lunch',
@@ -343,12 +345,12 @@ export const scheduleData: ScheduleDay[] = [
         endTime: '13:20',
       },
       {
-        id: 'd3-1320-lightning-tba',
-        title: 'Lightning Talk — to be announced',
+        id: 'd3-1320-lightning-nyaga',
+        title: 'Lightning Talk — topic to be announced',
         type: 'lightning',
         startTime: '13:20',
         endTime: '13:30',
-        tba: true,
+        speaker: { name: 'Chris Nyaga' },
       },
       {
         id: 'd3-1330-sponsor-moniepoint',
