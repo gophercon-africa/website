@@ -13,75 +13,58 @@ export const metadata: Metadata = {
     "Hands-on workshops led by experienced instructors at GopherCon Africa.",
 };
 
-const workshops = [
+type WorkshopModule = { title: string; intro: string; bullets: string[] };
+
+type Workshop = {
+  eyebrow: string;
+  title: string;
+  level: string;
+  instructor: string;
+  instructorImageSrc: string;
+  description: string[];
+  /** Short "What you'll learn" summary; omitted from the page when absent. */
+  outcome?: string;
+  /** Pull-quote; omitted from the page when absent. */
+  quote?: { text: string; author: string };
+  /** Syllabus accordion; the whole section is omitted when absent. */
+  modules?: WorkshopModule[];
+  prerequisites?: string[];
+  preparation?: string[];
+};
+
+// Ainsley is sending the full description and syllabus (a working copy was
+// shared 7 Sept; the level/scope is still being agreed). Until then the page
+// shows the title, instructor, and a brief description only. The commented
+// fields below show the shape to fill in — see the previous workshop
+// (git history, "Ultimate Software Design and Engineering") for a full
+// example of each.
+const workshops: Workshop[] = [
   {
-  eyebrow: "ULTIMATE SOFTWARE DESIGN",
-  title: "Ultimate Software Design and Engineering",
-  level: "Intermediate",
-  instructor: "Bill Kennedy",
-  instructorImageSrc: "/speakers-2026/workshops/bill-kenedy.jpg",
-  quote: {
-    text: "As a program evolves and acquires more features, it becomes complicated, with subtle dependencies between components. Over time, complexity accumulates, and it becomes harder and harder for programmers to keep all the relevant factors in their minds as they modify the system. This slows down development and leads to bugs, which slow development even more and add to its cost. Complexity increases inevitably over the life of any program. The larger the program, and the more people that work on it, the more difficult it is to manage complexity.",
-    author: "John Ousterhout",
-  },
-  description: [
-    "This class teaches you how to structure and architect software to take advantage of AI coding tools for the long term maintenance of your software. From the beginning, you will program along with the instructor as he walks through the design philosophies and guidelines for engineering software in Go leveraging AI tooling. With each new feature added to the project, you will learn how to think about, read, maintain, manage, and debug code. The core of this class is to teach you how to handle and reduce the spread of complexity in the systems you are building.",
-  ],
-  modules: [
-    {
-      title: "Deploy First Mentality",
-      intro:
-        "We begin to build a service with a focus on the ability to maintain, manage, and debug the service in Kubernetes.",
-      bullets: [
-        "Design Philosophy, Guidelines, What to Expect",
-        "Project Layers, Policies, and Guidelines",
-        "AI Tooling",
-      ],
-    },
-    {
-      title: "Kubernetes",
-      intro:
-        "We introduce Kubernetes and get a K8s environment up and running. At this point, everything we do runs in the K8s environment.",
-      bullets: [
-        "Clusters, Nodes and Pods",
-        "Start the Kubernetes Cluster",
-        "Create/Build a Dockerfile for the Service",
-        "Create/Apply K8s Deployment for the Service",
-      ],
-    },
-    {
-      title: "Go Scheduler and Kubernetes Quotas",
-      intro:
-        "We introduce applying Quotas to the deployment and discuss the problems that can result when using quotas.",
-      bullets: [
-        "Understanding CPU Quotas",
-        "Understanding the Go Scheduler",
-        "Adjust GOMAXPROCS to maximize performance",
-      ],
-    },
-    {
-      title: "Domain-Driven, Data-Oriented Architecture",
-      intro:
-        "We talk about the data-driven, data-oriented architecture. We discuss the design philosophy, guidelines, and semantics of how the three layers of App, Business, and Storage work together.",
-      bullets: [
-        "Architecture Review",
-        "Applying and Implementing Firewalls",
-        "Data Flow Trust vs Non-Trust",
-        "Data Isolation, Shaping, and Data Validation",
-        "Developer Isolation with Domains",
-        "Leveraging AI Tooling",
-      ],
-    },
-  ],
-  prerequisites: [
-    "It is expected that you will have been coding in Go for several months.",
-    "A working Go environment running on the device you will be bringing to class.",
-  ],
-  preparation: [
-    "Please clone the main repo for the class.",
-    "Please read the notes in the makefile for installing all the tooling and testing the code before class.",
-    "Please email the instructor, Bill Kennedy, for assistance.",
-  ],
+    eyebrow: "FULL-STACK GO",
+    title: "Full-Stack Go: Domain-Driven Applications with sqlc and templ",
+    // TODO(workshop): confirm level with Ainsley — the organisers asked for
+    // something more advanced than the first draft.
+    level: "Intermediate",
+    instructor: "Ainsley Clark",
+    instructorImageSrc: "/speakers-2026/ainsley-clark.jpg",
+    description: [
+      "A hands-on, domain-driven approach to building a complete Go application in a single day: type-safe database access with sqlc, server-rendered UI with templ, and a codebase organised around the domain rather than the framework. You'll build a working app against real external APIs, following a starter repo with checkpoints at each module so nobody gets left behind, and leave with something you built yourself.",
+    ],
+    outcome:
+      "How to structure a Go application around its domain, generate type-safe data access with sqlc, render UI with templ, and ship a working full-stack app by the end of the day.",
+    // TODO(workshop): fill in from Ainsley's syllabus when confirmed.
+    // quote: { text: "…", author: "…" },
+    // modules: [
+    //   { title: "Module 1", intro: "One-line summary.", bullets: ["…", "…"] },
+    // ],
+    // prerequisites: [
+    //   "Comfortable writing Go (several months of experience).",
+    //   "A working Go environment on the laptop you'll bring.",
+    // ],
+    // preparation: [
+    //   "Clone the starter repo (link to follow).",
+    //   "Install the tooling listed in its README before class.",
+    // ],
   },
 ];
 
@@ -123,6 +106,7 @@ function AccordionItem({
 
 export default function WorkshopsPage() {
   const workshop = workshops[0];
+  const hasLogistics = workshop.prerequisites || workshop.preparation;
   return (
     <div className="min-h-screen bg-surface-sunken py-12 sm:py-16">
       <Container>
@@ -177,72 +161,87 @@ export default function WorkshopsPage() {
                 ))}
               </div>
 
-              <div className="rounded-control bg-brand-tint p-6">
-                <p className="text-xs font-semibold uppercase tracking-wide text-brand-dark dark:text-brand-bright">
-                  What you&apos;ll learn
-                </p>
-                <p className="mt-2 text-sm text-body leading-relaxed">
-                  Learn how to structure and architect Go software for long-term
-                  maintainability, with a deploy-first mentality in Kubernetes
-                  and practical guidance for leveraging AI tooling.
-                </p>
-              </div>
-
-              <figure className="border-l-2 border-brand pl-5">
-                <blockquote className="leading-relaxed text-body">
-                  &ldquo;{workshop.quote.text}&rdquo;
-                </blockquote>
-                <figcaption className="mt-3 text-sm font-semibold text-muted">
-                  {workshop.quote.author}
-                </figcaption>
-              </figure>
-
-              <div>
-                <div className="mb-4">
-                  <h2 className="text-2xl font-bold tracking-tight text-ink">
-                    Syllabus
-                  </h2>
-                  <p className="mt-1 text-sm text-muted">
-                    What a student is expected to learn
+              {workshop.outcome && (
+                <div className="rounded-control bg-brand-tint p-6">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-brand-dark dark:text-brand-bright">
+                    What you&apos;ll learn
+                  </p>
+                  <p className="mt-2 text-sm text-body leading-relaxed">
+                    {workshop.outcome}
                   </p>
                 </div>
+              )}
 
-                <div className="space-y-3">
-                  {workshop.modules.map((module, idx) => (
-                    <AccordionItem
-                      key={module.title}
-                      index={idx + 1}
-                      title={module.title}
-                      intro={module.intro}
-                      bullets={module.bullets}
-                    />
-                  ))}
-                </div>
-              </div>
+              {workshop.quote && (
+                <figure className="border-l-2 border-brand pl-5">
+                  <blockquote className="leading-relaxed text-body">
+                    &ldquo;{workshop.quote.text}&rdquo;
+                  </blockquote>
+                  <figcaption className="mt-3 text-sm font-semibold text-muted">
+                    {workshop.quote.author}
+                  </figcaption>
+                </figure>
+              )}
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 pt-2">
-                <div className="rounded-control bg-surface-sunken p-6">
-                  <h3 className="mb-3 text-xs font-semibold uppercase tracking-wide text-ink">
-                    Prerequisites
-                  </h3>
-                  <ul className="space-y-2 text-sm text-body list-disc pl-5">
-                    {workshop.prerequisites.map((item) => (
-                      <li key={item}>{item}</li>
+              {workshop.modules ? (
+                <div>
+                  <div className="mb-4">
+                    <h2 className="text-2xl font-bold tracking-tight text-ink">
+                      Syllabus
+                    </h2>
+                    <p className="mt-1 text-sm text-muted">
+                      What a student is expected to learn
+                    </p>
+                  </div>
+
+                  <div className="space-y-3">
+                    {workshop.modules.map((module, idx) => (
+                      <AccordionItem
+                        key={module.title}
+                        index={idx + 1}
+                        title={module.title}
+                        intro={module.intro}
+                        bullets={module.bullets}
+                      />
                     ))}
-                  </ul>
+                  </div>
                 </div>
+              ) : (
+                <p className="text-sm text-muted">
+                  Full syllabus, prerequisites, and preparation notes will be
+                  published here shortly.
+                </p>
+              )}
 
-                <div className="rounded-control bg-surface-sunken p-6">
-                  <h3 className="mb-3 text-xs font-semibold uppercase tracking-wide text-ink">
-                    Recommended Preparation
-                  </h3>
-                  <ul className="space-y-2 text-sm text-body list-disc pl-5">
-                    {workshop.preparation.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
+              {hasLogistics && (
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 pt-2">
+                  {workshop.prerequisites && (
+                    <div className="rounded-control bg-surface-sunken p-6">
+                      <h3 className="mb-3 text-xs font-semibold uppercase tracking-wide text-ink">
+                        Prerequisites
+                      </h3>
+                      <ul className="space-y-2 text-sm text-body list-disc pl-5">
+                        {workshop.prerequisites.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {workshop.preparation && (
+                    <div className="rounded-control bg-surface-sunken p-6">
+                      <h3 className="mb-3 text-xs font-semibold uppercase tracking-wide text-ink">
+                        Recommended Preparation
+                      </h3>
+                      <ul className="space-y-2 text-sm text-body list-disc pl-5">
+                        {workshop.preparation.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
