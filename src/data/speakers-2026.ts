@@ -32,9 +32,10 @@ export const speakers2026: Speaker[] = [
   "name": "Alex Rios",
   "title": "Principal Engineer",
   "company": "Memed",
+  "imageUrl": "/speakers-2026/alex-rios.jpg",
   "bio": "Alex is a Principal Engineer at Memed, where he builds developer platforms and internal tools that empower engineering teams across the organization. With 17+ years of experience, he's the author of System Programming Essentials with Go and Learning Zig, and writes about staff engineering and systems thinking on Substack and his personal blog.\n\nAlex speaks regularly at international conferences and is passionate about data-oriented design, making complex systems understandable, and helping engineers grow into technical leadership roles.",
   "talkTitle": "Why Go Hides Its Spinlocks",
-  "talkDescription": "TBA"},
+  "talkDescription": "A spinlock is the difference between pacing by the door versus taking a nap while waiting for a package. One burns CPU cycles. The other yields to the scheduler. Both have their place, but Go deliberately hides spinlocks from you.\n\nThis talk explains the core trade-off between spinning and parking, reveals the hidden spin within a Mutex, and explores why Go's runtime uses a \"spinbit\" design that allows only one goroutine to spin at a time.\n\nYou'll learn when spinning wins, when it's catastrophic, and why adaptive hybrid locks beat both pure approaches."},
 {
   "slug": "anthony-alaribe",
   "name": "Anthony Alaribe",
