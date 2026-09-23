@@ -41,9 +41,10 @@ export const speakers2026: Speaker[] = [
   "name": "Anthony Alaribe",
   "title": "Cofounder",
   "company": "Monoscope",
+  "imageUrl": "/speakers-2026/anthony-alaribe.jpg",
   "bio": "Anthony has spent over a decade building software at companies like Opera, and DeliveryHero. \nNow he’s a founder of a AI friendly software monitoring startup, [Monoscope.tech](http://Monoscope.tech) . Say hi when you see him. He loves conversations about abusing tech, databases and less popular programming languages.",
   "talkTitle": "Runbooks That Think: Executable Checklists with AI in the Loop",
-  "talkDescription": "TBA"},
+  "talkDescription": "Operational runbooks are static documents that demand constant human attention. What if they could reason, adapt, and execute autonomously? This talk explores how to turn passive checklists into dynamic, AI-driven workflows — covering the architecture, the failure modes, and the practical patterns for keeping humans in the loop when it actually matters."},
 {
   "slug": "bala-grivine-ochieng",
   "name": "Bala Grivine Ochieng",
