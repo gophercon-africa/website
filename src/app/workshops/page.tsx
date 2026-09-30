@@ -22,8 +22,8 @@ type Workshop = {
   instructor: string;
   instructorImageSrc: string;
   description: string[];
-  /** Short "What you'll learn" summary; omitted from the page when absent. */
-  outcome?: string;
+  /** "What you'll learn": a summary paragraph or a list; omitted when absent. */
+  outcome?: string | string[];
   /** Pull-quote; omitted from the page when absent. */
   quote?: { text: string; author: string };
   /** Syllabus accordion; the whole section is omitted when absent. */
@@ -32,39 +32,103 @@ type Workshop = {
   preparation?: string[];
 };
 
-// Ainsley is sending the full description and syllabus (a working copy was
-// shared 7 Sept; the level/scope is still being agreed). Until then the page
-// shows the title, instructor, and a brief description only. The commented
-// fields below show the shape to fill in — see the previous workshop
-// (git history, "Ultimate Software Design and Engineering") for a full
-// example of each.
 const workshops: Workshop[] = [
   {
     eyebrow: "FULL-STACK GO",
     title: "Full-Stack Go: Domain-Driven Applications with sqlc and templ",
-    // TODO(workshop): confirm level with Ainsley — the organisers asked for
-    // something more advanced than the first draft.
     level: "Intermediate",
     instructor: "Ainsley Clark",
     instructorImageSrc: "/speakers-2026/ainsley-clark.jpg",
     description: [
-      "A hands-on, domain-driven approach to building a complete Go application in a single day: type-safe database access with sqlc, server-rendered UI with templ, and a codebase organised around the domain rather than the framework. You'll build a working app against real external APIs, following a starter repo with checkpoints at each module so nobody gets left behind, and leave with something you built yourself.",
+      "Build a complete full-stack application in Go, from data ingestion through persistence to a server-rendered UI, purely in Go. This workshop teaches you how to design maintainable full-stack applications that age well.",
+      "You'll start from a working application built on a real public API, walk through five different architectures for the same feature to see what domain-driven design actually buys you. Then you'll extend the application with a new domain, a type-safe data layer with sqlc and SQLite, and a front-end written with templ.",
+      "This workshop is intended to be hands-on and interactive, by making the architecture decisions yourself, with guidance at each step. You'll leave with a working application written by hand and a clear model of how to structure Go code around a domain rather than a framework.",
     ],
-    outcome:
-      "How to structure a Go application around its domain, generate type-safe data access with sqlc, render UI with templ, and ship a working full-stack app by the end of the day.",
-    // TODO(workshop): fill in from Ainsley's syllabus when confirmed.
-    // quote: { text: "…", author: "…" },
-    // modules: [
-    //   { title: "Module 1", intro: "One-line summary.", bullets: ["…", "…"] },
-    // ],
-    // prerequisites: [
-    //   "Comfortable writing Go (several months of experience).",
-    //   "A working Go environment on the laptop you'll bring.",
-    // ],
-    // preparation: [
-    //   "Clone the starter repo (link to follow).",
-    //   "Install the tooling listed in its README before class.",
-    // ],
+    outcome: [
+      "How to structure a Go codebase around its domain so it ages well.",
+      "How to extend an existing application with a brand-new domain, end to end.",
+      "How to generate a type-safe data layer with sqlc.",
+      "How to serve a user interface directly from Go with templ.",
+    ],
+    modules: [
+      {
+        title: "Architecture & Domain-Driven Design",
+        intro:
+          "What makes a Go project maintainable? We'll go through five different architectures with the same features and work out where each is suited best.",
+        bullets: [
+          "Package layout & structure.",
+          "Domain-driven: what belongs where, and why.",
+          "What pushes you from one architecture to the next.",
+          "A brief look at the finished application.",
+        ],
+      },
+      {
+        title: "Extending the Domain",
+        intro:
+          "You add a brand-new domain to an existing application, sourced from a second, independent API.",
+        bullets: [
+          "Where does a new concept live?",
+          "Modelling entities and operations.",
+          "Translating API responses into domain types.",
+        ],
+      },
+      {
+        title: "A Type-Safe Data Layer with sqlc",
+        intro:
+          "Once you're fetching new data, it's time to store it, with sqlc and SQLite.",
+        bullets: [
+          "Schema design, driven by the domain.",
+          "Writing & generating queries.",
+          "Mapping generated types to domain types.",
+          "Query tests against a real database.",
+        ],
+      },
+      {
+        title: "Ingestion",
+        intro:
+          "Wiring the new domain into the application's existing ingestion pipeline.",
+        bullets: [
+          "Enriching every record as it's ingested.",
+          "Persisting and associating the result.",
+        ],
+      },
+      {
+        title: "Building the Front-End with templ",
+        intro:
+          "Exposing the application through handlers that call templ components and layouts.",
+        bullets: [
+          "templ fundamentals: components, props, layout slots.",
+          "Handlers, routing & error mapping.",
+          "A homepage, themed your way.",
+        ],
+      },
+      {
+        title: "Profiling",
+        intro:
+          "Where the application spends its time, and how you can make it faster.",
+        bullets: [
+          "Profiling the web handler with pprof.",
+          "Load testing, and seeing where it falls over.",
+          "Reducing memory usage.",
+        ],
+      },
+    ],
+    prerequisites: [
+      "Several months writing Go.",
+      "Familiarity with SQL and relational databases.",
+      "Go 1.27.1 or newer on the device you bring, with ~/go/bin on your PATH.",
+      "macOS or Linux, or Windows with WSL2. You'll need make (on macOS: xcode-select --install).",
+      "A GitHub account. Send us your username beforehand so we can give you push access.",
+      "Basic knowledge of git.",
+      "Basic HTML and CSS. No JavaScript framework experience needed.",
+    ],
+    preparation: [
+      "Join the dedicated Slack channel.",
+      "Go 1.27.1 (or the latest version) installed.",
+      "Claude Code installed and up to date.",
+      "Python 3 installed (used by the design tooling).",
+      "GoLand preferred — we'll provide a 3-month free licence!",
+    ],
   },
 ];
 
@@ -166,9 +230,17 @@ export default function WorkshopsPage() {
                   <p className="text-xs font-semibold uppercase tracking-wide text-brand-dark dark:text-brand-bright">
                     What you&apos;ll learn
                   </p>
-                  <p className="mt-2 text-sm text-body leading-relaxed">
-                    {workshop.outcome}
-                  </p>
+                  {Array.isArray(workshop.outcome) ? (
+                    <ul className="mt-2 space-y-1.5 text-sm text-body leading-relaxed list-disc pl-5">
+                      {workshop.outcome.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="mt-2 text-sm text-body leading-relaxed">
+                      {workshop.outcome}
+                    </p>
+                  )}
                 </div>
               )}
 
