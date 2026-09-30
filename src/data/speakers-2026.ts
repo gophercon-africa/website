@@ -193,6 +193,6 @@ export const speakers2026: Speaker[] = [
   "name": "Chris Nyaga",
   "title": "Organizer, GopherCon Africa",
   "imageUrl": "/speakers-2026/chris-nyaga.jpg",
-  "talkTitle": "Lightning talk (topic to be announced)",
-  "talkDescription": "TBA"}
+  "talkTitle": "Invariants Are the New Interface",
+  "talkDescription": "Coding agents can now write a Go service end to end, and they will confidently break the rules your system depends on: idempotent handling, ordering, retries, what \"done\" means. The fix is not a better prompt. It is a page of invariants the agent must respect, and a verification loop that catches every violation before you do. Drawing on a fleet of Go services on Kafka, this talk shows what to write down, what to check, and why that now matters more than the code itself."}
 ];

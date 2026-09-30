@@ -346,11 +346,13 @@ export const scheduleData: ScheduleDay[] = [
       },
       {
         id: 'd3-1320-lightning-nyaga',
-        title: 'Lightning Talk — topic to be announced',
+        title: 'Invariants Are the New Interface',
         type: 'lightning',
         startTime: '13:20',
         endTime: '13:30',
         speaker: { name: 'Chris Nyaga' },
+        description:
+          'Agents make code cheap. The scarce asset is a team that has written down its invariants and can verify them automatically — what to write down, what to check, and why.',
       },
       {
         id: 'd3-1330-sponsor-moniepoint',
