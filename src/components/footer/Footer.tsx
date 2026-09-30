@@ -5,7 +5,6 @@ import {
   CODE_OF_CONDUCT_URL,
   CONTACT_EMAIL,
   SOCIAL_LINKS,
-  SPONSORSHIP_PROSPECTUS_URL,
   TICKETS_URL,
 } from '@/src/lib/links';
 
@@ -36,7 +35,7 @@ const COLUMNS = [
     links: [
       { href: '/schedule', label: 'Schedule' },
       { href: '/speakers', label: 'Speakers' },
-      { href: '/workshops', label: 'Workshops' },
+      { href: '/workshops', label: 'Workshop' },
       { href: TICKETS_URL, label: 'Tickets' },
     ],
   },
@@ -52,7 +51,7 @@ const COLUMNS = [
     links: [
       { href: `mailto:${CONTACT_EMAIL}`, label: CONTACT_EMAIL },
       { href: CODE_OF_CONDUCT_URL, label: 'Code of Conduct' },
-      { href: SPONSORSHIP_PROSPECTUS_URL, label: 'Sponsorship prospectus' },
+      { href: `mailto:${CONTACT_EMAIL}?subject=GopherCon%20Africa%202026%20sponsorship`, label: 'Become a sponsor' },
     ],
   },
 ];

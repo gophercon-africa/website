@@ -13,5 +13,3 @@ export const CONTACT_EMAIL = 'hello@gophers.africa';
 
 export const CODE_OF_CONDUCT_URL = 'https://go.dev/conduct';
 
-export const SPONSORSHIP_PROSPECTUS_URL =
-  'https://drive.google.com/file/d/1ns6v4lcfNOekBcqkT1DhPD3s2Nmc6FD5/view';

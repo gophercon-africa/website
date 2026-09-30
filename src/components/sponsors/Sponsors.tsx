@@ -3,7 +3,8 @@ import Container from '@components/ui/Container';
 import Section from '@components/ui/Section';
 import SectionHeading from '@components/ui/SectionHeading';
 import SponsorShowcase, { SponsorTier } from './SponsorShowcase';
-import { CONTACT_EMAIL, SPONSORSHIP_PROSPECTUS_URL } from '@/src/lib/links';
+import SponsorshipInquiry from './SponsorshipInquiry';
+import { CONTACT_EMAIL } from '@/src/lib/links';
 
 const TIERS: SponsorTier[] = [
   {
@@ -72,9 +73,7 @@ export default function Sponsors() {
             continent.
           </p>
           <div className="mt-6 flex flex-col justify-center gap-4 sm:flex-row">
-            <Button href={SPONSORSHIP_PROSPECTUS_URL} external variant="secondary">
-              Download the prospectus
-            </Button>
+            <SponsorshipInquiry />
             <Button href={`mailto:${CONTACT_EMAIL}`} variant="ghost">
               {CONTACT_EMAIL}
             </Button>

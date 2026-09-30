@@ -13,7 +13,7 @@ const NAV_LINKS = [
   { href: '/#about', label: 'About' },
   { href: '/schedule', label: 'Schedule' },
   { href: '/speakers', label: 'Speakers' },
-  { href: '/workshops', label: 'Workshops' },
+  { href: '/workshops', label: 'Workshop' },
 ] as const;
 
 export default function Header() {

@@ -16,14 +16,17 @@ type TicketOption = {
   price: string;
   description: string;
   days: TicketDay[];
+  /** Group tickets admit several people at one price. */
+  admits?: number;
+  soldOut?: boolean;
 };
 
 const ticketOptions: TicketOption[] = [
   {
-    title: 'Student Conference Ticket',
-    price: 'KSh 750',
-    description: 'Both conference days, valid with a student ID.',
-    days: ['conference'],
+    title: 'Workshop Ticket',
+    price: 'KSh 2,500',
+    description: "Ainsley Clark's full workshop day. Conference tickets do not include the workshop.",
+    days: ['workshop'],
   },
   {
     title: 'Conference Days Standard',
@@ -32,28 +35,46 @@ const ticketOptions: TicketOption[] = [
     days: ['conference'],
   },
   {
+    title: 'Workshop + Conference Days',
+    price: 'KSh 3,500',
+    description: 'All three days.',
+    days: ['workshop', 'conference'],
+    soldOut: true,
+  },
+  {
+    title: 'Group: Workshop + Conference Days',
+    price: 'KSh 9,450',
+    description: 'Three all-access tickets, 10% off the single price.',
+    days: ['workshop', 'conference'],
+    admits: 3,
+  },
+  {
+    title: 'Student Conference Ticket',
+    price: 'KSh 750',
+    description: 'Both conference days, valid with a student ID.',
+    days: ['conference'],
+  },
+  {
     title: 'Student Workshop Ticket',
     price: 'KSh 2,000',
     description: 'The workshop day, valid with a student ID.',
     days: ['workshop'],
-  },
-  {
-    title: 'Workshop Ticket',
-    price: 'KSh 2,500',
-    description: "Ainsley Clark's full workshop day.",
-    days: ['workshop'],
+    soldOut: true,
   },
   {
     title: 'Student Workshop + Conference',
     price: 'KSh 2,500',
     description: 'All three days, valid with a student ID.',
     days: ['workshop', 'conference'],
+    soldOut: true,
   },
   {
-    title: 'Workshop + Conference Days',
-    price: 'KSh 3,500',
-    description: 'All three days.',
+    title: 'Group Student: Workshop + Conference',
+    price: 'KSh 2,250',
+    description: 'Three all-access student tickets, valid with student IDs.',
     days: ['workshop', 'conference'],
+    admits: 3,
+    soldOut: true,
   },
 ];
 
@@ -79,7 +100,7 @@ export default function Tickets() {
       <Container>
         <SectionHeading
           title="Tickets"
-          description="Workshop: Thursday, October 15. Conference: Friday and Saturday, October 16–17."
+          description="Workshop: Thursday, October 15. Conference: Friday and Saturday, October 16–17. The workshop day needs its own ticket."
         />
 
         <div className="mx-auto mt-10 max-w-3xl">
@@ -124,16 +145,28 @@ export default function Tickets() {
                     {ticket.days.includes('conference') && (
                       <Badge tone="outline">Conference</Badge>
                     )}
+                    {ticket.admits && (
+                      <Badge tone="brand">Admits {ticket.admits}</Badge>
+                    )}
+                    {ticket.soldOut && <Badge tone="neutral">Sold out</Badge>}
                   </div>
                   <p className="mt-1 text-sm text-muted">{ticket.description}</p>
                 </div>
                 <div className="flex shrink-0 items-center gap-4">
-                  <span className="text-lg font-semibold tabular-nums text-ink">
+                  <span
+                    className={`text-lg font-semibold tabular-nums ${
+                      ticket.soldOut ? 'text-faint line-through' : 'text-ink'
+                    }`}
+                  >
                     {ticket.price}
                   </span>
-                  <Button href={TICKETS_URL} external variant="secondary">
-                    Buy
-                  </Button>
+                  {ticket.soldOut ? (
+                    <span className="text-sm font-semibold text-muted">Sold out</span>
+                  ) : (
+                    <Button href={TICKETS_URL} external variant="secondary">
+                      Buy
+                    </Button>
+                  )}
                 </div>
               </div>
             ))}

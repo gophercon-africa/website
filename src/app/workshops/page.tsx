@@ -183,7 +183,7 @@ export default function WorkshopsPage() {
                     {workshop.eyebrow}
                   </p>
                   <Button href={TICKETS_URL} external>
-                    Buy Tickets
+                    Get a workshop ticket
                   </Button>
                 </div>
 
@@ -199,6 +199,12 @@ export default function WorkshopsPage() {
                   >
                     See the full schedule
                   </Link>
+                </p>
+
+                <p className="text-sm text-muted">
+                  The workshop needs its own ticket: a Workshop ticket, or a
+                  Workshop + Conference ticket. Conference-days tickets do not
+                  include it.
                 </p>
 
                 <div className="flex flex-wrap items-center gap-3">
