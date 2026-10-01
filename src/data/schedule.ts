@@ -356,10 +356,15 @@ export const scheduleData: ScheduleDay[] = [
       },
       {
         id: 'd3-1330-sponsor-moniepoint',
-        title: 'Sponsor Session',
+        title: 'Automating Kubernetes Infrastructure in Go',
         type: 'sponsor',
         startTime: '13:30',
         endTime: '14:00',
+        speaker: { name: 'Sérgio Lourenço' },
+        // Sponsor-supplied abstract (Moniepoint partnership thread, 3 Sept),
+        // copy-edited for typos only.
+        description:
+          "With increasingly complex systems, testing applications locally is increasingly difficult: either because they consume a lot of resources or a lot of configuration is required to get all the dependencies up and running. It pushes developers to either not properly test or rely on shared environments which can impact their team members. In this talk we will go over a Go-built DevEx tool that allows developers to launch complex resources on a remote cluster quickly with minimal configuration, with a single terminal command and a minimal configuration YAML file.",
         sponsor: { name: 'Moniepoint', logo: MONIEPOINT_LOGO },
       },
       {
