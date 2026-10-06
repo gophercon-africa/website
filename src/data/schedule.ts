@@ -379,12 +379,17 @@ export const scheduleData: ScheduleDay[] = [
           'Instrumenting Go LLM backends with OpenTelemetry — tracing, token counts, real-time cost, and budget guardrails against runaway AI spend.',
       },
       {
-        id: 'd3-1430-panel-tba',
-        title: 'Panel / Roundtable — to be announced',
+        id: 'd3-1430-women-who-go',
+        title: 'Women Who Go: Fireside Chats',
         type: 'panel',
         startTime: '14:30',
         endTime: '15:00',
-        tba: true,
+        speakers: [
+          { name: 'Beryl Christine Atieno' },
+          { name: 'Shakiran Nannyombi' },
+        ],
+        description:
+          "Women Who Go Africa presents two fireside chats featuring Beryl Christine Atieno, a self-taught backend developer building systems with Go in Kenya, and Shakiran Nannyombi, a software engineer and community builder driving developer ecosystems in Uganda. Each conversation goes beyond the highlight reel into the real stories: how they got here, what they're building, and what they've learned along the way. Come for the honesty, stay for the community.",
       },
       {
         id: 'd3-1500-sponsor-photos',
