@@ -129,6 +129,7 @@ export const speakers2026: Speaker[] = [
   "slug": "irene-ufia",
   "name": "Irene Ufia",
   "title": "Software Engineer (Infrastructure & Security) · Co-organizer, GopherCon Africa",
+  "imageUrl": "/speakers-2026/irene-ufia.jpg",
   "bio": "Irene Ufia is a Software Engineer (Infrastructure & Security) and co-organizer of GopherCon Africa. Her work spans infrastructure and security for projects across the continent, including an African currency marketplace that is live in 19+ countries and supports the African Continental Free Trade Area.",
   "talkTitle": "Women Who Go: Fireside Chats (moderator)",
   "talkDescription": "Real stories from women building with Go across Africa."},
