@@ -121,6 +121,7 @@ export const speakers2026: Speaker[] = [
   "slug": "shakiran-nannyombi",
   "name": "Shakiran Nannyombi",
   "title": "Software Engineer & Community Builder",
+  "imageUrl": "/speakers-2026/shakiran-nannyombi.jpg",
   "bio": "Shakiran Nannyombi is a software engineer, developer, and tech community builder from Uganda, passionate about building with technology and helping others find their way into the developer ecosystem.\n\nShe has been actively involved in developer communities including AWS Student Builders Group and Google Developer Groups on Campus, and has contributed to initiatives around AI, cloud, hackathons, and developer education. Her experience spans software development, AI, and community-led learning, giving her a practical perspective on what it looks like to learn, build, and grow in tech.\n\nShakiran is also involved in AI Fest Uganda and regularly supports and speaks at initiatives that bring developers together to learn, experiment, and build.",
   "talkTitle": "Women Who Go: Fireside Chats",
   "talkDescription": "Real stories from women building with Go across Africa."},
