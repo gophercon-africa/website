@@ -232,10 +232,10 @@ export const scheduleData: ScheduleDay[] = [
         speakers: [
           { name: 'Beryl Christine Atieno' },
           { name: 'Shakiran Nannyombi' },
-          { name: 'Irene Ufia' },
+          { name: 'Irene Ufia', role: 'Moderator' },
         ],
         description:
-          "Moderated by Irene Ufia. Women Who Go Africa presents two fireside chats featuring Beryl Christine Atieno, a self-taught backend developer building systems with Go in Kenya, and Shakiran Nannyombi, a software engineer and community builder driving developer ecosystems in Uganda. Each conversation goes beyond the highlight reel into the real stories: how they got here, what they're building, and what they've learned along the way. Come for the honesty, stay for the community.",
+          "Women Who Go Africa presents two fireside chats featuring Beryl Christine Atieno, a self-taught backend developer building systems with Go in Kenya, and Shakiran Nannyombi, a software engineer and community builder driving developer ecosystems in Uganda. Each conversation goes beyond the highlight reel into the real stories: how they got here, what they're building, and what they've learned along the way. Come for the honesty, stay for the community.",
       },
       {
         id: 'd2-1550-closing',

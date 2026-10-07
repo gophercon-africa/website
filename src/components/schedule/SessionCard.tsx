@@ -193,7 +193,7 @@ export default function SessionCard({ session }: { session: Session }) {
         {speakerList.length > 0 && (
           <div className="mt-4 space-y-3">
             {speakerList.map((s) => (
-              <SpeakerBlock key={s.name} speaker={s} role={roleLabel(session)} />
+              <SpeakerBlock key={s.name} speaker={s} role={s.role ?? roleLabel(session)} />
             ))}
           </div>
         )}

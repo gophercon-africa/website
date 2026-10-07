@@ -18,6 +18,8 @@ export interface SessionSpeaker {
   title?: string;
   company?: string;
   imageUrl?: string;
+  /** Overrides the session-level role label (e.g. 'Moderator' on a panel). */
+  role?: string;
 }
 
 /** A slice inside a full-day session (workshop parts + the breaks between). */
