@@ -15,7 +15,7 @@ const COLLAPSED_PX = 48;
 
 function roleLabel(session: Session): string {
   if (session.type === 'workshop') return 'Instructor';
-  if (session.type === 'panel') return 'Panellists';
+  if (session.type === 'panel') return 'Panellist';
   return 'Speaker';
 }
 
