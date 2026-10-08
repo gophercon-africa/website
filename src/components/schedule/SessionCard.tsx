@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
@@ -79,17 +79,19 @@ function SpeakerBlock({ speaker, role }: { speaker: SessionSpeaker; role: string
 export default function SessionCard({ session }: { session: Session }) {
   const [expanded, setExpanded] = useState(false);
   const [contentHeight, setContentHeight] = useState(0);
-  const contentRef = useRef<HTMLDivElement>(null);
+  // Callback ref (state) rather than useRef: the abstract remounts when the
+  // head switches between plain and button wrappers, so the observer must
+  // re-attach to the new node or it keeps measuring a detached one (→ 0).
+  const [contentEl, setContentEl] = useState<HTMLDivElement | null>(null);
 
   // Measure the abstract's natural height so we can (a) decide whether it
   // overflows the 2-line preview and (b) animate max-height to a real target.
   useEffect(() => {
-    const el = contentRef.current;
-    if (!el) return;
-    const ro = new ResizeObserver(() => setContentHeight(el.scrollHeight));
-    ro.observe(el);
+    if (!contentEl) return;
+    const ro = new ResizeObserver(() => setContentHeight(contentEl.scrollHeight));
+    ro.observe(contentEl);
     return () => ro.disconnect();
-  }, []);
+  }, [contentEl]);
 
   const overflowing = contentHeight > COLLAPSED_PX + 2;
   const timeRange = `${formatTime(session.startTime)} – ${formatTime(session.endTime)}`;
@@ -124,7 +126,7 @@ export default function SessionCard({ session }: { session: Session }) {
           style={{ maxHeight: expanded ? contentHeight : COLLAPSED_PX }}
         >
           <div
-            ref={contentRef}
+            ref={setContentEl}
             className="whitespace-pre-line text-sm leading-relaxed text-body"
           >
             {session.description}
@@ -133,6 +135,11 @@ export default function SessionCard({ session }: { session: Session }) {
             <span className="pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-linear-to-t from-surface to-transparent" />
           )}
         </div>
+      )}
+      {overflowing && (
+        <span className="mt-1 inline-block text-xs font-semibold text-brand dark:text-brand-bright">
+          {expanded ? 'Show less' : 'Read more'}
+        </span>
       )}
     </>
   );
