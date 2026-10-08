@@ -118,6 +118,22 @@ export const speakers2026: Speaker[] = [
   "talkTitle": "One Struct, Four Autopsies",
   "talkDescription": "Go structs feel simple. That's exactly the problem. In \"One Struct, Four Autopsies,\" we take one ordinary struct and trace four separate commits that quietly broke it, each mirroring a real bug that's shipped in production at companies you know. Not a struct trivia, just the mental model you need to catch these before they catch you."},
 {
+  "slug": "shakiran-nannyombi",
+  "name": "Shakiran Nannyombi",
+  "title": "Software Engineer & Community Builder",
+  "imageUrl": "/speakers-2026/shakiran-nannyombi.jpg",
+  "bio": "Shakiran Nannyombi is a software engineer, developer, and tech community builder from Uganda, passionate about building with technology and helping others find their way into the developer ecosystem.\n\nShe has been actively involved in developer communities including AWS Student Builders Group and Google Developer Groups on Campus, and has contributed to initiatives around AI, cloud, hackathons, and developer education. Her experience spans software development, AI, and community-led learning, giving her a practical perspective on what it looks like to learn, build, and grow in tech.\n\nShakiran is also involved in AI Fest Uganda and regularly supports and speaks at initiatives that bring developers together to learn, experiment, and build.",
+  "talkTitle": "Women Who Go: Fireside Chats",
+  "talkDescription": "Real stories from women building with Go across Africa."},
+{
+  "slug": "irene-ufia",
+  "name": "Irene Ufia",
+  "title": "Software Engineer (Infrastructure & Security) · Co-organizer, GopherCon Africa",
+  "imageUrl": "/speakers-2026/irene-ufia.jpg",
+  "bio": "Irene Ufia is a Software Engineer (Infrastructure & Security) and co-organizer of GopherCon Africa. Her work spans infrastructure and security for projects across the continent, including an African currency marketplace that is live in 19+ countries and supports the African Continental Free Trade Area.",
+  "talkTitle": "Women Who Go: Fireside Chats (moderator)",
+  "talkDescription": "Real stories from women building with Go across Africa."},
+{
   "slug": "toluwase-thomas",
   "name": "Toluwase Thomas",
   "title": "Software Engineer",

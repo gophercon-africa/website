@@ -224,12 +224,18 @@ export const scheduleData: ScheduleDay[] = [
           'Lessons from production multi-tenant systems: team-scoped, request-context-aware authorization in Go, beyond simple role checks.',
       },
       {
-        id: 'd2-1520-wwg-panel',
-        title: 'Women Who Go',
+        id: 'd2-1520-wwg-fireside',
+        title: 'Women Who Go: Fireside Chats',
         type: 'panel',
         startTime: '15:20',
         endTime: '15:50',
-        speakerLabel: 'Panellists to be announced',
+        speakers: [
+          { name: 'Beryl Christine Atieno' },
+          { name: 'Shakiran Nannyombi' },
+          { name: 'Irene Ufia', role: 'Moderator' },
+        ],
+        description:
+          "Women Who Go Africa presents two fireside chats featuring Beryl Christine Atieno, a self-taught backend developer building systems with Go in Kenya, and Shakiran Nannyombi, a software engineer and community builder driving developer ecosystems in Uganda. Each conversation goes beyond the highlight reel into the real stories: how they got here, what they're building, and what they've learned along the way. Come for the honesty, stay for the community.",
       },
       {
         id: 'd2-1550-closing',
@@ -328,14 +334,15 @@ export const scheduleData: ScheduleDay[] = [
           'A third path between framework lock-in and rewriting primitives: scaffolding idiomatic Go with opt-out defaults you can delete piece by piece.',
       },
       {
-        id: 'd3-1130-alaribe',
-        title: 'Runbooks That Think: Executable Checklists with AI in the Loop',
+        id: 'd3-1130-oluwajubelo',
+        title:
+          'When Your AI Costs More Than Your Infrastructure: LLM Observability in Go',
         type: 'talk',
         startTime: '11:30',
         endTime: '12:00',
-        speaker: { name: 'Anthony Alaribe' },
+        speaker: { name: 'Ige Oluwasegun Oluwajubelo' },
         description:
-          'Runbooks as executable checklists: deterministic programs with LLM judgment at each step, shown with a working on-call agent.',
+          'Instrumenting Go LLM backends with OpenTelemetry — tracing, token counts, real-time cost, and budget guardrails against runaway AI spend.',
       },
       {
         id: 'd3-1200-lunch',
@@ -368,15 +375,14 @@ export const scheduleData: ScheduleDay[] = [
         sponsor: { name: 'Moniepoint', logo: MONIEPOINT_LOGO },
       },
       {
-        id: 'd3-1400-oluwajubelo',
-        title:
-          'When Your AI Costs More Than Your Infrastructure: LLM Observability in Go',
+        id: 'd3-1400-alaribe',
+        title: 'Runbooks That Think: Executable Checklists with AI in the Loop',
         type: 'talk',
         startTime: '14:00',
         endTime: '14:30',
-        speaker: { name: 'Ige Oluwasegun Oluwajubelo' },
+        speaker: { name: 'Anthony Alaribe' },
         description:
-          'Instrumenting Go LLM backends with OpenTelemetry — tracing, token counts, real-time cost, and budget guardrails against runaway AI spend.',
+          'Runbooks as executable checklists: deterministic programs with LLM judgment at each step, shown with a working on-call agent.',
       },
       {
         id: 'd3-1430-panel-tba',
