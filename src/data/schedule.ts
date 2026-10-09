@@ -363,15 +363,15 @@ export const scheduleData: ScheduleDay[] = [
       },
       {
         id: 'd3-1330-sponsor-moniepoint',
-        title: 'Automating Kubernetes Infrastructure in Go',
+        title:
+          'Scaling the Edge: Extending KrakenD with Custom Go Plugins at Moniepoint',
         type: 'sponsor',
         startTime: '13:30',
         endTime: '14:00',
-        speaker: { name: 'Sérgio Lourenço' },
-        // Sponsor-supplied abstract (Moniepoint partnership thread, 3 Sept),
-        // copy-edited for typos only.
-        description:
-          "With increasingly complex systems, testing applications locally is increasingly difficult: either because they consume a lot of resources or a lot of configuration is required to get all the dependencies up and running. It pushes developers to either not properly test or rely on shared environments which can impact their team members. In this talk we will go over a Go-built DevEx tool that allows developers to launch complex resources on a remote cluster quickly with minimal configuration, with a single terminal command and a minimal configuration YAML file.",
+        speakers: [{ name: 'Peter Dada' }, { name: 'Paul Okeke' }],
+        // Replaced Sérgio's "Automating Kubernetes Infrastructure in Go" at
+        // Moniepoint's request (partnership thread, 7 Oct). Abstract pending
+        // from the sponsor — add `description` when it arrives.
         sponsor: { name: 'Moniepoint', logo: MONIEPOINT_LOGO },
       },
       {

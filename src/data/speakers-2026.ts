@@ -160,7 +160,8 @@ export const speakers2026: Speaker[] = [
   "imageUrl": "/speakers-2026/sergio-lourenco.jpg",
   "bio": "Sérgio Lourenço is a software engineer who's been coding since 2015 and started with Go in 2021. Currently, he works on the R&D team at Moniepoint. In Moniepoint he has been working on performance engineering and building developer tools to streamline the process of getting code from commit to production.",
   "talkTitle": "ESHU — Building an Internal Development Platform in Go",
-  "talkDescription": "Eshu is Moniepoint's internal developer platform, consisting of an ephemeral-environment Kubernetes operator and Platform-as-a-Service. Leveraging Crossplane, Tekton, and Dagger, Eshu can launch ephemeral environments with over 10 dedicated dependencies (including Postgres, Spanner Omni, Redis, Reddit, and Kafka), allowing teams to build and launch services from development to production without needing infrastructure support."},
+  "talkDescription": "Eshu is Moniepoint's internal developer platform, consisting of an ephemeral-environment Kubernetes operator and Platform-as-a-Service. Leveraging Crossplane, Tekton, and Dagger, Eshu can launch ephemeral environments with over 10 dedicated dependencies (including Postgres, Spanner Omni, Redis, Reddit, and Kafka), allowing teams to build and launch services from development to production without needing infrastructure support.",
+  "linkedin": "https://www.linkedin.com/in/sergiolourenco"},
 {
   "slug": "abdulrahman-jimoh",
   "name": "Abdulrahman Jimoh",
@@ -169,7 +170,20 @@ export const speakers2026: Speaker[] = [
   "imageUrl": "/speakers-2026/abdulrahman-jimoh.jpg",
   "bio": "Abdulrahman Jimoh started his career in Technical support in 2014 before transitioning to DevOps in 2021 and picking up Go in 2024. Currently, he works on the Engineering Excellence team at Moniepoint, where he focuses on building developer tools to improve DevEx and cloud infrastructure.",
   "talkTitle": "ESHU — Building an Internal Development Platform in Go",
-  "talkDescription": "Eshu is Moniepoint's internal developer platform, consisting of an ephemeral-environment Kubernetes operator and Platform-as-a-Service. Leveraging Crossplane, Tekton, and Dagger, Eshu can launch ephemeral environments with over 10 dedicated dependencies (including Postgres, Spanner Omni, Redis, Reddit, and Kafka), allowing teams to build and launch services from development to production without needing infrastructure support."},
+  "talkDescription": "Eshu is Moniepoint's internal developer platform, consisting of an ephemeral-environment Kubernetes operator and Platform-as-a-Service. Leveraging Crossplane, Tekton, and Dagger, Eshu can launch ephemeral environments with over 10 dedicated dependencies (including Postgres, Spanner Omni, Redis, Reddit, and Kafka), allowing teams to build and launch services from development to production without needing infrastructure support.",
+  "linkedin": "https://ng.linkedin.com/in/abdulrahman-jimoh-devops-aws-kubernetes"},
+{
+  "slug": "peter-dada",
+  "name": "Peter Dada",
+  "company": "Moniepoint",
+  "talkTitle": "Scaling the Edge: Extending KrakenD with Custom Go Plugins at Moniepoint",
+  "linkedin": "https://linkedin.com/in/dapetoo"},
+{
+  "slug": "paul-okeke",
+  "name": "Paul Okeke",
+  "company": "Moniepoint",
+  "talkTitle": "Scaling the Edge: Extending KrakenD with Custom Go Plugins at Moniepoint",
+  "linkedin": "https://www.linkedin.com/in/paul-okeke-64437470"},
 {
   "slug": "richard-ochola-otieno",
   "name": "Richard Ochola Otieno",
