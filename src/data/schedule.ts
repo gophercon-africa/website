@@ -225,7 +225,7 @@ export const scheduleData: ScheduleDay[] = [
       },
       {
         id: 'd2-1520-wwg-fireside',
-        title: 'Women Who Go: Fireside Chats',
+        title: 'Women Who Go: Real stories from women building with Go across Africa',
         type: 'panel',
         startTime: '15:20',
         endTime: '15:50',
