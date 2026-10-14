@@ -368,10 +368,12 @@ export const scheduleData: ScheduleDay[] = [
         type: 'sponsor',
         startTime: '13:30',
         endTime: '14:00',
-        speakers: [{ name: 'Peter Dada' }, { name: 'Paul Okeke' }],
+        speaker: { name: 'Paul Okeke' },
         // Replaced Sérgio's "Automating Kubernetes Infrastructure in Go" at
-        // Moniepoint's request (partnership thread, 7 Oct). Abstract pending
-        // from the sponsor — add `description` when it arrives.
+        // Moniepoint's request (partnership thread, 7 Oct; Paul alone,
+        // confirmed 13 Oct). Sponsor-supplied abstract, published verbatim.
+        description:
+          'At Moniepoint, processing millions of mobile transactions daily demands an API gateway built for speed, security, and low network latency. In this session, we share how we extended KrakenD using custom Go plugins to solve mobile client bottlenecks. We cover our Tokeniser plugin to shrink header overhead, a BFF plugin to aggregate mobile dashboard calls, and an inline security plugin for edge defence. Attendees will learn practical patterns for building high-performance gateway plugins that optimise mobile user experience at scale.',
         sponsor: { name: 'Moniepoint', logo: MONIEPOINT_LOGO },
       },
       {
