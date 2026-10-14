@@ -363,15 +363,17 @@ export const scheduleData: ScheduleDay[] = [
       },
       {
         id: 'd3-1330-sponsor-moniepoint',
-        title: 'Automating Kubernetes Infrastructure in Go',
+        title:
+          'Scaling the Edge: Extending KrakenD with Custom Go Plugins at Moniepoint',
         type: 'sponsor',
         startTime: '13:30',
         endTime: '14:00',
-        speaker: { name: 'Sérgio Lourenço' },
-        // Sponsor-supplied abstract (Moniepoint partnership thread, 3 Sept),
-        // copy-edited for typos only.
+        speaker: { name: 'Paul Okeke' },
+        // Replaced Sérgio's "Automating Kubernetes Infrastructure in Go" at
+        // Moniepoint's request (partnership thread, 7 Oct; Paul alone,
+        // confirmed 13 Oct). Sponsor-supplied abstract, published verbatim.
         description:
-          "With increasingly complex systems, testing applications locally is increasingly difficult: either because they consume a lot of resources or a lot of configuration is required to get all the dependencies up and running. It pushes developers to either not properly test or rely on shared environments which can impact their team members. In this talk we will go over a Go-built DevEx tool that allows developers to launch complex resources on a remote cluster quickly with minimal configuration, with a single terminal command and a minimal configuration YAML file.",
+          'At Moniepoint, processing millions of mobile transactions daily demands an API gateway built for speed, security, and low network latency. In this session, we share how we extended KrakenD using custom Go plugins to solve mobile client bottlenecks. We cover our Tokeniser plugin to shrink header overhead, a BFF plugin to aggregate mobile dashboard calls, and an inline security plugin for edge defence. Attendees will learn practical patterns for building high-performance gateway plugins that optimise mobile user experience at scale.',
         sponsor: { name: 'Moniepoint', logo: MONIEPOINT_LOGO },
       },
       {
@@ -389,30 +391,30 @@ export const scheduleData: ScheduleDay[] = [
         title: 'Panel / Roundtable — to be announced',
         type: 'panel',
         startTime: '14:30',
-        endTime: '15:00',
+        endTime: '15:30',
         tba: true,
       },
       {
-        id: 'd3-1500-sponsor-photos',
+        id: 'd3-1530-sponsor-photos',
         title: 'Sponsor Announcements & Group Photos',
         type: 'remarks',
-        startTime: '15:00',
-        endTime: '15:20',
+        startTime: '15:30',
+        endTime: '15:50',
       },
       {
-        id: 'd3-1520-closing',
+        id: 'd3-1550-closing',
         title: 'Closing Ceremony & Remarks',
         type: 'remarks',
-        startTime: '15:20',
-        endTime: '15:40',
+        startTime: '15:50',
+        endTime: '16:10',
         speakerLabel: 'Event MC',
       },
       {
-        id: 'd3-1540-networking',
+        id: 'd3-1610-networking',
         title: 'Farewell Tea & Networking',
         type: 'networking',
-        startTime: '15:40',
-        endTime: '16:30',
+        startTime: '16:10',
+        endTime: '17:00',
       },
     ],
   },

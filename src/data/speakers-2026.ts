@@ -160,7 +160,8 @@ export const speakers2026: Speaker[] = [
   "imageUrl": "/speakers-2026/sergio-lourenco.jpg",
   "bio": "Sérgio Lourenço is a software engineer who's been coding since 2015 and started with Go in 2021. Currently, he works on the R&D team at Moniepoint. In Moniepoint he has been working on performance engineering and building developer tools to streamline the process of getting code from commit to production.",
   "talkTitle": "ESHU — Building an Internal Development Platform in Go",
-  "talkDescription": "Eshu is Moniepoint's internal developer platform, consisting of an ephemeral-environment Kubernetes operator and Platform-as-a-Service. Leveraging Crossplane, Tekton, and Dagger, Eshu can launch ephemeral environments with over 10 dedicated dependencies (including Postgres, Spanner Omni, Redis, Reddit, and Kafka), allowing teams to build and launch services from development to production without needing infrastructure support."},
+  "talkDescription": "Eshu is Moniepoint's internal developer platform, consisting of an ephemeral-environment Kubernetes operator and Platform-as-a-Service. Leveraging Crossplane, Tekton, and Dagger, Eshu can launch ephemeral environments with over 10 dedicated dependencies (including Postgres, Spanner Omni, Redis, Reddit, and Kafka), allowing teams to build and launch services from development to production without needing infrastructure support.",
+  "linkedin": "https://www.linkedin.com/in/sergiolourenco"},
 {
   "slug": "abdulrahman-jimoh",
   "name": "Abdulrahman Jimoh",
@@ -169,7 +170,17 @@ export const speakers2026: Speaker[] = [
   "imageUrl": "/speakers-2026/abdulrahman-jimoh.jpg",
   "bio": "Abdulrahman Jimoh started his career in Technical support in 2014 before transitioning to DevOps in 2021 and picking up Go in 2024. Currently, he works on the Engineering Excellence team at Moniepoint, where he focuses on building developer tools to improve DevEx and cloud infrastructure.",
   "talkTitle": "ESHU — Building an Internal Development Platform in Go",
-  "talkDescription": "Eshu is Moniepoint's internal developer platform, consisting of an ephemeral-environment Kubernetes operator and Platform-as-a-Service. Leveraging Crossplane, Tekton, and Dagger, Eshu can launch ephemeral environments with over 10 dedicated dependencies (including Postgres, Spanner Omni, Redis, Reddit, and Kafka), allowing teams to build and launch services from development to production without needing infrastructure support."},
+  "talkDescription": "Eshu is Moniepoint's internal developer platform, consisting of an ephemeral-environment Kubernetes operator and Platform-as-a-Service. Leveraging Crossplane, Tekton, and Dagger, Eshu can launch ephemeral environments with over 10 dedicated dependencies (including Postgres, Spanner Omni, Redis, Reddit, and Kafka), allowing teams to build and launch services from development to production without needing infrastructure support.",
+  "linkedin": "https://ng.linkedin.com/in/abdulrahman-jimoh-devops-aws-kubernetes"},
+{
+  "slug": "paul-okeke",
+  "name": "Paul Okeke",
+  "title": "Engineer, Mobile Platform",
+  "company": "Moniepoint",
+  "bio": "Paul Okeke is an engineer on the Mobile Platform team at Moniepoint, working across the entire mobile platform lifecycle. His focus bridges client-side engineering and edge infrastructure—covering core app architecture, design systems, mobile security, observability, developer experience, and release enablement.\n\nPassionate about high-scale mobile platforms, Paul works to deliver fast, secure, and seamless financial experiences for millions of daily active users across Africa. At GopherCon, he shares how Go edge gateways and custom plugins empower mobile teams to solve deep performance, security, and networking constraints at scale.",
+  "talkTitle": "Scaling the Edge: Extending KrakenD with Custom Go Plugins at Moniepoint",
+  "talkDescription": "At Moniepoint, processing millions of mobile transactions daily demands an API gateway built for speed, security, and low network latency. In this session, we share how we extended KrakenD using custom Go plugins to solve mobile client bottlenecks. We cover our Tokeniser plugin to shrink header overhead, a BFF plugin to aggregate mobile dashboard calls, and an inline security plugin for edge defence. Attendees will learn practical patterns for building high-performance gateway plugins that optimise mobile user experience at scale.",
+  "linkedin": "https://www.linkedin.com/in/paul-okeke-64437470"},
 {
   "slug": "richard-ochola-otieno",
   "name": "Richard Ochola Otieno",
