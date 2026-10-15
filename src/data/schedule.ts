@@ -40,9 +40,9 @@ export const scheduleData: ScheduleDay[] = [
           'Build a complete, domain-driven Go application in a day — type-safe data access with sqlc, server-rendered UI with templ, and a working app of your own by the end. Requires a workshop ticket; conference tickets do not include it.',
         link: WORKSHOP_LINK,
         segments: [
-          { startTime: '09:30', endTime: '11:30', title: 'Part 1', type: 'workshop' },
-          { startTime: '11:30', endTime: '12:00', title: 'Tea Break', type: 'break' },
-          { startTime: '12:00', endTime: '13:00', title: 'Part 2', type: 'workshop' },
+          { startTime: '09:30', endTime: '11:00', title: 'Part 1', type: 'workshop' },
+          { startTime: '11:00', endTime: '11:30', title: 'Tea Break', type: 'break' },
+          { startTime: '11:30', endTime: '13:00', title: 'Part 2', type: 'workshop' },
           { startTime: '13:00', endTime: '14:30', title: 'Lunch Break', type: 'break' },
           {
             startTime: '14:30',
