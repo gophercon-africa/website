@@ -38,7 +38,7 @@ const TIERS: SponsorTier[] = [
       {
         name: 'Moniepoint',
         href: 'https://moniepoint.com',
-        logo: 'https://res.cloudinary.com/dlmqe0two/image/upload/v1744802584/moniepoint_tgy3ii.jpg',
+        logo: '/sponsors/moniepoint-logo.png',
         height: 'h-12',
         tagline: "Africa's all-in-one financial platform",
         blurb: [

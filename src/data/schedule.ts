@@ -4,7 +4,7 @@ const WORKSHOP_LINK = { href: '/workshops', label: 'View workshop details' };
 
 // Same asset as the Sponsors section (logos are drawn for light backgrounds).
 const MONIEPOINT_LOGO =
-  'https://res.cloudinary.com/dlmqe0two/image/upload/v1744802584/moniepoint_tgy3ii.jpg';
+  '/sponsors/moniepoint-logo.png';
 
 export const scheduleData: ScheduleDay[] = [
   {
