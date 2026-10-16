@@ -177,6 +177,7 @@ export const speakers2026: Speaker[] = [
   "name": "Paul Okeke",
   "title": "Engineer, Mobile Platform",
   "company": "Moniepoint",
+  "imageUrl": "/speakers-2026/paul-okeke.jpg",
   "bio": "Paul Okeke is an engineer on the Mobile Platform team at Moniepoint, working across the entire mobile platform lifecycle. His focus bridges client-side engineering and edge infrastructure—covering core app architecture, design systems, mobile security, observability, developer experience, and release enablement.\n\nPassionate about high-scale mobile platforms, Paul works to deliver fast, secure, and seamless financial experiences for millions of daily active users across Africa. At GopherCon, he shares how Go edge gateways and custom plugins empower mobile teams to solve deep performance, security, and networking constraints at scale.",
   "talkTitle": "Scaling the Edge: Extending KrakenD with Custom Go Plugins at Moniepoint",
   "talkDescription": "At Moniepoint, processing millions of mobile transactions daily demands an API gateway built for speed, security, and low network latency. In this session, we share how we extended KrakenD using custom Go plugins to solve mobile client bottlenecks. We cover our Tokeniser plugin to shrink header overhead, a BFF plugin to aggregate mobile dashboard calls, and an inline security plugin for edge defence. Attendees will learn practical patterns for building high-performance gateway plugins that optimise mobile user experience at scale.",
