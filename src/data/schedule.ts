@@ -406,7 +406,7 @@ export const scheduleData: ScheduleDay[] = [
             name: 'Irene Ufia',
             title: 'Software Engineer (Infrastructure & Security) · Co-organizer, GopherCon Africa',
           },
-          { name: 'Anthony Alaribe', title: 'Cofounder, Monoscope' },
+          { name: 'Anthony Alaribe', title: 'Cofounder' },
           { name: 'Hakeem Orewole', title: 'CTO, Partna' },
           { name: 'Kemunto Ochwangi', title: 'Software Engineer · AI Security Research' },
           { name: 'Marvin Collins', title: 'Senior Software Engineer' },
