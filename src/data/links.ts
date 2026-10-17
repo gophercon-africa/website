@@ -98,6 +98,11 @@ export const LINK_GROUPS: LinkGroup[] = [
         note: 'Community group',
       },
       { href: 'https://x.com/wwgafrica', label: 'Women Who Go Africa on X' },
+      {
+        href: 'https://www.youtube.com/@GopherConAfrica',
+        label: 'GopherCon Africa on YouTube',
+        note: 'Talk recordings land here',
+      },
       { href: SOCIAL_LINKS.x, label: 'GopherCon Africa on X' },
       { href: SOCIAL_LINKS.linkedin, label: 'GopherCon Africa on LinkedIn' },
       { href: SOCIAL_LINKS.meetup, label: 'Golang Nigeria on Meetup' },
