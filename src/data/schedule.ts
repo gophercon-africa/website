@@ -272,15 +272,15 @@ export const scheduleData: ScheduleDay[] = [
         title: 'Introduction & Housekeeping',
         type: 'remarks',
         startTime: '08:45',
-        endTime: '09:15',
+        endTime: '09:20',
         speakerLabel: 'Event MC',
       },
       {
         id: 'd3-0900-sahasrabuddhe',
         title: 'Building a Container Runtime from Scratch',
         type: 'talk',
-        startTime: '09:15',
-        endTime: '09:45',
+        startTime: '09:20',
+        endTime: '09:50',
         speaker: { name: 'Ajitem Sahasrabuddhe' },
         description:
           'Building a minimal container runtime in Go — namespaces, cgroups, and filesystem isolation — to demystify what happens when a container starts.',
@@ -290,8 +290,8 @@ export const scheduleData: ScheduleDay[] = [
         title:
           'Opt-Out Defaults: Designing a Go Backend Toolkit Without Becoming a Framework',
         type: 'talk',
-        startTime: '09:45',
-        endTime: '10:15',
+        startTime: '09:50',
+        endTime: '10:20',
         speaker: { name: 'Mugirase Emmanuel' },
         description:
           'A third path between framework lock-in and rewriting primitives: scaffolding idiomatic Go with opt-out defaults you can delete piece by piece.',
@@ -300,8 +300,8 @@ export const scheduleData: ScheduleDay[] = [
         id: 'd3-1000-clark',
         title: '//go:embed: From Comment to Binary',
         type: 'talk',
-        startTime: '10:15',
-        endTime: '10:45',
+        startTime: '10:20',
+        endTime: '10:50',
         speaker: { name: 'Ainsley Clark' },
         description:
           'How //go:embed really works — from directive to binary through the linker — with the tradeoffs and production patterns for embedded assets.',
@@ -310,7 +310,7 @@ export const scheduleData: ScheduleDay[] = [
         id: 'd3-1030-tea',
         title: 'Tea Break',
         type: 'break',
-        startTime: '10:45',
+        startTime: '10:50',
         endTime: '11:25',
       },
       {
