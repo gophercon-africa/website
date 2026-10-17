@@ -311,7 +311,7 @@ export const scheduleData: ScheduleDay[] = [
         title: 'Tea Break',
         type: 'break',
         startTime: '10:50',
-        endTime: '11:25',
+        endTime: '11:30',
       },
       {
         id: 'd3-1050-lightning-biney',
@@ -340,8 +340,8 @@ export const scheduleData: ScheduleDay[] = [
         title:
           'When Your AI Costs More Than Your Infrastructure: LLM Observability in Go',
         type: 'talk',
-        startTime: '11:25',
-        endTime: '11:55',
+        startTime: '11:30',
+        endTime: '12:00',
         speaker: { name: 'Ige Oluwasegun Oluwajubelo' },
         description:
           'Instrumenting Go LLM backends with OpenTelemetry — tracing, token counts, real-time cost, and budget guardrails against runaway AI spend.',
@@ -350,7 +350,7 @@ export const scheduleData: ScheduleDay[] = [
         id: 'd3-1200-lunch',
         title: 'Lunch Break',
         type: 'break',
-        startTime: '11:55',
+        startTime: '12:00',
         endTime: '13:20',
       },
       {
