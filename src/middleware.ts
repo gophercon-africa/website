@@ -10,6 +10,7 @@ const publicExact = new Set([
   '/workshops',
   '/schedule',
   '/speakers',
+  '/links',
   '/call-for-speakers',
   '/signin',
   '/signup',

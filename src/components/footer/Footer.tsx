@@ -36,6 +36,7 @@ const COLUMNS = [
       { href: '/schedule', label: 'Schedule' },
       { href: '/speakers', label: 'Speakers' },
       { href: '/workshops', label: 'Workshop' },
+      { href: '/links', label: 'Links & photos' },
       { href: TICKETS_URL, label: 'Tickets' },
     ],
   },
