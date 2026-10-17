@@ -78,9 +78,14 @@ export const LINK_GROUPS: LinkGroup[] = [
     title: 'Stay connected',
     items: [
       {
-        href: 'https://gophers.slack.com/archives/C0C8LMDS58W',
+        href: 'https://gophers.slack.com/archives/C0C4RP4LU1F',
         label: '#gophercon-africa on Gophers Slack',
         note: 'Not on Gophers Slack yet? Get an invite below',
+      },
+      {
+        href: 'https://gophers.slack.com/archives/C0C8LMDS58W',
+        label: 'Workshop channel on Gophers Slack',
+        note: 'Setup help and materials from the workshop day',
       },
       {
         href: 'https://invite.slack.golangbridge.org',
