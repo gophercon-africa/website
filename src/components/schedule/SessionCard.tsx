@@ -101,21 +101,33 @@ export default function SessionCard({ session }: { session: Session }) {
     : formatDuration(session.startTime, session.endTime);
   const label = eyebrow(session);
   const speakerList = session.speakers ?? (session.speaker ? [session.speaker] : []);
+  const cancelled = Boolean(session.cancelled);
+  const muted = session.tba || cancelled;
 
   const head = (
     <>
-      {label && (
-        <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-brand dark:text-brand-bright">
-          {label}
+      {cancelled ? (
+        <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-400">
+          Not running
+        </p>
+      ) : (
+        label && (
+          <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-brand dark:text-brand-bright">
+            {label}
+          </p>
+        )
+      )}
+      {cancelled ? (
+        <p className="text-sm text-muted">{session.cancelled}</p>
+      ) : (
+        <p className="text-sm text-muted tabular-nums">
+          {timeRange}
+          {duration && <span className="text-faint"> · {duration}</span>}
         </p>
       )}
-      <p className="text-sm text-muted tabular-nums">
-        {timeRange}
-        {duration && <span className="text-faint"> · {duration}</span>}
-      </p>
       <h3
         className={`mt-1 text-lg font-semibold ${
-          session.tba ? 'text-muted' : 'text-ink'
+          muted ? 'text-muted' : 'text-ink'
         }`}
       >
         {session.title}
@@ -149,16 +161,16 @@ export default function SessionCard({ session }: { session: Session }) {
       <div className="shrink-0 pt-4">
         <span
           className={`inline-block rounded-control px-2.5 py-1 text-xs font-bold tabular-nums ${
-            session.tba ? 'bg-line text-muted' : 'bg-brand text-white'
+            muted ? 'bg-line text-muted' : 'bg-brand text-white'
           }`}
         >
-          {formatTime(session.startTime)}
+          {cancelled ? '—' : formatTime(session.startTime)}
         </span>
       </div>
 
       <article
         className={`min-w-0 flex-1 rounded-surface border p-4 shadow-sm transition sm:p-5 ${
-          session.tba
+          muted
             ? 'border-dashed border-line bg-surface-sunken'
             : session.fullDay
               ? 'border-brand/30 bg-surface'

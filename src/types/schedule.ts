@@ -42,6 +42,10 @@ export interface Session {
   endTime: string;
   /** Slot not yet filled — rendered as a muted placeholder card. */
   tba?: boolean;
+  /** Session will not run as planned (e.g. 'Speaker unavailable today').
+      The card stays in the day's order, muted, with this note in place of
+      the time so the programme still shows who was scheduled. */
+  cancelled?: string;
   speaker?: SessionSpeaker;
   /** Multiple presenters (co-stage sessions). Rendered in place of `speaker`. */
   speakers?: SessionSpeaker[];
