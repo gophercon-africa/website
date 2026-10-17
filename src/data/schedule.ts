@@ -317,6 +317,7 @@ export const scheduleData: ScheduleDay[] = [
         id: 'd3-1050-lightning-biney',
         title: 'P2P Networking with Go',
         type: 'lightning',
+        cancelled: 'Speaker unavailable today',
         startTime: '11:25',
         endTime: '11:35',
         speaker: { name: 'Kwaku Biney' },
@@ -339,8 +340,8 @@ export const scheduleData: ScheduleDay[] = [
         title:
           'When Your AI Costs More Than Your Infrastructure: LLM Observability in Go',
         type: 'talk',
-        startTime: '11:35',
-        endTime: '12:05',
+        startTime: '11:25',
+        endTime: '11:55',
         speaker: { name: 'Ige Oluwasegun Oluwajubelo' },
         description:
           'Instrumenting Go LLM backends with OpenTelemetry — tracing, token counts, real-time cost, and budget guardrails against runaway AI spend.',
@@ -349,7 +350,7 @@ export const scheduleData: ScheduleDay[] = [
         id: 'd3-1200-lunch',
         title: 'Lunch Break',
         type: 'break',
-        startTime: '12:05',
+        startTime: '11:55',
         endTime: '13:20',
       },
       {
@@ -367,7 +368,6 @@ export const scheduleData: ScheduleDay[] = [
         title:
           'Scaling the Edge: Extending KrakenD with Custom Go Plugins at Moniepoint',
         type: 'sponsor',
-        cancelled: 'Speaker unavailable today',
         startTime: '13:30',
         endTime: '14:00',
         speaker: { name: 'Paul Okeke' },
