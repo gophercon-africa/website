@@ -390,11 +390,27 @@ export const scheduleData: ScheduleDay[] = [
       },
       {
         id: 'd3-1430-panel-tba',
-        title: 'Panel / Roundtable — to be announced',
+        title: 'Panel: Building, shipping, and organizing at the same time',
         type: 'panel',
         startTime: '14:30',
         endTime: '15:30',
-        tba: true,
+        namesOnly: true,
+        speakers: [
+          {
+            name: 'Adeshina Hassan',
+            title: 'AI Software Engineer · Organizer, Golang Nigeria & GopherCon Africa',
+            role: 'Moderator',
+          },
+          { name: 'David Odohi', title: 'Organizer, GopherCon Africa' },
+          {
+            name: 'Irene Ufia',
+            title: 'Software Engineer (Infrastructure & Security) · Co-organizer, GopherCon Africa',
+          },
+          { name: 'Anthony Alaribe', title: 'Cofounder, Monoscope' },
+          { name: 'Hakeem Orewole', title: 'CTO, Partna' },
+          { name: 'Kemunto Ochwangi', title: 'Software Engineer · AI Security Research' },
+          { name: 'Marvin Collins', title: 'Senior Software Engineer' },
+        ],
       },
       {
         id: 'd3-1530-sponsor-photos',

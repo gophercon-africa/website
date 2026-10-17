@@ -27,7 +27,15 @@ function eyebrow(session: Session): string | null {
 
 /** One presenter. Real lineup speakers open the profile modal in place;
  *  placeholder co-presenters render un-linked. */
-function SpeakerBlock({ speaker, role }: { speaker: SessionSpeaker; role: string }) {
+function SpeakerBlock({
+  speaker,
+  role,
+  avatar = true,
+}: {
+  speaker: SessionSpeaker;
+  role: string;
+  avatar?: boolean;
+}) {
   const openSpeaker = useOpenSpeaker();
   const profile = getSpeakerProfile(speaker.name);
   const imageUrl = speaker.imageUrl ?? profile.imageUrl;
@@ -37,12 +45,14 @@ function SpeakerBlock({ speaker, role }: { speaker: SessionSpeaker; role: string
 
   const inner = (
     <>
-      <SpeakerAvatar
-        name={speaker.name}
-        imageUrl={imageUrl}
-        size={48}
-        rounded="control"
-      />
+      {avatar && (
+        <SpeakerAvatar
+          name={speaker.name}
+          imageUrl={imageUrl}
+          size={48}
+          rounded="control"
+        />
+      )}
       <div className="min-w-0 text-sm leading-tight">
         <p
           className={`font-semibold text-ink ${
@@ -210,9 +220,14 @@ export default function SessionCard({ session }: { session: Session }) {
         )}
 
         {speakerList.length > 0 && (
-          <div className="mt-4 space-y-3">
+          <div className={session.namesOnly ? 'mt-4 space-y-2' : 'mt-4 space-y-3'}>
             {speakerList.map((s) => (
-              <SpeakerBlock key={s.name} speaker={s} role={s.role ?? roleLabel(session)} />
+              <SpeakerBlock
+                key={s.name}
+                speaker={s}
+                role={s.role ?? roleLabel(session)}
+                avatar={!session.namesOnly}
+              />
             ))}
           </div>
         )}

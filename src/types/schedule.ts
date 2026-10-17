@@ -49,6 +49,9 @@ export interface Session {
   speaker?: SessionSpeaker;
   /** Multiple presenters (co-stage sessions). Rendered in place of `speaker`. */
   speakers?: SessionSpeaker[];
+  /** List presenters by name and title only, without avatars (e.g. a large
+      panel where not everyone has a headshot). */
+  namesOnly?: boolean;
   /** Shown in the speaker position when no one can be named yet,
       e.g. 'Event MC' or 'Speaker to be announced'. */
   speakerLabel?: string;
